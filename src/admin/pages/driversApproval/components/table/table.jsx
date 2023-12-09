@@ -124,9 +124,9 @@ export default function TableData({ columns, rows }) {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('');
   const [page, setPage] = useState(0);
-  const rowsPerPage = 10;
   const [visibleRows, setVisibleRows] = useState([]);
   const theme = useTheme();
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -138,6 +138,7 @@ export default function TableData({ columns, rows }) {
     setPage(newPage);
   };
   const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
@@ -148,7 +149,7 @@ export default function TableData({ columns, rows }) {
         page * rowsPerPage + rowsPerPage
       )
     );
-  }, [order, orderBy, rows]);
+  }, [order, orderBy, rows, rowsPerPage, page]);
 
   return (
     <Box sx={{ marginTop: '24px', overflowY: 'auto' }}>
@@ -192,7 +193,10 @@ export default function TableData({ columns, rows }) {
                           sx={{
                             cursor: 'default',
                             borderBottom: '2px solid rgba(0, 0, 0, 1)',
-                            hover: {
+                            '&:last-child td, &:last-child th': {
+                              border: 0,
+                            },
+                            '&:hover': {
                               backgroundColor: theme.palette.table.hover,
                             },
                           }}
@@ -241,7 +245,7 @@ export default function TableData({ columns, rows }) {
                   <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     count={rows.length}
-                    rowsPerPage={10}
+                    rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
