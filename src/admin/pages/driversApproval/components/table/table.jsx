@@ -170,7 +170,7 @@ export default function TableData({ columns, rows }) {
                 component="div"
                 sx={{
                   borderRadius: '5px',
-                  backgroundColor: theme.palette.table,
+                  backgroundColor: theme.palette.table.body,
                 }}
               >
                 <Table
