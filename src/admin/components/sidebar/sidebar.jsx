@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Box, Button, Drawer } from '@mui/material';
+import { Box, Button, Drawer, useTheme } from '@mui/material';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
-import { useTheme } from '@material-ui/core';
+
 
 const Sidebar = ({ leftSpan }) => {
   const widthVal = (leftSpan / 12) * 100;
@@ -41,22 +41,16 @@ const Sidebar = ({ leftSpan }) => {
           color: isActive ? theme.palette.text.primary : '#565656',
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
-          fontSize: theme.typography.customComponent.fontSize,
+          fontSize: '16px',
           textTransform: 'none',
-          fontWeight: isActive
-            ? theme.typography.customComponent.fontWeight
-            : 400,
-          lineHeight: theme.typography.customComponent.lineHeight,
+          fontWeight: isActive ? 550 : 400,
+          lineHeight: '140%',
           height: '40px',
           justifyContent: 'left',
           borderRight: isActive ? '4px solid #0061FF' : 'none',
-          backgroundColor: isActive
-            ? theme.palette.primary.main
-            : 'transparent',
+          backgroundColor: isActive ? '#EAEFFF' : 'transparent',
           '&:hover': {
-            backgroundColor: isActive
-              ? theme.palette.primary.main
-              : 'transparent',
+            backgroundColor: '#EAEFFF',
           },
         }}
         onClick={() => handleClick(item)}
