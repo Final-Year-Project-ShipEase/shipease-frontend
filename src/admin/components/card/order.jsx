@@ -3,24 +3,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import dummyOrderData from './dummyOrderData';
+import { useTheme } from '@mui/material/styles';
+
 
 const Order = () => {
-  const data = [
-    { month: 'Jan', orders: 1 },
-    { month: 'Feb', orders: 2 },
-    { month: 'Mar', orders: 3 },
-    { month: 'Apr', orders: 4 },
-    { month: 'May', orders: 5 },
-    { month: 'Jun', orders: 6 },
-    { month: 'Jul', orders: 7 },
-    { month: 'Aug', orders: 8 },
-    { month: 'Sep', orders: 9 },
-    { month: 'Oct', orders: 10 },
-    { month: 'Nov', orders: 11 },
-    { month: 'Dec', orders: 12 },
-  ];
-
-  const COLORS = ['red', '#7E62D7', '#FF8C00', '#FFD700', '#36A2EB', '#FF6384'];
+  const theme=useTheme();
 
   return (
     <Card sx={{ width: '100%', maxWidth: 277, borderRadius: 5 }}>
@@ -38,7 +26,7 @@ const Order = () => {
         <ResponsiveContainer width="90%" height={150}>
           <PieChart>
             <Pie
-              data={data}
+              data={dummyOrderData}
               cx="50%"
               cy="50%"
               innerRadius={40}
@@ -47,10 +35,10 @@ const Order = () => {
               paddingAngle={5}
               dataKey="orders"
             >
-              {data.map((entry, index) => (
+              {dummyOrderData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
+                  fill={theme.palette.PieChart[index % theme.palette.PieChart.length]}
                 />
               ))}
             </Pie>
