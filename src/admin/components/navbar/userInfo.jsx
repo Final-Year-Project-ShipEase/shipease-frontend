@@ -3,6 +3,8 @@ import { Box, IconButton, Menu, MenuItem, Typography } from '@mui/material';
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import image from '../../../icons/image.png';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+
 
 const imageStyles = { width: '35px', height: '35px', borderRadius: '50%' };
 const onlineDotStyles = {
@@ -19,8 +21,8 @@ const onlineDotStyles = {
 };
 
 const UserInfo = () => {
+
   const [name, setName] = useState('John Doe');
-  const [post, setPost] = useState('Software Engineer');
   const [isOnline, setIsOnline] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -49,7 +51,6 @@ const UserInfo = () => {
           horizontal: 'center',
         }}
       >
-        <MenuItem onClick={onClose}>Profile</MenuItem>
         <MenuItem onClick={onClose}>Settings</MenuItem>
         <MenuItem onClick={onClose}>Logout</MenuItem>
       </Menu>
@@ -68,18 +69,28 @@ const UserInfo = () => {
         <IconButton
           size="small"
           sx={{
-            padding: '7px',
-            borderRadius: '50%',
             display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#EAEFFF',
-            mr: '24px',
+            backgroundColor: 'white',
+            mr: '4px',
           }}
         >
           <NotificationsActiveOutlinedIcon
             sx={{
-              color: '#2963FF',
+              color: 'black',
+            }}
+          />
+        </IconButton>
+        <IconButton
+          size="small"
+          sx={{
+            display: 'flex',
+            backgroundColor: 'white',
+            mr: '10px',
+          }}
+        >
+          <DarkModeOutlinedIcon
+            sx={{
+              color: 'black',
             }}
           />
         </IconButton>
@@ -144,7 +155,6 @@ const UserInfo = () => {
                 textOverflow: 'ellipsis',
               }}
             >
-              {post}
             </Typography>
           </Box>
           <Box

@@ -8,7 +8,10 @@ import Permissions from './admin/pages/permissions/permissions';
 import Announcements from './admin/pages/announcements/announcements';
 import AdminDashboard from './admin/pages/dashboard/dashboard';
 import { SnackbarProvider } from './utils/snackbarContextProvider';
+import { ThemeProvider, CssBaseline } from '@material-ui/core';
+import theme from './theme';
 import SignIn from './admin/pages/signin/signin';
+
 
 const App = () => {
   return (
@@ -19,7 +22,7 @@ const App = () => {
           <Router>
             <Routes>
               <Route path="/" element={<Layout />}>
-                <Route path="/" element={<AdminDashboard />} />
+                <Route path="/" element={<ManageTenants />} />
                 <Route path="dashboard" element={<AdminDashboard />} />
                 <Route path="managetenants" element={<ManageTenants />} />
                 <Route path="approval/drivers" element={<DriversApproval />} />
