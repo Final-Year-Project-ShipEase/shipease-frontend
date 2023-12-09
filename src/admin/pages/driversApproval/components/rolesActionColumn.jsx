@@ -10,10 +10,8 @@ const CustomIconButton = ({ children, onClick, color }) => {
     <IconButton
       onClick={onClick}
       style={{
-        borderRadius: '50%',
         width: 32,
         height: 32,
-        backgroundColor: color || 'grey',
         margin: '0 4px',
       }}
     >
@@ -50,24 +48,27 @@ const RolesActionColumn = ({ value }) => {
         alignItems: 'center',
         width: '100%',
         height: '100%',
-        padding: '8px 11px 8px 16px',
+        padding: '4px 8px 8px 6px',
       }}
     >
       <CustomIconButton>
-        <EditNoteIcon style={{ color: '#e8e8e8' }} onClick={handleEdit} />
+        <EditNoteIcon style={{ color: '#7E62D7B2' }} onClick={handleEdit} />
       </CustomIconButton>
       <CustomIconButton>
-        <FileCopySharpIcon style={{ color: '#e8e8e8' }} onClick={handleCopy} />
+        <FileCopySharpIcon
+          style={{ color: '#7E62D7B2' }}
+          onClick={handleCopy}
+        />
       </CustomIconButton>
       <CustomIconButton
         onClick={handleLockClick}
         color={isLockClicked ? '#e196a3' : 'grey'}
       >
-        <LockIcon style={{ color: isLockClicked ? '#6B1137' : '#e8e8e8' }} />
+        <LockIcon style={{ color: isLockClicked ? '#6B1137' : '#7E62D7B2' }} />
       </CustomIconButton>
       <CustomIconButton>
         <DeleteForeverSharpIcon
-          style={{ color: '#e8e8e8' }}
+          style={{ color: '#7E62D7B2' }}
           onClick={handleDelete}
         />
       </CustomIconButton>

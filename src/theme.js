@@ -49,7 +49,7 @@ const Theme = createTheme({
       fontWeight: 600,
     },
     tableHeader: {
-      fontSize: '16px',
+      fontSize: '18px',
       fontWeight: 600,
       color: '#FFFFFF',
       fontFamily: 'Lato',

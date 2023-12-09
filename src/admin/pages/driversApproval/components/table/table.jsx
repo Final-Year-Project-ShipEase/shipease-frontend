@@ -59,6 +59,7 @@ function EnhancedTableHead(props) {
           color: theme.typography.tableHeader.color,
           fontFamily: theme.typography.tableHeader.fontFamily,
           height: '60px',
+          borderTopRadius: '15px',
         }}
       >
         {columns.map((column) => (
@@ -126,7 +127,7 @@ export default function TableData({ columns, rows }) {
   const [page, setPage] = useState(0);
   const [visibleRows, setVisibleRows] = useState([]);
   const theme = useTheme();
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -156,12 +157,19 @@ export default function TableData({ columns, rows }) {
       <Grid justifyContent="center">
         <Grid item xs={12} md={12}>
           <Box sx={{ width: '100%', borderRadius: '20px 20px 20px 20px' }}>
-            <Paper sx={{ width: '100%', mb: 2, borderRadius: '5px' }}>
+            <Paper
+              sx={{
+                width: '100%',
+                mb: 2,
+                borderRadius: '5px',
+                boxShadow:
+                  '5px 7px 8px rgba(0, 0, 0, 0.1), 6px 8px 16px rgba(0, 0, 0, 0.1)',
+              }}
+            >
               <TableContainer
                 component="div"
                 sx={{
                   borderRadius: '5px',
-                  boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.05)',
                   backgroundColor: theme.palette.table.body,
                 }}
               >
@@ -252,7 +260,16 @@ export default function TableData({ columns, rows }) {
                     sx={{
                       fontSize: theme.typography.tableHeader.fontSize,
                       width: '100%',
-                      paddingRight: '16px', // Add some right padding for better spacing
+                      borderBottomLeftRadius: '5px',
+                      borderBottomRightRadius: '5px',
+                      '& .MuiTablePagination-toolbar': {
+                        height: '60px',
+                        minHeight: '60px',
+                        maxHeight: '60px',
+                        borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+                        borderBottomLeftRadius: '5px',
+                        borderBottomRightRadius: '5px',
+                      },
                     }}
                   />
                 </Table>

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { Box, TablePagination } from '@mui/material';
+import { Box } from '@mui/material';
 import PageHeader from './pageHeader';
 import TableData from './components/table/table';
 import { DriverColumns, dummyDriverData } from './_columns.js';
 
 const DriversApproval = () => {
-
-
   return (
     <Box
       sx={{
