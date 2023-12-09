@@ -18,7 +18,7 @@ const HeaderButton = ({ text, onClick }) => {
         gap: 8,
         flexShrink: 0,
         backgroundColor: theme.palette.buttons.main,
-        color: theme.palette.buttons.text,
+        color: theme.palette.buttons.solidText,
         boxShadow: theme.palette.shadows.customButton1,
         borderRadius: 4,
         '&:hover': {

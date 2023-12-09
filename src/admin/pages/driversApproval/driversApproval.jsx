@@ -1,15 +1,18 @@
-import React from 'react';
-import { Box, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, TablePagination } from '@mui/material';
 import PageHeader from './pageHeader';
+import TableData from './components/table/table';
+import { DriverColumns, dummyDriverData } from './_columns.js';
 
 const DriversApproval = () => {
+
+
   return (
     <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
-        gap: 2,
         p: 2,
       }}
     >
@@ -25,7 +28,7 @@ const DriversApproval = () => {
         <PageHeader />
       </Box>
       <Box sx={{ mt: 2 }}>
-        <Typography variant="body1">Table</Typography>
+        <TableData columns={DriverColumns} rows={dummyDriverData} />
       </Box>
     </Box>
   );

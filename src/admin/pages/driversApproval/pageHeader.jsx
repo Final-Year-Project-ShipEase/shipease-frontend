@@ -50,6 +50,7 @@ const PageHeader = () => {
             sx={{
               display: 'flex',
               width: 125,
+              height: 50,
               alignItems: 'flex-start',
               flexShrink: 0,
               backgroundColor: theme.palette.buttons.main,
@@ -77,6 +78,7 @@ const PageHeader = () => {
             padding: '10px 18px',
             gap: 8,
             width: 500,
+            height: 50,
             color: theme.palette.buttons.text,
             backgroundColor: theme.palette.buttons.main,
             borderRadius: 4,

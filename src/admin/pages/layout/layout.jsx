@@ -27,7 +27,7 @@ const Layout = () => {
           lg={rigthSpan}
           sx={{
             mt: '7vh',
-            backgroundColor: '#FAFAFA',
+            backgroundColor: '#DFDFDF',
             minHeight: '93vh',
           }}
         >
