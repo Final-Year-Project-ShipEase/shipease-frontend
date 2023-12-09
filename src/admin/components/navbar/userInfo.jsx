@@ -179,7 +179,7 @@ const UserInfo = () => {
             >
               <ArrowDropDownOutlinedIcon
                 sx={{
-                  color: '#2963FF',
+                  color: '#000000',
                 }}
               />
             </IconButton>

@@ -12,7 +12,6 @@ import { ThemeProvider, CssBaseline } from '@material-ui/core';
 import theme from './theme';
 import SignIn from './admin/pages/signin/signin';
 
-
 const App = () => {
   return (
     <>

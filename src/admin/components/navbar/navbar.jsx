@@ -40,9 +40,8 @@ import SearchIcon from '@mui/icons-material/Search';
                           <Box
                             sx={{
                               display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'flex-end', // Aligns the content to the right
-                              marginLeft: '10px',
+                              alignItems: 'left', // Aligns the content to the right
+                              marginLeft: '640px',
                             }}
                           >
                             <InputBase
@@ -51,9 +50,8 @@ import SearchIcon from '@mui/icons-material/Search';
                                 borderRadius: '14px',
                                 backgroundColor: 'rgba(126, 98, 215, 0.4)',
                                 paddingLeft: '15px',
-                                marginTop: '-5%',
-                                width: '250px',
-                                marginLeft: 'auto',
+                                marginTop: '-3%',
+                                width: '350px',
                                 color: "white"
                               }}
                               placeholder="Search..."
