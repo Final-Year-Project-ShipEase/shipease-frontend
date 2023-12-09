@@ -9,23 +9,23 @@ const Layout = () => {
   const rigthSpan = 12 - leftSpan;
   return (
     <>
-      <Navbar />
+      {/* <Navbar />
       <Grid container>
         <Grid item md={leftSpan}>
           <Sidebar leftSpan={leftSpan} />
         </Grid>
+        */}
         <Grid
           item
           md={rigthSpan}
-          sx={{
-            mt: '7vh',
-            backgroundColor: '#FAFAFA',
+          sx={
+            {/*mt: '7vh',*/
+            backgroundColor: '#302E35',
             minHeight: '93vh',
           }}
         >
           <Outlet context={[rigthSpan, leftSpan]} />
         </Grid>
-      </Grid>
     </>
   );
 };
