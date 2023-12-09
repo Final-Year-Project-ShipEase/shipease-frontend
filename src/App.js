@@ -21,7 +21,7 @@ const App = () => {
           <Router>
             <Routes>
               <Route path="/" element={<Layout />}>
-                <Route path="/" element={<ManageTenants />} />
+                <Route path="/" element={<SignIn />} />
                 <Route path="dashboard" element={<AdminDashboard />} />
                 <Route path="managetenants" element={<ManageTenants />} />
                 <Route path="approval/drivers" element={<DriversApproval />} />
