@@ -5,7 +5,7 @@ import Sidebar from '../../../admin/components/sidebar/sidebar';
 import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
-  const leftSpan = 1.5;
+  const leftSpan = 2;
   const rigthSpan = 12 - leftSpan;
   return (
     <>
