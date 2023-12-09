@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import dummyBookingData from './dummyBookingData.js';
 import {
   LineChart,
   Line,
@@ -13,21 +14,7 @@ import {
 } from 'recharts';
 
 const Booking = () => {
-  const data = [
-    { month: 'Jan', bookings: 20 },
-    { month: 'Feb', bookings: 40 },
-    { month: 'Mar', bookings: 10 },
-    { month: 'Apr', bookings: 80 },
-    { month: 'May', bookings: 90 },
-    { month: 'Jun', bookings: 20 },
-    { month: 'Jul', bookings: 20 },
-    { month: 'Aug', bookings: 40 },
-    { month: 'Sep', bookings: 10 },
-    { month: 'Oct', bookings: 80 },
-    { month: 'Nov', bookings: 90 },
-    { month: 'Dec', bookings: 20 },
-  ];
-
+ 
   return (
     <Card sx={{ width: '100%', maxWidth: 350, borderRadius: 5 }}>
       <CardContent
@@ -42,7 +29,7 @@ const Booking = () => {
           Overall Booking
         </Typography>
         <ResponsiveContainer width="90%" height={150}>
-          <LineChart data={data}>
+          <LineChart data={dummyBookingData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="month" />
             <YAxis />
