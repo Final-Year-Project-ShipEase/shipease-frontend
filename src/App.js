@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@mui/material';
-import theme from './theme';
 import Layout from './admin/pages/layout/layout';
 import ManageTenants from './admin/pages/manageTenants/manageTenants';
 import DriversApproval from './admin/pages/driversApproval/driversApproval';
@@ -11,11 +10,12 @@ import Permissions from './admin/pages/permissions/permissions';
 import Announcements from './admin/pages/announcements/announcements';
 import AdminDashboard from './admin/pages/dashboard/dashboard';
 import { SnackbarProvider } from './utils/snackbarContextProvider';
+import Theme from './theme';
 
 const App = () => {
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={Theme}>
         <CssBaseline />
         <SnackbarProvider>
           <Router>

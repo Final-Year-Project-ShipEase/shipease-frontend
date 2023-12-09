@@ -1,10 +1,33 @@
 import React from 'react';
+import { Box, Typography } from '@mui/material';
+import PageHeader from './pageHeader';
 
 const DriversApproval = () => {
   return (
-    <div>
-      <h1>Drivers Approval</h1>
-    </div>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        gap: 2,
+        p: 2,
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          width: '100%',
+          height: '7%',
+        }}
+      >
+        <PageHeader />
+      </Box>
+      <Box sx={{ mt: 2 }}>
+        <Typography variant="body1">Table</Typography>
+      </Box>
+    </Box>
   );
 };
 

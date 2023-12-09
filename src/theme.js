@@ -1,24 +1,19 @@
-import { createTheme } from '@mui/material/styles';
-
-const theme = createTheme({
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+const Theme = createTheme({
   palette: {
     primary: {
-      main: '#56a5d6',
+      main: '#7E62D7',
       text: '#fff',
     },
     secondary: {
-      main: '#2963FF',
+      main: '#60B478',
     },
-    button: {
-      main: '#3862fc',
-      hover: '#2745b0',
+    buttons: {
+      main: '#FFFFFF',
+      text: '#121212',
     },
-    background: {
-      default: '#fff',
-      tableHeader: '#EAEFFF',
-    },
-    text: {
-      primary: '#2C2C2C',
+    shadows: {
+      customButton1: `0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(103, 110, 118, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08)`,
     },
   },
   typography: {
@@ -42,6 +37,12 @@ const theme = createTheme({
       fontSize: '18px',
       fontWeight: 600,
     },
+    t3: {
+      fontSize: '16px',
+      fontWeight: 600,
+    },
   },
 });
-export default theme;
+responsiveFontSizes(Theme);
+
+export default Theme;
