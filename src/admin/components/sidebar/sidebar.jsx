@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Box, Button, Drawer } from '@mui/material';
+import { Box, Button, Drawer, useTheme } from '@mui/material';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
-import { useTheme } from '@material-ui/core';
+
 
 const Sidebar = ({ leftSpan }) => {
   const widthVal = (leftSpan / 12) * 100;

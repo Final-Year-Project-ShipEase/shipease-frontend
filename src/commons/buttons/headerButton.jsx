@@ -1,5 +1,4 @@
-import { useTheme } from '@material-ui/core';
-import { Button } from '@mui/material';
+import { Button, useTheme } from '@mui/material';
 import React from 'react';
 
 const HeaderButton = ({ text, onClick, type }) => {
