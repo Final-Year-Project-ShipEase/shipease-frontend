@@ -14,7 +14,7 @@ const ApprovalDetail = () => {
         width: 351,
         height: 150,
         borderRadius: 3,
-        backgroundColor: '#2B2626',
+        backgroundColor: theme.palette.primary.backgroundColor,
         marginTop: '5px',
       }}
     >
@@ -42,7 +42,7 @@ const ApprovalDetail = () => {
             style={{
               width: '147px',
               height: '36px',
-              color: 'black',
+              color: theme.palette.buttons.color,
               backgroundColor: theme.palette.buttons.main,
               borderRadius: '10px',
               fontSize: '20px',
@@ -55,7 +55,7 @@ const ApprovalDetail = () => {
             style={{
               width: '107px',
               height: '36px',
-              color: 'black',
+              color: theme.palette.buttons.color,
               backgroundColor: theme.palette.table.rowHover,
               borderRadius: '20px',
               fontSize: '14px',

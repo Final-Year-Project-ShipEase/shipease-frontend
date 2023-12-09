@@ -3,6 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import dummyBookingData from './dummyBookingData.js';
+import { useTheme } from '@mui/material/styles';
 import {
   LineChart,
   Line,
@@ -14,7 +15,9 @@ import {
 } from 'recharts';
 
 const Booking = () => {
- 
+
+  const theme = useTheme();
+
   return (
     <Card sx={{ width: '100%', maxWidth: 350, borderRadius: 5 }}>
       <CardContent
@@ -37,7 +40,7 @@ const Booking = () => {
             <Line
               type="monotone"
               dataKey="bookings"
-              stroke="#60B478"
+              stroke={theme.palette.secondary.main}
               strokeWidth={2}
             />
           </LineChart>

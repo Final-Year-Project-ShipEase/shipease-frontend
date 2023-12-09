@@ -8,6 +8,9 @@ const theme = createTheme({
     primary: {
       main: '#7E62D7',
       text: '#fff',
+      backgroundColor: '#2B2626',
+      color: '#8884d8',
+      color1: '#7E62D733'
     },
     secondary: {
       main: '#60B478',
@@ -16,6 +19,7 @@ const theme = createTheme({
       main: '#FFFFFF',
       text: '#121212',
       solidText: '#000000',
+      color: '#000000',
     },
     shadows: {
       customButton1: `0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(103, 110, 118, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08)`,

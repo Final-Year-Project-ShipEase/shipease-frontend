@@ -5,8 +5,12 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import image from '../../resources/Background.png';
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+import { useTheme } from '@mui/material/styles';
 
 const CardWithImage = ({ name }) => {
+
+  const theme = useTheme();
+
   return (
     <Card
       sx={{
@@ -43,7 +47,7 @@ const CardWithImage = ({ name }) => {
           <Typography
             variant="h5"
             component="div"
-            sx={{ color: 'black', fontWeight: 'bold' }}
+            sx={{ color: theme.palette.buttons.color, fontWeight: 'bold' }}
           >
             Welcome
           </Typography>
@@ -51,7 +55,7 @@ const CardWithImage = ({ name }) => {
           <Typography
             variant="body1"
             color="text.secondary"
-            sx={{ color: 'black' }}
+            sx={{ color: theme.palette.buttons.color }}
           >
             Nice to see you, {name}!
           </Typography>
@@ -68,7 +72,7 @@ const CardWithImage = ({ name }) => {
         <Link
           href="www.google.com"
           sx={{
-            color: 'black',
+            color: theme.palette.buttons.color,
             display: 'flex',
             alignItems: 'center',
             textDecoration: 'none',

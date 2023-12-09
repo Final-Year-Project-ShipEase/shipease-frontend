@@ -2,8 +2,12 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
 
 const TopTenant = ({ tenantName, totalRevenue }) => {
+
+  const theme = useTheme();
+
   return (
     <Card sx={{ width: '100%', maxWidth: 286, borderRadius: 5 }}>
       <CardContent style={{ fontWeight: 'bold' }}>
@@ -66,7 +70,7 @@ const TopTenant = ({ tenantName, totalRevenue }) => {
                   fontSize: { xs: '14px', sm: '16px', md: '18px' },
                   borderRadius: '10px',
                   color: 'black',
-                  backgroundColor: '#7E62D733',
+                  backgroundColor: theme.palette.primary.color1,
                   padding: '10px 20px',
                   cursor: 'pointer',
                   border: 'none',

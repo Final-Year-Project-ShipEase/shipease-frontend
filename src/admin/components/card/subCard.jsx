@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import ArrowCircleUpRoundedIcon from '@mui/icons-material/ArrowCircleUpRounded';
 import ArrowCircleDownRoundedIcon from '@mui/icons-material/ArrowCircleDownRounded';
 import dummyTenantData from './dummyTenantData';
+import { useTheme } from '@mui/material/styles';
 import {
   LineChart,
   Line,
@@ -19,6 +20,7 @@ const SubCard = ({ content }) => {
   const [count, setCount] = useState(100); // Initial count value
   const [isIncreasing, setIsIncreasing] = useState(true); // Initial state
 
+  const theme = useTheme();
 
   return (
     <Card
@@ -56,7 +58,7 @@ const SubCard = ({ content }) => {
             {isIncreasing ? (
               <>
                 <ArrowCircleUpRoundedIcon
-                  sx={{ color: '#60B478', width: 30, height: 29 }}
+                  sx={{ color: theme.palette.secondary.main, width: 30, height: 29 }}
                 />
                 <Typography
                   sx={{
@@ -64,7 +66,7 @@ const SubCard = ({ content }) => {
                     height: 20,
                     fontWeight: 'bold',
                     fontSize: '10px',
-                    color: '#60B478',
+                    color: theme.palette.secondary.main,
                   }}
                 >
                   +{Math.abs(count)}%
@@ -73,7 +75,7 @@ const SubCard = ({ content }) => {
             ) : (
               <>
                 <ArrowCircleDownRoundedIcon
-                  sx={{ color: '#7E62D7', width: 30, height: 29 }}
+                  sx={{ color: theme.palette.primary.main, width: 30, height: 29 }}
                 />
                 <Typography
                   sx={{
@@ -81,7 +83,7 @@ const SubCard = ({ content }) => {
                     height: 20,
                     fontWeight: 'bold',
                     fontSize: '10px',
-                    color: '#7E62D7',
+                    color: theme.palette.primary.main,
                   }}
                 >
                   -{Math.abs(count)}%
@@ -118,7 +120,7 @@ const SubCard = ({ content }) => {
             <Line
               type="monotone"
               dataKey="tenants"
-              stroke={isIncreasing ? '#60B478' : '#7E62D7'}
+              stroke={isIncreasing ? theme.palette.secondary.main : theme.palette.primary.main}
               strokeWidth={2}
             />
           </LineChart>

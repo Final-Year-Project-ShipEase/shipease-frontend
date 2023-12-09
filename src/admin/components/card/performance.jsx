@@ -3,6 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import dummyPerformanceData from './dummyPerformanceData';
+import { useTheme } from '@mui/material/styles';
 import {
   LineChart,
   Line,
@@ -15,6 +16,7 @@ import {
 
 const Performance = () => {
  
+  const theme = useTheme();
 
   return (
     <Card
@@ -51,14 +53,14 @@ const Performance = () => {
             <Line
               type="monotone"
               dataKey="bookings"
-              stroke="#60B478"
+              stroke={theme.palette.secondary.main}
               strokeWidth={2}
               name="User"
             />
             <Line
               type="monotone"
               dataKey="bookings1"
-              stroke="#7E62D7"
+              stroke={theme.palette.primary.main}
               strokeWidth={2}
               name="Booking"
             />
