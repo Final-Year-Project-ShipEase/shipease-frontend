@@ -12,13 +12,22 @@ import {
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
 import HeaderButton from '../../../commons/buttons/headerButton';
-
+import DriverDetailsModal from './components/modal/driverDetails';
 
 const PageHeader = () => {
   const [Driver, setDriver] = React.useState('');
   const theme = useTheme();
-  console.log(theme);
   const navigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   const handleChange = (event) => {
     setDriver(event.target.value);
   };
@@ -35,6 +44,7 @@ const PageHeader = () => {
         width: '100%',
       }}
     >
+      <DriverDetailsModal open={open} handleClose={handleClose} />
       <Box
         sx={{
           display: 'flex',
@@ -105,7 +115,12 @@ const PageHeader = () => {
         }}
       >
         <HeaderButton text={'Export'} onClick={onClickPermit} />
-        <HeaderButton text={'Reset'} onClick={onClickPermit} />
+        <HeaderButton
+          text={'Reset'}
+          onClick={() => {
+            setOpen(true);
+          }}
+        />
       </Box>
     </Box>
   );
