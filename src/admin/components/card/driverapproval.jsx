@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import DriverDetail from '../card/driverdetails'; // Replace with the correct path to your SubCard component
+import DriverDetail from './driverDetails';
 
 const VehicleApproval = () => {
   return (
