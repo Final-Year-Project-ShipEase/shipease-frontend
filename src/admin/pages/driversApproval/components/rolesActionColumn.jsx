@@ -42,6 +42,11 @@ const RolesActionColumn = ({ value }) => {
     //delRole(value);
   };
 
+  const handleApprove = () => {
+    //appDriver(value);
+    console.log(value);
+  };
+
   return (
     <Box
       sx={{
@@ -69,7 +74,10 @@ const RolesActionColumn = ({ value }) => {
         <LockIcon style={{ color: isLockClicked ? '#60B478' : '#7E62D7B2' }} />
       </CustomIconButton>
       <CustomIconButton>
-        <DoneOutlinedIcon style={{ color: '#7E62D7B2' }} />
+        <DoneOutlinedIcon
+          style={{ color: '#7E62D7B2' }}
+          onClick={handleApprove}
+        />
       </CustomIconButton>
       <CustomIconButton>
         <RemoveOutlinedIcon style={{ color: '#7E62D7B2' }} />

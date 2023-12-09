@@ -238,11 +238,13 @@ export default function TableData({ columns, rows }) {
                                 }),
                               }}
                               onClick={() => {
-                                handleOpen(row);
+                                if (column.id !== 'actions') {
+                                  handleOpen(row);
+                                }
                               }}
                             >
                               {column.id === 'actions' ? (
-                                <RolesActionColumn value={row.name} />
+                                <RolesActionColumn value={row.id} />
                               ) : (
                                 row[column.id]
                               )}
