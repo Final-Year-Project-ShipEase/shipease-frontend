@@ -4,6 +4,8 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import FileCopySharpIcon from '@mui/icons-material/FileCopySharp';
 import LockIcon from '@mui/icons-material/Lock';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
+import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 
 const CustomIconButton = ({ children, onClick, color }) => {
   return (
@@ -64,7 +66,13 @@ const RolesActionColumn = ({ value }) => {
         onClick={handleLockClick}
         color={isLockClicked ? '#e196a3' : 'grey'}
       >
-        <LockIcon style={{ color: isLockClicked ? '#6B1137' : '#7E62D7B2' }} />
+        <LockIcon style={{ color: isLockClicked ? '#60B478' : '#7E62D7B2' }} />
+      </CustomIconButton>
+      <CustomIconButton>
+        <DoneOutlinedIcon style={{ color: '#7E62D7B2' }} />
+      </CustomIconButton>
+      <CustomIconButton>
+        <RemoveOutlinedIcon style={{ color: '#7E62D7B2' }} />
       </CustomIconButton>
       <CustomIconButton>
         <DeleteForeverSharpIcon
