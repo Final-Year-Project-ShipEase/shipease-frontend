@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -6,9 +6,8 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import dummyOrderData from './dummyOrderData';
 import { useTheme } from '@mui/material/styles';
 
-
 const Order = () => {
-  const theme=useTheme();
+  const theme = useTheme();
 
   return (
     <Card sx={{ width: '100%', maxWidth: 277, borderRadius: 5 }}>
@@ -38,7 +37,7 @@ const Order = () => {
               {dummyOrderData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={theme.palette.PieChart[index % theme.palette.PieChart.length]}
+                  fill={theme.palette.pieChart[index % theme.palette.pieChart.length]}
                 />
               ))}
             </Pie>
@@ -47,7 +46,7 @@ const Order = () => {
         </ResponsiveContainer>
       </CardContent>
 
-      <CardContent style={{ alignText: 'center' }}>
+      <CardContent style={{ textAlign: 'center' }}>
         <div
           style={{
             display: 'flex',

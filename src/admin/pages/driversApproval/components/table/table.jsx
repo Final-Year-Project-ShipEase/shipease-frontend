@@ -11,7 +11,7 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import { visuallyHidden } from '@mui/utils';
 import { Grid, Paper, TablePagination, Typography } from '@mui/material';
 import RolesActionColumn from '../rolesActionColumn.jsx';
-import { useTheme } from '@material-ui/core';
+import { useTheme } from '@mui/material/styles';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -170,7 +170,7 @@ export default function TableData({ columns, rows }) {
                 component="div"
                 sx={{
                   borderRadius: '5px',
-                  backgroundColor: theme.palette.table.body,
+                  backgroundColor: theme.palette.table,
                 }}
               >
                 <Table

@@ -41,12 +41,12 @@ const Sidebar = ({ leftSpan }) => {
           color: isActive ? theme.palette.text.primary : '#565656',
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
-          fontSize: theme.typography.customComponent.fontSize,
+          fontSize: theme.typography.fontSize,
           textTransform: 'none',
           fontWeight: isActive
-            ? theme.typography.customComponent.fontWeight
+            ? theme.typography.fontWeight
             : 400,
-          lineHeight: theme.typography.customComponent.lineHeight,
+          lineHeight: theme.typography.lineHeight,
           height: '40px',
           justifyContent: 'left',
           borderRight: isActive ? '4px solid #0061FF' : 'none',
