@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Box, Button, Drawer } from '@mui/material';
-
+import { Box, Button, Drawer, useTheme } from '@mui/material';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
+
 
 const Sidebar = ({ leftSpan}) => {
   const widthVal = (leftSpan / 11) * 100;
   const [activeButton, setActiveButton] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-
+  const theme = useTheme();
 
     const handleClick = (item) => {
       navigate(item.link);

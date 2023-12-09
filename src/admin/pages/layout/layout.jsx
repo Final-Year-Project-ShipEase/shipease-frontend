@@ -9,7 +9,13 @@ const Layout = () => {
     <>
       {/* <Navbar />
       <Grid container>
-        <Grid item md={leftSpan}>
+        <Grid
+          item
+          md={leftSpan}
+          xs={leftSpan}
+          lg={leftSpan}
+          sx={{ backgroundColor: '#FAFAFA' }}
+        >
           <Sidebar leftSpan={leftSpan} />
         </Grid>
         */}

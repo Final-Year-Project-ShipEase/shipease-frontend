@@ -1,8 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@material-ui/core/styles';
-import { CssBaseline } from '@mui/material';
-import theme from './theme';
 import Layout from './admin/pages/layout/layout';
 import ManageTenants from './admin/pages/manageTenants/manageTenants';
 import DriversApproval from './admin/pages/driversApproval/driversApproval';
