@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-
 import ArrowCircleUpRoundedIcon from '@mui/icons-material/ArrowCircleUpRounded';
 import ArrowCircleDownRoundedIcon from '@mui/icons-material/ArrowCircleDownRounded';
+import dummyTenantData from './dummyTenantData';
 import {
   LineChart,
   Line,
@@ -19,14 +19,6 @@ const SubCard = ({ content }) => {
   const [count, setCount] = useState(100); // Initial count value
   const [isIncreasing, setIsIncreasing] = useState(true); // Initial state
 
-  const data = [
-    { month: 'Jan', tenants: 20 },
-    { month: 'Feb', tenants: 40 },
-    { month: 'Mar', tenants: 10 },
-    { month: 'Apr', tenants: 80 },
-    { month: 'May', tenants: 90 },
-    { month: 'Jun', tenants: 20 },
-  ];
 
   return (
     <Card
@@ -118,7 +110,7 @@ const SubCard = ({ content }) => {
         </div>
 
         <ResponsiveContainer width={250} height={120}>
-          <LineChart data={data}>
+          <LineChart data={dummyTenantData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="month" />
             <YAxis />
