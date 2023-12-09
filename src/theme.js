@@ -1,6 +1,10 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+
+const COLORS = ['red', '#7E62D7', '#FF8C00', '#FFD700', '#36A2EB', '#FF6384'];
+
 const theme = createTheme({
   palette: {
+    pieChart: COLORS,
     primary: {
       main: '#7E62D7',
       text: '#fff',
