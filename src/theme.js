@@ -1,24 +1,26 @@
-import { createTheme } from '@mui/material/styles';
-
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#56a5d6',
+      main: '#7E62D7',
       text: '#fff',
     },
     secondary: {
-      main: '#2963FF',
+      main: '#60B478',
     },
-    button: {
-      main: '#3862fc',
-      hover: '#2745b0',
+    buttons: {
+      main: '#FFFFFF',
+      text: '#121212',
+      solidText: '#000000',
     },
-    background: {
-      default: '#fff',
-      tableHeader: '#EAEFFF',
+    shadows: {
+      customButton1: `0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(103, 110, 118, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08)`,
     },
-    text: {
-      primary: '#2C2C2C',
+    table: {
+      header: '#7E62D7',
+      row: '#FFFFFF',
+      rowHover: '#60B478',
+      border: '#000000',
     },
   },
   typography: {
@@ -42,6 +44,24 @@ const theme = createTheme({
       fontSize: '18px',
       fontWeight: 600,
     },
+    t3: {
+      fontSize: '16px',
+      fontWeight: 600,
+    },
+    tableHeader: {
+      fontSize: '18px',
+      fontWeight: 600,
+      color: '#FFFFFF',
+      fontFamily: 'Lato',
+    },
+    tableRow: {
+      fontSize: '14px',
+      fontWeight: 500,
+      color: '#000000',
+      fontFamily: 'Lato',
+    },
   },
 });
+responsiveFontSizes(theme);
+
 export default theme;

@@ -1,5 +1,5 @@
 
-name: Build and Lint
+name: Main Build 
 
 on:
   push:
@@ -8,6 +8,7 @@ on:
   pull_request:
     branches:
       - main
+      - staging
 
 jobs:
   build-and-lint:

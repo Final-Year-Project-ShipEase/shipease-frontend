@@ -30,6 +30,11 @@ const Navbar = () => {
               <img
                 src={require('../../resources/shipease.png')}
                 alt="ShipEase-logo"
+                style={{
+                  height: '35px',
+                  width: 'auto',
+                  marginRight: '10px',
+                }}
               />
             </Box>
             <Box

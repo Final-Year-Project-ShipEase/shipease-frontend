@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Box, Button, Drawer } from '@mui/material';
-
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
+import { useTheme } from '@material-ui/core';
 
 const Sidebar = ({ leftSpan }) => {
   const widthVal = (leftSpan / 12) * 100;
   const [activeButton, setActiveButton] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
 
   const handleClick = (item) => {
     navigate(item.link);
@@ -37,19 +38,25 @@ const Sidebar = ({ leftSpan }) => {
           gap: '8px',
           alignSelf: 'stretch',
           overflow: 'hidden',
-          color: isActive ? '#121212' : '#565656',
+          color: isActive ? theme.palette.text.primary : '#565656',
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
-          fontSize: '16px',
+          fontSize: theme.typography.customComponent.fontSize,
           textTransform: 'none',
-          fontWeight: isActive ? 550 : 400,
-          lineHeight: '140%',
+          fontWeight: isActive
+            ? theme.typography.customComponent.fontWeight
+            : 400,
+          lineHeight: theme.typography.customComponent.lineHeight,
           height: '40px',
           justifyContent: 'left',
           borderRight: isActive ? '4px solid #0061FF' : 'none',
-          backgroundColor: isActive ? '#EAEFFF' : 'transparent',
+          backgroundColor: isActive
+            ? theme.palette.primary.main
+            : 'transparent',
           '&:hover': {
-            backgroundColor: '#EAEFFF',
+            backgroundColor: isActive
+              ? theme.palette.primary.main
+              : 'transparent',
           },
         }}
         onClick={() => handleClick(item)}
@@ -86,7 +93,6 @@ const Sidebar = ({ leftSpan }) => {
           flexDirection: 'column',
           width: '100%',
           height: '100%',
-          padding: '0 0 3rem 0',
         }}
       >
         {NavigationItems.map((item) => (
