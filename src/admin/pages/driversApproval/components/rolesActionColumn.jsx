@@ -47,6 +47,11 @@ const RolesActionColumn = ({ value }) => {
     console.log(value);
   };
 
+  const handleRemove = () => {
+    //remDriver(value);
+    console.log(value);
+  };
+
   return (
     <Box
       sx={{
@@ -80,7 +85,10 @@ const RolesActionColumn = ({ value }) => {
         />
       </CustomIconButton>
       <CustomIconButton>
-        <RemoveOutlinedIcon style={{ color: '#7E62D7B2' }} />
+        <RemoveOutlinedIcon
+          style={{ color: '#7E62D7B2' }}
+          onClick={handleRemove}
+        />
       </CustomIconButton>
       <CustomIconButton>
         <DeleteForeverSharpIcon
