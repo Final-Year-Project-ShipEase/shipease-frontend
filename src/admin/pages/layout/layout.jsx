@@ -11,12 +11,20 @@ const Layout = () => {
     <>
       <Navbar />
       <Grid container>
-        <Grid item md={leftSpan}>
+        <Grid
+          item
+          md={leftSpan}
+          xs={leftSpan}
+          lg={leftSpan}
+          sx={{ backgroundColor: '#FAFAFA' }}
+        >
           <Sidebar leftSpan={leftSpan} />
         </Grid>
         <Grid
           item
           md={rigthSpan}
+          xs={rigthSpan}
+          lg={rigthSpan}
           sx={{
             mt: '7vh',
             backgroundColor: '#FAFAFA',
