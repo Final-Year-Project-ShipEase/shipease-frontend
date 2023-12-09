@@ -11,16 +11,22 @@ const Layout = () => {
     <>
       {/* <Navbar />
       <Grid container>
-        <Grid item md={leftSpan}>
+        <Grid
+          item
+          md={leftSpan}
+          xs={leftSpan}
+          lg={leftSpan}
+          sx={{ backgroundColor: '#FAFAFA' }}
+        >
           <Sidebar leftSpan={leftSpan} />
         </Grid>
         */}
         <Grid
           item
           md={rigthSpan}
-          sx={
-            {/*mt: '7vh',*/
-            backgroundColor: '#302E35',
+          sx={{
+            mt: '7vh',
+            backgroundColor: '#FAFAFA',
             minHeight: '93vh',
           }}
         >
