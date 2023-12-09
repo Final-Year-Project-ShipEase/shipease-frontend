@@ -7,16 +7,11 @@ import {
   Typography,
   TextField,
   Button,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
   Box,
   Grid,
   Switch,
   FormControlLabel,
   DialogContentText,
-  CircularProgress,
 } from '@mui/material';
 import {
   AddCircleOutline as AddIcon,
@@ -33,14 +28,12 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
   const [formData, setFormData] = useState({
     ID: '',
     name: '',
-    tenant: '',
-    roles: '',
-    rolesOption: '',
-    description: '',
-    isDefault: false,
-    isSuperRole: false,
+    username: '',
+    password: '',
+    email: '',
+    phoneNo: '',
+    status: false,
     smsTemplate: '',
-    emailTemplate: '',
   });
 
   const handleChange = (event) => {
@@ -59,7 +52,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
     const clientData = {
       clientId: formData.ID,
       name: formData.name,
-      description: formData.description,
+      email: formData.email,
     };
 
     try {
@@ -72,13 +65,28 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      maxWidth="md"
+      sx={{
+        '& .MuiDialog-paper': {
+          width: '100%',
+          margin: 0,
+          borderRadius: 7,
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundColor: '#F5F5F5',
+        },
+      }}
+    >
       <ConfirmAdd
         open={isConfirmationDialogOpen}
         onClose={() => setIsConfirmationDialogOpen(false)}
         onConfirm={handleAddConfirm}
         //loading={creatingApp}
-        entity="tenant"
+        entity="username"
       />
       <DialogTitle>
         <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -95,7 +103,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
         >
           Create Application
         </DialogContentText>
-        <Typography variant="subtitle2">Description</Typography>
+        <Typography variant="subtitle2">email</Typography>
       </DialogTitle>
       <DialogContent>
         <Grid container spacing={2}>
@@ -120,48 +128,42 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <InputLabel>Tenant</InputLabel>
-              <Select
-                name="tenant"
-                value={formData.tenant}
-                onChange={handleChange}
-              >
-                <MenuItem value="country1">Tenant 1</MenuItem>
-                <MenuItem value="country2">Tenant 2</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
               margin="normal"
-              label="Roles"
-              name="roles"
-              value={formData.roles}
+              label="password"
+              name="password"
+              value={formData.password}
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <InputLabel>Roles</InputLabel>
-              <Select
-                name="rolesOption"
-                value={formData.rolesOption}
-                onChange={handleChange}
-              >
-                <MenuItem value="country1">Role 1</MenuItem>
-                <MenuItem value="country2">Role 2</MenuItem>
-              </Select>
-            </FormControl>
+            <TextField
+              fullWidth
+              margin="normal"
+              label="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
               margin="normal"
-              label="Description"
-              name="description"
-              value={formData.description}
+              label="Phone No"
+              name="Phone No"
+              value={formData.phoneNo}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              margin="normal"
+              label="email"
+              name="email"
+              value={formData.email}
               onChange={handleChange}
             />
           </Grid>
@@ -169,53 +171,14 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
             <FormControlLabel
               control={
                 <Switch
-                  checked={formData.isDefault}
+                  checked={formData.status}
                   onChange={handleSwitchChange}
-                  name="isDefault"
+                  name="status"
                 />
               }
-              label="Default"
-            />
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={formData.isSuperRole}
-                  onChange={handleSwitchChange}
-                  name="isSuperRole"
-                />
-              }
-              label="Super Role"
+              label="Active"
             />
           </Box>
-          <Box m={2} sx={{ width: '100%' }}>
-            <Typography variant="subtitle1">Multi Factor</Typography>
-          </Box>
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <InputLabel>SMS Template</InputLabel>
-              <Select
-                name="smsTemplate"
-                value={formData.smsTemplate}
-                onChange={handleChange}
-              >
-                <MenuItem value="country1">Template 1</MenuItem>
-                <MenuItem value="country2">Template 2</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <InputLabel>Email Template</InputLabel>
-              <Select
-                name="emailTemplate"
-                value={formData.emailTemplate}
-                onChange={handleChange}
-              >
-                <MenuItem value="country1">Template 1</MenuItem>
-                <MenuItem value="country2">Template 2</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
           <Grid item xs={6}>
             <Button fullWidth onClick={handleClose} sx={{ color: 'black' }}>
               Cancel
@@ -228,7 +191,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
               color="success"
               variant="contained"
             >
-              Save
+              Approve
             </Button>
           </Grid>
         </Grid>

@@ -9,6 +9,7 @@ import {
   Box,
   Checkbox,
   CircularProgress,
+  useTheme,
 } from '@mui/material';
 import {
   Close as CloseIcon,
@@ -16,20 +17,33 @@ import {
 } from '@mui/icons-material';
 
 const ConfirmAdd = ({ open, onClose, onConfirm, loading }) => {
+  const theme = useTheme();
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
+    <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth sx={{
+      '& .MuiDialog-paper': {
+        backgroundColor: theme.palette.background.default,
+        color: theme.palette.text.primary,
+        boxShadow: theme.shadows[5],
+        borderRadius: 4,
+      }
+    }}>
       <DialogTitle>
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <Box display="flex" alignItems="center">
-            <IconButton style={{ backgroundColor: '#D1FADF', color: 'green' }}>
+            <IconButton
+              style={{
+                backgroundColor: theme.palette.background.iconBackground,
+                color: theme.palette.background.iconColor,
+              }}
+            >
               <AddIcon />
             </IconButton>
             <Box m={2}>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                Create New Application
+                Driver Details
               </Typography>
               <Typography variant="subtitle2">
-                Are you sure you want to create this new application?
+                Are you sure you want to approve this new driver?
               </Typography>
             </Box>
           </Box>
@@ -44,7 +58,10 @@ const ConfirmAdd = ({ open, onClose, onConfirm, loading }) => {
           <Typography variant="subtitle2">Don't show again</Typography>
         </Box>
         <Box>
-          <Button onClick={onClose} sx={{ color: 'black' }}>
+          <Button
+            onClick={onClose}
+            sx={{ color: theme.palette.primary.blackColor }}
+          >
             Close
           </Button>
           <Button onClick={onConfirm} color="success" variant="contained">
