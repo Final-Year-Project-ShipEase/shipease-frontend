@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import image from '../../resources/Background.png';
-import arrow from '../../resources/Collapsable50.png';
+import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 
 const CardWithImage = ({ name }) => {
   return (
@@ -76,11 +76,8 @@ const CardWithImage = ({ name }) => {
         >
           Turn on your
           <br /> car
-          <img
-            src={arrow}
-            alt="Arrow"
-            sx={{ marginLeft: '4px', width: '15px', height: '15px' }}
-          />
+          <ArrowForwardRoundedIcon sx={{ marginLeft: '4px', width: '15px', height: '15px' }}>
+          </ArrowForwardRoundedIcon>
         </Link>
       </CardContent>
     </Card>
