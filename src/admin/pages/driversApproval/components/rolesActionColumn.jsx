@@ -22,7 +22,7 @@ const CustomIconButton = ({ children, onClick, color }) => {
   );
 };
 
-const RolesActionColumn = ({ value }) => {
+const RolesActionColumn = ({ value, boxType }) => {
   const [isLockClicked, setIsLockClicked] = useState(false);
   //const { delRole } = useRBACService();
 
@@ -45,11 +45,13 @@ const RolesActionColumn = ({ value }) => {
   const handleApprove = () => {
     //appDriver(value);
     console.log(value);
+    boxType('approved');
   };
 
   const handleRemove = () => {
     //remDriver(value);
     console.log(value);
+    boxType('removed');
   };
 
   return (
