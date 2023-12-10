@@ -17,7 +17,7 @@ import {
   useTheme,
 } from '@mui/material';
 import RolesActionColumn from '../rolesActionColumn.jsx';
-import DriverDetailsModal from '../modal/driverDetails.jsx';
+import VehicleDetailsModal from '../modal/vehicleDetails.jsx';
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
 import ConfirmDelete from '../dialogues/ConfirmDelete.jsx';
 
@@ -177,7 +177,7 @@ export default function TableData({ columns, rows }) {
 
   return (
     <Box sx={{ marginTop: '24px', overflowY: 'auto' }}>
-      <DriverDetailsModal open={open} handleClose={handleClose} />
+      <VehicleDetailsModal open={open} handleClose={handleClose} />
       <ConfirmAdd
         open={boxType === 'approved'}
         onClose={handleDialogClose}

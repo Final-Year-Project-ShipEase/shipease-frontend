@@ -17,10 +17,10 @@ import {
   useTheme,
 } from '@mui/material';
 import RolesActionColumn from '../rolesActionColumn.jsx';
-import DriverDetailsModal from '../modal/driverDetails.jsx';
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
 import ConfirmDelete from '../dialogues/ConfirmDelete.jsx';
 import { useNavigate } from 'react-router-dom';
+import TenantDetailsModal from '../modal/tenantsDetails.jsx';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -179,7 +179,7 @@ export default function TableData({ columns, rows }) {
 
   return (
     <Box sx={{ marginTop: '24px', overflowY: 'auto' }}>
-      <DriverDetailsModal open={modalOpen} handleClose={handleModalClose} />
+      <TenantDetailsModal open={modalOpen} handleClose={handleModalClose} />
       <ConfirmAdd
         open={boxType === 'approved'}
         onClose={handleDialogClose}

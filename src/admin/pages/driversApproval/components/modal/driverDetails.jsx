@@ -108,9 +108,11 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           variant="h6"
           sx={{ fontWeight: 'bold', color: 'black' }}
         >
-          Create Application
+          Driver Details
         </DialogContentText>
-        <Typography variant="subtitle2">email</Typography>
+        <Typography variant="subtitle2">
+          Following are the Driver Details
+        </Typography>
       </DialogTitle>
       <DialogContent>
         <Grid container spacing={2}>
