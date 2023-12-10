@@ -34,18 +34,8 @@ const RolesActionColumn = ({ value, boxType, setModalOpen }) => {
     setModalOpen(true);
   };
 
-  const handleCopy = () => {
-    console.log('copy');
-  };
-
   const handleDelete = () => {
     //delRole(value);
-  };
-
-  const handleApprove = () => {
-    //appDriver(value);
-    console.log(value);
-    boxType('approved');
   };
 
   const handleRemove = () => {
@@ -68,23 +58,11 @@ const RolesActionColumn = ({ value, boxType, setModalOpen }) => {
       <CustomIconButton>
         <EditNoteIcon style={{ color: '#7E62D7B2' }} onClick={handleEdit} />
       </CustomIconButton>
-      <CustomIconButton>
-        <FileCopySharpIcon
-          style={{ color: '#7E62D7B2' }}
-          onClick={handleCopy}
-        />
-      </CustomIconButton>
       <CustomIconButton
         onClick={handleLockClick}
         color={isLockClicked ? '#e196a3' : 'grey'}
       >
         <LockIcon style={{ color: isLockClicked ? '#60B478' : '#7E62D7B2' }} />
-      </CustomIconButton>
-      <CustomIconButton>
-        <DoneOutlinedIcon
-          style={{ color: '#7E62D7B2' }}
-          onClick={handleApprove}
-        />
       </CustomIconButton>
       <CustomIconButton>
         <RemoveOutlinedIcon
