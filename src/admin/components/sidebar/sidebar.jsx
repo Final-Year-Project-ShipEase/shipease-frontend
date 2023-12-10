@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Box, Button, Drawer} from '@mui/material';
+import { Box, Button, Drawer, useTheme} from '@mui/material';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
 
 
 const Sidebar = ({ leftSpan}) => {
+  const theme = useTheme();
   const widthVal = (leftSpan / 11) * 100;
   const [activeButton, setActiveButton] = useState('');
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const Sidebar = ({ leftSpan}) => {
             gap: '3px',
             alignSelf: 'stretch',
             overflow: 'hidden',
-            color: isActive ? '#7E62D7' : 'black',
+            color: isActive ? theme.palette.buttonSidebar.colorActiveHover : theme.palette.buttonSidebar.ColorActive,
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
             fontFamily: 'latoregular',
@@ -48,11 +49,11 @@ const Sidebar = ({ leftSpan}) => {
             height: '40px',
             justifyContent: 'left',
             borderRight: isActive ? '4px solid #0061FF' : 'none',
-            backgroundColor: isActive ? '#7E62D7' : 'transparent',
+            backgroundColor: isActive ? theme.palette.buttonSidebar.BackgroundColorActiveHover : theme.palette.buttonSidebar.BackgroundColorActive,
             '&:hover': {
-              backgroundColor: 'rgba(126, 98, 215, 0.4)',
+              backgroundColor: theme.palette.buttonSidebar.main,
               '&:hover': {
-                color: 'white',
+                color: theme.palette.buttonSidebar.hovertextcolor,
               },
             },
           }}
@@ -77,7 +78,7 @@ const Sidebar = ({ leftSpan}) => {
             mt: '7vh',
             py: '24px',
             width: `${widthVal}%`,
-            backgroundColor: '#ffffff',
+            backgroundColor: theme.palette.buttonSidebar.hovertextcolor,
           },
         }}
       >

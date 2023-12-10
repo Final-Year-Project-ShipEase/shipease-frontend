@@ -1,8 +1,9 @@
 import React from 'react';
-import { Grid } from '@mui/material';
+import { Grid, useTheme } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
+  const theme = useTheme();
   const leftSpan = 1.5;
   const rigthSpan = 12 - leftSpan;
   return (
@@ -24,7 +25,7 @@ const Layout = () => {
           md={rigthSpan}
           sx={{
             mt: '7vh',
-            backgroundColor: '#FAFAFA',
+            backgroundColor: theme.palette.page.main,
             minHeight: '93vh',
           }}
         >

@@ -7,11 +7,13 @@ const theme = createTheme({
     },
     secondary: {
       main: '#60B478',
+      hover: "#509664",
     },
     buttons: {
       main: '#FFFFFF',
       text: '#121212',
       solidText: '#000000',
+      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)"
     },
     shadows: {
       customButton1: `0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(103, 110, 118, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08)`,
@@ -22,6 +24,20 @@ const theme = createTheme({
       rowHover: '#60B478',
       border: '#000000',
     },
+    buttonSidebar: {
+      main:  'rgba(126, 98, 215, 0.4)',
+      ColorActive: 'black',
+      ColorActiveHover: 'white',
+      BackgroundColorActive: 'transparent',
+      BackgroundColorActiveHover: '#7E62D7',
+      hovertextcolor: 'white',
+    },
+    page:{
+      main: 'lightgray',
+      form: 'white',
+      h5: 'gray',
+      border: "1px solid lightgrey"
+    }
   },
   typography: {
     allVariants: {

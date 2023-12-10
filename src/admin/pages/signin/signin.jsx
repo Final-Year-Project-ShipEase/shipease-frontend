@@ -1,5 +1,6 @@
 import { red } from '@material-ui/core/colors';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useTheme } from '@mui/material';
 import React, { useState } from 'react';
 
 const SignInPage = () => {
@@ -7,6 +8,7 @@ const SignInPage = () => {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [acceptTerms, setAcceptTerms] = useState(false);
+    const theme = useTheme();
     const [message, setMessage] = useState(""); // new state variable for the message
 
     const handlePasswordVisibility = (event) => {
@@ -18,7 +20,7 @@ const SignInPage = () => {
     };
 
     const handleSignIn = () => {
-        setMessage("You have successfully signed in!");
+        console.log("Name: ", name);
     };
 
     return (
@@ -34,16 +36,16 @@ const SignInPage = () => {
                     </div>
                     <div className="right-div" style={{ width: "55%", height: "auto", position: "relative", zIndex: "1" }}>
 
-                        <form style={{backgroundColor: "white", padding: "15%", paddingTop: "21%", paddingBottom:"21%", borderTopLeftRadius: "10%", borderBottomLeftRadius: "10%"}}>
+                        <form style={{backgroundColor: theme.palette.page.form, padding: "15%", paddingTop: "21%", paddingBottom:"21%", borderTopLeftRadius: "10%", borderBottomLeftRadius: "10%"}}>
                             <h2 style={{ marginTop: 10, fontSize: "250%" }}>Welcome back!</h2>
-                            <h5 style={{ marginTop: -40, fontSize: "89%", color: 'gray' }}>Please enter your details!</h5>
+                            <h5 style={{ marginTop: -40, fontSize: "89%", color: theme.palette.page.h5}}>Please enter your details!</h5>
                             <h2 style={{ marginTop: -15, fontSize: "170%"}}><strong>Sign In</strong></h2>
                             <div name="username">
                                 <label style={{ fontSize: "12px", marginLeft: "1%", fontWeight: "bold" }}>Username:</label>
                                 <input
                                     type="text"
                                     id="username"
-                                    style={{ width: "100%", height: "40px", paddingLeft: "5%", border: "1px solid lightgrey"}}
+                                    style={{ width: "100%", height: "40px", paddingLeft: "5%", border: theme.palette.page.border}}
                                     onChange={(e) => setName(e.target.value)}
                                     value={name}
                                     placeholder="Muntazer Mehdi"
@@ -55,7 +57,7 @@ const SignInPage = () => {
                                     <input
                                         type={showPassword ? "text" : "password"}
                                         id="password"
-                                        style={{ width: "100%", height: "40px", paddingLeft: "5%",  border: "1px solid lightgrey"}}
+                                        style={{ width: "100%", height: "40px", paddingLeft: "5%",  border: theme.palette.page.border}}
                                         onChange={(e) => setPassword(e.target.value)}
                                         value={password}
                                         placeholder="Password"
@@ -74,10 +76,10 @@ const SignInPage = () => {
                                 </div>
                             </div>
                             <div name = "forgot" style={{textAlign: "right" }}>
-                                <a href="/forgot-password" style={{ color: "#60B478", fontSize:"88%"}}>Forgot Password?</a>
+                                <a href="/forgot-password" style={{ color: theme.palette.secondary.main, fontSize:"88%"}}>Forgot Password?</a>
                             </div>
                             <div name="checkbox">
-                                <label style={{ color: "#60B478", fontSize: "13px", marginLeft: "1%", fontWeight: "bold" }}>
+                                <label style={{ color: theme.palette.secondary.main, fontSize: "13px", marginLeft: "1%", fontWeight: "bold" }}>
                                     <input
                                         type="checkbox"
                                         checked={acceptTerms}
@@ -90,8 +92,8 @@ const SignInPage = () => {
                                 <button
                                     type="submit"
                                     style={{
-                                        backgroundColor: "#60B478",
-                                        color: "white",
+                                        backgroundColor: theme.palette.secondary.main,
+                                        color: theme.palette.buttons.main,
                                         marginTop: "10px",
                                         padding: "10px 20px",
                                         fontSize: "16px",
@@ -100,17 +102,16 @@ const SignInPage = () => {
                                         width: "100%",
                                         height: "100%",
                                         borderRadius: "4px",
-                                        boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)"
+                                        boxShadow: theme.palette.buttons.boxShadow,
                                     }}
                                     onClick={handleSignIn}
-                                        onTouchStart={(e) => e.target.style.backgroundColor = "#509664"}
-                                        onTouchEnd={(e) => e.target.style.backgroundColor = "#60B478"}
-                                        onMouseEnter={(e) => e.target.style.backgroundColor = "#509664"}
-                                        onMouseLeave={(e) => e.target.style.backgroundColor = "#60B478"}
+                                        onTouchStart={(e) => e.target.style.backgroundColor = theme.palette.secondary.hover}
+                                        onTouchEnd={(e) => e.target.style.backgroundColor = theme.palette.secondary.main}
+                                        onMouseEnter={(e) => e.target.style.backgroundColor = theme.palette.secondary.hover}
+                                        onMouseLeave={(e) => e.target.style.backgroundColor = theme.palette.secondary.main}
                                 >
                                     Sign In
                                 </button>
-                                <h1 style={{color: red}}>{message}</h1>
                             </div>
                         </form>
                     </div>
