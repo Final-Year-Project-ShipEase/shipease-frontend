@@ -21,6 +21,7 @@ const theme = createTheme({
       text: '#121212',
       solidText: '#000000',
       color: '#000000',
+      hover: '#2B2626',
     },
     shadows: {
       customButton1: `0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(103, 110, 118, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08)`,

@@ -12,6 +12,7 @@ import {
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
 import HeaderButton from '../../../commons/buttons/headerButton';
+import AddModalButton from '../../../commons/buttons/addModal';
 
 const PageHeader = () => {
   const [Driver, setDriver] = React.useState('');
@@ -104,6 +105,7 @@ const PageHeader = () => {
       >
         <HeaderButton text={'Export'} onClick={onClickPermit} />
         <HeaderButton text={'Reset'} onClick={onClickPermit} />
+        <AddModalButton text={'Add Permission'} onClick={onClickPermit} />
       </Box>
     </Box>
   );
