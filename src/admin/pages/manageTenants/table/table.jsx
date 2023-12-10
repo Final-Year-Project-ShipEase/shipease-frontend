@@ -132,21 +132,6 @@ export default function TableData({ columns, rows }) {
   const [visibleRows, setVisibleRows] = useState([]);
   const theme = useTheme();
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [open, setOpen] = React.useState(false);
-  const [boxType, setBoxType] = useState('');
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleDialogClose = () => {
-    setBoxType('');
-  };
-
-  const handleOpen = (row) => {
-    setOpen(true);
-    //console.log(row.id); use this to get result of row id
-  };
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -244,11 +229,6 @@ export default function TableData({ columns, rows }) {
                                 ...(columnIndex === 0 && {
                                   paddingLeft: '16px',
                                 }),
-                              }}
-                              onClick={() => {
-                                if (column.id !== 'actions') {
-                                  handleOpen(row);
-                                }
                               }}
                             >
                               {row[column.id]}
