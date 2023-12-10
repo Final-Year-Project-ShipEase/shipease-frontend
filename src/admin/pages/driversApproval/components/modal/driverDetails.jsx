@@ -12,6 +12,7 @@ import {
   Switch,
   FormControlLabel,
   DialogContentText,
+  useTheme,
 } from '@mui/material';
 import {
   AddCircleOutline as AddIcon,
@@ -23,6 +24,7 @@ import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
 const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
+  const theme = useTheme();
   //const { createApplication, creatingApp } = useApplicationService();
 
   const [formData, setFormData] = useState({
@@ -32,8 +34,13 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
     password: '',
     email: '',
     phoneNo: '',
+    cnic: '',
+    LicenseNo: '',
+    TrackerNo: '',
+    City: '',
+    Tenant: '',
+    LicenseImages: 'License Image',
     status: false,
-    smsTemplate: '',
   });
 
   const handleChange = (event) => {
@@ -166,6 +173,79 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
               value={formData.email}
               onChange={handleChange}
             />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              margin="normal"
+              label="CNIC"
+              name="CNIC"
+              value={formData.cnic}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              margin="normal"
+              label="License No"
+              name="License No"
+              value={formData.LicenseNo}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Tracker No"
+              name="Tracker No"
+              value={formData.TrackerNo}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              margin="normal"
+              label="City"
+              name="City"
+              value={formData.City}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Tenant"
+              name="Tenant"
+              value={formData.Tenant}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button
+              name="License Images"
+              onChange={handleChange}
+              variant="contained"
+              sx={{
+                backgroundColor: theme.palette.secondary.main,
+                color: 'white',
+                width: '100%',
+                height: '72%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mt: 2,
+                ':hover': {
+                  backgroundColor: theme,
+                },
+              }}
+              startIcon={<AddIcon />}
+            >
+              License Images
+            </Button>
           </Grid>
           <Box display="flex" ml={2} sx={{ width: '100%' }}>
             <FormControlLabel

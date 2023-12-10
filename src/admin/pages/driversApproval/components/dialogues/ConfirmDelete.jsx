@@ -26,10 +26,10 @@ const ConfirmDelete = ({ open, onClose, onConfirm, loading }) => {
             </IconButton>
             <Box m={2}>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                Delete Application
+                Reject Application
               </Typography>
               <Typography variant="subtitle2">
-                Are you sure you want to delete this application?
+                Are you sure you want to reject this application?
               </Typography>
             </Box>
           </Box>
@@ -48,7 +48,7 @@ const ConfirmDelete = ({ open, onClose, onConfirm, loading }) => {
             Close
           </Button>
           <Button onClick={onConfirm} variant="contained">
-            {loading ? <CircularProgress /> : 'Delete'}
+            {loading ? <CircularProgress /> : 'Reject'}
           </Button>
         </Box>
       </DialogActions>
