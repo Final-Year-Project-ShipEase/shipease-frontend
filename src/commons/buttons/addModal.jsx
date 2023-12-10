@@ -1,16 +1,17 @@
-import { Button } from '@mui/material';
+import { Button, useTheme } from '@mui/material';
 import React from 'react';
 import theme from '../../theme';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-const AddModal = ({ text, onClick }) => {
+const AddModalButton = ({ text, onClick }) => {
+  const theme = useTheme();
   return (
     <Button
       variant="contained"
       onClick={onClick}
       sx={{
         display: 'flex',
-        width: '120px',
+        minWidth: theme.typography.pxToRem(145),
         padding: '10px 18px',
         borderRadius: '8px',
         background: ' #2963FF',
@@ -24,7 +25,7 @@ const AddModal = ({ text, onClick }) => {
         fontWeight: 600,
         lineHeight: '140%',
         '&:hover': {
-          backgroundColor: theme.palette.button.hover,
+          backgroundColor: theme.palette.buttons.hover,
           color: theme.palette.primary.text,
           boxShadow: 'none',
         },
@@ -36,4 +37,4 @@ const AddModal = ({ text, onClick }) => {
   );
 };
 
-export default AddModal;
+export default AddModalButton;
