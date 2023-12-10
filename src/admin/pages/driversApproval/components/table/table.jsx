@@ -9,7 +9,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { visuallyHidden } from '@mui/utils';
-import { Grid, Paper, TablePagination, Typography, useTheme } from '@mui/material';
+import {
+  Grid,
+  Paper,
+  TablePagination,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import RolesActionColumn from '../rolesActionColumn.jsx';
 import DriverDetailsModal from '../modal/driverDetails.jsx';
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';

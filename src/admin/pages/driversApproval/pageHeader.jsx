@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 import HeaderButton from '../../../commons/buttons/headerButton';
 import DriverDetailsModal from './components/modal/driverDetails';
 
-
 const PageHeader = () => {
   const [Driver, setDriver] = React.useState('');
   const theme = useTheme();
