@@ -13,17 +13,27 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
 import HeaderButton from '../../../commons/buttons/headerButton';
 import AddModalButton from '../../../commons/buttons/addModal';
+import AddPermissionModal from './components/modal/addPermission';
 
 const PageHeader = () => {
   const [Driver, setDriver] = React.useState('');
+  const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
   const handleChange = (event) => {
     setDriver(event.target.value);
   };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const onClickPermit = () => {
     navigate('/approval/drivers');
+  };
+
+  const onAddPermission = () => {
+    setOpen(true);
   };
 
   return (
@@ -34,6 +44,11 @@ const PageHeader = () => {
         width: '100%',
       }}
     >
+      <AddPermissionModal
+        text={'Add Permission'}
+        open={open}
+        handleClose={handleClose}
+      />
       <Box
         sx={{
           display: 'flex',
@@ -105,7 +120,7 @@ const PageHeader = () => {
       >
         <HeaderButton text={'Export'} onClick={onClickPermit} />
         <HeaderButton text={'Reset'} onClick={onClickPermit} />
-        <AddModalButton text={'Add Permission'} onClick={onClickPermit} />
+        <AddModalButton text={'Add Permission'} onClick={onAddPermission} />
       </Box>
     </Box>
   );
