@@ -8,6 +8,7 @@ import {
   Checkbox,
   Box,
   Grid,
+  useTheme,
 } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import userList from './userList';
@@ -17,6 +18,7 @@ const CustomTable = () => {
   //   const { getUserData } = useUserService();
   const [roles, setRole] = React.useState([]);
   const [users, setUserList] = useState([]);
+  const theme = useTheme();
 
   const getData = async () => {
     try {
@@ -71,17 +73,23 @@ const CustomTable = () => {
       <TableHead>
         <TableRow
           sx={{
-            backgroundColor: 'background.tableHeader',
+            backgroundColor: theme.palette.table.header,
+            padding: '12px 8px 8px 16px',
+            height: '60px',
+            borderTopRadius: '15px',
           }}
         >
           <TableCell
             style={{
               width: '300px',
               padding: '12px 8px 8px 16px',
-              fontWeight: 'bold',
+              fontSize: theme.typography.tableHeader.fontSize,
+              fontFamily: theme.typography.tableHeader.fontFamily,
+              fontWeight: theme.typography.tableHeader.fontWeight,
+              color: theme.typography.tableHeader.color,
             }}
           >
-            User
+            Tenant
           </TableCell>{' '}
           {roles.map((role) => (
             <TableCell key={role.id}>
@@ -119,7 +127,7 @@ const CustomTable = () => {
       >
         {users.map((user) => (
           <TableRow key={user.id}>
-            <TableCell>{user.username}</TableCell>
+            <TableCell>{user.name}</TableCell>
             {roles.map((role) => (
               <TableCell
                 key={role.id}
