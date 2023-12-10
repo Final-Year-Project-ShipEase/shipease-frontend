@@ -3,16 +3,16 @@ import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import Person4OutlinedIcon from '@mui/icons-material/Person4Outlined';
 import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
 import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined';
-
 const NavigationItems = [
+
   {
     name: 'Dashboard',
     link: '/dashboard',
     icon: <HomeOutlinedIcon style={{ color: '#565656' }} />,
   },
   {
-    name: 'Tenant Management',
-    link: '/managetenants',
+    name: 'ManageTenants',
+    link: '/manageTenants',
     icon: <BadgeOutlinedIcon style={{ color: '#565656' }} />,
   },
   {
@@ -20,12 +20,12 @@ const NavigationItems = [
     icon: <PersonAddAltOutlinedIcon style={{ color: '#565656' }} />,
   },
   {
-    name: 'Driver Approval',
-    link: '/approval/drivers',
+    name: 'DriversApproval',
+    link: '/driversApproval',
   },
   {
-    name: 'Vehicle Approval',
-    link: '/approval/vehicles',
+    name: 'VehiclesApproval',
+    link: '/vehiclesApproval',
   },
   {
     name: 'Permissions',
@@ -39,4 +39,4 @@ const NavigationItems = [
   },
 ];
 
-export default NavigationItems;
+  export default NavigationItems;

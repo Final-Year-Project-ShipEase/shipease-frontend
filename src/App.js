@@ -24,9 +24,9 @@ const App = () => {
                 <Route path="/" element={<SignIn />} />
                 <Route path="dashboard" element={<AdminDashboard />} />
                 <Route path="managetenants" element={<ManageTenants />} />
-                <Route path="approval/drivers" element={<DriversApproval />} />
+                <Route path="driversapproval" element={<DriversApproval />} />
                 <Route
-                  path="approval/vehicles"
+                  path="vehiclesapproval"
                   element={<VehiclesApproval />}
                 />
                 <Route path="permissions" element={<Permissions />} />

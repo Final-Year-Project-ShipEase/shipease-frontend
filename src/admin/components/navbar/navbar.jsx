@@ -1,11 +1,13 @@
 import React from 'react';
+import { useTheme } from '@mui/material/styles';
 import { AppBar, Box, Toolbar } from '@mui/material';
 import { appBarStyles } from './config.js';
 import UserInfo from './userInfo';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 
-              const Navbar = () => {
+              const Navbar = () => {   
+const theme = useTheme();
                 return (
                   <Box
                     sx={{
@@ -48,18 +50,18 @@ import SearchIcon from '@mui/icons-material/Search';
                               sx={{
                                 border: '1px solid #ccc',
                                 borderRadius: '14px',
-                                backgroundColor: 'rgba(126, 98, 215, 0.4)',
+                                backgroundColor: theme.palette.buttonSidebar.main,
                                 paddingLeft: '15px',
                                 marginTop: '-3%',
                                 width: '350px',
-                                color: "white"
+                                color: theme.palette.buttonSidebar.ColorActiveHover,
                               }}
                               placeholder="Search..."
                               inputProps={{ 'aria-label': 'search' }}
                               startAdornment={
                                 <SearchIcon
                                   sx={{
-                                    color: 'white',
+                                    color: theme.palette.buttonSidebar.ColorActiveHover,
                                     marginRight: '18px',
                                   }}
                                 />

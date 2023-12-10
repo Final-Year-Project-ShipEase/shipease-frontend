@@ -1,6 +1,8 @@
 import React from 'react';
 import { Grid, useTheme } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import Navbar from '../../components/navbar/navbar';
+import Sidebar from '../../components/sidebar/sidebar';
 
 const Layout = () => {
   const theme = useTheme();
@@ -8,7 +10,7 @@ const Layout = () => {
   const rigthSpan = 12 - leftSpan;
   return (
     <>
-      {/* <Navbar />
+      <Navbar />
       <Grid container>
         <Grid
           item
@@ -19,7 +21,6 @@ const Layout = () => {
         >
           <Sidebar leftSpan={leftSpan} />
         </Grid>
-        */}
         <Grid
           item
           md={rigthSpan}
@@ -31,6 +32,7 @@ const Layout = () => {
         >
           <Outlet context={[rigthSpan, leftSpan]} />
         </Grid>
+      </Grid>
     </>
   );
 };

@@ -25,12 +25,14 @@ const theme = createTheme({
       border: '#000000',
     },
     buttonSidebar: {
-      main:  'rgba(126, 98, 215, 0.4)',
+      main:  'rgba(0, 102, 140, 0.4)',
       ColorActive: 'black',
       ColorActiveHover: 'white',
       BackgroundColorActive: 'transparent',
-      BackgroundColorActiveHover: '#7E62D7',
+      BackgroundColorActiveHover: 'rgba(0, 102, 140, 1)',
       hovertextcolor: 'white',
+      borderright: '4px solid rgba(0, 102, 140, 1)',
+      sidebarshadow: '5px 2px 10px rgba(0, 0, 0, 0.1)',
     },
     page:{
       main: 'lightgray',

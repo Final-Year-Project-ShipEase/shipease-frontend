@@ -1,6 +1,6 @@
 import React from 'react';
 
-const VehiclesApproval = () => {
+const Vehiclesapproval = () => {
   return (
     <div>
       <h1>Vehicles Approval</h1>
@@ -8,4 +8,4 @@ const VehiclesApproval = () => {
   );
 };
 
-export default VehiclesApproval;
+export default Vehiclesapproval;
