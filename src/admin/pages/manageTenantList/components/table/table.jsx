@@ -145,13 +145,12 @@ export default function TableData({ columns, rows }) {
     setBoxType('');
   };
 
-
   const handleModalClose = () => {
     setModalOpen(false);
   };
 
   const handleNav = (row) => {
-    console.log(row.id);  
+    console.log(row.id);
     navigate('/managetenants/' + row.id);
   };
 
