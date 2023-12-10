@@ -1,10 +1,7 @@
 import React from 'react';
 
 const ManageTenants = () => {
-  return (
-    <>      
-    </>
-  );
+  return <></>;
 };
 
 export default ManageTenants;

@@ -15,7 +15,6 @@ import {
 } from 'recharts';
 
 const Booking = () => {
-
   const theme = useTheme();
 
   return (

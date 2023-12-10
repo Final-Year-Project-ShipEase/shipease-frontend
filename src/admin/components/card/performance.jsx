@@ -15,7 +15,6 @@ import {
 } from 'recharts';
 
 const Performance = () => {
- 
   const theme = useTheme();
 
   return (

@@ -8,7 +8,6 @@ import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
 import { useTheme } from '@mui/material/styles';
 
 const CardWithImage = ({ name }) => {
-
   const theme = useTheme();
 
   return (
@@ -80,8 +79,9 @@ const CardWithImage = ({ name }) => {
         >
           Turn on your
           <br /> car
-          <ArrowForwardRoundedIcon sx={{ marginLeft: '4px', width: '15px', height: '15px' }}>
-          </ArrowForwardRoundedIcon>
+          <ArrowForwardRoundedIcon
+            sx={{ marginLeft: '4px', width: '15px', height: '15px' }}
+          ></ArrowForwardRoundedIcon>
         </Link>
       </CardContent>
     </Card>

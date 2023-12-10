@@ -5,9 +5,8 @@ import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 const ApprovalDetail = () => {
-
   const theme = useTheme();
-  
+
   return (
     <Card
       sx={{
@@ -26,7 +25,11 @@ const ApprovalDetail = () => {
         }}
       >
         <Typography
-          style={{ fontWeight: 'bold', textAlign: 'center', color: theme.palette.buttons.main }}
+          style={{
+            fontWeight: 'bold',
+            textAlign: 'center',
+            color: theme.palette.buttons.main,
+          }}
         >
           Vehicle Approval Pending
         </Typography>
@@ -75,12 +78,20 @@ const ApprovalDetail = () => {
           }}
         >
           <Typography
-            sx={{ fontWeight: 'bold', color: theme.palette.buttons.main, fontSize: '14px' }}
+            sx={{
+              fontWeight: 'bold',
+              color: theme.palette.buttons.main,
+              fontSize: '14px',
+            }}
           >
             Vehicle Details
           </Typography>
           <Typography
-            sx={{ fontWeight: 'bold', color: theme.palette.buttons.main, fontSize: '14px' }}
+            sx={{
+              fontWeight: 'bold',
+              color: theme.palette.buttons.main,
+              fontSize: '14px',
+            }}
           >
             Registration Number
           </Typography>
@@ -94,10 +105,14 @@ const ApprovalDetail = () => {
             marginTop: '8px',
           }}
         >
-          <Typography sx={{ color: theme.palette.buttons.main, fontSize: '14px' }}>
+          <Typography
+            sx={{ color: theme.palette.buttons.main, fontSize: '14px' }}
+          >
             ThunderBlaze
           </Typography>
-          <Typography sx={{ color: theme.palette.buttons.main, fontSize: '14px' }}>
+          <Typography
+            sx={{ color: theme.palette.buttons.main, fontSize: '14px' }}
+          >
             ZAB-1234
           </Typography>
         </div>

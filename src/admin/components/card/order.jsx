@@ -37,7 +37,11 @@ const Order = () => {
               {dummyOrderData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={theme.palette.pieChart[index % theme.palette.pieChart.length]}
+                  fill={
+                    theme.palette.pieChart[
+                      index % theme.palette.pieChart.length
+                    ]
+                  }
                 />
               ))}
             </Pie>

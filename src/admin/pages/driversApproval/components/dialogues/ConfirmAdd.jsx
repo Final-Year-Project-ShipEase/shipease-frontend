@@ -19,14 +19,20 @@ import {
 const ConfirmAdd = ({ open, onClose, onConfirm, loading }) => {
   const theme = useTheme();
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth sx={{
-      '& .MuiDialog-paper': {
-        backgroundColor: theme.palette.background.default,
-        color: theme.palette.text.primary,
-        boxShadow: theme.shadows[5],
-        borderRadius: 4,
-      }
-    }}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth="xs"
+      fullWidth
+      sx={{
+        '& .MuiDialog-paper': {
+          backgroundColor: theme.palette.background.default,
+          color: theme.palette.text.primary,
+          boxShadow: theme.shadows[5],
+          borderRadius: 4,
+        },
+      }}
+    >
       <DialogTitle>
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <Box display="flex" alignItems="center">

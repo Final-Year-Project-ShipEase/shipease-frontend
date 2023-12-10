@@ -58,7 +58,11 @@ const SubCard = ({ content }) => {
             {isIncreasing ? (
               <>
                 <ArrowCircleUpRoundedIcon
-                  sx={{ color: theme.palette.secondary.main, width: 30, height: 29 }}
+                  sx={{
+                    color: theme.palette.secondary.main,
+                    width: 30,
+                    height: 29,
+                  }}
                 />
                 <Typography
                   sx={{
@@ -75,7 +79,11 @@ const SubCard = ({ content }) => {
             ) : (
               <>
                 <ArrowCircleDownRoundedIcon
-                  sx={{ color: theme.palette.primary.main, width: 30, height: 29 }}
+                  sx={{
+                    color: theme.palette.primary.main,
+                    width: 30,
+                    height: 29,
+                  }}
                 />
                 <Typography
                   sx={{
@@ -120,7 +128,11 @@ const SubCard = ({ content }) => {
             <Line
               type="monotone"
               dataKey="tenants"
-              stroke={isIncreasing ? theme.palette.secondary.main : theme.palette.primary.main}
+              stroke={
+                isIncreasing
+                  ? theme.palette.secondary.main
+                  : theme.palette.primary.main
+              }
               strokeWidth={2}
             />
           </LineChart>

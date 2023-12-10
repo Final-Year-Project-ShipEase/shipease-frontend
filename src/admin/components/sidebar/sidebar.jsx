@@ -4,7 +4,6 @@ import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOu
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
 
-
 const Sidebar = ({ leftSpan }) => {
   const widthVal = (leftSpan / 12) * 100;
   const [activeButton, setActiveButton] = useState('');
