@@ -7,8 +7,8 @@ const generateDummyData = () => {
     dummyData.push({
       id: i + 1000000000,
       username: `username${i}`,
-      tenant: `Tenant ${i}`,
-      actions: `Action ${i}`,
+      name: `Tenant ${i}`,
+      requests: i + 1,
     });
   }
 
