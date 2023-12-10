@@ -16,10 +16,6 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import RolesActionColumn from '../rolesActionColumn.jsx';
-import DriverDetailsModal from '../modal/driverDetails.jsx';
-import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
-import ConfirmDelete from '../dialogues/ConfirmDelete.jsx';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -135,7 +131,7 @@ export default function TableData({ columns, rows }) {
   const [page, setPage] = useState(0);
   const [visibleRows, setVisibleRows] = useState([]);
   const theme = useTheme();
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [open, setOpen] = React.useState(false);
   const [boxType, setBoxType] = useState('');
 
@@ -177,17 +173,6 @@ export default function TableData({ columns, rows }) {
 
   return (
     <Box sx={{ marginTop: '24px', overflowY: 'auto' }}>
-      <DriverDetailsModal open={open} handleClose={handleClose} />
-      <ConfirmAdd
-        open={boxType === 'approved'}
-        onClose={handleDialogClose}
-        onConfirm={handleDialogClose}
-      />
-      <ConfirmDelete
-        open={boxType === 'removed'}
-        onClose={handleDialogClose}
-        onConfirm={handleDialogClose}
-      />
       <Grid justifyContent="center">
         <Grid item xs={12} md={12}>
           <Box sx={{ width: '100%', borderRadius: '20px 20px 20px 20px' }}>
@@ -266,14 +251,7 @@ export default function TableData({ columns, rows }) {
                                 }
                               }}
                             >
-                              {column.id === 'actions' ? (
-                                <RolesActionColumn
-                                  value={row.id}
-                                  boxType={setBoxType}
-                                />
-                              ) : (
-                                row[column.id]
-                              )}
+                              {row[column.id]}
                             </TableCell>
                           ))}{' '}
                         </TableRow>
