@@ -5,9 +5,11 @@ import { useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import busImage from '../../../resources/image 1.png';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
+import { useNavigate } from 'react-router-dom';
 
 const TenantDetails = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <Card
@@ -26,8 +28,16 @@ const TenantDetails = () => {
           alignItems: 'center',
           padding: 1,
         }}
+        onClick={() => {
+          navigate('/manageTenants');
+        }}
       >
-        <ArrowBackRoundedIcon sx={{ color: theme.palette.primary.main }} />
+        <ArrowBackRoundedIcon
+          sx={{
+            color: theme.palette.primary.main,
+            cursor: 'pointer',
+          }}
+        />
         <Button sx={{ color: theme.palette.buttons.main, fontSize: '12px' }}>
           Back to Tenant List
         </Button>

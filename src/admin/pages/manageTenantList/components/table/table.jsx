@@ -20,6 +20,7 @@ import RolesActionColumn from '../rolesActionColumn.jsx';
 import DriverDetailsModal from '../modal/driverDetails.jsx';
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
 import ConfirmDelete from '../dialogues/ConfirmDelete.jsx';
+import { useNavigate } from 'react-router-dom';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -136,24 +137,22 @@ export default function TableData({ columns, rows }) {
   const [visibleRows, setVisibleRows] = useState([]);
   const theme = useTheme();
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [open, setOpen] = React.useState(false);
   const [boxType, setBoxType] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const navigate = useNavigate();
 
   const handleDialogClose = () => {
     setBoxType('');
   };
 
-  const handleOpen = (row) => {
-    //console.log(row.id); use this to get result of row id
-  };
 
   const handleModalClose = () => {
     setModalOpen(false);
+  };
+
+  const handleNav = (row) => {
+    console.log(row.id);  
+    navigate('/managetenants/' + row.id);
   };
 
   const handleRequestSort = (property) => {
@@ -266,7 +265,7 @@ export default function TableData({ columns, rows }) {
                               }}
                               onClick={() => {
                                 if (column.id !== 'actions') {
-                                  handleOpen(row);
+                                  handleNav(row);
                                 }
                               }}
                             >

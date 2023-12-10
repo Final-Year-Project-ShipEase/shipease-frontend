@@ -22,14 +22,6 @@ export const TenantsColumns = [
     width: '30%',
     numeric: false,
     disablePadding: false,
-    renderCell: (params) => (
-      <Link
-        to={'/managetenants/' + params.row?.id}
-        style={{ textDecoration: 'none', color: 'black' }}
-      >
-        {params.row?.username ? params.row.username : '-'}
-      </Link>
-    ),
   },
   {
     id: 'username',
