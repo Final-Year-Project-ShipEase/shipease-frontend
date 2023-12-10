@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import TableData from '../driversApproval/components/table/table'
+import TableData from '../driversApproval/components/table/table';
 import TenantDetails from './recentBookingComponent/tenantDetails';
 import TabComponent from './tabComponent';
 
@@ -14,8 +14,14 @@ const ManageTenants = () => {
         padding: 2,
       }}
     >
-
-      <Box sx={{marginBottom: '-10px', width:'100%', height:'280px', borderRadius:'10px'}}>
+      <Box
+        sx={{
+          marginBottom: '-10px',
+          width: '100%',
+          height: '280px',
+          borderRadius: '10px',
+        }}
+      >
         <TenantDetails />
       </Box>
 

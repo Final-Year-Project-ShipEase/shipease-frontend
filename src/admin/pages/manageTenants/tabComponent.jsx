@@ -4,9 +4,18 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TableData from '../driversApproval/components/table/table';
-import {BookingColumns, dummyBookingData} from './recentBookingComponent/_columns'
-import {VehicleColumns, dummyVehicleData} from './vehicleDetailsComponent/_columns'
-import {DriverColumns, dummyDriverData} from './driverDetailsComponent/_columns'
+import {
+  BookingColumns,
+  dummyBookingData,
+} from './recentBookingComponent/_columns';
+import {
+  VehicleColumns,
+  dummyVehicleData,
+} from './vehicleDetailsComponent/_columns';
+import {
+  DriverColumns,
+  dummyDriverData,
+} from './driverDetailsComponent/_columns';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -67,13 +76,13 @@ const TabComponent = () => {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-      <TableData columns={BookingColumns} rows={dummyBookingData} />
+        <TableData columns={BookingColumns} rows={dummyBookingData} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-      <TableData columns={VehicleColumns} rows={dummyVehicleData} />
+        <TableData columns={VehicleColumns} rows={dummyVehicleData} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-      <TableData columns={DriverColumns} rows={dummyDriverData} />
+        <TableData columns={DriverColumns} rows={dummyDriverData} />
       </CustomTabPanel>
     </Box>
   );
