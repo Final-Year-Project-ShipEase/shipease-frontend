@@ -135,7 +135,7 @@ export default function TableData({ columns, rows }) {
   const [page, setPage] = useState(0);
   const [visibleRows, setVisibleRows] = useState([]);
   const theme = useTheme();
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [open, setOpen] = React.useState(false);
   const [boxType, setBoxType] = useState('');
 
