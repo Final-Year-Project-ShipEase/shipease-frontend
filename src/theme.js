@@ -10,7 +10,8 @@ const theme = createTheme({
       text: '#fff',
       backgroundColor: '#2B2626',
       color: '#8884d8',
-      color1: '#7E62D733'
+      color1: '#7E62D733',
+      blackColor: 'Black',
     },
     secondary: {
       main: '#60B478',
@@ -29,6 +30,11 @@ const theme = createTheme({
       row: '#FFFFFF',
       rowHover: '#60B478',
       border: '#000000',
+    },
+    background: {
+      default: '#F5F5F5',
+      iconBackground: 'D1FADF',
+      iconColor: 'Green',
     },
   },
   typography: {

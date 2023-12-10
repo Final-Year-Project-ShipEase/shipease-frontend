@@ -6,7 +6,6 @@ import image from '../../../icons/image.png';
 import { useTheme } from '@mui/material/styles';
 
 const DriverDetail = () => {
-
   const theme = useTheme();
 
   return (
@@ -76,12 +75,20 @@ const DriverDetail = () => {
           }}
         >
           <Typography
-            sx={{ fontWeight: 'bold', color: theme.palette.buttons.main, fontSize: '14px' }}
+            sx={{
+              fontWeight: 'bold',
+              color: theme.palette.buttons.main,
+              fontSize: '14px',
+            }}
           >
             Driver Details
           </Typography>
           <Typography
-            sx={{ fontWeight: 'bold', color: theme.palette.buttons.main, fontSize: '14px' }}
+            sx={{
+              fontWeight: 'bold',
+              color: theme.palette.buttons.main,
+              fontSize: '14px',
+            }}
           >
             Contact Detail
           </Typography>
@@ -107,12 +114,18 @@ const DriverDetail = () => {
               style={{ width: '20px', height: '20px', borderRadius: '200px' }}
             ></img>
             <Typography
-              sx={{ color:  theme.palette.buttons.main, fontSize: '14px', marginLeft: '5px' }}
+              sx={{
+                color: theme.palette.buttons.main,
+                fontSize: '14px',
+                marginLeft: '5px',
+              }}
             >
               Abdullah Minhas
             </Typography>
           </div>
-          <Typography sx={{ color:  theme.palette.buttons.main, fontSize: '14px' }}>
+          <Typography
+            sx={{ color: theme.palette.buttons.main, fontSize: '14px' }}
+          >
             0306 7566528
           </Typography>
         </div>
@@ -126,12 +139,20 @@ const DriverDetail = () => {
           }}
         >
           <Typography
-            sx={{ fontWeight: 'bold', color:  theme.palette.buttons.main, fontSize: '14px' }}
+            sx={{
+              fontWeight: 'bold',
+              color: theme.palette.buttons.main,
+              fontSize: '14px',
+            }}
           >
             Vehicle Details
           </Typography>
           <Typography
-            sx={{ fontWeight: 'bold', color:  theme.palette.buttons.main, fontSize: '14px' }}
+            sx={{
+              fontWeight: 'bold',
+              color: theme.palette.buttons.main,
+              fontSize: '14px',
+            }}
           >
             Registration Number
           </Typography>
@@ -145,10 +166,14 @@ const DriverDetail = () => {
             marginTop: '8px',
           }}
         >
-          <Typography sx={{ color:  theme.palette.buttons.main, fontSize: '14px' }}>
+          <Typography
+            sx={{ color: theme.palette.buttons.main, fontSize: '14px' }}
+          >
             ThunderBlaze
           </Typography>
-          <Typography sx={{ color:  theme.palette.buttons.main, fontSize: '14px' }}>
+          <Typography
+            sx={{ color: theme.palette.buttons.main, fontSize: '14px' }}
+          >
             ZAB-1234
           </Typography>
         </div>

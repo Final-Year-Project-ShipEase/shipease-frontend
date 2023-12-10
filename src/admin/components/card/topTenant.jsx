@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 
 const TopTenant = ({ tenantName, totalRevenue }) => {
-
   const theme = useTheme();
 
   return (
