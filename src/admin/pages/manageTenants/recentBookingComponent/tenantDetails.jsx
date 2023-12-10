@@ -14,7 +14,6 @@ const TenantDetails = () => {
   return (
     <Card
       sx={{
-        borderRadius: '5px',
         backgroundColor: theme.palette.primary.backgroundColor,
         width: '100%',
         height: '280px',
@@ -48,7 +47,7 @@ const TenantDetails = () => {
           <img
             style={{ borderRadius: '5px', height: '100%' }}
             src={busImage}
-            alt="Bus-Image"
+            alt="Bus"
           />
         </Grid>
         <Grid item xs={9}>

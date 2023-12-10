@@ -21,7 +21,7 @@ import {
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
 //import { useApplicationService } from '../../../../services/applicationService';
 
-const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
+const TenantDetailsModal = ({ open, handleClose, onSubmit }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const theme = useTheme();
@@ -203,4 +203,4 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
   );
 };
 
-export default DriverDetailsModal;
+export default TenantDetailsModal;
