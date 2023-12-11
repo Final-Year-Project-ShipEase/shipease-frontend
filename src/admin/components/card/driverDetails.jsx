@@ -11,7 +11,7 @@ const DriverDetail = () => {
   return (
     <Card
       sx={{
-        width: 351,
+        width: '100%',
         height: 210,
         borderRadius: 3,
         backgroundColor: theme.palette.primary.backgroundColor,
@@ -26,7 +26,12 @@ const DriverDetail = () => {
         }}
       >
         <Typography
-          style={{ fontWeight: 'bold', textAlign: 'center', color: 'white',marginbottom: '10px',}}
+          style={{
+            fontWeight: 'bold',
+            textAlign: 'center',
+            color: 'white',
+            marginbottom: '10px',
+          }}
         >
           Driver Approval Pending
         </Typography>

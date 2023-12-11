@@ -10,7 +10,7 @@ const ApprovalDetail = () => {
   return (
     <Card
       sx={{
-        width: 351,
+        width: '100%',
         height: 150,
         borderRadius: 3,
         backgroundColor: theme.palette.primary.backgroundColor,
