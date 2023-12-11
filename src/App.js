@@ -10,6 +10,8 @@ import AdminDashboard from './admin/pages/dashboard/dashboard';
 import { SnackbarProvider } from './utils/snackbarContextProvider';
 import ManageTenantList from './admin/pages/manageTenantList/manageTenant';
 import TenantDashboard from './tenant/pages/tenantDashboard/tenantDashboard';
+import DriversGarage from './tenant/pages/driversGarage/driversGarage';
+import { Dashboard } from '@mui/icons-material';
 
 const App = () => {
   return (
@@ -18,7 +20,7 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route path="/" element={<AdminDashboard />} />
+              <Route path="/" element={<Dashboard />} />
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="managetenants" element={<ManageTenantList />} />
               <Route path="managetenants/:id" element={<ManageTenants />} />
@@ -27,6 +29,7 @@ const App = () => {
               <Route path="permissions" element={<Permissions />} />
               <Route path="announcements" element={<Announcements />} />
               <Route path="tenantDashboard" element={<TenantDashboard />} />
+              <Route path="driversGarage" element={<DriversGarage />} />
             </Route>
           </Routes>
         </Router>
