@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box } from '@mui/material';
 import PageHeader from './pageHeader';
 import TableData from './components/table/table';
 import { TenantsColumns, dummyTenantData } from './_columns.js';
+import useTenantService from '../../services/tenantService.jsx';
 
 const ManageTenantList = () => {
+  const { getTenants } = useTenantService();
+  const [tenants, setTenants] = React.useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getTenants();
+      setTenants(data);
+      console.log(tenants);
+    };
+    fetchData();
+  }, []);
   return (
     <Box
       sx={{
