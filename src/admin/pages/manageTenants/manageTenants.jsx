@@ -2,8 +2,10 @@ import React from 'react';
 import { Box } from '@mui/material';
 import TenantDetails from './recentBookingComponent/tenantDetails';
 import TabComponent from './tabComponent';
+import { useParams } from 'react-router-dom';
 
 const ManageTenants = () => {
+  const { id } = useParams();
   return (
     <Box
       sx={{
@@ -21,7 +23,7 @@ const ManageTenants = () => {
           borderRadius: '10px',
         }}
       >
-        <TenantDetails />
+        <TenantDetails tenantId={id} />
       </Box>
 
       <Box sx={{ mt: '32px', borderTop: '1px dashed #BEBEBE' }}>

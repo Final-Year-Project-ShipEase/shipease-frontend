@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const CreateAxiosInstance = () => {
   const instance = axios.create({
-    baseURL: 'http://localhost:12345',
+    baseURL: process.env.REACT_APP_BACKEND_URL,
   });
 
   return instance;
