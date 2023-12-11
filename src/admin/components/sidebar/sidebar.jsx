@@ -22,6 +22,7 @@ const Sidebar = ({ leftSpan }) => {
     const currentPathNameCapitalized =
       currentPathName.charAt(0).toUpperCase() + currentPathName.slice(1);
     setActiveButton(currentPathNameCapitalized);
+    console.log('Current Path Name Capitalized:', currentPathNameCapitalized);
   }, [location]);
 
   const CustomButton = ({ item, sx }) => {
@@ -33,23 +34,27 @@ const Sidebar = ({ leftSpan }) => {
           ...sx,
           display: 'flex',
           padding: '16px 16px 16px 32px',
-          alignItems: 'center',
-          gap: '8px',
+          alignItems: 'left',
+          gap: '3px',
           alignSelf: 'stretch',
           overflow: 'hidden',
-          color: isActive ? theme.palette.text.primary : '#565656',
+          color: theme.palette.buttonSidebar.ColorActive,
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
-          fontSize: '16px',
+          fontSize: '14px',
           textTransform: 'none',
           fontWeight: isActive ? 550 : 400,
           lineHeight: '140%',
           height: '40px',
           justifyContent: 'left',
-          borderRight: isActive ? '4px solid #0061FF' : 'none',
-          backgroundColor: isActive ? '#EAEFFF' : 'transparent',
+          borderRight: isActive
+            ? theme.palette.buttonSidebar.borderright
+            : 'none',
+          backgroundColor: isActive
+            ? theme.palette.buttonSidebar.main
+            : theme.palette.buttonSidebar.BackgroundColorActive,
           '&:hover': {
-            backgroundColor: '#EAEFFF',
+            backgroundColor: theme.palette.buttonSidebar.main,
           },
         }}
         onClick={() => handleClick(item)}
@@ -73,8 +78,8 @@ const Sidebar = ({ leftSpan }) => {
           mt: '7vh',
           py: '24px',
           width: `${widthVal}%`,
-          backgroundColor: '#ffffff',
-          boxShadow: '5px 2px 10px rgba(0, 0, 0, 0.1)',
+          backgroundColor: theme.palette.buttonSidebar.hovertextcolor,
+          boxShadow: theme.palette.buttonSidebar.sidebarshadow,
         },
       }}
     >
@@ -86,16 +91,21 @@ const Sidebar = ({ leftSpan }) => {
           flexDirection: 'column',
           width: '100%',
           height: '100%',
+          padding: '0 0 3rem 0',
         }}
       >
-        {NavigationItems.map((item) => (
-          <CustomButton key={item.name} item={item} />
+        {NavigationItems.map((item, index) => (
+          <CustomButton key={index} item={item} />
         ))}
         <CustomButton
           item={{
             name: 'Log out',
             link: '/dashboard',
-            icon: <PowerSettingsNewOutlinedIcon style={{ color: '#565656' }} />,
+            icon: (
+              <PowerSettingsNewOutlinedIcon
+                style={{ color: theme.palette.buttonSidebar.ColorActive }}
+              />
+            ),
           }}
           sx={{ marginTop: 'auto' }}
         />

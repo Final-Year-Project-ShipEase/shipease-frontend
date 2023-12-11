@@ -1,42 +1,62 @@
 import React from 'react';
-import { AppBar, Box, Toolbar } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { AppBar, Box, Toolbar, Grid } from '@mui/material';
 import { appBarStyles } from './config.js';
 import UserInfo from './userInfo';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Navbar = () => {
+  const theme = useTheme();
+
   return (
-    <Box
-      sx={{
-        backgroundColor: '#ffffff',
-      }}
-    >
-      <AppBar position="fixed" elevation={3} sx={appBarStyles}>
-        <Toolbar>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              width: '100%',
-            }}
-          >
+    <AppBar position="fixed" elevation={3} sx={appBarStyles}>
+      <Toolbar>
+        <Grid container alignItems="center">
+          <Grid item xs={12} sm={4} md={7}>
             <Box
               sx={{
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                alignItems: 'left',
               }}
             >
               <img
                 src={require('../../resources/shipease.png')}
                 alt="ShipEase-logo"
-                style={{
-                  height: '35px',
-                  width: 'auto',
-                  marginRight: '10px',
-                }}
               />
             </Box>
+          </Grid>
+          <Grid item xs={12} sm={4} md={2.5}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'right ',
+                justifyContent: 'center',
+              }}
+            >
+              <InputBase
+                sx={{
+                  border: '1px solid #ccc',
+                  borderRadius: '14px',
+                  backgroundColor: theme.palette.buttonSidebar.main,
+                  paddingLeft: '15px',
+                  width: '100%',
+                  color: theme.palette.buttonSidebar.ColorActiveHover,
+                }}
+                placeholder="Search..."
+                inputProps={{ 'aria-label': 'search' }}
+                startAdornment={
+                  <SearchIcon
+                    sx={{
+                      color: theme.palette.buttonSidebar.ColorActiveHover,
+                      marginRight: '18px',
+                    }}
+                  />
+                }
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={4} md={2.5}>
             <Box
               sx={{
                 display: 'flex',
@@ -46,10 +66,10 @@ const Navbar = () => {
             >
               <UserInfo />
             </Box>
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </Box>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </AppBar>
   );
 };
 

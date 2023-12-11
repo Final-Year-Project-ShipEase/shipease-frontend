@@ -12,9 +12,12 @@ const theme = createTheme({
       color: '#8884d8',
       color1: '#7E62D733',
       blackColor: 'Black',
+      white: 'white',
+      blacl: 'black',
     },
     secondary: {
       main: '#60B478',
+      hover: '#509664',
     },
     buttons: {
       main: '#FFFFFF',
@@ -23,6 +26,8 @@ const theme = createTheme({
       color: '#000000',
       hover: '#2B2626',
       borderbutton: '1px solid #7E62D7',
+      boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
+      navHover: '#F5F5F5',
     },
     shadows: {
       customButton1: `0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(103, 110, 118, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08)`,
@@ -39,6 +44,22 @@ const theme = createTheme({
       iconColor: 'Green',
       poolback: '#D9D9D9',
       trasnparent: 'transparent',
+    },
+    buttonSidebar: {
+      main: 'rgba(0, 102, 140, 0.4)',
+      ColorActive: 'black',
+      ColorActiveHover: 'white',
+      BackgroundColorActive: 'transparent',
+      BackgroundColorActiveHover: 'rgba(0, 102, 140, 1)',
+      hovertextcolor: 'white',
+      borderright: '4px solid rgba(0, 102, 140, 1)',
+      sidebarshadow: '5px 2px 10px rgba(0, 0, 0, 0.1)',
+    },
+    page: {
+      main: 'lightgray',
+      form: 'white',
+      h5: 'gray',
+      border: '1px solid lightgrey',
     },
     spinner: {
       main: '#00668C',
