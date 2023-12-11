@@ -26,6 +26,11 @@ const VehiclesGarage = () => {
                 >
                     <DriversDetails tenantId={id} />
                 </Box>
+                <Box sx={{ mt: '30px', borderTop: '1px dashed black' }}>
+                <Box sx={{ mt: '-10px'}}>
+                    <TableData columns={DriverColumns} rows={dummyDriverData} />
+                </Box>
+            </Box>
             </Box>
         );
 };
