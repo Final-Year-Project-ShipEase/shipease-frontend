@@ -21,8 +21,6 @@ const Performance = () => {
     <Card
       sx={{
         width: '100%',
-        maxWidth: 800,
-        height: 250,
         borderRadius: 5,
       }}
     >
@@ -30,24 +28,32 @@ const Performance = () => {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
+          marginLeft: '2%',
         }}
       >
         <Typography
-          sx={{ fontWeight: 'bold', fontSize: { xs: 18, sm: 20, md: 22 } }}
+          sx={{ fontWeight: 'bold', fontSize: { xs: 18, sm: 20, md: 17 } }}
         >
           Performance Line Chart
         </Typography>
-        <Typography sx={{ fontSize: { xs: 12, sm: 14, md: 16 } }}>
+        <Typography sx={{ fontSize: { xs: 12, sm: 14, md: 13 } }}>
           User Performance This Month
         </Typography>
 
-        <ResponsiveContainer width="90%" height={150}>
+        <ResponsiveContainer
+          width="100%"
+          height={190}
+          style={{ marginTop: '1%', marginLeft: '-6%' }}
+        >
           <LineChart data={dummyPerformanceData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis />
+            <CartesianGrid
+              vertical={false}
+              horizontal={true}
+              strokeLinecap="3 3"
+              strokeWidth={0.3}
+            />
+            <XAxis dataKey="month" strokeWidth={0} />
+            <YAxis strokeWidth={0} />
             <Tooltip />
             <Line
               type="monotone"

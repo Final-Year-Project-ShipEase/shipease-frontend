@@ -9,13 +9,20 @@ const SummaryCard = () => {
     <Card
       sx={{
         width: '100%',
-        maxWidth: 440,
         height: 280,
         position: 'relative',
         borderRadius: 5,
       }}
     >
-      <CardContent>
+      <CardContent
+        sx={{
+          wordWrap: 'break-word',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          width: '100%',
+        }}
+      >
         <Typography
           variant="h6"
           gutterBottom
@@ -31,6 +38,7 @@ const SummaryCard = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'space-between',
+          marginLeft: '3%',
         }}
       >
         <div
@@ -41,8 +49,8 @@ const SummaryCard = () => {
             width: '100%',
           }}
         >
-          <SubCard content="Tenant's Registered This Month" />
-          <SubCard content="User's Registered This Month" />
+          <SubCard content="Tenant's Registered This Month" count={5} />
+          <SubCard content="User's Registered This Month" count={5} />
         </div>
       </CardContent>
 
@@ -52,6 +60,7 @@ const SummaryCard = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'space-between',
+          marginLeft: '3%',
         }}
       >
         <div
@@ -62,8 +71,8 @@ const SummaryCard = () => {
             width: '100%',
           }}
         >
-          <SubCard content="Driver's Registered This Month" />
-          <SubCard content="Vehicle's Registered This Month" />
+          <SubCard content="Driver's Registered This Month" count={10} />
+          <SubCard content="Vehicle's Registered This Month" count={15} />
         </div>
       </CardContent>
     </Card>
