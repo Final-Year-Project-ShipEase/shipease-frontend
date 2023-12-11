@@ -63,7 +63,7 @@ const DriversDetails = ({ tenantId }) => {
         </Button>
       </Box>
 
-      <Grid container spacing={2} sx={{ marginLeft: '25px'}}>
+      <Grid container spacing={2} sx={{ marginLeft: '65px'}}>
         <Grid item xs={3}>
           <img
             style={{ borderRadius: '5px', height: '100%' }}
@@ -75,7 +75,7 @@ const DriversDetails = ({ tenantId }) => {
                   <Grid
                     item
                     xs={6}
-                    sx={{marginLeft: "-50px", display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+                    sx={{marginLeft: "-140px", display: 'flex', flexDirection: 'row', alignItems: 'center' }}
                   >
                     <Grid>
                       <Typography
@@ -104,7 +104,7 @@ const DriversDetails = ({ tenantId }) => {
                       flexDirection: 'row',
                       alignItems: 'center',
                       marginTop: '10px',
-                      marginLeft: "-50px",
+                      marginLeft: "-140px",
                     }}
                   >
                     <Grid item xs={8}
