@@ -10,6 +10,10 @@ import AdminDashboard from './admin/pages/dashboard/dashboard';
 import { SnackbarProvider } from './utils/snackbarContextProvider';
 import ManageTenantList from './admin/pages/manageTenantList/manageTenant';
 import TenantDashboard from './tenant/pages/tenantDashboard/tenantDashboard';
+import DriversGarage from './tenant/pages/driversGarage/driversGarage';
+import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
+import TenantSignIn from './tenant/pages/signIn/signIn';
+import AdminSignIn from './admin/pages/signin/signin';
 
 const App = () => {
   return (
@@ -19,6 +23,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route path="/" element={<AdminDashboard />} />
+              <Route path="adminSignin" element={<AdminSignIn />} />
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="managetenants" element={<ManageTenantList />} />
               <Route path="managetenants/:id" element={<ManageTenants />} />
@@ -26,6 +31,7 @@ const App = () => {
               <Route path="vehiclesapproval" element={<VehiclesApproval />} />
               <Route path="permissions" element={<Permissions />} />
               <Route path="announcements" element={<Announcements />} />
+              <Route path="TenantSignin" element={<TenantSignIn />} />
               <Route path="tenantDashboard" element={<TenantDashboard />} />
             </Route>
           </Routes>
