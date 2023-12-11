@@ -1,11 +1,12 @@
 import React from 'react';
-import { Grid } from '@mui/material';
-import Navbar from '../../../admin/components/navbar/navbar';
-import Sidebar from '../../../admin/components/sidebar/sidebar';
+import { Grid, useTheme } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import Navbar from '../../components/navbar/navbar';
+import Sidebar from '../../components/sidebar/sidebar';
 
 const Layout = () => {
-  const leftSpan = 2;
+  const theme = useTheme();
+  const leftSpan = 1.5;
   const rigthSpan = 12 - leftSpan;
   return (
     <>
@@ -23,11 +24,9 @@ const Layout = () => {
         <Grid
           item
           md={rigthSpan}
-          xs={rigthSpan}
-          lg={rigthSpan}
           sx={{
             mt: '7vh',
-            backgroundColor: '#DFDFDF',
+            backgroundColor: theme.palette.page.main,
             minHeight: '93vh',
           }}
         >
