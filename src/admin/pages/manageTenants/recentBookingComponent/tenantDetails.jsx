@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
@@ -6,10 +6,26 @@ import Card from '@mui/material/Card';
 import busImage from '../../../resources/image 1.png';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { useNavigate } from 'react-router-dom';
+import useTenantService from '../../../services/tenantService';
+import Spinner from '../../../../utils/spinner';
+import { formatTimestamp } from '../../../../utils/timestamp';
 
-const TenantDetails = () => {
+const TenantDetails = ({ tenantId }) => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const [tenant, setTenant] = useState([]);
+  const { getTenantById } = useTenantService();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchTenantData = async () => {
+      setLoading(true);
+      const data = await getTenantById(tenantId);
+      setTenant(data);
+      setLoading(false);
+    };
+    fetchTenantData();
+  }, []);
 
   return (
     <Card
@@ -20,6 +36,7 @@ const TenantDetails = () => {
         borderRadius: '10px',
       }}
     >
+      {loading && <Spinner />}
       <Box
         sx={{
           display: 'flex',
@@ -60,17 +77,17 @@ const TenantDetails = () => {
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
               >
-                Louise Salazar
+                Name: {tenant?.name || 'John Doe'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                @lusalazar
+                Username: @{tenant?.username || 'hello123'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                lsalazar@gmai.com
+                Email: {tenant?.email || 'hello123@gmail.com'}
               </Typography>
             </Grid>
           </Grid>
@@ -89,17 +106,20 @@ const TenantDetails = () => {
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
               >
-                Phone :+92139473928
+                Phone No: {tenant?.phoneNo || '1234567890'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                Language:-
+                Cities:{' '}
+                {tenant?.cities
+                  ? tenant?.cities.map((city) => city).join(', ')
+                  : 'NewYork'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                TenantID:15b3c77d-3a00-4773-b27-2db6bb350fa
+                Tenant Id: {tenant?.id || '12345678'}
               </Typography>
             </Grid>
             <Grid
@@ -115,17 +135,23 @@ const TenantDetails = () => {
                 <Typography
                   sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
                 >
-                  Status :Active
+                  Status :{tenant?.status || 'Active'}
                 </Typography>
                 <Typography
                   sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
                 >
-                  Created :19/4/2023 01:10 PM EDT
+                  Created At :
+                  {tenant?.createdAt
+                    ? formatTimestamp(tenant.createdAt)
+                    : '19/4/2023 01:23 PM EDT'}
                 </Typography>
                 <Typography
                   sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
                 >
-                  Created :19/4/2023 01:23 PM EDT
+                  Updated At :{' '}
+                  {tenant?.updatedAt
+                    ? formatTimestamp(tenant.updatedAt)
+                    : '19/4/2023 01:23 PM EDT'}
                 </Typography>
               </Grid>
             </Grid>

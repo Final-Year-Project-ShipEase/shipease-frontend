@@ -1,11 +1,10 @@
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 import EditNoteIcon from '@mui/icons-material/EditNote';
-import FileCopySharpIcon from '@mui/icons-material/FileCopySharp';
 import LockIcon from '@mui/icons-material/Lock';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
-import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+import useTenantService from '../../../services/tenantService';
 
 const CustomIconButton = ({ children, onClick, color }) => {
   return (
@@ -22,20 +21,30 @@ const CustomIconButton = ({ children, onClick, color }) => {
   );
 };
 
-const RolesActionColumn = ({ value, boxType, setModalOpen }) => {
+const TenantActionColumn = ({
+  value,
+  boxType,
+  setModalOpen,
+  setLoading,
+  setTenantId,
+}) => {
   const [isLockClicked, setIsLockClicked] = useState(false);
-  //const { delRole } = useRBACService();
+  const { deleteTenant } = useTenantService();
+  const theme = useTheme();
 
   const handleLockClick = () => {
     setIsLockClicked(!isLockClicked);
   };
 
   const handleEdit = () => {
+    setTenantId(value);
     setModalOpen(true);
   };
 
-  const handleDelete = () => {
-    //delRole(value);
+  const handleDelete = async () => {
+    setLoading(true);
+    await deleteTenant(value);
+    setLoading(false);
   };
 
   const handleRemove = () => {
@@ -56,23 +65,32 @@ const RolesActionColumn = ({ value, boxType, setModalOpen }) => {
       }}
     >
       <CustomIconButton>
-        <EditNoteIcon style={{ color: '#7E62D7B2' }} onClick={handleEdit} />
+        <EditNoteIcon
+          style={{ color: theme.palette.actionButton.main }}
+          onClick={handleEdit}
+        />
       </CustomIconButton>
       <CustomIconButton
         onClick={handleLockClick}
         color={isLockClicked ? '#e196a3' : 'grey'}
       >
-        <LockIcon style={{ color: isLockClicked ? '#60B478' : '#7E62D7B2' }} />
+        <LockIcon
+          style={{
+            color: isLockClicked
+              ? theme.palette.actionButton.hover
+              : theme.palette.actionButton.main,
+          }}
+        />
       </CustomIconButton>
       <CustomIconButton>
         <RemoveOutlinedIcon
-          style={{ color: '#7E62D7B2' }}
+          style={{ color: theme.palette.actionButton.main }}
           onClick={handleRemove}
         />
       </CustomIconButton>
       <CustomIconButton>
         <DeleteForeverSharpIcon
-          style={{ color: '#7E62D7B2' }}
+          style={{ color: theme.palette.actionButton.main }}
           onClick={handleDelete}
         />
       </CustomIconButton>
@@ -80,4 +98,4 @@ const RolesActionColumn = ({ value, boxType, setModalOpen }) => {
   );
 };
 
-export default RolesActionColumn;
+export default TenantActionColumn;

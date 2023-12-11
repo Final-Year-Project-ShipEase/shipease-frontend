@@ -31,8 +31,8 @@ export const TenantsColumns = [
     disablePadding: false,
   },
   {
-    id: 'requests',
-    label: 'Pending Reqa',
+    id: 'status',
+    label: 'Status',
     width: '15%',
     numeric: false,
     disablePadding: false,

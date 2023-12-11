@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -13,20 +13,20 @@ import {
   FormControlLabel,
   DialogContentText,
   useTheme,
+  Autocomplete,
 } from '@mui/material';
 import {
   AddCircleOutline as AddIcon,
   Close as CloseIcon,
 } from '@mui/icons-material';
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
-//import { useApplicationService } from '../../../../services/applicationService';
+import useTenantService from '../../../../services/tenantService.jsx';
 
-const TenantDetailsModal = ({ open, handleClose, onSubmit }) => {
+const TenantDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const theme = useTheme();
-  //const { createApplication, creatingApp } = useApplicationService();
-
+  const { updateTenant, getTenantById } = useTenantService();
   const [formData, setFormData] = useState({
     ID: '',
     name: '',
@@ -34,8 +34,27 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit }) => {
     password: '',
     email: '',
     phoneNo: '',
+    cities: [],
     status: false,
   });
+
+  useEffect(() => {
+    const fetchTenant = async () => {
+      const tenant = await getTenantById(tenantId);
+      setFormData({
+        ID: tenant.id,
+        name: tenant.name,
+        username: tenant.username,
+        password: tenant.password,
+        email: tenant.email,
+        phoneNo: tenant.phoneNo,
+        cities: tenant.cities,
+        status: tenant.status,
+      });
+      console.log(tenant);
+    };
+    if (tenantId) fetchTenant();
+  }, [tenantId]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -50,14 +69,17 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit }) => {
   };
 
   const handleAddConfirm = async () => {
-    const clientData = {
-      clientId: formData.ID,
+    const tenantData = {
+      username: formData.username,
       name: formData.name,
       email: formData.email,
+      phoneNo: formData.phoneNo,
+      status: formData.status,
+      password: formData.password,
+      cities: formData.cities,
     };
-
     try {
-      //await createApplication(clientData);
+      await updateTenant(tenantData, tenantId);
       setIsConfirmationDialogOpen(false);
       handleClose();
     } catch (err) {
@@ -116,6 +138,7 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit }) => {
               margin="normal"
               label="ID"
               name="ID"
+              disabled
               value={formData.ID}
               onChange={handleChange}
             />
@@ -135,7 +158,7 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit }) => {
               fullWidth
               margin="normal"
               label="Username"
-              name="Username"
+              name="username"
               value={formData.username}
               onChange={handleChange}
             />
@@ -155,7 +178,7 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit }) => {
               fullWidth
               margin="normal"
               label="Phone No"
-              name="Phone No"
+              name="phoneNo"
               value={formData.phoneNo}
               onChange={handleChange}
             />
@@ -168,6 +191,26 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit }) => {
               name="email"
               value={formData.email}
               onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Autocomplete
+              multiple
+              id="cities"
+              options={['Faisalabad', 'Lahore', 'Islamabad']}
+              value={formData.cities}
+              onChange={(event, newValue) => {
+                setFormData({ ...formData, cities: newValue });
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  fullWidth
+                  margin="normal"
+                  label="Cities"
+                  name="cities"
+                />
+              )}
             />
           </Grid>
           <Box display="flex" ml={2} sx={{ width: '100%' }}>

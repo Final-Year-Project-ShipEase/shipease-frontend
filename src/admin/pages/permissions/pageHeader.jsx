@@ -8,6 +8,7 @@ import {
   TextField,
   InputAdornment,
   useTheme,
+  Grid,
 } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
@@ -37,23 +38,26 @@ const PageHeader = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        width: '100%',
-      }}
+    <Grid
+      container
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
     >
       <AddPermissionModal
         text={'Add Permission'}
         open={open}
         handleClose={handleClose}
       />
-      <Box
+      <Grid
+        item
+        xs={12}
+        md={6}
         sx={{
           display: 'flex',
-          flexWrap: 'wrap',
           gap: 2,
+          flexDirection: { md: 'row', xs: 'column' },
+          flexShrink: 0,
         }}
       >
         <FormControl>
@@ -109,20 +113,24 @@ const PageHeader = () => {
             ),
           }}
         />
-      </Box>
-      <Box
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        md={6}
         sx={{
           display: 'flex',
-          flexWrap: 'wrap',
-          gap: 2,
+          flexDirection: { md: 'row', xs: 'column' },
+          flexShrink: 0,
           justifyContent: 'flex-end',
+          gap: 2,
         }}
       >
         <HeaderButton text={'Export'} onClick={onClickPermit} />
         <HeaderButton text={'Reset'} onClick={onClickPermit} />
         <AddModalButton text={'Add Permission'} onClick={onAddPermission} />
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 };
 

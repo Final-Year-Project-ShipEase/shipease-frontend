@@ -130,7 +130,7 @@ EnhancedTableHead.propTypes = {
   ).isRequired,
 };
 
-export default function TableData({ columns, rows }) {
+export default function TableData({ columns, rows, setLoading }) {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('');
   const [page, setPage] = useState(0);
@@ -140,6 +140,7 @@ export default function TableData({ columns, rows }) {
   const [boxType, setBoxType] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [tenantId, setTenantId] = useState('');
 
   const handleDialogClose = () => {
     setBoxType('');
@@ -150,7 +151,6 @@ export default function TableData({ columns, rows }) {
   };
 
   const handleNav = (row) => {
-    console.log(row.id);
     navigate('/managetenants/' + row.id);
   };
 
@@ -179,7 +179,11 @@ export default function TableData({ columns, rows }) {
 
   return (
     <Box sx={{ marginTop: '24px', overflowY: 'auto' }}>
-      <TenantDetailsModal open={modalOpen} handleClose={handleModalClose} />
+      <TenantDetailsModal
+        open={modalOpen}
+        handleClose={handleModalClose}
+        tenantId={tenantId}
+      />
       <ConfirmAdd
         open={boxType === 'approved'}
         onClose={handleDialogClose}
@@ -273,6 +277,8 @@ export default function TableData({ columns, rows }) {
                                   value={row.id}
                                   boxType={setBoxType}
                                   setModalOpen={setModalOpen}
+                                  setLoading={setLoading}
+                                  setTenantId={setTenantId}
                                 />
                               ) : (
                                 row[column.id]

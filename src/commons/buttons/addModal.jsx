@@ -24,6 +24,7 @@ const AddModalButton = ({ text, onClick }) => {
         fontStyle: 'normal',
         fontWeight: 600,
         lineHeight: '140%',
+        backgroundColor: theme.palette.buttons.addModal,
         '&:hover': {
           backgroundColor: theme.palette.buttons.hover,
           color: theme.palette.primary.text,

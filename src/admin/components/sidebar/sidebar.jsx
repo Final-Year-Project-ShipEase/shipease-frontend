@@ -22,7 +22,6 @@ const Sidebar = ({ leftSpan }) => {
     const currentPathNameCapitalized =
       currentPathName.charAt(0).toUpperCase() + currentPathName.slice(1);
     setActiveButton(currentPathNameCapitalized);
-    console.log('Current Path Name Capitalized:', currentPathNameCapitalized);
   }, [location]);
 
   const CustomButton = ({ item, sx }) => {

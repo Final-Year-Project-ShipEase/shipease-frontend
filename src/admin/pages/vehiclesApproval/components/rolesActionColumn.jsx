@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import FileCopySharpIcon from '@mui/icons-material/FileCopySharp';
@@ -22,8 +22,9 @@ const CustomIconButton = ({ children, onClick }) => {
   );
 };
 
-const RolesActionColumn = ({ value, boxType }) => {
+const VehicleActionColumn = ({ value, boxType }) => {
   const [isLockClicked, setIsLockClicked] = useState(false);
+  const theme = useTheme();
   //const { delRole } = useRBACService();
 
   const handleLockClick = () => {
@@ -66,11 +67,14 @@ const RolesActionColumn = ({ value, boxType }) => {
       }}
     >
       <CustomIconButton>
-        <EditNoteIcon style={{ color: '#7E62D7B2' }} onClick={handleEdit} />
+        <EditNoteIcon
+          style={{ color: theme.palette.actionButton.main }}
+          onClick={handleEdit}
+        />
       </CustomIconButton>
       <CustomIconButton>
         <FileCopySharpIcon
-          style={{ color: '#7E62D7B2' }}
+          style={{ color: theme.palette.actionButton.main }}
           onClick={handleCopy}
         />
       </CustomIconButton>
@@ -78,23 +82,29 @@ const RolesActionColumn = ({ value, boxType }) => {
         onClick={handleLockClick}
         color={isLockClicked ? '#e196a3' : 'grey'}
       >
-        <LockIcon style={{ color: isLockClicked ? '#60B478' : '#7E62D7B2' }} />
+        <LockIcon
+          style={{
+            color: isLockClicked
+              ? theme.palette.actionButton.hover
+              : theme.palette.actionButton.main,
+          }}
+        />
       </CustomIconButton>
       <CustomIconButton>
         <DoneOutlinedIcon
-          style={{ color: '#7E62D7B2' }}
+          style={{ color: theme.palette.actionButton.main }}
           onClick={handleApprove}
         />
       </CustomIconButton>
       <CustomIconButton>
         <RemoveOutlinedIcon
-          style={{ color: '#7E62D7B2' }}
+          style={{ color: theme.palette.actionButton.main }}
           onClick={handleRemove}
         />
       </CustomIconButton>
       <CustomIconButton>
         <DeleteForeverSharpIcon
-          style={{ color: '#7E62D7B2' }}
+          style={{ color: theme.palette.actionButton.main }}
           onClick={handleDelete}
         />
       </CustomIconButton>
@@ -102,4 +112,4 @@ const RolesActionColumn = ({ value, boxType }) => {
   );
 };
 
-export default RolesActionColumn;
+export default VehicleActionColumn;

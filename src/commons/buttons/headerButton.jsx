@@ -9,7 +9,7 @@ const HeaderButton = ({ text, onClick, type }) => {
       onClick={onClick}
       sx={{
         display: 'flex',
-        width: theme.typography.pxToRem(145),
+        minWidth: theme.typography.pxToRem(145),
         padding: '10px 18px',
         flexDirection: 'column',
         justifyContent: 'center',
