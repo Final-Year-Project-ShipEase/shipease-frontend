@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { Box, IconButton, Menu, MenuItem, Typography } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  Menu,
+  MenuItem,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import image from '../../../icons/image.png';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-
 
 const imageStyles = { width: '35px', height: '35px', borderRadius: '50%' };
 const onlineDotStyles = {
@@ -21,10 +27,10 @@ const onlineDotStyles = {
 };
 
 const UserInfo = () => {
-
   const [name, setName] = useState('John Doe');
   const [isOnline, setIsOnline] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
+  const theme = useTheme();
 
   const handleClick = (event) => {
     event.stopPropagation();
@@ -70,13 +76,13 @@ const UserInfo = () => {
           size="small"
           sx={{
             display: 'flex',
-            backgroundColor: 'white',
+            backgroundColor: theme.palette.primary.white,
             mr: '4px',
           }}
         >
           <NotificationsActiveOutlinedIcon
             sx={{
-              color: 'black',
+              color: theme.palette.primary.black,
             }}
           />
         </IconButton>
@@ -84,13 +90,13 @@ const UserInfo = () => {
           size="small"
           sx={{
             display: 'flex',
-            backgroundColor: 'white',
+            backgroundColor: theme.palette.primary.white,
             mr: '10px',
           }}
         >
           <DarkModeOutlinedIcon
             sx={{
-              color: 'black',
+              color: theme.palette.primary.black,
             }}
           />
         </IconButton>
@@ -101,6 +107,14 @@ const UserInfo = () => {
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
+            width: '100%',
+            height: '100%',
+            padding: '0px 10px',
+            borderRadius: '10px',
+            cursor: 'pointer',
+            ':hover': {
+              backgroundColor: theme.palette.buttons.navHover,
+            },
           }}
           aria-controls={menuId}
           aria-haspopup="true"
@@ -112,7 +126,7 @@ const UserInfo = () => {
               sx={{
                 padding: 0,
                 borderRadius: '50%',
-                backgroundColor: '#000000',
+                backgroundColor: theme.palette.primary.black,
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -140,6 +154,7 @@ const UserInfo = () => {
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
+                cursor: 'pointer',
               }}
             >
               Hi, {name}
@@ -149,13 +164,11 @@ const UserInfo = () => {
                 fontWeight: 'bold',
                 fontSize: '12px',
                 color: '#000000',
-
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
               }}
-            >
-            </Typography>
+            ></Typography>
           </Box>
           <Box
             sx={{
@@ -179,7 +192,7 @@ const UserInfo = () => {
             >
               <ArrowDropDownOutlinedIcon
                 sx={{
-                  color: '#000000',
+                  color: theme.palette.primary.black,
                 }}
               />
             </IconButton>

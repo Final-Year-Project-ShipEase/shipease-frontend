@@ -25,10 +25,7 @@ const App = () => {
                 <Route path="dashboard" element={<AdminDashboard />} />
                 <Route path="managetenants" element={<ManageTenants />} />
                 <Route path="driversapproval" element={<DriversApproval />} />
-                <Route
-                  path="vehiclesapproval"
-                  element={<VehiclesApproval />}
-                />
+                <Route path="vehiclesapproval" element={<VehiclesApproval />} />
                 <Route path="permissions" element={<Permissions />} />
                 <Route path="announcements" element={<Announcements />} />
               </Route>

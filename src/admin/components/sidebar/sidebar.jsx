@@ -16,15 +16,13 @@ const Sidebar = ({ leftSpan }) => {
     setActiveButton(item.name);
   };
 
-
-
   React.useEffect(() => {
     const currentPath = location.pathname;
     const currentPathName = currentPath.split('/')[1];
     const currentPathNameCapitalized =
       currentPathName.charAt(0).toUpperCase() + currentPathName.slice(1);
-            setActiveButton(currentPathNameCapitalized);
-            console.log("Current Path Name Capitalized:", currentPathNameCapitalized);
+    setActiveButton(currentPathNameCapitalized);
+    console.log('Current Path Name Capitalized:', currentPathNameCapitalized);
   }, [location]);
 
   const CustomButton = ({ item, sx }) => {
@@ -49,11 +47,15 @@ const Sidebar = ({ leftSpan }) => {
           lineHeight: '140%',
           height: '40px',
           justifyContent: 'left',
-          borderRight: isActive ? theme.palette.buttonSidebar.borderright : 'none',
-          backgroundColor: isActive ? theme.palette.buttonSidebar.main : theme.palette.buttonSidebar.BackgroundColorActive,
-            '&:hover': {
-              backgroundColor: theme.palette.buttonSidebar.main,
-            },
+          borderRight: isActive
+            ? theme.palette.buttonSidebar.borderright
+            : 'none',
+          backgroundColor: isActive
+            ? theme.palette.buttonSidebar.main
+            : theme.palette.buttonSidebar.BackgroundColorActive,
+          '&:hover': {
+            backgroundColor: theme.palette.buttonSidebar.main,
+          },
         }}
         onClick={() => handleClick(item)}
         startIcon={item.icon}
@@ -99,7 +101,11 @@ const Sidebar = ({ leftSpan }) => {
           item={{
             name: 'Log out',
             link: '/dashboard',
-            icon: <PowerSettingsNewOutlinedIcon style={{ color: theme.palette.buttonSidebar.ColorActive }} />,
+            icon: (
+              <PowerSettingsNewOutlinedIcon
+                style={{ color: theme.palette.buttonSidebar.ColorActive }}
+              />
+            ),
           }}
           sx={{ marginTop: 'auto' }}
         />

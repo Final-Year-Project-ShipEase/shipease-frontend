@@ -4,7 +4,6 @@ import Person4OutlinedIcon from '@mui/icons-material/Person4Outlined';
 import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
 import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined';
 const NavigationItems = [
-
   {
     name: 'Dashboard',
     link: '/dashboard',
@@ -39,4 +38,4 @@ const NavigationItems = [
   },
 ];
 
-  export default NavigationItems;
+export default NavigationItems;

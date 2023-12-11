@@ -13,7 +13,6 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
 import HeaderButton from '../../../commons/buttons/headerButton';
 
-
 const PageHeader = () => {
   const [Driver, setDriver] = React.useState('');
   const theme = useTheme();

@@ -4,16 +4,19 @@ const theme = createTheme({
     primary: {
       main: '#7E62D7',
       text: '#fff',
+      white: 'white',
+      blacl: 'black',
     },
     secondary: {
       main: '#60B478',
-      hover: "#509664",
+      hover: '#509664',
     },
     buttons: {
       main: '#FFFFFF',
       text: '#121212',
       solidText: '#000000',
-      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.25)"
+      boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
+      navHover: '#F5F5F5',
     },
     shadows: {
       customButton1: `0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(103, 110, 118, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08)`,
@@ -25,7 +28,7 @@ const theme = createTheme({
       border: '#000000',
     },
     buttonSidebar: {
-      main:  'rgba(0, 102, 140, 0.4)',
+      main: 'rgba(0, 102, 140, 0.4)',
       ColorActive: 'black',
       ColorActiveHover: 'white',
       BackgroundColorActive: 'transparent',
@@ -34,12 +37,12 @@ const theme = createTheme({
       borderright: '4px solid rgba(0, 102, 140, 1)',
       sidebarshadow: '5px 2px 10px rgba(0, 0, 0, 0.1)',
     },
-    page:{
+    page: {
       main: 'lightgray',
       form: 'white',
       h5: 'gray',
-      border: "1px solid lightgrey"
-    }
+      border: '1px solid lightgrey',
+    },
   },
   typography: {
     allVariants: {
