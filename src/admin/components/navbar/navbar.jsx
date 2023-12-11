@@ -17,7 +17,7 @@ const Navbar = () => {
             <Box
               sx={{
                 display: 'flex',
-                alignItems: 'left',
+                alignItems: 'flex-start',
               }}
             >
               <img
@@ -30,7 +30,7 @@ const Navbar = () => {
             <Box
               sx={{
                 display: 'flex',
-                alignItems: 'right ',
+                alignItems: 'flex-end ',
                 justifyContent: 'center',
               }}
             >
