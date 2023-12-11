@@ -17,6 +17,7 @@ const NavigationItems = [
   {
     name: 'Approval',
     icon: <PersonAddAltOutlinedIcon style={{ color: '#565656' }} />,
+    link: '/driversApproval',
   },
   {
     name: 'DriversApproval',

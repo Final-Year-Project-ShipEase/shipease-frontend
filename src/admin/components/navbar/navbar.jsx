@@ -26,7 +26,7 @@ const Navbar = () => {
               />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={4} md={3}>
+          <Grid item xs={12} sm={4} md={2.5}>
             <Box
               sx={{
                 display: 'flex',
@@ -56,7 +56,7 @@ const Navbar = () => {
               />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={4} md={2}>
+          <Grid item xs={12} sm={4} md={2.5}>
             <Box
               sx={{
                 display: 'flex',

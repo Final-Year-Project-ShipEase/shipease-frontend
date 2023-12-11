@@ -94,8 +94,8 @@ const Sidebar = ({ leftSpan }) => {
           padding: '0 0 3rem 0',
         }}
       >
-        {NavigationItems.map((item) => (
-          <CustomButton key={item.name} item={item} />
+        {NavigationItems.map((item, index) => (
+          <CustomButton key={index} item={item} />
         ))}
         <CustomButton
           item={{
