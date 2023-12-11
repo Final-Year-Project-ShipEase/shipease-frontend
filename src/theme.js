@@ -22,6 +22,7 @@ const theme = createTheme({
       solidText: '#000000',
       color: '#000000',
       hover: '#2B2626',
+      borderbutton: '1px solid #7E62D7',
     },
     shadows: {
       customButton1: `0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(103, 110, 118, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08)`,
@@ -36,6 +37,8 @@ const theme = createTheme({
       default: '#F5F5F5',
       iconBackground: 'D1FADF',
       iconColor: 'Green',
+      poolback: '#D9D9D9',
+      trasnparent: 'transparent',
     },
   },
   typography: {
