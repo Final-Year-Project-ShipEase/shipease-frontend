@@ -8,7 +8,7 @@ const theme = createTheme({
     primary: {
       main: '#00668C',
       text: '#fff',
-      backgroundColor: '#2B2626',
+      backgroundColor: '#00668C',
       color: '#8884d8',
       color1: '#00668C33',
       blackColor: 'Black',
@@ -24,10 +24,11 @@ const theme = createTheme({
       text: '#121212',
       solidText: '#000000',
       color: '#000000',
-      hover: '#2B2626',
+      hover: '#00668CB2',
       borderbutton: '1px solid #00668C',
       boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
       navHover: '#F5F5F5',
+      addModal: '#00668C',
     },
     shadows: {
       customButton1: `0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(103, 110, 118, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08)`,

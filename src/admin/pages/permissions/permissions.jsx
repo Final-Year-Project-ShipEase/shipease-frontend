@@ -16,7 +16,6 @@ const Permissions = () => {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'space-between',
           alignItems: 'center',
           width: '100%',
           height: '7%',

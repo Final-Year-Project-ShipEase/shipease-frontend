@@ -77,17 +77,17 @@ const TenantDetails = ({ tenantId }) => {
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
               >
-                {tenant?.name || 'John Doe'}
+                Name: {tenant?.name || 'John Doe'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                @{tenant?.username || 'hello123'}
+                Username: @{tenant?.username || 'hello123'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                {tenant?.email || 'hello123@gmail.com'}
+                Email: {tenant?.email || 'hello123@gmail.com'}
               </Typography>
             </Grid>
           </Grid>
@@ -106,11 +106,12 @@ const TenantDetails = ({ tenantId }) => {
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
               >
-                {tenant?.phoneNo || '1234567890'}
+                Phone No: {tenant?.phoneNo || '1234567890'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
+                Cities:{' '}
                 {tenant?.cities
                   ? tenant?.cities.map((city) => city).join(', ')
                   : 'NewYork'}
