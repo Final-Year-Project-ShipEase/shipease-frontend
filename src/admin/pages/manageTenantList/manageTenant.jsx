@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import PageHeader from './pageHeader';
 import TableData from './components/table/table';
-import { TenantsColumns, dummyTenantData } from './_columns.js';
+import { TenantsColumns } from './_columns.js';
 import useTenantService from '../../services/tenantService.jsx';
 import Spinner from '../../../utils/spinner';
 

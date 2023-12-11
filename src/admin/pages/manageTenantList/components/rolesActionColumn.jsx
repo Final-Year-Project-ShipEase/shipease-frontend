@@ -21,7 +21,13 @@ const CustomIconButton = ({ children, onClick, color }) => {
   );
 };
 
-const RolesActionColumn = ({ value, boxType, setModalOpen, setLoading }) => {
+const RolesActionColumn = ({
+  value,
+  boxType,
+  setModalOpen,
+  setLoading,
+  setTenantId,
+}) => {
   const [isLockClicked, setIsLockClicked] = useState(false);
   const { deleteTenant } = useTenantService();
 
@@ -30,6 +36,7 @@ const RolesActionColumn = ({ value, boxType, setModalOpen, setLoading }) => {
   };
 
   const handleEdit = () => {
+    setTenantId(value);
     setModalOpen(true);
   };
 

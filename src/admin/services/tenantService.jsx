@@ -30,9 +30,9 @@ export function useTenantService() {
     }
   };
 
-  const updateTenant = async (tenant) => {
+  const updateTenant = async (tenant, id) => {
     try {
-      const response = await axiosInstance.put(`/tenant/${tenant.id}`, tenant);
+      const response = await axiosInstance.put(`/tenant/${id}`, tenant);
       return response.data;
     } catch (error) {
       throw error;
