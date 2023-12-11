@@ -21,7 +21,7 @@ const Performance = () => {
     <Card
       sx={{
         width: '100%',
-        height: "95%",
+        height: '100%',
         borderRadius: 5,
       }}
     >
@@ -41,9 +41,18 @@ const Performance = () => {
           User Performance This Month
         </Typography>
 
-        <ResponsiveContainer width="100%" height={190} style={{marginTop: "1%", marginLeft: "-6%"}}>
+        <ResponsiveContainer
+          width="100%"
+          height={190}
+          style={{ marginTop: '1%', marginLeft: '-6%' }}
+        >
           <LineChart data={dummyPerformanceData}>
-          <CartesianGrid vertical={false} horizontal={true} strokeLinecap="3 3" strokeWidth={0.3} />
+            <CartesianGrid
+              vertical={false}
+              horizontal={true}
+              strokeLinecap="3 3"
+              strokeWidth={0.3}
+            />
             <XAxis dataKey="month" strokeWidth={0} />
             <YAxis strokeWidth={0} />
             <Tooltip />
