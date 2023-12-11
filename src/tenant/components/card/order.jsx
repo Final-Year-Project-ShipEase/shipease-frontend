@@ -5,40 +5,30 @@ import Typography from '@mui/material/Typography';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import dummyOrderData from './dummyOrderData';
 import { useTheme } from '@mui/material/styles';
-import { toContainHTML } from '@testing-library/jest-dom/matchers';
 
 const Order = () => {
   const theme = useTheme();
-  const totalOrders = dummyOrderData.reduce((a, b) => a + b.orders, 0);
 
   return (
-    <Card sx={{ width: '100%', borderRadius: 5, height: '280px' }}>
+    <Card sx={{ width: '100%', borderRadius: 5 }}>
       <CardContent
         style={{
           display: 'flex',
           flexDirection: 'column',
-          width: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         <Typography sx={{ fontWeight: 'bold', marginBottom: '10px' }}>
           Total Orders
         </Typography>
-        <ResponsiveContainer width="100%" height={180}>
-          <PieChart
-            width={180}
-            height={180}
-            margin={{
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0,
-            }}
-          >
+        <ResponsiveContainer width="90%" height={140}>
+          <PieChart>
             <Pie
               data={dummyOrderData}
               cx="50%"
               cy="50%"
-              innerRadius={30}
+              innerRadius={40}
               outerRadius={60}
               fill={theme.palette.primary.color}
               paddingAngle={5}
@@ -81,7 +71,7 @@ const Order = () => {
               marginLeft: '25%',
             }}
           >
-            {totalOrders}
+            25
           </Typography>
         </div>
       </CardContent>

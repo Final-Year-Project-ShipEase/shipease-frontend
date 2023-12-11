@@ -9,6 +9,7 @@ import Announcements from './admin/pages/announcements/announcements';
 import AdminDashboard from './admin/pages/dashboard/dashboard';
 import { SnackbarProvider } from './utils/snackbarContextProvider';
 import ManageTenantList from './admin/pages/manageTenantList/manageTenant';
+import TenantDashboard from './tenant/pages/tenantDashboard/tenantDashboard';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
               <Route path="approval/vehicles" element={<VehiclesApproval />} />
               <Route path="permissions" element={<Permissions />} />
               <Route path="announcements" element={<Announcements />} />
+              <Route path="tenantDashboard" element={<TenantDashboard />} />
             </Route>
           </Routes>
         </Router>

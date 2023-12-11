@@ -3,17 +3,16 @@ import CardViewImage from '../../components/card/welcome';
 import SummaryCard from '../../components/card/summary';
 import Booking from '../../components/card/booking';
 import Performance from '../../components/card/performance';
-import TopTenant from '../../components/card/topTenant';
+import TopTenant from '../../components/card/topDriver';
 import Order from '../../components/card/order';
-import VehicleApproval from '../../components/card/vehicleApproval';
-import DriverApproval from '../../components/card/driverApproval';
-import { Grid } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
+import MessageBox from '../../components/card/UserCommunication';
+import PoolRequestBox from '../../components/card/poolRequestBox';
+import { Grid, Box } from '@mui/material';
 
-const AdminDashboard = () => {
-  const [name, setName] = useState('Hamza');
-  const [tenantName, setTenantName] = useState('Abdullah');
-  const [revenue, setRevenue] = useState('50k');
+const TenantDashboard = () => {
+  const [name, setName] = useState('Muntazer Mehdi');
+  const [tenantName, setTenantName] = useState('Abdullah Minhas');
+  const [revenue, setRevenue] = useState('250K');
 
   return (
     <Box
@@ -41,17 +40,17 @@ const AdminDashboard = () => {
           <TopTenant tenantName={tenantName} totalRevenue={revenue}></TopTenant>
         </Grid>
         <Grid item md={4} xs={12}>
-          <VehicleApproval></VehicleApproval>
+          <MessageBox></MessageBox>
         </Grid>
         <Grid item md={4} xs={12}>
           <Order></Order>
         </Grid>
         <Grid item md={4} xs={12}>
-          <DriverApproval></DriverApproval>
+          <PoolRequestBox></PoolRequestBox>
         </Grid>
       </Grid>
     </Box>
   );
 };
 
-export default AdminDashboard;
+export default TenantDashboard;

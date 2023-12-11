@@ -3,6 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import SubCard from './subCard';
+import DummyUserData from './dummyData';
 
 const SummaryCard = () => {
   return (
@@ -14,15 +15,7 @@ const SummaryCard = () => {
         borderRadius: 5,
       }}
     >
-      <CardContent
-        sx={{
-          wordWrap: 'break-word',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-          width: '100%',
-        }}
-      >
+      <CardContent>
         <Typography
           variant="h6"
           gutterBottom
@@ -45,12 +38,15 @@ const SummaryCard = () => {
           style={{
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             width: '100%',
           }}
         >
-          <SubCard content="Tenant's Registered This Month" count={5} />
-          <SubCard content="User's Registered This Month" count={5} />
+          <SubCard
+            content="User's Registered This Month"
+            count={15}
+            data={DummyUserData}
+          />
         </div>
       </CardContent>
 
@@ -71,8 +67,16 @@ const SummaryCard = () => {
             width: '100%',
           }}
         >
-          <SubCard content="Driver's Registered This Month" count={10} />
-          <SubCard content="Vehicle's Registered This Month" count={15} />
+          <SubCard
+            content="Driver's Registered This Month"
+            count={25}
+            data={DummyUserData}
+          />
+          <SubCard
+            content="Vehicle's Registered This Month"
+            count={20}
+            data={DummyUserData}
+          />
         </div>
       </CardContent>
     </Card>

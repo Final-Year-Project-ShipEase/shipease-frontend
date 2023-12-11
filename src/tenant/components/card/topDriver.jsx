@@ -12,7 +12,7 @@ import {
   Tooltip,
 } from 'recharts';
 
-const topPerformingTenants = [
+const topPerformingDrivers = [
   { name: 'Tenant 1', value: 400 },
   { name: 'Tenant 2', value: 300 },
 ];
@@ -36,7 +36,7 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
-const TopTenant = ({ tenantName, totalRevenue }) => {
+const TopDriver = ({ tenantName, totalRevenue }) => {
   const theme = useTheme();
   const COLORS = [theme.palette.primary.main, theme.palette.secondary.main];
 
@@ -47,13 +47,13 @@ const TopTenant = ({ tenantName, totalRevenue }) => {
           component="div"
           sx={{ fontWeight: 'bold', textAlign: 'center' }}
         >
-          Top Performing Tenants
+          Top Performing Drivers
         </Typography>
 
         <ResponsiveContainer width="100%" height={195}>
           <PieChart>
             <Pie
-              data={topPerformingTenants}
+              data={topPerformingDrivers}
               dataKey="value"
               nameKey="name"
               cx="50%"
@@ -64,7 +64,7 @@ const TopTenant = ({ tenantName, totalRevenue }) => {
               endAngle={-50}
               label
             >
-              {topPerformingTenants.map((entry, index) => (
+              {topPerformingDrivers.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}
@@ -113,7 +113,7 @@ const TopTenant = ({ tenantName, totalRevenue }) => {
                   border: 'none',
                 }}
               >
-                Tenant Details
+                Driver Details
               </button>
             </div>
           </div>
@@ -123,4 +123,4 @@ const TopTenant = ({ tenantName, totalRevenue }) => {
   );
 };
 
-export default TopTenant;
+export default TopDriver;
