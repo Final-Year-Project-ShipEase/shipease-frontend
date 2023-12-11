@@ -5,7 +5,7 @@ import ApprovalDetail from './approvalDetails';
 
 const VehicleApproval = () => {
   return (
-    <Card sx={{ width: "100%", height: 250, borderRadius: 5, overflow: 'auto' }}>
+    <Card sx={{ width: "100%", maxHeight: '280px', borderRadius: 5, overflow: 'auto' }}>
       <CardContent>
         <div
           style={{

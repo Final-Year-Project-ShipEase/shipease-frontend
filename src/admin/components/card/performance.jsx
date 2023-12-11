@@ -21,7 +21,6 @@ const Performance = () => {
     <Card
       sx={{
         width: '100%',
-        height: "95%",
         borderRadius: 5,
       }}
     >

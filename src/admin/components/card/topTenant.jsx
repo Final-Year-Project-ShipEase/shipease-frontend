@@ -29,7 +29,7 @@ const TopTenant = ({ tenantName, totalRevenue }) => {
   const COLORS = [theme.palette.primary.main, theme.palette.secondary.main];
 
   return (
-    <Card sx={{ width: '100%', height: "95%", borderRadius: 5 }}>
+    <Card sx={{ width: '100%', height: '100%', borderRadius: 5 }}>
       <CardContent style={{ fontWeight: 'bold' }}>
         <Typography
           component="div"
@@ -39,26 +39,34 @@ const TopTenant = ({ tenantName, totalRevenue }) => {
         </Typography>
 
         <ResponsiveContainer width="100%" height={195}>
-      <PieChart>
-        <Pie
-          data={topPerformingTenants}
-          dataKey="value"
-          nameKey="name"
-          cx="50%"
-          cy="50%"
-          outerRadius={70}
-          innerRadius={60}  // Set the inner radius for the transparent part
-          startAngle={230}
-          endAngle={-50}
-          label
-        >
-          {topPerformingTenants.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Legend align="center" verticalAlign="bottom" height={46} style={{marginTop: "1%"}}/>
-      </PieChart>
-    </ResponsiveContainer>
+          <PieChart>
+            <Pie
+              data={topPerformingTenants}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              outerRadius={70}
+              innerRadius={60} // Set the inner radius for the transparent part
+              startAngle={230}
+              endAngle={-50}
+              label
+            >
+              {topPerformingTenants.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+            <Legend
+              align="center"
+              verticalAlign="bottom"
+              height={46}
+              style={{ marginTop: '1%' }}
+            />
+          </PieChart>
+        </ResponsiveContainer>
 
         <div
           style={{
@@ -75,8 +83,6 @@ const TopTenant = ({ tenantName, totalRevenue }) => {
               gap: '10px',
             }}
           >
-
-
             <div
               style={{
                 display: 'flex',
