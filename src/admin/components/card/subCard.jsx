@@ -6,18 +6,9 @@ import ArrowCircleUpRoundedIcon from '@mui/icons-material/ArrowCircleUpRounded';
 import ArrowCircleDownRoundedIcon from '@mui/icons-material/ArrowCircleDownRounded';
 import dummyTenantData from './dummyTenantData';
 import { useTheme } from '@mui/material/styles';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from 'recharts';
+import { LineChart, Line, Tooltip, ResponsiveContainer } from 'recharts';
 
-const SubCard = ({ content }) => {
-  const [count, setCount] = useState(100); // Initial count value
+const SubCard = ({ content, count }) => {
   const [isIncreasing, setIsIncreasing] = useState(true); // Initial state
 
   const theme = useTheme();
@@ -25,7 +16,7 @@ const SubCard = ({ content }) => {
   return (
     <Card
       sx={{
-        width: 200,
+        width: '100%',
         height: 100,
         borderRadius: 3,
         marginBottom: 1,
@@ -121,19 +112,16 @@ const SubCard = ({ content }) => {
 
         <ResponsiveContainer width={250} height={120}>
           <LineChart data={dummyTenantData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis />
             <Tooltip />
             <Line
-              type="monotone"
+              type="monotoneX"
               dataKey="tenants"
               stroke={
                 isIncreasing
                   ? theme.palette.secondary.main
                   : theme.palette.primary.main
               }
-              strokeWidth={2}
+              strokeWidth={4}
             />
           </LineChart>
         </ResponsiveContainer>

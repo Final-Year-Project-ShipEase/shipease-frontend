@@ -14,8 +14,7 @@ const CardWithImage = ({ name }) => {
     <Card
       sx={{
         width: '100%',
-        maxWidth: 277,
-        height: 264,
+        height: '100%',
         position: 'relative',
         borderRadius: 5,
       }}
@@ -80,7 +79,7 @@ const CardWithImage = ({ name }) => {
           Turn on your
           <br /> car
           <ArrowForwardRoundedIcon
-            sx={{ marginLeft: '4px', width: '15px', height: '15px' }}
+            sx={{ marginLeft: '4px', width: '25px', height: '15px' }}
           ></ArrowForwardRoundedIcon>
         </Link>
       </CardContent>
