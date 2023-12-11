@@ -37,6 +37,9 @@ const theme = createTheme({
       iconBackground: 'D1FADF',
       iconColor: 'Green',
     },
+    spinner: {
+      main: '#00668C',
+    },
   },
   typography: {
     allVariants: {

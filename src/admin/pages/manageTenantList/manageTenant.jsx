@@ -4,19 +4,23 @@ import PageHeader from './pageHeader';
 import TableData from './components/table/table';
 import { TenantsColumns, dummyTenantData } from './_columns.js';
 import useTenantService from '../../services/tenantService.jsx';
+import Spinner from '../../../utils/spinner';
 
 const ManageTenantList = () => {
   const { getTenants } = useTenantService();
   const [tenants, setTenants] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const data = await getTenants();
       setTenants(data);
-      console.log(tenants);
+      setLoading(false);
     };
     fetchData();
   }, []);
+
   return (
     <Box
       sx={{
@@ -26,6 +30,7 @@ const ManageTenantList = () => {
         p: 2,
       }}
     >
+      {loading && <Spinner />}
       <Box
         sx={{
           display: 'flex',
@@ -38,7 +43,7 @@ const ManageTenantList = () => {
         <PageHeader />
       </Box>
       <Box sx={{ mt: 2 }}>
-        <TableData columns={TenantsColumns} rows={dummyTenantData} />
+        <TableData columns={TenantsColumns} rows={tenants} />
       </Box>
     </Box>
   );
