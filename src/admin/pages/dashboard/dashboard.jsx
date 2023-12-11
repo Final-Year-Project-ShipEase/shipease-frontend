@@ -7,11 +7,6 @@ import TopTenant from '../../components/card/topTenant';
 import Order from '../../components/card/order';
 import VehicleApproval from '../../components/card/vehicleApproval';
 import DriverApproval from '../../components/card/driverApproval';
-<<<<<<< Updated upstream
-=======
-import { Grid } from '@material-ui/core';
-
->>>>>>> Stashed changes
 
 const AdminDashboard = () => {
   const name = 'Hamza Idrees';
