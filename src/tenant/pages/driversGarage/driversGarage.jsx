@@ -1,10 +1,9 @@
 import React from "react";
-import TabComponent from "./tabComponent";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
 import DriversDetails from "./recentBookingComponent/driversDetails";
-import TenantDetails from "../../../admin/pages/manageTenants/recentBookingComponent/tenantDetails";
-
+import TableData from './components/table/table';
+import { DriverColumns, dummyDriverData } from './_columns.js';
 const DriversGarage = () => {
       const { id } = useParams();
       return (
@@ -24,12 +23,12 @@ const DriversGarage = () => {
               borderRadius: '10px',
             }}
           >
-        <DriversDetails tenantId={id} />         
+        <DriversDetails tenantId={id} />
           </Box>
     
-          <Box sx={{ mt: '32px', borderTop: '1px dashed #BEBEBE' }}>
-            <TabComponent />
-          </Box>
+          <Box sx={{ mt: '90px', borderTop: '1px dashed black' }}>
+          <TableData columns={DriverColumns} rows={dummyDriverData} />
+      </Box>
         </Box>
       );
 };

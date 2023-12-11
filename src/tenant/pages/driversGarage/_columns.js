@@ -3,9 +3,9 @@ const generateDummyData = () => {
 
   for (let i = 1; i <= 15; i++) {
     dummyData.push({
-      vehicleNo: `vehicleNo${i}`,
-      type: `type${i}`,
-      lastApproved: `lastApproved${i}`,
+      id: i,
+      username: `username${i}`,
+      tenant: `Tenant ${i}`,
       actions: `Action ${i}`,
     });
   }
@@ -13,24 +13,24 @@ const generateDummyData = () => {
   return dummyData;
 };
 
-export const VehicleColumns = [
+export const DriverColumns = [
   {
-    id: 'vehicleNo',
-    label: 'Vehicle No',
+    id: 'id',
+    label: 'Driver ID',
     width: '30%',
     numeric: false,
     disablePadding: false,
   },
   {
-    id: 'type',
-    label: 'Type',
+    id: 'username',
+    label: 'Username',
     width: '20%',
     numeric: false,
     disablePadding: false,
   },
   {
-    id: 'lastApproved',
-    label: 'Last Approved',
+    id: 'tenant',
+    label: 'Tenant Name',
     width: '25%',
     numeric: false,
     disablePadding: false,
@@ -44,4 +44,4 @@ export const VehicleColumns = [
   },
 ];
 
-export const dummyVehicleData = generateDummyData();
+export const dummyDriverData = generateDummyData();

@@ -14,22 +14,29 @@ const generateDummyData = () => {
 
 export const BookingColumns = [
   {
-    id: 'user',
-    label: 'User',
+    id: 'NAME',
+    label: 'Driver Name',
     width: '20%',
     numeric: false,
     disablePadding: false,
   },
   {
-    id: 'date',
-    label: 'Date',
+    id: 'CNIC',
+    label: 'Cnic',
     width: '25%',
     numeric: false,
     disablePadding: false,
   },
   {
-    id: 'payment',
-    label: 'Payment',
+    id: 'LICENSE',
+    label: 'License',
+    width: '20%',
+    numeric: false,
+    disablePadding: false,
+  },
+  {
+    id: 'TRACKER',
+    label: 'Tracker No',
     width: '20%',
     numeric: false,
     disablePadding: false,
