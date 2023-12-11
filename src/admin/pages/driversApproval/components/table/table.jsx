@@ -16,10 +16,11 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import RolesActionColumn from '../rolesActionColumn.jsx';
+import DriverApprovalActionColumn from '../rolesActionColumn.jsx';
 import DriverDetailsModal from '../modal/driverDetails.jsx';
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
 import ConfirmDelete from '../dialogues/ConfirmDelete.jsx';
+import useDriverApprovalService from '../../../../services/driverApprovalServices.jsx';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -138,6 +139,7 @@ export default function TableData({ columns, rows }) {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [open, setOpen] = React.useState(false);
   const [boxType, setBoxType] = useState('');
+  const [driverId, setDriverId] = useState('');
 
   const handleClose = () => {
     setOpen(false);
@@ -177,7 +179,11 @@ export default function TableData({ columns, rows }) {
 
   return (
     <Box sx={{ marginTop: '24px', overflowY: 'auto' }}>
-      <DriverDetailsModal open={open} handleClose={handleClose} />
+      <DriverDetailsModal
+        open={open}
+        handleClose={handleClose}
+        driver_id={driverId}
+      />
       <ConfirmAdd
         open={boxType === 'approved'}
         onClose={handleDialogClose}
@@ -267,9 +273,11 @@ export default function TableData({ columns, rows }) {
                               }}
                             >
                               {column.id === 'actions' ? (
-                                <RolesActionColumn
-                                  value={row.id}
+                                <DriverApprovalActionColumn
+                                  value={row.driver_id}
+                                  setModalOpen={setOpen}
                                   boxType={setBoxType}
+                                  setDriverId={setDriverId}
                                 />
                               ) : (
                                 row[column.id]

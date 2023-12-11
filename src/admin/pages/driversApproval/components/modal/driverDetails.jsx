@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -19,20 +19,20 @@ import {
   Close as CloseIcon,
 } from '@mui/icons-material';
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
-//import { useApplicationService } from '../../../../services/applicationService';
+import useDriverService from '../../../../services/driverService.jsx';
 
-const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
+const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const theme = useTheme();
   //const { createApplication, creatingApp } = useApplicationService();
+  const { getDriver, getDriverDetailsById } = useDriverService();
 
   const [formData, setFormData] = useState({
     ID: '',
     name: '',
     username: '',
     password: '',
-    email: '',
     phoneNo: '',
     cnic: '',
     LicenseNo: '',
@@ -42,6 +42,28 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
     LicenseImages: 'License Image',
     status: false,
   });
+
+  useEffect(() => {
+    const fetchDriver = async () => {
+      const driver = await getDriver(driver_id);
+      const driverDetails = await getDriverDetailsById(driver_id);
+      setFormData({
+        ID: driver.id,
+        name: driver.name,
+        username: driver.username,
+        password: driver.password,
+        phoneNo: driver.phoneNo,
+        cnic: driverDetails.cnic,
+        LicenseNo: driverDetails.liscence,
+        TrackerNo: driverDetails.trackerNo,
+        City: driverDetails.city,
+        Tenant: driver.tenant_id,
+        LicenseImages: driver.LicenseImages,
+        status: driver.status,
+      });
+    };
+    if (driver_id) fetchDriver();
+  }, [driver_id]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -59,7 +81,6 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
     const clientData = {
       clientId: formData.ID,
       name: formData.name,
-      email: formData.email,
     };
 
     try {
@@ -119,6 +140,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="ID"
               name="ID"
@@ -129,6 +151,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="Name"
               name="name"
@@ -139,6 +162,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="password"
               name="password"
@@ -149,6 +173,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="password"
               name="password"
@@ -159,6 +184,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="Phone No"
               name="Phone No"
@@ -169,16 +195,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              margin="normal"
-              label="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
+              disabled
               margin="normal"
               label="CNIC"
               name="CNIC"
@@ -189,6 +206,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="License No"
               name="License No"
@@ -199,6 +217,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="Tracker No"
               name="Tracker No"
@@ -209,6 +228,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="City"
               name="City"
@@ -219,6 +239,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="Tenant"
               name="Tenant"

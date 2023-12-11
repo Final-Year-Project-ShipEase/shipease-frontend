@@ -51,7 +51,6 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
         cities: tenant.cities,
         status: tenant.status,
       });
-      console.log(tenant);
     };
     if (tenantId) fetchTenant();
   }, [tenantId]);

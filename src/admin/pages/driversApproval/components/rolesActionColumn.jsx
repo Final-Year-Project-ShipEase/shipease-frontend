@@ -22,7 +22,12 @@ const CustomIconButton = ({ children, onClick, color }) => {
   );
 };
 
-const RolesActionColumn = ({ value, boxType }) => {
+const DriverApprovalActionColumn = ({
+  value,
+  setModalOpen,
+  boxType,
+  setDriverId,
+}) => {
   const [isLockClicked, setIsLockClicked] = useState(false);
   //const { delRole } = useRBACService();
   const theme = useTheme();
@@ -32,7 +37,8 @@ const RolesActionColumn = ({ value, boxType }) => {
   };
 
   const handleEdit = () => {
-    console.log('edit');
+    setDriverId(value);
+    setModalOpen(true);
   };
 
   const handleCopy = () => {
@@ -112,4 +118,4 @@ const RolesActionColumn = ({ value, boxType }) => {
   );
 };
 
-export default RolesActionColumn;
+export default DriverApprovalActionColumn;
