@@ -13,7 +13,7 @@ const theme = createTheme({
       color1: '#00668C33',
       blackColor: 'Black',
       white: 'white',
-      blacl: 'black',
+      black: 'black',
     },
     secondary: {
       main: '#60B478',
@@ -29,6 +29,8 @@ const theme = createTheme({
       boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
       navHover: '#F5F5F5',
       addModal: '#00668C',
+      cancel: '#71C4EF',
+      approve: '#00668C',
     },
     shadows: {
       customButton1: `0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(103, 110, 118, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08)`,

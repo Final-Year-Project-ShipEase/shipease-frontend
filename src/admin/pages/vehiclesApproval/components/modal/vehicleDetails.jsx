@@ -94,7 +94,13 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit }) => {
       />
       <DialogTitle>
         <Box display="flex" alignItems="center" justifyContent="space-between">
-          <IconButton sx={{ p: 1, backgroundColor: '#D1FADF', color: 'green' }}>
+          <IconButton
+            sx={{
+              p: 1,
+              backgroundColor: theme.palette.buttons.approve,
+              color: theme.palette.buttons.white,
+            }}
+          >
             <AddIcon />
           </IconButton>
           <IconButton onClick={handleClose}>
@@ -260,7 +266,10 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit }) => {
             <Button
               fullWidth
               onClick={() => setIsConfirmationDialogOpen(true)}
-              color="success"
+              sx={{
+                color: theme.palette.primary.white,
+                backgroundColor: theme.palette.buttons.approve,
+              }}
               variant="contained"
             >
               Approve

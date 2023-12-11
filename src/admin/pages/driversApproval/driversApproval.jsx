@@ -1,10 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import PageHeader from './pageHeader';
 import TableData from './components/table/table';
-import { DriverColumns, dummyDriverData } from './_columns.js';
+import { DriverColumns } from './_columns.js';
+import useDriverApprovalService from '../../services/driverApprovalServices.jsx';
 
 const DriversApproval = () => {
+  const { getDriverApprovalList } = useDriverApprovalService();
+  const [driverData, setDriverData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const response = await getDriverApprovalList();
+      setDriverData(response);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
   return (
     <Box
       sx={{
@@ -26,7 +41,7 @@ const DriversApproval = () => {
         <PageHeader />
       </Box>
       <Box sx={{ mt: 2 }}>
-        <TableData columns={DriverColumns} rows={dummyDriverData} />
+        <TableData columns={DriverColumns} rows={driverData} />
       </Box>
     </Box>
   );
