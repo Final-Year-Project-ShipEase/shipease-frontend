@@ -43,21 +43,23 @@ const Booking = () => {
           style={{ marginLeft: '-5%', marginRight: '5%' }}
         >
           <LineChart data={dummyBookingData}>
-            <CartesianGrid vertical={true} horizontal={false} strokeDasharray="3 3" strokeWidth={3} />
+            <CartesianGrid
+              vertical={true}
+              horizontal={false}
+              strokeDasharray="3 3"
+              strokeWidth={3}
+            />
             <XAxis dataKey="month" />
             <YAxis />
-              <Line
-                type="monotone"
-                dataKey="bookings"
-                stroke={theme.palette.secondary.main}
-                strokeWidth={2}
-              />
-              <Tooltip />
-            </LineChart>
+            <Line
+              type="monotone"
+              dataKey="bookings"
+              stroke={theme.palette.secondary.main}
+              strokeWidth={2}
+            />
+            <Tooltip />
+          </LineChart>
         </ResponsiveContainer>
-
-
-
       </CardContent>
 
       <CardContent>
@@ -89,8 +91,12 @@ const Booking = () => {
             marginRight: '20%',
           }}
         >
-          <Typography sx={{ fontWeight: 'bold', marginTop: '-10px' }}>Today</Typography>
-          <Typography sx={{ fontWeight: 'bold', marginTop: '-10px'}}>25</Typography>
+          <Typography sx={{ fontWeight: 'bold', marginTop: '-10px' }}>
+            Today
+          </Typography>
+          <Typography sx={{ fontWeight: 'bold', marginTop: '-10px' }}>
+            25
+          </Typography>
         </div>
       </CardContent>
     </Card>

@@ -3,8 +3,14 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
-import { ResponsiveContainer, PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
-
+import {
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  Legend,
+  Tooltip,
+} from 'recharts';
 
 const topPerformingTenants = [
   { name: 'Tenant 1', value: 400 },
@@ -15,7 +21,13 @@ const CustomTooltip = ({ active, payload }) => {
   const theme = useTheme();
   if (active) {
     return (
-      <div style={{ backgroundColor: 'white', padding: '10px', border: '1px solid #ccc' }}>
+      <div
+        style={{
+          backgroundColor: 'white',
+          padding: '10px',
+          border: '1px solid #ccc',
+        }}
+      >
         <p>{`${payload[0].name} : ${payload[0].value}`}</p>
       </div>
     );
