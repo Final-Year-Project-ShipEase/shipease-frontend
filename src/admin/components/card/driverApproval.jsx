@@ -5,7 +5,7 @@ import DriverDetail from './driverDetails';
 
 const VehicleApproval = () => {
   return (
-    <Card sx={{ width: 385, height: 280, borderRadius: 5, overflow: 'auto' }}>
+    <Card sx={{ width: "100%", height: 250, borderRadius: 5, overflow: 'auto' }}>
       <CardContent>
         <div
           style={{

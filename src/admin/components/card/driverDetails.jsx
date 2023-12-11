@@ -12,7 +12,7 @@ const DriverDetail = () => {
     <Card
       sx={{
         width: 351,
-        height: 232,
+        height: 210,
         borderRadius: 3,
         backgroundColor: theme.palette.primary.backgroundColor,
         marginTop: '5px',
@@ -26,7 +26,7 @@ const DriverDetail = () => {
         }}
       >
         <Typography
-          style={{ fontWeight: 'bold', textAlign: 'center', color: 'white' }}
+          style={{ fontWeight: 'bold', textAlign: 'center', color: 'white',marginbottom: '10px',}}
         >
           Driver Approval Pending
         </Typography>
@@ -35,7 +35,7 @@ const DriverDetail = () => {
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-between',
-            marginTop: '5px',
+            marginTop: '7px',
           }}
         >
           <button
@@ -45,11 +45,11 @@ const DriverDetail = () => {
               color: theme.palette.buttons.color,
               backgroundColor: theme.palette.buttons.main,
               borderRadius: '10px',
-              fontSize: '20px',
+              fontSize: '14px',
               border: 'none ',
             }}
           >
-            Date
+            19-nov-2022
           </button>
           <button
             style={{
@@ -62,7 +62,7 @@ const DriverDetail = () => {
               border: 'none',
             }}
           >
-            View Report
+            Report
           </button>
         </div>
 

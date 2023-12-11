@@ -9,7 +9,6 @@ const SummaryCard = () => {
     <Card
       sx={{
         width: '100%',
-        maxWidth: 440,
         height: 280,
         position: 'relative',
         borderRadius: 5,
@@ -31,6 +30,7 @@ const SummaryCard = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'space-between',
+          marginLeft: '3%'
         }}
       >
         <div
@@ -52,6 +52,7 @@ const SummaryCard = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'space-between',
+          marginLeft: '3%'
         }}
       >
         <div

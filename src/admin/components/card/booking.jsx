@@ -18,7 +18,14 @@ const Booking = () => {
   const theme = useTheme();
 
   return (
-    <Card sx={{ width: '100%', maxWidth: 350, borderRadius: 5 }}>
+    <Card
+      sx={{
+        width: '100%',
+        height: 280,
+        position: 'relative',
+        borderRadius: 5,
+      }}
+    >
       <CardContent
         style={{
           display: 'flex',
@@ -30,20 +37,27 @@ const Booking = () => {
         <Typography sx={{ fontWeight: 'bold', marginBottom: '10px' }}>
           Overall Booking
         </Typography>
-        <ResponsiveContainer width="90%" height={150}>
+        <ResponsiveContainer
+          width="100%"
+          height={180}
+          style={{ marginLeft: '-5%', marginRight: '5%' }}
+        >
           <LineChart data={dummyBookingData}>
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid vertical={true} horizontal={false} strokeDasharray="3 3" strokeWidth={3} />
             <XAxis dataKey="month" />
             <YAxis />
-            <Tooltip />
-            <Line
-              type="monotone"
-              dataKey="bookings"
-              stroke={theme.palette.secondary.main}
-              strokeWidth={2}
-            />
-          </LineChart>
+              <Line
+                type="monotone"
+                dataKey="bookings"
+                stroke={theme.palette.secondary.main}
+                strokeWidth={2}
+              />
+              <Tooltip />
+            </LineChart>
         </ResponsiveContainer>
+
+
+
       </CardContent>
 
       <CardContent>
@@ -53,12 +67,14 @@ const Booking = () => {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
+            marginLeft: '20%',
+            marginRight: '20%',
           }}
         >
-          <Typography sx={{ fontWeight: 'bold', marginTop: '-30px' }}>
+          <Typography sx={{ fontWeight: 'bold', marginTop: '-40px' }}>
             Total
           </Typography>
-          <Typography sx={{ fontWeight: 'bold', marginTop: '-30px' }}>
+          <Typography sx={{ fontWeight: 'bold', marginTop: '-40px' }}>
             1500
           </Typography>
         </div>
@@ -69,10 +85,12 @@ const Booking = () => {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
+            marginLeft: '20%',
+            marginRight: '20%',
           }}
         >
-          <Typography sx={{ fontWeight: 'bold' }}>Today</Typography>
-          <Typography sx={{ fontWeight: 'bold' }}>25</Typography>
+          <Typography sx={{ fontWeight: 'bold', marginTop: '-10px' }}>Today</Typography>
+          <Typography sx={{ fontWeight: 'bold', marginTop: '-10px'}}>25</Typography>
         </div>
       </CardContent>
     </Card>

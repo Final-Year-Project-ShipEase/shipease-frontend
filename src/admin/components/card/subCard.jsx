@@ -121,19 +121,16 @@ const SubCard = ({ content }) => {
 
         <ResponsiveContainer width={250} height={120}>
           <LineChart data={dummyTenantData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis />
             <Tooltip />
             <Line
-              type="monotone"
+              type="monotoneX"
               dataKey="tenants"
               stroke={
                 isIncreasing
                   ? theme.palette.secondary.main
                   : theme.palette.primary.main
               }
-              strokeWidth={2}
+              strokeWidth={4}
             />
           </LineChart>
         </ResponsiveContainer>

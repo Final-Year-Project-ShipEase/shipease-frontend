@@ -10,7 +10,7 @@ const Order = () => {
   const theme = useTheme();
 
   return (
-    <Card sx={{ width: '100%', maxWidth: 277, borderRadius: 5 }}>
+    <Card sx={{ width: '100%', borderRadius: 5 }}>
       <CardContent
         style={{
           display: 'flex',
@@ -22,7 +22,7 @@ const Order = () => {
         <Typography sx={{ fontWeight: 'bold', marginBottom: '10px' }}>
           Total Orders
         </Typography>
-        <ResponsiveContainer width="90%" height={150}>
+        <ResponsiveContainer width="90%" height={140}>
           <PieChart>
             <Pie
               data={dummyOrderData}
@@ -56,14 +56,15 @@ const Order = () => {
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            marginTop: '-5%',
+            marginLeft: '10%', 
           }}
         >
-          <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>
+          <Typography sx={{ fontWeight: 'bold', fontSize: '14px'}}>
             Average Order per Month
           </Typography>
           <Typography
-            sx={{ fontWeight: 'bold', borderRadius: '5px', color: 'purple' }}
+            sx={{ fontWeight: 'bold', borderRadius: '5px', color: 'purple', marginLeft: '25%'}}
           >
             25
           </Typography>
