@@ -1,9 +1,17 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+
+const COLORS = ['red', '#7E62D7', '#FF8C00', '#FFD700', '#36A2EB', '#FF6384'];
+
 const theme = createTheme({
   palette: {
+    pieChart: COLORS,
     primary: {
       main: '#7E62D7',
       text: '#fff',
+      backgroundColor: '#2B2626',
+      color: '#8884d8',
+      color1: '#7E62D733',
+      blackColor: 'Black',
       white: 'white',
       blacl: 'black',
     },
@@ -15,6 +23,9 @@ const theme = createTheme({
       main: '#FFFFFF',
       text: '#121212',
       solidText: '#000000',
+      color: '#000000',
+      hover: '#2B2626',
+      borderbutton: '1px solid #7E62D7',
       boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
       navHover: '#F5F5F5',
     },
@@ -26,6 +37,13 @@ const theme = createTheme({
       row: '#FFFFFF',
       rowHover: '#60B478',
       border: '#000000',
+    },
+    background: {
+      default: '#F5F5F5',
+      iconBackground: 'D1FADF',
+      iconColor: 'Green',
+      poolback: '#D9D9D9',
+      trasnparent: 'transparent',
     },
     buttonSidebar: {
       main: 'rgba(0, 102, 140, 0.4)',

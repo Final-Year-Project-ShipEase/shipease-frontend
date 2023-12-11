@@ -8,31 +8,29 @@ import Permissions from './admin/pages/permissions/permissions';
 import Announcements from './admin/pages/announcements/announcements';
 import AdminDashboard from './admin/pages/dashboard/dashboard';
 import { SnackbarProvider } from './utils/snackbarContextProvider';
-import { ThemeProvider, CssBaseline } from '@material-ui/core';
-import theme from './theme';
-import SignIn from './admin/pages/signin/signin';
+import ManageTenantList from './admin/pages/manageTenantList/manageTenant';
+import TenantDashboard from './tenant/pages/tenantDashboard/tenantDashboard';
 
 const App = () => {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <SnackbarProvider>
-          <Router>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route path="/" element={<SignIn />} />
-                <Route path="dashboard" element={<AdminDashboard />} />
-                <Route path="managetenants" element={<ManageTenants />} />
-                <Route path="driversapproval" element={<DriversApproval />} />
-                <Route path="vehiclesapproval" element={<VehiclesApproval />} />
-                <Route path="permissions" element={<Permissions />} />
-                <Route path="announcements" element={<Announcements />} />
-              </Route>
-            </Routes>
-          </Router>
-        </SnackbarProvider>
-      </ThemeProvider>
+      <SnackbarProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route path="/" element={<AdminDashboard />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="managetenants" element={<ManageTenantList />} />
+              <Route path="managetenants/:id" element={<ManageTenants />} />
+              <Route path="approval/drivers" element={<DriversApproval />} />
+              <Route path="approval/vehicles" element={<VehiclesApproval />} />
+              <Route path="permissions" element={<Permissions />} />
+              <Route path="announcements" element={<Announcements />} />
+              <Route path="tenantDashboard" element={<TenantDashboard />} />
+            </Route>
+          </Routes>
+        </Router>
+      </SnackbarProvider>
     </>
   );
 };

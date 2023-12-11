@@ -1,11 +1,35 @@
 import React from 'react';
+import { Box } from '@mui/material';
+import PageHeader from './pageHeader';
+import TableData from './components/table/table';
+import { VehicleColumns, dummyVehicleData } from './_columns.js';
 
-const Vehiclesapproval = () => {
+const VehicleApproval = () => {
   return (
-    <div>
-      <h1>Vehicles Approval</h1>
-    </div>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        p: 2,
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          width: '100%',
+          height: '7%',
+        }}
+      >
+        <PageHeader />
+      </Box>
+      <Box sx={{ mt: 2 }}>
+        <TableData columns={VehicleColumns} rows={dummyVehicleData} />
+      </Box>
+    </Box>
   );
 };
 
-export default Vehiclesapproval;
+export default VehicleApproval;
