@@ -1,8 +1,9 @@
 import React from "react";
-import TenantDetails from "./recentBookingComponent/driversDetails";
 import TabComponent from "./tabComponent";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/material";
+import DriversDetails from "./recentBookingComponent/driversDetails";
+import TenantDetails from "../../../admin/pages/manageTenants/recentBookingComponent/tenantDetails";
 
 const DriversGarage = () => {
       const { id } = useParams();
@@ -23,7 +24,7 @@ const DriversGarage = () => {
               borderRadius: '10px',
             }}
           >
-            <TenantDetails tenantId={id} />
+        <DriversDetails tenantId={id} />         
           </Box>
     
           <Box sx={{ mt: '32px', borderTop: '1px dashed #BEBEBE' }}>

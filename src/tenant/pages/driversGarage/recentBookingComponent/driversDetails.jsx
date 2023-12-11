@@ -8,8 +8,9 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../../utils/spinner';
 import { formatTimestamp } from '../../../../utils/timestamp';
-
-const TenantDetails = ({ tenantId }) => {
+import PageHeader from '../../../../admin/pages/driversApproval/pageHeader';
+import AddIcon from '@mui/icons-material/Add';
+const DriversDetails = ({ tenantId }) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [tenant, setTenant] = useState([]);
@@ -20,7 +21,7 @@ const TenantDetails = ({ tenantId }) => {
       sx={{
         backgroundColor: theme.palette.primary.backgroundColor,
         width: '100%',
-        height: '280px',
+        height: '350px',
         borderRadius: '10px',
       }}
     >
@@ -28,9 +29,24 @@ const TenantDetails = ({ tenantId }) => {
       <Box
         sx={{
           display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          width: '96%',
+          marginLeft: '5%',
+          height: '6%',
+          marginLeft: '25px',
+          marginTop: '35px',
+        }}
+      >
+        <PageHeader />
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
           padding: 1,
+          marginTop: '20px',
         }}
         onClick={() => {
           navigate('/manageTenants');
@@ -47,7 +63,7 @@ const TenantDetails = ({ tenantId }) => {
         </Button>
       </Box>
 
-      <Grid container spacing={2} sx={{ marginLeft: '5px' }}>
+      <Grid container spacing={2} sx={{ marginLeft: '25px'}}>
         <Grid item xs={3}>
           <img
             style={{ borderRadius: '5px', height: '100%' }}
@@ -55,92 +71,105 @@ const TenantDetails = ({ tenantId }) => {
             alt="Bus"
           />
         </Grid>
-        <Grid item xs={9}>
-          <Grid
-            item
-            xs={6}
-            sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
-          >
-            <Grid>
-              <Typography
-                sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
-              >
-                Name: {tenant?.name || 'John Doe'}
-              </Typography>
-              <Typography
-                sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
-              >
-                Username: @{tenant?.username || 'hello123'}
-              </Typography>
-              <Typography
-                sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
-              >
-                Email: {tenant?.email || 'hello123@gmail.com'}
-              </Typography>
-            </Grid>
-          </Grid>
+                <Grid item xs={9}>
+                  <Grid
+                    item
+                    xs={6}
+                    sx={{marginLeft: "-50px", display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+                  >
+                    <Grid>
+                      <Typography
+                        sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
+                      >
+                        {tenant?.name || 'John Doe'}
+                      </Typography>
+                      <Typography
+                        sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
+                      >
+                        @{tenant?.username || 'hello123'}
+                      </Typography>
+                      <Typography
+                        sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
+                      >
+                       {tenant?.email || 'hello123@gmail.com'}
+                      </Typography>
+                    </Grid>
+                  </Grid>
 
-          <Grid
-            item
-            xs={12}
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: '30px',
-            }}
-          >
-            <Grid item xs={8}>
-              <Typography
-                sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
-              >
-                Phone No: {tenant?.phoneNo || '1234567890'}
-              </Typography>
-              <Typography
-                sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
-              >
-                Cities:{' '}
-                {tenant?.cities
-                  ? tenant?.cities.map((city) => city).join(', ')
-                  : 'NewYork'}
-              </Typography>
-              <Typography
-                sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
-              >
-                Tenant Id: {tenant?.id || '12345678'}
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={6}
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}
-            >
-              <Grid>
-                <Typography
-                  sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
-                >
-                  Status :{tenant?.status || 'Active'}
-                </Typography>
-                <Typography
-                  sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
-                >
-                  Created At :
-                  {tenant?.createdAt
-                    ? formatTimestamp(tenant.createdAt)
-                    : '19/4/2023 01:23 PM EDT'}
-                </Typography>
-                <Typography
-                  sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
-                >
-                  Updated At :{' '}
-                  {tenant?.updatedAt
-                    ? formatTimestamp(tenant.updatedAt)
-                    : '19/4/2023 01:23 PM EDT'}
-                </Typography>
+                  <Grid
+                    item
+                    xs={12}
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      marginTop: '10px',
+                      marginLeft: "-50px",
+                    }}
+                  >
+                    <Grid item xs={8}
+                    sx={{
+                      marginTop: '-20px',
+                    }}>
+                      <Typography
+                        sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
+                      >
+                        Phone: {tenant?.phoneNo || '1234567890'}
+                      </Typography>
+                      <Typography
+                        sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
+                      >
+                        Language:{' '}
+                        {tenant?.cities
+                          ? tenant?.cities.map((city) => city).join(', ')
+                          : 'English'}
+                      </Typography>
+                      <Typography
+                        sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
+                      >
+                        Driver Id: {tenant?.id || '12345678'}
+                      </Typography>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={6}
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        marginLeft: "-170px",
+                      }}
+                    >
+                      <Grid>
+                        <Typography
+                          sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
+                        >
+                          Status :{tenant?.status || 'Active'}
+                        </Typography>
+                        <Typography
+                          sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
+                        >
+                          Created At :
+                          {tenant?.createdAt
+                            ? formatTimestamp(tenant.createdAt)
+                            : '19/4/2023 01:23 PM EDT'}
+                        </Typography>
+                        <Typography
+                          sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
+                        >
+                          Updated At :{' '}
+                          {tenant?.updatedAt
+                            ? formatTimestamp(tenant.updatedAt)
+                            : '19/4/2023 01:23 PM EDT'}
+                        </Typography>
+                        <Typography
+                          sx={{ color: theme.palette.buttons.main, fontSize: '16px', marginTop:"10px"}}
+                        >
+                          license Digital Copy :{' '}
+                        <Button startIcon={<AddIcon />} variant="contained" color="secondary" style={{marginLeft:"20px"}}>
+                          License Image
+                        </Button>
+                      </Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -150,4 +179,4 @@ const TenantDetails = ({ tenantId }) => {
   );
 };
 
-export default TenantDetails;
+export default DriversDetails;
