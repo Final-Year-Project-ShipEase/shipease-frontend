@@ -8,6 +8,7 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { useNavigate } from 'react-router-dom';
 import useTenantService from '../../../services/tenantService';
 import Spinner from '../../../../utils/spinner';
+import { formatTimestamp } from '../../../../utils/timestamp';
 
 const TenantDetails = ({ tenantId }) => {
   const theme = useTheme();
@@ -138,12 +139,18 @@ const TenantDetails = ({ tenantId }) => {
                 <Typography
                   sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
                 >
-                  Created At :{tenant?.createdAt || '19/4/2023 01:23 PM EDT'}
+                  Created At :
+                  {tenant?.createdAt
+                    ? formatTimestamp(tenant.createdAt)
+                    : '19/4/2023 01:23 PM EDT'}
                 </Typography>
                 <Typography
                   sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
                 >
-                  Updated At :{tenant?.updatedAt || '19/4/2023 01:23 PM EDT'}
+                  Updated At :{' '}
+                  {tenant?.updatedAt
+                    ? formatTimestamp(tenant.updatedAt)
+                    : '19/4/2023 01:23 PM EDT'}
                 </Typography>
               </Grid>
             </Grid>
