@@ -150,8 +150,8 @@ export default function TableData({ columns, rows }) {
   };
 
   const handleOpen = (row) => {
+    setDriverId(row.driver_id);
     setOpen(true);
-    //console.log(row.id); use this to get result of row id
   };
 
   const handleRequestSort = (property) => {

@@ -9,8 +9,6 @@ import {
   Button,
   Box,
   Grid,
-  Switch,
-  FormControlLabel,
   DialogContentText,
   useTheme,
 } from '@mui/material';
@@ -78,18 +76,17 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
   };
 
   const handleAddConfirm = async () => {
-    const clientData = {
-      clientId: formData.ID,
-      name: formData.name,
-    };
-
-    try {
-      //await createApplication(clientData);
-      setIsConfirmationDialogOpen(false);
-      handleClose();
-    } catch (err) {
-      console.log(err);
-    }
+    // const clientData = {
+    //   clientId: formData.ID,
+    //   name: formData.name,
+    // };
+    // try {
+    //   //await createApplication(clientData);
+    //   setIsConfirmationDialogOpen(false);
+    //   handleClose();
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   return (
@@ -118,8 +115,14 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
       />
       <DialogTitle>
         <Box display="flex" alignItems="center" justifyContent="space-between">
-          <IconButton sx={{ p: 1, backgroundColor: '#D1FADF', color: 'green' }}>
-            <AddIcon />
+          <IconButton
+            sx={{
+              p: 1,
+              backgroundColor: theme.palette.buttons.approve,
+              color: theme.palette.buttons.white,
+            }}
+          >
+            <AddIcon color={theme.palette.buttons.white} />
           </IconButton>
           <IconButton onClick={handleClose}>
             <CloseIcon />
@@ -253,7 +256,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
               onChange={handleChange}
               variant="contained"
               sx={{
-                backgroundColor: theme.palette.secondary.main,
+                backgroundColor: theme.palette.buttons.approve,
                 color: 'white',
                 width: '100%',
                 height: '72%',
@@ -270,28 +273,27 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
               License Images
             </Button>
           </Grid>
-          <Box display="flex" ml={2} sx={{ width: '100%' }}>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={formData.status}
-                  onChange={handleSwitchChange}
-                  name="status"
-                />
-              }
-              label="Active"
-            />
-          </Box>
-          <Grid item xs={6}>
-            <Button fullWidth onClick={handleClose} sx={{ color: 'black' }}>
+          <Grid item xs={12} sm={6}></Grid>
+          <Grid item xs={12} sm={6}>
+            <Button
+              fullWidth
+              onClick={handleClose}
+              sx={{
+                color: theme.palette.primary.white,
+                backgroundColor: theme.palette.buttons.cancel,
+              }}
+            >
               Cancel
             </Button>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <Button
               fullWidth
               onClick={() => setIsConfirmationDialogOpen(true)}
-              color="success"
+              sx={{
+                color: theme.palette.primary.white,
+                backgroundColor: theme.palette.buttons.approve,
+              }}
               variant="contained"
             >
               Approve

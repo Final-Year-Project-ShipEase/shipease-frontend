@@ -70,7 +70,14 @@ const ConfirmAdd = ({ open, onClose, onConfirm, loading }) => {
           >
             Close
           </Button>
-          <Button onClick={onConfirm} color="success" variant="contained">
+          <Button
+            onClick={onConfirm}
+            sx={{
+              color: theme.palette.primary.white,
+              backgroundColor: theme.palette.buttons.approve,
+            }}
+            variant="contained"
+          >
             {loading ? <CircularProgress /> : 'Confirm'}
           </Button>
         </Box>

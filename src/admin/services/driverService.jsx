@@ -34,7 +34,7 @@ export function useDriverService() {
   };
 
   const getDriverDetailsById = async (id) => {
-    const response = await axiosInstance.get(`/driverdetail /${id}`);
+    const response = await axiosInstance.get(`/driverdetail/${id}`);
     return response.data;
   };
 
