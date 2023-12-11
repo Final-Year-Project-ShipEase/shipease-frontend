@@ -10,16 +10,31 @@ const CommunicationDetails = ({ messages }) => {
   };
 
   return (
-    <div style={{ width: '100%', padding: '10px', borderRadius: "10px",  backgroundColor: theme.palette.primary.backgroundColor}}>
+    <div
+      style={{
+        width: '100%',
+        padding: '10px',
+        borderRadius: '10px',
+        backgroundColor: theme.palette.primary.backgroundColor,
+      }}
+    >
       <div style={{ height: '200px', overflowY: 'scroll' }}>
         {Array.isArray(messages) && messages.length > 0 ? (
           messages.map((message, index) => (
-            <div key={index} style={{ marginBottom: '10px', textAlign: message.sender === 'user' ? 'right' : 'left' }}>
+            <div
+              key={index}
+              style={{
+                marginBottom: '10px',
+                textAlign: message.sender === 'user' ? 'right' : 'left',
+              }}
+            >
               {message.text}
             </div>
           ))
         ) : (
-          <div style={{color: theme.palette.buttons.main}}>No messages available.</div>
+          <div style={{ color: theme.palette.buttons.main }}>
+            No messages available.
+          </div>
         )}
       </div>
       <div style={{ marginTop: '10px', display: 'flex' }}>

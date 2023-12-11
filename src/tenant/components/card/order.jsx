@@ -57,14 +57,19 @@ const Order = () => {
             flexDirection: 'row',
             alignItems: 'center',
             marginTop: '-5%',
-            marginLeft: '10%', 
+            marginLeft: '10%',
           }}
         >
-          <Typography sx={{ fontWeight: 'bold', fontSize: '14px'}}>
+          <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>
             Average Order per Month
           </Typography>
           <Typography
-            sx={{ fontWeight: 'bold', borderRadius: '5px', color: 'purple', marginLeft: '25%'}}
+            sx={{
+              fontWeight: 'bold',
+              borderRadius: '5px',
+              color: 'purple',
+              marginLeft: '25%',
+            }}
           >
             25
           </Typography>
