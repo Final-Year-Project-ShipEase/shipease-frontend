@@ -3,9 +3,11 @@ const generateDummyData = () => {
 
   for (let i = 1; i <= 15; i++) {
     dummyData.push({
-      id: i,
-      username: `username${i}`,
-      tenant: `Tenant ${i}`,
+      CNIC: i,
+      Drivername: `drivername${i}`,
+      LICENSEE: `B-213 ${i}`,
+      TrackerNo: `T-313${i}`,
+      last: `12-04-${i}`,
       actions: `Action ${i}`,
     });
   }
@@ -15,22 +17,36 @@ const generateDummyData = () => {
 
 export const DriverColumns = [
   {
-    id: 'id',
-    label: 'Driver ID',
-    width: '30%',
-    numeric: false,
-    disablePadding: false,
-  },
-  {
-    id: 'username',
-    label: 'Username',
+    id: 'Drivername',
+    label: 'Driver Name',
     width: '20%',
     numeric: false,
     disablePadding: false,
   },
   {
-    id: 'tenant',
-    label: 'Tenant Name',
+    id: 'CNIC',
+    label: 'CNIC',  
+    width: '30%',
+    numeric: false,
+    disablePadding: false,
+  },
+  {
+    id: 'LICENSEE',
+    label: 'License No',
+    width: '25%',
+    numeric: false,
+    disablePadding: false,
+  },
+  {
+    id: 'TrackerNo',
+    label: 'Tracker No',
+    width: '25%',
+    numeric: false,
+    disablePadding: false,
+  },
+  {
+    id: 'last',
+    label: 'Last Approval',
     width: '25%',
     numeric: false,
     disablePadding: false,

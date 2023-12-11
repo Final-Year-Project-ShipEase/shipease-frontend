@@ -67,12 +67,6 @@ const RolesActionColumn = ({ value, boxType }) => {
       }}
     >
       <CustomIconButton>
-        <EditNoteIcon
-          style={{ color: theme.palette.actionButton.main }}
-          onClick={handleEdit}
-        />
-      </CustomIconButton>
-      <CustomIconButton>
         <FileCopySharpIcon
           style={{ color: theme.palette.actionButton.main }}
           onClick={handleCopy}
@@ -88,24 +82,6 @@ const RolesActionColumn = ({ value, boxType }) => {
               ? theme.palette.actionButton.hover
               : theme.palette.actionButton.main,
           }}
-        />
-      </CustomIconButton>
-      <CustomIconButton>
-        <DoneOutlinedIcon
-          style={{ color: theme.palette.actionButton.main }}
-          onClick={handleApprove}
-        />
-      </CustomIconButton>
-      <CustomIconButton>
-        <RemoveOutlinedIcon
-          style={{ color: theme.palette.actionButton.main }}
-          onClick={handleRemove}
-        />
-      </CustomIconButton>
-      <CustomIconButton>
-        <DeleteForeverSharpIcon
-          style={{ color: theme.palette.actionButton.main }}
-          onClick={handleDelete}
         />
       </CustomIconButton>
     </Box>

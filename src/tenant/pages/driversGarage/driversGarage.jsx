@@ -11,7 +11,7 @@ const DriversGarage = () => {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            height: '100px',
+        height: '100px',
             padding: 2,
           }}
         >
