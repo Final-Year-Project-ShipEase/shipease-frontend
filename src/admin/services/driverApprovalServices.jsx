@@ -33,6 +33,16 @@ export function useDriverApprovalService() {
     return response.data;
   };
 
+  const approveDriver = async (id) => {
+    const response = await axiosInstance.get(`/driverApproval/approve/${id}`);
+    return response.data;
+  };
+
+  const rejectDriver = async (id) => {
+    const response = await axiosInstance.get(`/driverApproval/reject/${id}`);
+    return response.data;
+  };
+
   return {
     getDriverApprovalList,
     getDriverApproval,
@@ -40,6 +50,8 @@ export function useDriverApprovalService() {
     deleteDriverApproval,
     createDriverApproval,
     getDriverApprovalByTenantId,
+    approveDriver,
+    rejectDriver,
   };
 }
 

@@ -274,7 +274,7 @@ export default function TableData({ columns, rows }) {
                             >
                               {column.id === 'actions' ? (
                                 <DriverApprovalActionColumn
-                                  value={row.driver_id}
+                                  value={row}
                                   setModalOpen={setOpen}
                                   boxType={setBoxType}
                                   setDriverId={setDriverId}

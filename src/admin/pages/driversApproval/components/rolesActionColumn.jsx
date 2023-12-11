@@ -6,6 +6,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+import useDriverApprovalService from '../../../services/driverApprovalServices';
 
 const CustomIconButton = ({ children, onClick, color }) => {
   return (
@@ -31,6 +32,7 @@ const DriverApprovalActionColumn = ({
   const [isLockClicked, setIsLockClicked] = useState(false);
   //const { delRole } = useRBACService();
   const theme = useTheme();
+  const { deleteDriverApproval } = useDriverApprovalService();
 
   const handleLockClick = () => {
     setIsLockClicked(!isLockClicked);
@@ -46,18 +48,16 @@ const DriverApprovalActionColumn = ({
   };
 
   const handleDelete = () => {
-    //delRole(value);
+    deleteDriverApproval(value.id);
   };
 
   const handleApprove = () => {
     //appDriver(value);
-    console.log(value);
     boxType('approved');
   };
 
   const handleRemove = () => {
     //remDriver(value);
-    console.log(value);
     boxType('removed');
   };
 
