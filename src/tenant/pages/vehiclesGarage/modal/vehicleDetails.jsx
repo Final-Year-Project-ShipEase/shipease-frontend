@@ -21,7 +21,7 @@ import {
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
 //import { useApplicationService } from '../../../../services/applicationService';
 
-const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
+const VehicleDetailsModal = ({ open, handleClose, onSubmit }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const theme = useTheme();
@@ -29,17 +29,14 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
 
   const [formData, setFormData] = useState({
     ID: '',
-    name: '',
-    username: '',
-    password: '',
-    email: '',
-    phoneNo: '',
+    type: '',
+    regNo: '',
+    city: '',
+    trackId: '',
+    vehicleCompany: '',
     cnic: '',
-    LicenseNo: '',
+    incspectionRep: '',
     TrackerNo: '',
-    City: '',
-    Tenant: '',
-    LicenseImages: 'License Image',
     status: false,
   });
 
@@ -59,7 +56,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
     const clientData = {
       clientId: formData.ID,
       name: formData.name,
-      email: formData.email,
+      trackId: formData.trackId,
     };
 
     try {
@@ -108,10 +105,10 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           variant="h6"
           sx={{ fontWeight: 'bold', color: 'black' }}
         >
-          Driver Details
+          Vehicle Details
         </DialogContentText>
         <Typography variant="subtitle2">
-          Following are the Driver Details
+          Following are the Vehicle Details
         </Typography>
       </DialogTitle>
       <DialogContent>
@@ -130,9 +127,9 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
             <TextField
               fullWidth
               margin="normal"
-              label="Name"
-              name="name"
-              value={formData.name}
+              label="Type"
+              name="type"
+              value={formData.type}
               onChange={handleChange}
             />
           </Grid>
@@ -140,9 +137,9 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
             <TextField
               fullWidth
               margin="normal"
-              label="password"
-              name="password"
-              value={formData.password}
+              label="Reg No."
+              name="regNo"
+              value={formData.regNo}
               onChange={handleChange}
             />
           </Grid>
@@ -150,9 +147,9 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
             <TextField
               fullWidth
               margin="normal"
-              label="password"
-              name="password"
-              value={formData.password}
+              label="city"
+              name="city"
+              value={formData.city}
               onChange={handleChange}
             />
           </Grid>
@@ -160,9 +157,9 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
             <TextField
               fullWidth
               margin="normal"
-              label="Phone No"
-              name="Phone No"
-              value={formData.phoneNo}
+              label="Tracker Id"
+              name="Tracker Id"
+              value={formData.trackId}
               onChange={handleChange}
             />
           </Grid>
@@ -170,18 +167,8 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
             <TextField
               fullWidth
               margin="normal"
-              label="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              margin="normal"
-              label="CNIC"
-              name="CNIC"
+              label="Owner Cnic"
+              name="Owner Cnic"
               value={formData.cnic}
               onChange={handleChange}
             />
@@ -190,45 +177,15 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
             <TextField
               fullWidth
               margin="normal"
-              label="License No"
-              name="License No"
-              value={formData.LicenseNo}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              margin="normal"
-              label="Tracker No"
-              name="Tracker No"
-              value={formData.TrackerNo}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              margin="normal"
-              label="City"
-              name="City"
-              value={formData.City}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              margin="normal"
-              label="Tenant"
-              name="Tenant"
-              value={formData.Tenant}
+              label="Vehicle Company"
+              name="Vehicle Company"
+              value={formData.vehicleCompany}
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <Button
-              name="License Images"
+              name="vehicleDocs"
               onChange={handleChange}
               variant="contained"
               sx={{
@@ -246,7 +203,40 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
               }}
               startIcon={<AddIcon />}
             >
-              License Images
+              Vehicle Documents
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Inspection Report Vendor"
+              name="inspectionRepVen"
+              value={formData.incspectionRep}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button
+              name="InsepctionRep"
+              onChange={handleChange}
+              variant="contained"
+              sx={{
+                backgroundColor: theme.palette.secondary.main,
+                color: 'white',
+                width: '100%',
+                height: '72%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mt: 2,
+                ':hover': {
+                  backgroundColor: theme,
+                },
+              }}
+              startIcon={<AddIcon />}
+            >
+              Inspection Report
             </Button>
           </Grid>
           <Box display="flex" ml={2} sx={{ width: '100%' }}>
@@ -282,4 +272,4 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
   );
 };
 
-export default DriverDetailsModal;
+export default VehicleDetailsModal;
