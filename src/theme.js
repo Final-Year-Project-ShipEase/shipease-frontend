@@ -1,16 +1,16 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
-const COLORS = ['red', '#7E62D7', '#FF8C00', '#FFD700', '#36A2EB', '#FF6384'];
+const COLORS = ['red', '#00668C', '#FF8C00', '#FFD700', '#36A2EB', '#FF6384'];
 
 const theme = createTheme({
   palette: {
     pieChart: COLORS,
     primary: {
-      main: '#7E62D7',
+      main: '#00668C',
       text: '#fff',
       backgroundColor: '#2B2626',
       color: '#8884d8',
-      color1: '#7E62D733',
+      color1: '#00668C33',
       blackColor: 'Black',
       white: 'white',
       blacl: 'black',
@@ -25,7 +25,7 @@ const theme = createTheme({
       solidText: '#000000',
       color: '#000000',
       hover: '#2B2626',
-      borderbutton: '1px solid #7E62D7',
+      borderbutton: '1px solid #00668C',
       boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
       navHover: '#F5F5F5',
     },
@@ -33,7 +33,7 @@ const theme = createTheme({
       customButton1: `0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(103, 110, 118, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08)`,
     },
     table: {
-      header: '#7E62D7',
+      header: '#00668C',
       row: '#FFFFFF',
       rowHover: '#60B478',
       border: '#000000',
@@ -63,6 +63,10 @@ const theme = createTheme({
     },
     spinner: {
       main: '#00668C',
+    },
+    actionButton: {
+      main: '#00668CB2',
+      hover: '#509664',
     },
   },
   typography: {

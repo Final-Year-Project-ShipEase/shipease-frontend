@@ -12,5 +12,5 @@ export function formatTimestamp(timestamp) {
   };
 
   const formattedDate = date.toLocaleString('en-US', options);
-  return formattedDate.replace(',', ''); // Remove the comma between the date and time
+  return formattedDate.replace(',', ''); 
 }
