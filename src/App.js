@@ -12,6 +12,7 @@ import ManageTenantList from './admin/pages/manageTenantList/manageTenant';
 import TenantDashboard from './tenant/pages/tenantDashboard/tenantDashboard';
 import DriversGarage from './tenant/pages/driversGarage/driversGarage';
 import { Dashboard } from '@mui/icons-material';
+import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
               <Route path="announcements" element={<Announcements />} />
               <Route path="tenantDashboard" element={<TenantDashboard />} />
               <Route path="driversGarage" element={<DriversGarage />} />
+              <Route path="vehiclesGarage" element={<VehiclesGarage />} />
             </Route>
           </Routes>
         </Router>
