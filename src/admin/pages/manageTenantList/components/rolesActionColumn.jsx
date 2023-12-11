@@ -1,11 +1,10 @@
 import { Box, IconButton } from '@mui/material';
 import React, { useState } from 'react';
 import EditNoteIcon from '@mui/icons-material/EditNote';
-import FileCopySharpIcon from '@mui/icons-material/FileCopySharp';
 import LockIcon from '@mui/icons-material/Lock';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
-import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+import useTenantService from '../../../services/tenantService';
 
 const CustomIconButton = ({ children, onClick, color }) => {
   return (
@@ -22,9 +21,9 @@ const CustomIconButton = ({ children, onClick, color }) => {
   );
 };
 
-const RolesActionColumn = ({ value, boxType, setModalOpen }) => {
+const RolesActionColumn = ({ value, boxType, setModalOpen, setLoading }) => {
   const [isLockClicked, setIsLockClicked] = useState(false);
-  //const { delRole } = useRBACService();
+  const { deleteTenant } = useTenantService();
 
   const handleLockClick = () => {
     setIsLockClicked(!isLockClicked);
@@ -34,8 +33,10 @@ const RolesActionColumn = ({ value, boxType, setModalOpen }) => {
     setModalOpen(true);
   };
 
-  const handleDelete = () => {
-    //delRole(value);
+  const handleDelete = async () => {
+    setLoading(true);
+    await deleteTenant(value);
+    setLoading(false);
   };
 
   const handleRemove = () => {
