@@ -20,7 +20,7 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route path="/" element={<DriversGarage />} />
+              <Route path="/" element={<AdminDashboard />} />
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="managetenants" element={<ManageTenantList />} />
               <Route path="managetenants/:id" element={<ManageTenants />} />
