@@ -15,6 +15,7 @@ import AdminSignIn from './admin/pages/signin/signin';
 import TenantSignUp from './tenant/pages/signUp/signUp';
 import DriversGarage from './tenant/pages/driversGarage/driversGarage';
 import { Dashboard } from '@mui/icons-material';
+import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
 
 
 const App = () => {
@@ -37,6 +38,7 @@ const App = () => {
               <Route path="TenantSignup" element={<TenantSignUp />} />
               <Route path="tenantDashboard" element={<TenantDashboard />} />
               <Route path="driversGarage" element={<DriversGarage />} />
+              <Route path="vehiclesGarage" element={<VehiclesGarage />} />
             </Route>
           </Routes>
         </Router>

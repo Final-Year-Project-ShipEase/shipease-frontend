@@ -16,7 +16,7 @@ const theme = createTheme({
       black: 'black',
     },
     secondary: {
-      main: '#60B478',
+      main: '#71C4EF',
       hover: '#509664',
     },
     buttons: {
@@ -38,7 +38,7 @@ const theme = createTheme({
     table: {
       header: '#00668C',
       row: '#FFFFFF',
-      rowHover: '#60B478',
+      rowHover: '#71C4EF',
       border: '#000000',
     },
     background: {
