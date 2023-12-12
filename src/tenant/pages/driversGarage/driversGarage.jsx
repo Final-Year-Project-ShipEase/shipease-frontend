@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import DriversDetails from './recentBookingComponent/driversDetails';
 import TableData from './components/table/table';
-import { DriverColumns, dummyDriverData } from './_columns.js';
+import { DriverColumns } from './_columns.js';
+import useDriverService from '../../../admin/services/driverService';
+import CreateDriver from '../createDriver/createDriver.jsx';
+
 const DriversGarage = () => {
-  const { id } = useParams();
+  const { getDriverByTenantId } = useDriverService();
+  const [drivers, setDrivers] = useState([]);
+  const [driverId, setDriverId] = useState('');
+
+  const id = 1;
+  useEffect(() => {
+    const fetchDrivers = async () => {
+      try {
+        const response = await getDriverByTenantId(id);
+        setDrivers(response.tenants);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDrivers();
+  }, []);
+
   return (
     <Box
       sx={{
@@ -20,15 +39,19 @@ const DriversGarage = () => {
           width: '100%',
           height: '100%',
           borderRadius: '10px',
-          boxShadow: '0px 2px 14px rgba(0, 0, 0, 1)', // Add drop shadow
+          boxShadow: '0px 2px 14px rgba(0, 0, 0, 1)',
         }}
       >
-        <DriversDetails tenantId={id} />
+        <DriversDetails driverId={driverId} />
       </Box>
 
       <Box sx={{ mt: '30px', borderTop: '1px dashed black' }}>
         <Box sx={{ mt: '-10px' }}>
-          <TableData columns={DriverColumns} rows={dummyDriverData} />
+          <TableData
+            columns={DriverColumns}
+            rows={drivers}
+            setDriverId={setDriverId}
+          />
         </Box>
       </Box>
     </Box>

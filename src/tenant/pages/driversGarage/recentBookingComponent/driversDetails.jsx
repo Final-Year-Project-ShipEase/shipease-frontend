@@ -8,13 +8,31 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../../utils/spinner';
 import { formatTimestamp } from '../../../../utils/timestamp';
-import PageHeader from '../../../../admin/pages/driversApproval/pageHeader';
 import AddIcon from '@mui/icons-material/Add';
-const DriversDetails = ({ tenantId }) => {
+import useDriverService from '../../../../admin/services/driverService';
+import PageHeader from '../pageHeader';
+
+const DriversDetails = ({ driverId }) => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const [tenant, setTenant] = useState([]);
+  const [driver, setDriver] = useState({});
   const [loading, setLoading] = useState(false);
+  const { getDriver } = useDriverService();
+
+  useEffect(() => {
+    const fetchDriver = async () => {
+      try {
+        setLoading(true);
+        const response = await getDriver(driverId);
+        setDriver(response);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    };
+    fetchDriver();
+  }, [driverId]);
 
   return (
     <Card
@@ -40,30 +58,8 @@ const DriversDetails = ({ tenantId }) => {
       >
         <PageHeader />
       </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          padding: 1,
-          marginTop: '20px',
-        }}
-        onClick={() => {
-          navigate('/manageTenants');
-        }}
-      >
-        <ArrowBackRoundedIcon
-          sx={{
-            color: theme.palette.primary.main,
-            cursor: 'pointer',
-          }}
-        />
-        <Button sx={{ color: theme.palette.buttons.main, fontSize: '12px' }}>
-          Back to Tenant List
-        </Button>
-      </Box>
 
-      <Grid container spacing={2} sx={{ marginLeft: '65px' }}>
+      <Grid container spacing={2} sx={{ marginLeft: '5%', mt: '2%' }}>
         <Grid item xs={3}>
           <img
             style={{ borderRadius: '5px', height: '100%' }}
@@ -86,17 +82,17 @@ const DriversDetails = ({ tenantId }) => {
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
               >
-                {tenant?.name || 'John Doe'}
+                {driver?.name || 'John Doe'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                @{tenant?.username || 'hello123'}
+                @{driver?.username || 'hello123'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                {tenant?.email || 'hello123@gmail.com'}
+                {driver?.email || 'hello123@gmail.com'}
               </Typography>
             </Grid>
           </Grid>
@@ -108,34 +104,27 @@ const DriversDetails = ({ tenantId }) => {
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
-              marginTop: '10px',
               marginLeft: '-140px',
             }}
           >
-            <Grid
-              item
-              xs={8}
-              sx={{
-                marginTop: '-20px',
-              }}
-            >
+            <Grid item xs={8} sx={{}}>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
               >
-                Phone: {tenant?.phoneNo || '1234567890'}
+                Phone: {driver?.phoneNo || '1234567890'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
                 Language:{' '}
-                {tenant?.cities
-                  ? tenant?.cities.map((city) => city).join(', ')
+                {driver?.cities
+                  ? driver?.cities.map((city) => city).join(', ')
                   : 'English'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                Driver Id: {tenant?.id || '12345678'}
+                Driver Id: {driver?.id || '12345678'}
               </Typography>
             </Grid>
             <Grid
@@ -152,22 +141,22 @@ const DriversDetails = ({ tenantId }) => {
                 <Typography
                   sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
                 >
-                  Status :{tenant?.status || 'Active'}
+                  Status :{driver?.status || 'Active'}
                 </Typography>
                 <Typography
                   sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
                 >
                   Created At :
-                  {tenant?.createdAt
-                    ? formatTimestamp(tenant.createdAt)
+                  {driver?.createdAt
+                    ? formatTimestamp(driver.createdAt)
                     : '19/4/2023 01:23 PM EDT'}
                 </Typography>
                 <Typography
                   sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
                 >
                   Updated At :{' '}
-                  {tenant?.updatedAt
-                    ? formatTimestamp(tenant.updatedAt)
+                  {driver?.updatedAt
+                    ? formatTimestamp(driver.updatedAt)
                     : '19/4/2023 01:23 PM EDT'}
                 </Typography>
                 <Typography

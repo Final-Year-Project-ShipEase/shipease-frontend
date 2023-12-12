@@ -17,14 +17,14 @@ const AddModalButton = ({ text, onClick }) => {
         background: ' #2963FF',
         boxShadow:
           '0px 1px 1px 0px rgba(0, 0, 0, 0.12), 0px 0px 0px 1px rgba(103, 110, 118, 0.16), 0px 2px 5px 0px rgba(103, 110, 118, 0.08)',
-        color: '#FAFAFA',
+        color: theme.palette.primary.black,
         textAlign: 'center',
         fontFamily: 'Barlow',
         fontSize: '14px',
         fontStyle: 'normal',
         fontWeight: 600,
         lineHeight: '140%',
-        backgroundColor: theme.palette.buttons.addModal,
+        backgroundColor: theme.palette.buttons.main,
         '&:hover': {
           backgroundColor: theme.palette.buttons.hover,
           color: theme.palette.primary.text,

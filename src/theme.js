@@ -27,7 +27,7 @@ const theme = createTheme({
       color1: '#00668C33',
       blackColor: 'Black',
       white: 'white',
-      blacl: 'black',
+      black: 'black',
     },
     secondary: {
       main: '#71C4EF',
@@ -75,6 +75,7 @@ const theme = createTheme({
       form: 'white',
       h5: 'gray',
       border: '1px solid lightgrey',
+      background: '#302E35',
     },
     spinner: {
       main: '#00668C',

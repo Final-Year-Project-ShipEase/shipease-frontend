@@ -29,7 +29,7 @@ export function useDriverService() {
   };
 
   const getDriverByTenantId = async (id) => {
-    const response = await axiosInstance.get(`/driver/tenant/${id}/index`);
+    const response = await axiosInstance.get(`/drivers/tenant/${id}/index`);
     return response.data;
   };
 

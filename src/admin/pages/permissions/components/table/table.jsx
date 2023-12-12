@@ -12,18 +12,24 @@ import {
 } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import userList from './userList';
+import useTenantService from '../../../../services/tenantService';
 
 const CustomTable = () => {
   //   const { getRolesData } = useRoleService();
   //   const { getUserData } = useUserService();
   const [roles, setRole] = React.useState([]);
   const [users, setUserList] = useState([]);
+  const { getTenants } = useTenantService();
   const theme = useTheme();
 
   const getData = async () => {
     try {
-      //const userList = await getRolesData();
-      setRole(userList);
+      const userList = await getTenants();
+      //setRole(userList.permissions);
+      userList.map((user) => {
+        setRole(Object.keys(user.permissions));
+        return null; // This is necessary if you are using map for side effects and not creating a new array
+      });
     } catch (error) {
       console.error(error);
     }
@@ -31,7 +37,7 @@ const CustomTable = () => {
 
   const getUsersData = async () => {
     try {
-      //const userList = await getUserData();
+      const userList = await getTenants();
       setUserList(userList);
     } catch (error) {
       console.error(error);
@@ -112,7 +118,7 @@ const CustomTable = () => {
                   alignItems="center"
                   justifyContent="space-between"
                 >
-                  {role.name}
+                  {role}
                   <EditOutlinedIcon />
                 </Grid>
               </Box>
@@ -127,7 +133,7 @@ const CustomTable = () => {
       >
         {users.map((user) => (
           <TableRow key={user.id}>
-            <TableCell>{user.name}</TableCell>
+            <TableCell>{user.username}</TableCell>
             {roles.map((role) => (
               <TableCell
                 key={role.id}

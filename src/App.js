@@ -21,6 +21,7 @@ import TenantSignInPage from './tenant/pages/signin/signin';
 import TenantSignUpPage from './tenant/pages/signUp/signUp';
 import DriversGarage from './tenant/pages/driversGarage/driversGarage';
 import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
+import CreateDriver from './tenant/pages/createDriver/createDriver';
 
 const App = () => {
   return (
@@ -51,8 +52,9 @@ const App = () => {
                           path="vehiclesgarage"
                           element={<VehiclesGarage />}
                         />
-                        <Route path="*" element={<ErrorPage />}></Route>
+                        <Route path="addDriver" element={<CreateDriver />} />
                       </Route>
+                      <Route path="*" element={<ErrorPage />}></Route>
                     </Routes>
                   </>
                 }
@@ -93,9 +95,8 @@ const App = () => {
                           path="announcements"
                           element={<Announcements />}
                         /> */}
-                        <Route path="*" element={<ErrorPage />}></Route>
-                        <Route path="*" element={<ErrorPage />}></Route>
                       </Route>
+                      <Route path="*" element={<ErrorPage />}></Route>
                     </Routes>
                   </>
                 }

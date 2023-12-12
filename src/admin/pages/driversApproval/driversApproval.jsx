@@ -6,19 +6,19 @@ import { DriverColumns } from './_columns.js';
 import useDriverApprovalService from '../../services/driverApprovalServices.jsx';
 
 const DriversApproval = () => {
-  const { getDriverApprovalList } = useDriverApprovalService();
+  const { getRejectedApproval } = useDriverApprovalService();
   const [driverData, setDriverData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const response = await getDriverApprovalList();
+      const response = await getRejectedApproval();
       setDriverData(response);
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [driverData]);
 
   return (
     <Box

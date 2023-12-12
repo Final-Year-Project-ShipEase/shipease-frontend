@@ -15,15 +15,15 @@ import HeaderButton from '../../../commons/buttons/headerButton';
 import AddModalButton from '../../../commons/buttons/addModal';
 
 const PageHeader = () => {
-  const [Driver, setDriver] = React.useState('');
+  const [vehicle, setVehicle] = React.useState('');
   const theme = useTheme();
   const navigate = useNavigate();
   const handleChange = (event) => {
-    setDriver(event.target.value);
+    setVehicle(event.target.value);
   };
 
   const onClickPermit = () => {
-    navigate('/approval/drivers');
+    navigate('/approval/vehicle');
   };
 
   return (
@@ -42,11 +42,11 @@ const PageHeader = () => {
         }}
       >
         <FormControl>
-          <InputLabel id="Driver-select-label">Driver</InputLabel>
+          <InputLabel id="Vehicle-select-label">Vehicle</InputLabel>
           <Select
-            id="Driver-select"
-            value={Driver}
-            label="Driver"
+            id="Vehicle-select"
+            value={vehicle}
+            label="Vehicle"
             onChange={handleChange}
             sx={{
               display: 'flex',
@@ -59,7 +59,7 @@ const PageHeader = () => {
               borderRadius: 4,
             }}
             inputProps={{
-              label: 'Driver',
+              label: 'Vehicle',
               disableUnderline: true,
             }}
           >
@@ -70,7 +70,7 @@ const PageHeader = () => {
         </FormControl>
         <TextField
           id="search"
-          placeholder="Search Driver"
+          placeholder="Search Vehicle"
           variant="standard"
           sx={{
             display: 'flex',
@@ -104,7 +104,12 @@ const PageHeader = () => {
         }}
       >
         <HeaderButton text={'Export'} onClick={onClickPermit} />
-        <HeaderButton text={'Reset'} onClick={onClickPermit} />
+        <AddModalButton
+          text={'Add Vehicle'}
+          onClick={() => {
+            navigate('/addVehicle');
+          }}
+        />
       </Box>
     </Box>
   );
