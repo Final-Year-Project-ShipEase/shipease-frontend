@@ -24,7 +24,7 @@ const SignInPage = () => {
   };
 
   const handleSignIn = () => {
-    navigate('admin/dashboard');
+    navigate('/admin/dashboard');
   };
 
   return (
@@ -78,7 +78,7 @@ const SignInPage = () => {
                 Please enter your details!
               </h5>
               <h2 style={{ marginTop: -15, fontSize: '170%' }}>
-                <strong>Sign In</strong>
+                <strong>Admin Panel</strong>
               </h2>
               <div name="username">
                 <label
