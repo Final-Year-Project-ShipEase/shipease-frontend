@@ -99,7 +99,7 @@ const Sidebar = ({ leftSpan }) => {
         <CustomButton
           item={{
             name: 'Log out',
-            link: '/admin/login',
+            link: '/dashboard',
             icon: (
               <PowerSettingsNewOutlinedIcon
                 style={{ color: theme.palette.buttonSidebar.ColorActive }}

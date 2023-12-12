@@ -2,6 +2,8 @@ import { red } from '@material-ui/core/colors';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useTheme } from '@mui/material';
 import React, { useState } from 'react';
+import UseAdminAuth from '../../auth/adminAuth';
+import { useNavigate } from 'react-router-dom';
 
 const SignInPage = () => {
   const [name, setName] = useState('');
@@ -10,6 +12,8 @@ const SignInPage = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const theme = useTheme();
   const [message, setMessage] = useState(''); // new state variable for the message
+  const { login, loading } = UseAdminAuth();
+  const navigate = useNavigate();
 
   const handlePasswordVisibility = (event) => {
     setShowPassword(!showPassword);
@@ -20,7 +24,7 @@ const SignInPage = () => {
   };
 
   const handleSignIn = () => {
-    console.log('Name: ', name);
+    navigate('admin/dashboard');
   };
 
   return (

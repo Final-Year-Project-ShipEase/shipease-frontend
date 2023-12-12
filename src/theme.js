@@ -1,10 +1,24 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
-const COLORS = ['red', '#00668C', '#FF8C00', '#FFD700', '#36A2EB', '#FF6384'];
+const COLORS = [
+  '#FF0000',
+  '#00668C',
+  '#FF8C00',
+  '#FFD700',
+  '#36A2EB',
+  '#FF6384',
+];
 
 const theme = createTheme({
   palette: {
-    pieChart: COLORS,
+    pieChart: [
+      '#3ba1c5',
+      '#00668C',
+      '#66b6d2',
+      '#92cbdf',
+      '#a8d5e5',
+      '#1a6985',
+    ],
     primary: {
       main: '#00668C',
       text: '#fff',
@@ -13,10 +27,10 @@ const theme = createTheme({
       color1: '#00668C33',
       blackColor: 'Black',
       white: 'white',
-      black: 'black',
+      blacl: 'black',
     },
     secondary: {
-      main: '#60B478',
+      main: '#71C4EF',
       hover: '#509664',
     },
     buttons: {
@@ -29,8 +43,6 @@ const theme = createTheme({
       boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
       navHover: '#F5F5F5',
       addModal: '#00668C',
-      cancel: '#71C4EF',
-      approve: '#00668C',
     },
     shadows: {
       customButton1: `0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(103, 110, 118, 0.16), 0 2px 5px 0 rgba(103, 110, 118, 0.08)`,
@@ -38,7 +50,7 @@ const theme = createTheme({
     table: {
       header: '#00668C',
       row: '#FFFFFF',
-      rowHover: '#60B478',
+      rowHover: '#71C4EF',
       border: '#000000',
     },
     background: {
@@ -74,7 +86,7 @@ const theme = createTheme({
   },
   typography: {
     allVariants: {
-      fontFamily: 'Barlow',
+      fontfamily: 'LemonMilk',
       color: '#2C2C2C',
     },
     b2: {
@@ -101,13 +113,13 @@ const theme = createTheme({
       fontSize: '18px',
       fontWeight: 600,
       color: '#FFFFFF',
-      fontFamily: 'Lato',
+      fontfamily: 'LemonMilk',
     },
     tableRow: {
       fontSize: '14px',
       fontWeight: 500,
       color: '#000000',
-      fontFamily: 'Lato',
+      fontfamily: 'LemonMilk',
     },
   },
 });

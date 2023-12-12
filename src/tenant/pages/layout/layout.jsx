@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../../components/navbar/navbar';
 import Sidebar from '../../components/sidebar/sidebar';
 
-const Layout = () => {
+const TenantLayout = () => {
   const theme = useTheme();
   const leftSpan = 1.5;
   const rigthSpan = 12 - leftSpan;
@@ -56,4 +56,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default TenantLayout;

@@ -40,7 +40,7 @@ const Order = () => {
               cy="50%"
               innerRadius={30}
               outerRadius={60}
-              fill={theme.palette.primary.color}
+              fill={theme.palette.pieChart.COLORS}
               paddingAngle={5}
               dataKey="orders"
             >
@@ -59,7 +59,6 @@ const Order = () => {
           </PieChart>
         </ResponsiveContainer>
       </CardContent>
-
       <CardContent style={{ textAlign: 'center' }}>
         <div
           style={{
