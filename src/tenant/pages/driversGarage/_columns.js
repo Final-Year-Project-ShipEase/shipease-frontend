@@ -14,14 +14,14 @@ export const DriverColumns = [
     disablePadding: false,
   },
   {
-    id: 'LICENSEE',
-    label: 'License No',
+    id: 'cnic',
+    label: 'Owner CNIC',
     width: '25%',
     numeric: false,
     disablePadding: false,
   },
   {
-    id: 'TrackerNo',
+    id: 'trackerNo',
     label: 'Tracker No',
     width: '25%',
     numeric: false,

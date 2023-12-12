@@ -15,29 +15,29 @@ const generateDummyData = () => {
 
 export const VehicleColumns = [
   {
-    id: 'vehicleNo',
-    label: 'Vehicle No',
-    width: '30%',
-    numeric: false,
-    disablePadding: false,
-  },
-  {
-    id: 'type',
-    label: 'Type',
+    id: 'id',
+    label: 'Vehicle ID',
     width: '20%',
     numeric: false,
     disablePadding: false,
   },
   {
-    id: 'lastApproved',
-    label: 'Last Approved',
-    width: '25%',
+    id: 'regNo',
+    label: 'Reg No',
+    width: '30%',
     numeric: false,
     disablePadding: false,
   },
   {
-    id: 'actions',
-    label: 'Action',
+    id: 'location',
+    label: 'City',
+    width: '20%',
+    numeric: false,
+    disablePadding: false,
+  },
+  {
+    id: 'status',
+    label: 'Status',
     width: '20%',
     numeric: false,
     disablePadding: false,

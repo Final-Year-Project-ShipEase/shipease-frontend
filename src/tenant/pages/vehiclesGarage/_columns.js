@@ -1,4 +1,4 @@
-export const DriverColumns = [
+export const VehicleColumns = [
   {
     id: 'type',
     label: 'Type',

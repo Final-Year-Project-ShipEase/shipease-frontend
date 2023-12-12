@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
@@ -16,10 +16,12 @@ import {
   DriverColumns,
   dummyDriverData,
 } from './driverDetailsComponent/_columns';
+import { useParams } from 'react-router-dom';
+import { useVehicleService } from '../../../services/vehicleServices';
+import useDriverService from '../../services/driverService';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -46,6 +48,32 @@ function a11yProps(index) {
 
 const TabComponent = () => {
   const [value, setValue] = useState(0);
+  const { id } = useParams();
+  const { getVehicleByTenantId } = useVehicleService();
+  const { getDriverByTenantId } = useDriverService();
+  const [vehicleList, setVehicleList] = useState();
+  const [driverList, setDriverList] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getVehicleByTenantId(id);
+        setVehicleList(response.tenants);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const fetchDriverData = async () => {
+      try {
+        const response = await getDriverByTenantId(id);
+        setDriverList(response.tenants);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDriverData();
+    fetchData();
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -79,10 +107,10 @@ const TabComponent = () => {
         <TableData columns={BookingColumns} rows={dummyBookingData} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <TableData columns={VehicleColumns} rows={dummyVehicleData} />
+        <TableData columns={VehicleColumns} rows={vehicleList} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <TableData columns={DriverColumns} rows={dummyDriverData} />
+        <TableData columns={DriverColumns} rows={driverList} />
       </CustomTabPanel>
     </Box>
   );
