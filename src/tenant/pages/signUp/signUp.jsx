@@ -217,6 +217,29 @@ const SignUpPage = () => {
                     value={name}
                     placeholder="Password"
                     />
+                    {showPassword ? (
+                        <VisibilityOff
+                        style={{
+                            position: 'absolute',
+                            top: '50%',
+                            right: '10px',
+                            transform: 'translateY(-50%)',
+                            cursor: 'pointer',
+                        }}
+                        onClick={handlePasswordVisibility}
+                        />
+                    ) : (
+                        <Visibility
+                        style={{
+                            position: 'absolute',
+                            top: '50%',
+                            right: '10px',
+                            transform: 'translateY(-50%)',
+                            cursor: 'pointer',
+                        }}
+                        onClick={handlePasswordVisibility}
+                        />
+                    )}
                     </div>
                 </div>
                 </div>
@@ -255,36 +278,6 @@ const SignUpPage = () => {
                     />
                 </div>
                 </div>
-
-                <div name="forgot" style={{ textAlign: 'right', marginTop: '16px' }}>
-                <a
-                    href="/forgot-password"
-                    style={{
-                    color: theme.palette.secondary.main,
-                    fontSize: '88%',
-                    }}
-                >
-                    Forgot Password?
-                </a>
-                </div>
-
-                <div name="checkbox">
-                  <label
-                    style={{
-                      color: theme.palette.secondary.main,
-                      fontSize: '13px',
-                      marginLeft: '1%',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={acceptTerms}
-                      onChange={handleAcceptTerms}
-                    />
-                    I accept the Terms and Conditions
-                  </label>
-                </div>
   
                 <div name="button" style={{ width: '100%', height: '40%' }}>
                   <button
@@ -320,12 +313,12 @@ const SignUpPage = () => {
                         theme.palette.secondary.main)
                     }
                   >
-                    Sign In
+                    Create Account
                   </button>
                 </div>
                
               <div name="forgot" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
-    <h4 style={{marginRight: '8px' }}>Do you have an account?</h4>
+    <h4 style={{marginRight: '8px' }}>Already have an account?</h4>
     <a
       href="/forgot-password"
       style={{
@@ -334,7 +327,7 @@ const SignUpPage = () => {
         textDecoration: 'none', // Optional: Remove underline from the link
       }}
     >
-      Create account
+      Log In
     </a>
                 </div>
               </form>
