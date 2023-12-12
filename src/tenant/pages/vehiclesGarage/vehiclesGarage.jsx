@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
-import DriversDetails from './recentBookingComponent/VehiclesDetails.jsx';
+import VehicleDetails from './recentBookingComponent/VehiclesDetails.jsx';
 import TableData from './components/table/table';
 import { DriverColumns } from './_columns.js';
 import { useVehicleService } from '../../../services/vehicleServices.jsx';
@@ -11,11 +11,12 @@ const VehiclesGarage = () => {
   const { getVehicleByTenantId } = useVehicleService();
   const [vehicleList, setVehicleList] = useState([]);
   const [Loading, setLoading] = useState(true);
+  const [tenantId, setTenantId] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getVehicleByTenantId(id);
+        const response = await getVehicleByTenantId(1);
         setVehicleList(response.tenants);
         setLoading(false);
       } catch (error) {
@@ -43,11 +44,15 @@ const VehiclesGarage = () => {
           boxShadow: '0px 2px 14px rgba(0, 0, 0, 1)',
         }}
       >
-        <DriversDetails tenantId={id} />
+        <VehicleDetails tenantId={tenantId} />
       </Box>
       <Box sx={{ mt: '30px', borderTop: '1px dashed black' }}>
         <Box sx={{ mt: '-10px' }}>
-          <TableData columns={DriverColumns} rows={vehicleList} />
+          <TableData
+            columns={DriverColumns}
+            rows={vehicleList}
+            setTenantId={setTenantId}
+          />
         </Box>
       </Box>
     </Box>

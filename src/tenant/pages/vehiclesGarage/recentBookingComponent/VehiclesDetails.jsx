@@ -4,17 +4,33 @@ import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import busImage from '../../../resources/image 2.png';
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../../utils/spinner';
-import { formatTimestamp } from '../../../../utils/timestamp';
-import PageHeader from '../../../../admin/pages/driversApproval/pageHeader';
 import AddIcon from '@mui/icons-material/Add';
+import PageHeader from '../pageHeader';
+import { useVehicleService } from '../../../../services/vehicleServices';
+
 const VehiclesDetails = ({ tenantId }) => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const [tenant, setTenant] = useState([]);
+  const [vehicle, setVehicle] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { getVehicle } = useVehicleService();
+
+  useEffect(() => {
+    const fetchVehicle = async () => {
+      try {
+        setLoading(true);
+        const response = await getVehicle(tenantId);
+        setVehicle(response);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    };
+    fetchVehicle();
+  }, [tenantId]);
 
   return (
     <Card
@@ -40,30 +56,7 @@ const VehiclesDetails = ({ tenantId }) => {
       >
         <PageHeader />
       </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          padding: 1,
-          marginTop: '20px',
-        }}
-        onClick={() => {
-          navigate('/manageTenants');
-        }}
-      >
-        <ArrowBackRoundedIcon
-          sx={{
-            color: theme.palette.primary.main,
-            cursor: 'pointer',
-          }}
-        />
-        <Button sx={{ color: theme.palette.buttons.main, fontSize: '12px' }}>
-          Back to Tenant List
-        </Button>
-      </Box>
-
-      <Grid container spacing={2} sx={{ marginLeft: '55px' }}>
+      <Grid container spacing={2} sx={{ mt: '2%', ml: '5%' }}>
         <Grid item xs={3}>
           <img
             style={{ borderRadius: '5px', height: '50%' }}
@@ -90,7 +83,7 @@ const VehiclesDetails = ({ tenantId }) => {
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
               >
-                {tenant?.name || 'Trucker Trailer'}
+                Registration No: {vehicle?.regNo || 'Trucker Trailer'}
               </Typography>
             </Grid>
           </Grid>
@@ -116,20 +109,25 @@ const VehiclesDetails = ({ tenantId }) => {
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
               >
-                ID: {tenant?.phoneNo || 'D-321'}
+                ID: {vehicle?.id || 'D-321'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                Register No:{' '}
-                {tenant?.cities
-                  ? tenant?.cities.map((city) => city).join(', ')
+                Types:{' '}
+                {vehicle?.type
+                  ? vehicle?.type.map((city) => city).join(', ')
                   : 'R-321'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                Tracker No: {tenant?.id || 'T-321'}
+                Tracker No: {vehicle?.trackerNo || 'T-321'}
+              </Typography>
+              <Typography
+                sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
+              >
+                Location: {vehicle?.location || 'NewYork'}
               </Typography>
             </Grid>
             <Grid
@@ -146,7 +144,7 @@ const VehiclesDetails = ({ tenantId }) => {
                 <Typography
                   sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
                 >
-                  Owner Cnic :{tenant?.status || '333-0285351821'}
+                  Owner Cnic :{vehicle?.ownerCnic || '333-0285351821'}
                 </Typography>
                 <Typography
                   sx={{
