@@ -45,7 +45,7 @@ const TenantDetails = ({ tenantId }) => {
           padding: 1,
         }}
         onClick={() => {
-          navigate('/manageTenants');
+          navigate('/admin/manageTenants');
         }}
       >
         <ArrowBackRoundedIcon
