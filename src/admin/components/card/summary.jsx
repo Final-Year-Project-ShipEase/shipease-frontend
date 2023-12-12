@@ -1,10 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import SubCard from './subCard';
+import useTenantService from '../../services/tenantService';
+import { useNavigate } from 'react-router-dom';
+import useDriverApprovalService from '../../services/driverApprovalServices';
+import useVehicleApprovalService from '../../services/vehicleApprovalService';
 
 const SummaryCard = () => {
+  const { getTenants } = useTenantService();
+  const [tenants, setTenants] = useState([]);
+  const { getDriverApprovalList } = useDriverApprovalService();
+  const [driverApprovals, setDriverApprovals] = useState([]);
+  const { getVehiclesApproval } = useVehicleApprovalService();
+  const [vehicleApprovals, setVehicleApprovals] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getTenantData = async () => {
+      try {
+        const tenants = await getTenants();
+        setTenants(tenants.length);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getDriverApprovalData = async () => {
+      try {
+        const driverApprovals = await getDriverApprovalList();
+        setDriverApprovals(driverApprovals.length);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getVehicleApprovalData = async () => {
+      try {
+        const vehicleApprovals = await getVehiclesApproval();
+        setVehicleApprovals(vehicleApprovals.length);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getVehicleApprovalData();
+    getDriverApprovalData();
+    getTenantData();
+  }, []);
+
   return (
     <Card
       sx={{
@@ -28,7 +70,7 @@ const SummaryCard = () => {
           gutterBottom
           sx={{ textAlign: 'center', marginBottom: '5px', color: 'black' }}
         >
-          Performance Summary, This Month
+          Performance Summary,
         </Typography>
       </CardContent>
 
@@ -49,8 +91,20 @@ const SummaryCard = () => {
             width: '100%',
           }}
         >
-          <SubCard content="Tenant's Registered This Month" count={5} />
-          <SubCard content="User's Registered This Month" count={5} />
+          <SubCard
+            content="Tenant Registered"
+            count={tenants || 5}
+            onClick={() => {
+              navigate('/admin/manageTenants');
+            }}
+          />
+          <SubCard
+            content="Drivers Approvals"
+            count={driverApprovals || 5}
+            onClick={() => {
+              navigate('/admin/driversApproval');
+            }}
+          />
         </div>
       </CardContent>
 
@@ -71,8 +125,14 @@ const SummaryCard = () => {
             width: '100%',
           }}
         >
-          <SubCard content="Driver's Registered This Month" count={10} />
-          <SubCard content="Vehicle's Registered This Month" count={15} />
+          <SubCard
+            content="Driver's Approvals"
+            count={driverApprovals || 10}
+            onClick={() => {
+              navigate('/admin/driversApproval');
+            }}
+          />
+          <SubCard content="User's Registered" count={15} />
         </div>
       </CardContent>
     </Card>

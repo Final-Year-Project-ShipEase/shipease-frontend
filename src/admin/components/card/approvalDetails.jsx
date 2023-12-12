@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-const ApprovalDetail = () => {
+const ApprovalDetail = ({ details }) => {
   const theme = useTheme();
 
   return (
@@ -52,7 +52,7 @@ const ApprovalDetail = () => {
               border: 'none ',
             }}
           >
-            19-nov-2022
+            {details?.date || '19-nov-2022'}
           </button>
           <button
             style={{
@@ -65,7 +65,7 @@ const ApprovalDetail = () => {
               border: 'none',
             }}
           >
-            Report
+            View
           </button>
         </div>
 
@@ -93,7 +93,7 @@ const ApprovalDetail = () => {
               fontSize: '14px',
             }}
           >
-            B-31023
+            {details?.regNo || 'B-31023'}
           </Typography>
         </div>
 
@@ -107,7 +107,8 @@ const ApprovalDetail = () => {
           <Typography
             sx={{ color: theme.palette.buttons.main, fontSize: '14px' }}
           >
-            ThunderBlaze
+            {details?.cities.map((city) => city.name).join(', ') ||
+              'ThunderBlaze'}
           </Typography>
           <Typography
             sx={{ color: theme.palette.buttons.main, fontSize: '14px' }}
