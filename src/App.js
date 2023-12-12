@@ -10,8 +10,12 @@ import AdminDashboard from './admin/pages/dashboard/dashboard';
 import { SnackbarProvider } from './utils/snackbarContextProvider';
 import ManageTenantList from './admin/pages/manageTenantList/manageTenant';
 import TenantDashboard from './tenant/pages/tenantDashboard/tenantDashboard';
+import TenantSignIn from './tenant/pages/signIn/signIn';
+import AdminSignIn from './admin/pages/signin/signin';
+import TenantSignUp from './tenant/pages/signUp/signUp';
 import DriversGarage from './tenant/pages/driversGarage/driversGarage';
 import { Dashboard } from '@mui/icons-material';
+
 
 const App = () => {
   return (
@@ -21,6 +25,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route path="/" element={<AdminDashboard />} />
+              <Route path="adminSignin" element={<AdminSignIn />} />
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="managetenants" element={<ManageTenantList />} />
               <Route path="managetenants/:id" element={<ManageTenants />} />
@@ -28,6 +33,8 @@ const App = () => {
               <Route path="vehiclesapproval" element={<VehiclesApproval />} />
               <Route path="permissions" element={<Permissions />} />
               <Route path="announcements" element={<Announcements />} />
+              <Route path="TenantSignin" element={<TenantSignIn />} />
+              <Route path="TenantSignup" element={<TenantSignUp />} />
               <Route path="tenantDashboard" element={<TenantDashboard />} />
               <Route path="driversGarage" element={<DriversGarage />} />
             </Route>
