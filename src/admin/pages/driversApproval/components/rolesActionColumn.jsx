@@ -32,14 +32,15 @@ const DriverApprovalActionColumn = ({
   const [isLockClicked, setIsLockClicked] = useState(false);
   //const { delRole } = useRBACService();
   const theme = useTheme();
-  const { deleteDriverApproval } = useDriverApprovalService();
+  const { deleteDriverApproval, approveDriver, rejectDriver } =
+    useDriverApprovalService();
 
   const handleLockClick = () => {
     setIsLockClicked(!isLockClicked);
   };
 
   const handleEdit = () => {
-    setDriverId(value);
+    setDriverId(value.driver_id);
     setModalOpen(true);
   };
 
@@ -51,14 +52,18 @@ const DriverApprovalActionColumn = ({
     deleteDriverApproval(value.id);
   };
 
-  const handleApprove = () => {
+  const handleApprove = async () => {
     //appDriver(value);
     boxType('approved');
+    await approveDriver(value.id);
+    handleDelete();
   };
 
-  const handleRemove = () => {
+  const handleRemove = async () => {
     //remDriver(value);
     boxType('removed');
+    await rejectDriver(value.id);
+    handleDelete();
   };
 
   return (

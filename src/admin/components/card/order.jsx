@@ -23,10 +23,9 @@ const Order = () => {
         <Typography sx={{ fontWeight: 'bold', marginBottom: '10px' }}>
           Total Orders
         </Typography>
-        <ResponsiveContainer width="100%" height={180}>
+        <ResponsiveContainer width="100%" height={150}>
           <PieChart
             width={180}
-            height={180}
             margin={{
               top: 0,
               right: 0,

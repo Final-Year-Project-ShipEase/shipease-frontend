@@ -3,9 +3,11 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
-const ApprovalDetail = () => {
+const ApprovalDetail = ({ details }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <Card
@@ -52,7 +54,7 @@ const ApprovalDetail = () => {
               border: 'none ',
             }}
           >
-            19-nov-2022
+            {details?.date || '19-nov-2022'}
           </button>
           <button
             style={{
@@ -63,9 +65,14 @@ const ApprovalDetail = () => {
               borderRadius: '20px',
               fontSize: '14px',
               border: 'none',
+              cursor: 'pointer',
+              '&:hover': {
+                backgroundColor: theme.palette.primary.main,
+              },
             }}
+            onClick={() => navigate('/admin/vehiclesapproval')}
           >
-            Report
+            View
           </button>
         </div>
 
@@ -93,7 +100,7 @@ const ApprovalDetail = () => {
               fontSize: '14px',
             }}
           >
-            B-31023
+            {details?.regNo || 'B-31023'}
           </Typography>
         </div>
 
@@ -107,7 +114,8 @@ const ApprovalDetail = () => {
           <Typography
             sx={{ color: theme.palette.buttons.main, fontSize: '14px' }}
           >
-            ThunderBlaze
+            {details?.cities.map((city) => city.name).join(', ') ||
+              'ThunderBlaze'}
           </Typography>
           <Typography
             sx={{ color: theme.palette.buttons.main, fontSize: '14px' }}

@@ -11,6 +11,7 @@ import {
   Legend,
   Tooltip,
 } from 'recharts';
+import { useNavigate } from 'react-router-dom';
 
 const topPerformingTenants = [
   { name: 'Tenant 1', value: 400 },
@@ -38,6 +39,7 @@ const CustomTooltip = ({ active, payload }) => {
 
 const TopTenant = ({ tenantName, totalRevenue }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
   const COLORS = [theme.palette.primary.main, theme.palette.secondary.main];
 
   return (
@@ -111,6 +113,9 @@ const TopTenant = ({ tenantName, totalRevenue }) => {
                   padding: '10px 20px',
                   cursor: 'pointer',
                   border: 'none',
+                }}
+                onClick={() => {
+                  navigate('/admin/manageTenants');
                 }}
               >
                 Tenant Details

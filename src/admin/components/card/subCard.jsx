@@ -8,7 +8,7 @@ import dummyTenantData from './dummyTenantData';
 import { useTheme } from '@mui/material/styles';
 import { LineChart, Line, Tooltip, ResponsiveContainer } from 'recharts';
 
-const SubCard = ({ content, count }) => {
+const SubCard = ({ content, count, onClick }) => {
   const [isIncreasing, setIsIncreasing] = useState(true); // Initial state
 
   const theme = useTheme();
@@ -23,6 +23,7 @@ const SubCard = ({ content, count }) => {
         marginTop: '-30px',
         marginRight: '10px',
       }}
+      onClick={onClick}
     >
       <CardContent
         style={{
@@ -103,10 +104,8 @@ const SubCard = ({ content, count }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Typography
-            sx={{ width: 70, height: 25, fontWeight: 'bold', fontSize: '8px' }}
-          >
-            Tenant's Register This Month
+          <Typography sx={{ fontWeight: 'bold', fontSize: '12px' }}>
+            {content}
           </Typography>
         </div>
 

@@ -51,5 +51,4 @@ export const DriverColumns = [
   },
 ];
 
-
 export const dummyDriverData = generateDummyData();
