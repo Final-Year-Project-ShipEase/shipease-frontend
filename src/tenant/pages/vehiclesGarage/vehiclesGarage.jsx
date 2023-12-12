@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import VehicleDetails from './recentBookingComponent/VehiclesDetails.jsx';
 import TableData from './components/table/table';
-import { DriverColumns } from './_columns.js';
+import { VehicleColumns } from './_columns.js';
 import { useVehicleService } from '../../../services/vehicleServices.jsx';
 import Spinner from '../../../utils/spinner.jsx';
 
@@ -49,7 +49,7 @@ const VehiclesGarage = () => {
       <Box sx={{ mt: '30px', borderTop: '1px dashed black' }}>
         <Box sx={{ mt: '-10px' }}>
           <TableData
-            columns={DriverColumns}
+            columns={VehicleColumns}
             rows={vehicleList}
             setTenantId={setTenantId}
           />
