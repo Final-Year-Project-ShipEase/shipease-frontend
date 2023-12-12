@@ -3,9 +3,11 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 const ApprovalDetail = ({ details }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <Card
@@ -63,7 +65,12 @@ const ApprovalDetail = ({ details }) => {
               borderRadius: '20px',
               fontSize: '14px',
               border: 'none',
+              cursor: 'pointer',
+              '&:hover': {
+                backgroundColor: theme.palette.primary.main,
+              },
             }}
+            onClick={() => navigate('/admin/vehiclesapproval')}
           >
             View
           </button>

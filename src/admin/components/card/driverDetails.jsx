@@ -4,9 +4,11 @@ import CardContent from '@mui/material/CardContent';
 import { Typography } from '@mui/material';
 import image from '../../../icons/image.png';
 import { useTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
-const DriverDetail = () => {
+const DriverDetail = ({ content }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <Card
@@ -54,7 +56,7 @@ const DriverDetail = () => {
               border: 'none ',
             }}
           >
-            19-nov-2022
+            {content?.date || '19-nov-2022'}
           </button>
           <button
             style={{
@@ -65,6 +67,14 @@ const DriverDetail = () => {
               borderRadius: '20px',
               fontSize: '14px',
               border: 'none',
+              cursor: 'pointer',
+              '&:hover': {
+                backgroundColor: theme.palette.primary.main,
+              },
+            }}
+            onClick={() => {
+              navigate('/admin/driversapproval');
+              //content?.id; // Pass this to modal
             }}
           >
             Report
@@ -125,13 +135,13 @@ const DriverDetail = () => {
                 marginLeft: '5px',
               }}
             >
-              Abdullah Minhas
+              {content?.name || 'Abdullah Minhas'}
             </Typography>
           </div>
           <Typography
             sx={{ color: theme.palette.buttons.main, fontSize: '14px' }}
           >
-            0306 7566528
+            {content?.phoneNo || '0306 7566528'}
           </Typography>
         </div>
 
