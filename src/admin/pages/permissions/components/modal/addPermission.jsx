@@ -10,6 +10,7 @@ import {
   IconButton,
   TextField,
   Typography,
+  useTheme,
 } from '@mui/material';
 import {
   AddCircleOutline as AddIcon,
@@ -21,6 +22,7 @@ const AddPermissionModal = ({ open, handleClose, onSubmit }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   //const { addPermission } = useRBACService();
+  const theme = useTheme();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -55,7 +57,11 @@ const AddPermissionModal = ({ open, handleClose, onSubmit }) => {
             justifyContent="space-between"
           >
             <IconButton
-              sx={{ p: 1, backgroundColor: '#D1FADF', color: 'green' }}
+              sx={{
+                p: 1,
+                backgroundColor: theme.palette.buttons.approve,
+                color: theme.palette.buttons.white,
+              }}
             >
               <AddIcon />
             </IconButton>
@@ -106,7 +112,10 @@ const AddPermissionModal = ({ open, handleClose, onSubmit }) => {
                   setIsConfirmationDialogOpen(true);
                   //  addPermission(formData.name);
                 }}
-                color="success"
+                sx={{
+                  color: theme.palette.primary.white,
+                  backgroundColor: theme.palette.buttons.approve,
+                }}
                 variant="contained"
               >
                 Save

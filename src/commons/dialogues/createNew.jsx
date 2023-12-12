@@ -8,6 +8,7 @@ import {
   DialogTitle,
   IconButton,
   Typography,
+  useTheme,
 } from '@mui/material';
 import {
   AddCircleOutline as AddIcon,
@@ -15,12 +16,18 @@ import {
 } from '@mui/icons-material';
 
 const ConfirmationDialog = ({ open, onClose, onConfirm, name }) => {
+  const theme = useTheme();
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <Box display="flex" alignItems="center">
-            <IconButton style={{ backgroundColor: '#D1FADF', color: 'green' }}>
+            <IconButton
+              style={{
+                backgroundColor: theme.palette.buttons.approve,
+                color: 'green',
+              }}
+            >
               <AddIcon />
             </IconButton>
             <Box m={2}>
@@ -46,7 +53,14 @@ const ConfirmationDialog = ({ open, onClose, onConfirm, name }) => {
           <Button onClick={onClose} sx={{ color: 'black' }}>
             Close
           </Button>
-          <Button onClick={onConfirm} color="success" variant="contained">
+          <Button
+            onClick={onConfirm}
+            sx={{
+              color: theme.palette.primary.white,
+              backgroundColor: theme.palette.buttons.approve,
+            }}
+            variant="contained"
+          >
             Confirm
           </Button>
         </Box>

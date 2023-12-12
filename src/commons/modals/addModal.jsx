@@ -61,7 +61,11 @@ const AddResourceModal = ({ open, handleClose, onSubmit }) => {
             justifyContent="space-between"
           >
             <IconButton
-              sx={{ p: 1, backgroundColor: '#D1FADF', color: 'green' }}
+              sx={{
+                p: 1,
+                backgroundColor: theme.palette.buttons.approve,
+                color: theme.palette.buttons.white,
+              }}
             >
               <AddIcon />
             </IconButton>
@@ -108,7 +112,10 @@ const AddResourceModal = ({ open, handleClose, onSubmit }) => {
               <Button
                 fullWidth
                 onClick={() => setIsConfirmationDialogOpen(true)}
-                color="success"
+                sx={{
+                  color: theme.palette.primary.white,
+                  backgroundColor: theme.palette.buttons.approve,
+                }}
                 variant="contained"
               >
                 Save
