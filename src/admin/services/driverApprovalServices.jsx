@@ -43,6 +43,11 @@ export function useDriverApprovalService() {
     return response.data;
   };
 
+  const getRejectedApproval = async () => {
+    const response = await axiosInstance.get('/driverApprovals/rejected');
+    return response.data;
+  };
+
   return {
     getDriverApprovalList,
     getDriverApproval,
@@ -52,6 +57,7 @@ export function useDriverApprovalService() {
     getDriverApprovalByTenantId,
     approveDriver,
     rejectDriver,
+    getRejectedApproval,
   };
 }
 

@@ -6,6 +6,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+import useVehicleApprovalService from '../../../services/vehicleApprovalService';
 
 const CustomIconButton = ({ children, onClick }) => {
   return (
@@ -26,6 +27,7 @@ const VehicleActionColumn = ({ value, boxType, setTenantId, setModalOpen }) => {
   const [isLockClicked, setIsLockClicked] = useState(false);
   const theme = useTheme();
   //const { delRole } = useRBACService();
+  const { deleteVehicleApproval } = useVehicleApprovalService();
 
   const handleLockClick = () => {
     setIsLockClicked(!isLockClicked);
@@ -40,13 +42,16 @@ const VehicleActionColumn = ({ value, boxType, setTenantId, setModalOpen }) => {
     console.log('copy');
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     //delRole(value);
+    await deleteVehicleApproval(value);
   };
 
-  const handleApprove = () => {
+  const handleApprove = async () => {
     //appDriver(value);
     boxType('approved');
+    //approveDriver(value.id);
+    await deleteVehicleApproval(value);
   };
 
   const handleRemove = () => {

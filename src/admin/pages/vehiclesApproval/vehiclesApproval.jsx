@@ -7,7 +7,7 @@ import useVehicleApprovalService from '../../services/vehicleApprovalService.jsx
 import Spinner from '../../../utils/spinner';
 
 const VehicleApproval = () => {
-  const { getVehiclesApproval } = useVehicleApprovalService();
+  const { getRejectedApproval } = useVehicleApprovalService();
   const [vehiclesApproval, setVehiclesApproval] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -15,7 +15,7 @@ const VehicleApproval = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getVehiclesApproval();
+        const data = await getRejectedApproval();
         setVehiclesApproval(data);
         setLoading(false);
       } catch (error) {
@@ -23,7 +23,8 @@ const VehicleApproval = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [VehicleApproval]);
+
   return (
     <Box
       sx={{

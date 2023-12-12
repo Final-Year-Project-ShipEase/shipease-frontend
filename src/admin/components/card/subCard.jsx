@@ -104,9 +104,7 @@ const SubCard = ({ content, count, onClick }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Typography
-            sx={{ fontWeight: 'bold', fontSize: '12px' }}
-          >
+          <Typography sx={{ fontWeight: 'bold', fontSize: '12px' }}>
             {content}
           </Typography>
         </div>

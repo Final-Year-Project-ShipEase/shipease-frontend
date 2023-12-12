@@ -28,12 +28,18 @@ export function useVehicleApprovalService() {
     return response.data;
   };
 
+  const getRejectedApproval = async () => {
+    const response = await axiosInstance.get('/vehicleApprovals/rejected');
+    return response.data;
+  };
+
   return {
     getVehiclesApproval,
     getVehicleApproval,
     addVehicleApproval,
     updateVehicleApproval,
     deleteVehicleApproval,
+    getRejectedApproval,
   };
 }
 
