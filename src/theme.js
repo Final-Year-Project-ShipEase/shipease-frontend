@@ -27,7 +27,7 @@ const theme = createTheme({
       color1: '#00668C33',
       blackColor: 'Black',
       white: 'white',
-      blacl: 'black',
+      black: 'black',
     },
     secondary: {
       main: '#71C4EF',

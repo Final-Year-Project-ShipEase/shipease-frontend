@@ -104,7 +104,12 @@ const PageHeader = () => {
         }}
       >
         <HeaderButton text={'Export'} onClick={onClickPermit} />
-        <HeaderButton text={'Reset'} onClick={onClickPermit} />
+        <AddModalButton
+          text={'Add Driver'}
+          onClick={() => {
+            navigate('/addDriver');
+          }}
+        />
       </Box>
     </Box>
   );

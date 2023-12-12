@@ -8,9 +8,9 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../../utils/spinner';
 import { formatTimestamp } from '../../../../utils/timestamp';
-import PageHeader from '../../../../admin/pages/driversApproval/pageHeader';
 import AddIcon from '@mui/icons-material/Add';
 import useDriverService from '../../../../admin/services/driverService';
+import PageHeader from '../pageHeader';
 
 const DriversDetails = ({ driverId }) => {
   const theme = useTheme();
@@ -58,30 +58,8 @@ const DriversDetails = ({ driverId }) => {
       >
         <PageHeader />
       </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          padding: 1,
-          marginTop: '20px',
-        }}
-        onClick={() => {
-          navigate('/managedrivers');
-        }}
-      >
-        <ArrowBackRoundedIcon
-          sx={{
-            color: theme.palette.primary.main,
-            cursor: 'pointer',
-          }}
-        />
-        <Button sx={{ color: theme.palette.buttons.main, fontSize: '12px' }}>
-          Back to driver List
-        </Button>
-      </Box>
 
-      <Grid container spacing={2} sx={{ marginLeft: '65px' }}>
+      <Grid container spacing={2} sx={{ marginLeft: '5%', mt: '2%' }}>
         <Grid item xs={3}>
           <img
             style={{ borderRadius: '5px', height: '100%' }}
@@ -126,17 +104,10 @@ const DriversDetails = ({ driverId }) => {
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
-              marginTop: '10px',
               marginLeft: '-140px',
             }}
           >
-            <Grid
-              item
-              xs={8}
-              sx={{
-                marginTop: '-20px',
-              }}
-            >
+            <Grid item xs={8} sx={{}}>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
               >
