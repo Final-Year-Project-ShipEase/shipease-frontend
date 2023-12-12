@@ -51,8 +51,8 @@ const App = () => {
                           path="vehiclesgarage"
                           element={<VehiclesGarage />}
                         />
-                        <Route path="*" element={<ErrorPage />}></Route>
                       </Route>
+                      <Route path="*" element={<ErrorPage />}></Route>
                     </Routes>
                   </>
                 }
@@ -93,9 +93,8 @@ const App = () => {
                           path="announcements"
                           element={<Announcements />}
                         /> */}
-                        <Route path="*" element={<ErrorPage />}></Route>
-                        <Route path="*" element={<ErrorPage />}></Route>
                       </Route>
+                      <Route path="*" element={<ErrorPage />}></Route>
                     </Routes>
                   </>
                 }

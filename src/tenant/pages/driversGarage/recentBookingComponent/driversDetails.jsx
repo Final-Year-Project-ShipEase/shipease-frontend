@@ -10,11 +10,29 @@ import Spinner from '../../../../utils/spinner';
 import { formatTimestamp } from '../../../../utils/timestamp';
 import PageHeader from '../../../../admin/pages/driversApproval/pageHeader';
 import AddIcon from '@mui/icons-material/Add';
-const DriversDetails = ({ tenantId }) => {
+import useDriverService from '../../../../admin/services/driverService';
+
+const DriversDetails = ({ driverId }) => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const [tenant, setTenant] = useState([]);
+  const [driver, setDriver] = useState({});
   const [loading, setLoading] = useState(false);
+  const { getDriver } = useDriverService();
+
+  useEffect(() => {
+    const fetchDriver = async () => {
+      try {
+        setLoading(true);
+        const response = await getDriver(driverId);
+        setDriver(response);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
+    };
+    fetchDriver();
+  }, [driverId]);
 
   return (
     <Card
@@ -49,7 +67,7 @@ const DriversDetails = ({ tenantId }) => {
           marginTop: '20px',
         }}
         onClick={() => {
-          navigate('/manageTenants');
+          navigate('/managedrivers');
         }}
       >
         <ArrowBackRoundedIcon
@@ -59,7 +77,7 @@ const DriversDetails = ({ tenantId }) => {
           }}
         />
         <Button sx={{ color: theme.palette.buttons.main, fontSize: '12px' }}>
-          Back to Tenant List
+          Back to driver List
         </Button>
       </Box>
 
@@ -86,17 +104,17 @@ const DriversDetails = ({ tenantId }) => {
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
               >
-                {tenant?.name || 'John Doe'}
+                {driver?.name || 'John Doe'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                @{tenant?.username || 'hello123'}
+                @{driver?.username || 'hello123'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                {tenant?.email || 'hello123@gmail.com'}
+                {driver?.email || 'hello123@gmail.com'}
               </Typography>
             </Grid>
           </Grid>
@@ -122,20 +140,20 @@ const DriversDetails = ({ tenantId }) => {
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
               >
-                Phone: {tenant?.phoneNo || '1234567890'}
+                Phone: {driver?.phoneNo || '1234567890'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
                 Language:{' '}
-                {tenant?.cities
-                  ? tenant?.cities.map((city) => city).join(', ')
+                {driver?.cities
+                  ? driver?.cities.map((city) => city).join(', ')
                   : 'English'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                Driver Id: {tenant?.id || '12345678'}
+                Driver Id: {driver?.id || '12345678'}
               </Typography>
             </Grid>
             <Grid
@@ -152,22 +170,22 @@ const DriversDetails = ({ tenantId }) => {
                 <Typography
                   sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
                 >
-                  Status :{tenant?.status || 'Active'}
+                  Status :{driver?.status || 'Active'}
                 </Typography>
                 <Typography
                   sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
                 >
                   Created At :
-                  {tenant?.createdAt
-                    ? formatTimestamp(tenant.createdAt)
+                  {driver?.createdAt
+                    ? formatTimestamp(driver.createdAt)
                     : '19/4/2023 01:23 PM EDT'}
                 </Typography>
                 <Typography
                   sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
                 >
                   Updated At :{' '}
-                  {tenant?.updatedAt
-                    ? formatTimestamp(tenant.updatedAt)
+                  {driver?.updatedAt
+                    ? formatTimestamp(driver.updatedAt)
                     : '19/4/2023 01:23 PM EDT'}
                 </Typography>
                 <Typography

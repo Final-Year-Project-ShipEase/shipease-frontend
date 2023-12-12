@@ -126,7 +126,7 @@ EnhancedTableHead.propTypes = {
   ).isRequired,
 };
 
-export default function TableData({ columns, rows }) {
+export default function TableData({ columns, rows, setDriverId }) {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('');
   const [page, setPage] = useState(0);
@@ -242,6 +242,7 @@ export default function TableData({ columns, rows }) {
                                 if (column.id !== 'actions') {
                                   handleOpen(row);
                                 }
+                                setDriverId(row.id);
                               }}
                             >
                               {column.id === 'actions' ? (
