@@ -77,7 +77,7 @@ const TenantSignInPage = () => {
                 Please enter your details!
               </h5>
               <h2 style={{ marginTop: -15, fontSize: '170%' }}>
-                <strong>Login Her</strong>
+                <strong>Login Here</strong>
               </h2>
               <div name="username">
                 <label
