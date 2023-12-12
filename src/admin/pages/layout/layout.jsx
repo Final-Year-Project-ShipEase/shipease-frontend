@@ -24,10 +24,12 @@ const Layout = () => {
       >
         <Navbar />
       </Box>
-      <Box sx={{
-        backgroundColor: theme.palette.page.main,
-        minHeight: '93vh',
-      }}>
+      <Box
+        sx={{
+          backgroundColor: theme.palette.page.main,
+          minHeight: '93vh',
+        }}
+      >
         <Grid container>
           <Grid
             item

@@ -10,13 +10,17 @@ import AdminDashboard from './admin/pages/dashboard/dashboard';
 import { SnackbarProvider } from './utils/snackbarContextProvider';
 import ManageTenantList from './admin/pages/manageTenantList/manageTenant';
 import TenantDashboard from './tenant/pages/tenantDashboard/tenantDashboard';
-import TenantSignIn from './tenant/pages/signIn/signIn';
-import AdminSignIn from './admin/pages/signin/signin';
-import TenantSignUp from './tenant/pages/signUp/signUp';
+import TenantLayout from './tenant/pages/layout/layout';
+import ErrorPage from './utils/errorPage404';
+import AdminNonLoginRoute from './admin/auth/nonProtectedRoutes';
+import AdminProtectedRoute from './admin/auth/protectedRoutes';
+import SignInPage from './admin/pages/signin/signin';
+import TenantProtectedRoute from './tenant/auth/protectedRoutes';
+import TenantNonLoginRoute from './tenant/auth/nonProtectedRoutes';
+import TenantSignInPage from './tenant/pages/signin/signin';
+import TenantSignUpPage from './tenant/pages/signUp/signUp';
 import DriversGarage from './tenant/pages/driversGarage/driversGarage';
-import { Dashboard } from '@mui/icons-material';
 import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
-
 
 const App = () => {
   return (
@@ -24,21 +28,78 @@ const App = () => {
       <SnackbarProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route path="/" element={<AdminDashboard />} />
-              <Route path="adminSignin" element={<AdminSignIn />} />
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="managetenants" element={<ManageTenantList />} />
-              <Route path="managetenants/:id" element={<ManageTenants />} />
-              <Route path="driversapproval" element={<DriversApproval />} />
-              <Route path="vehiclesapproval" element={<VehiclesApproval />} />
-              <Route path="permissions" element={<Permissions />} />
-              <Route path="announcements" element={<Announcements />} />
-              <Route path="TenantSignin" element={<TenantSignIn />} />
-              <Route path="TenantSignup" element={<TenantSignUp />} />
-              <Route path="tenantDashboard" element={<TenantDashboard />} />
-              <Route path="driversGarage" element={<DriversGarage />} />
-              <Route path="vehiclesGarage" element={<VehiclesGarage />} />
+            <Route path="/error" element={<ErrorPage />} />
+            <Route element={<TenantNonLoginRoute />}>
+              <Route path="login" element={<TenantSignInPage />} />
+              <Route path="signup" element={<TenantSignUpPage />} />
+            </Route>
+
+            <Route element={<TenantProtectedRoute />}>
+              <Route
+                path="*"
+                element={
+                  <>
+                    <Routes>
+                      <Route element={<TenantLayout />}>
+                        <Route path="/" element={<TenantDashboard />} />
+                        <Route path="dashboard" element={<TenantDashboard />} />
+                        <Route
+                          path="driversgarage"
+                          element={<DriversGarage />}
+                        />
+                        <Route
+                          path="vehiclesgarage"
+                          element={<VehiclesGarage />}
+                        />
+                        <Route path="*" element={<ErrorPage />}></Route>
+                      </Route>
+                    </Routes>
+                  </>
+                }
+              />
+            </Route>
+            <Route path="/error" element={<ErrorPage />} />
+            <Route element={<AdminNonLoginRoute />}>
+              <Route path="admin/login" element={<SignInPage />} />
+            </Route>
+
+            <Route element={<AdminProtectedRoute />}>
+              <Route
+                path="admin/*"
+                element={
+                  <>
+                    <Routes>
+                      <Route element={<Layout />}>
+                        <Route path="/" element={<AdminDashboard />} />
+                        <Route path="dashboard" element={<AdminDashboard />} />
+                        <Route
+                          path="managetenants"
+                          element={<ManageTenantList />}
+                        />
+                        <Route
+                          path="managetenants/:id"
+                          element={<ManageTenants />}
+                        />
+                        <Route
+                          path="driversapproval"
+                          element={<DriversApproval />}
+                        />
+                        <Route
+                          path="vehiclesapproval"
+                          element={<VehiclesApproval />}
+                        />
+                        <Route path="permissions" element={<Permissions />} />
+                        {/* <Route
+                          path="announcements"
+                          element={<Announcements />}
+                        /> */}
+                        <Route path="*" element={<ErrorPage />}></Route>
+                        <Route path="*" element={<ErrorPage />}></Route>
+                      </Route>
+                    </Routes>
+                  </>
+                }
+              />
             </Route>
           </Routes>
         </Router>

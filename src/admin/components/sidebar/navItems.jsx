@@ -6,35 +6,35 @@ import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined';
 const NavigationItems = [
   {
     name: 'Dashboard',
-    link: '/dashboard',
+    link: '/admin/dashboard',
     icon: <HomeOutlinedIcon style={{ color: '#565656' }} />,
   },
   {
     name: 'ManageTenants',
-    link: '/manageTenants',
+    link: '/admin/manageTenants',
     icon: <BadgeOutlinedIcon style={{ color: '#565656' }} />,
   },
   {
     name: 'Approval',
     icon: <PersonAddAltOutlinedIcon style={{ color: '#565656' }} />,
-    link: '/driversApproval',
+    link: '/admin/driversApproval',
   },
   {
     name: 'DriversApproval',
-    link: '/driversApproval',
+    link: '/admin/driversApproval',
   },
   {
     name: 'VehiclesApproval',
-    link: '/vehiclesApproval',
+    link: '/admin/vehiclesApproval',
   },
   {
     name: 'Permissions',
-    link: '/permissions',
+    link: '/admin/permissions',
     icon: <Person4OutlinedIcon style={{ color: '#565656' }} />,
   },
   {
     name: 'Announcements',
-    link: '/announcements',
+    link: '/admin/announcements',
     icon: <GppGoodOutlinedIcon style={{ color: '#565656' }} />,
   },
 ];

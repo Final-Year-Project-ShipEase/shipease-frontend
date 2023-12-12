@@ -151,7 +151,7 @@ export default function TableData({ columns, rows, setLoading }) {
   };
 
   const handleNav = (row) => {
-    navigate('/managetenants/' + row.id);
+    navigate('/admin/managetenants/' + row.id);
   };
 
   const handleRequestSort = (property) => {

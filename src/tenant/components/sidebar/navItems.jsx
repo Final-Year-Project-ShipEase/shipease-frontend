@@ -10,26 +10,13 @@ const NavigationItems = [
     icon: <HomeOutlinedIcon style={{ color: '#565656' }} />,
   },
   {
-    name: 'ManageTenants',
-    link: '/manageTenants',
-    icon: <BadgeOutlinedIcon style={{ color: '#565656' }} />,
-  },
-  {
-    name: 'Approval',
+    name: 'Drivers Garage',
     icon: <PersonAddAltOutlinedIcon style={{ color: '#565656' }} />,
-    link: '/driversApproval',
+    link: '/driversgarage',
   },
   {
-    name: 'DriversApproval',
-    link: '/driversApproval',
-  },
-  {
-    name: 'VehiclesApproval',
-    link: '/vehiclesApproval',
-  },
-  {
-    name: 'Permissions',
-    link: '/permissions',
+    name: 'Vehicles Garage',
+    link: '/vehiclesgarage',
     icon: <Person4OutlinedIcon style={{ color: '#565656' }} />,
   },
   {
