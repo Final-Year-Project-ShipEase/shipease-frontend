@@ -25,7 +25,7 @@ export const DriverColumns = [
   },
   {
     id: 'CNIC',
-    label: 'CNIC',  
+    label: 'CNIC',
     width: '30%',
     numeric: false,
     disablePadding: false,

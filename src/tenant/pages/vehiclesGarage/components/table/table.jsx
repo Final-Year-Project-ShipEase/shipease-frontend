@@ -136,7 +136,6 @@ export default function TableData({ columns, rows }) {
   const [open, setOpen] = React.useState(false);
   const [boxType, setBoxType] = useState('');
 
-
   const handleOpen = (row) => {
     setOpen(true);
     //console.log(row.id); use this to get result of row id

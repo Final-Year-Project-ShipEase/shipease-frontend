@@ -63,7 +63,7 @@ const VehiclesDetails = ({ tenantId }) => {
         </Button>
       </Box>
 
-      <Grid container spacing={2} sx={{ marginLeft: '55px'}}>
+      <Grid container spacing={2} sx={{ marginLeft: '55px' }}>
         <Grid item xs={3}>
           <img
             style={{ borderRadius: '5px', height: '50%' }}
@@ -71,92 +71,122 @@ const VehiclesDetails = ({ tenantId }) => {
             alt="Bus"
           />
         </Grid>
-                <Grid item xs={9}>
-                  <Grid
-                    item
-                    xs={6}
-                    sx={{marginLeft: "-100px", display: 'flex', flexDirection: 'row', alignItems: 'center' }}
-                  >
-                    <Grid
-                    sx={{
-                      marginTop: '20px',
-                    
-                    }}>
-                      <Typography
-                        sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
-                      >
-                        {tenant?.name || 'Trucker Trailer'}
-                      </Typography>
-                    </Grid>
-                  </Grid>
+        <Grid item xs={9}>
+          <Grid
+            item
+            xs={6}
+            sx={{
+              marginLeft: '-100px',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
+          >
+            <Grid
+              sx={{
+                marginTop: '20px',
+              }}
+            >
+              <Typography
+                sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
+              >
+                {tenant?.name || 'Trucker Trailer'}
+              </Typography>
+            </Grid>
+          </Grid>
 
-                  <Grid
-                    item
-                    xs={12}
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      marginTop: '5px',
-                      marginLeft: "-60px",
+          <Grid
+            item
+            xs={12}
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginTop: '5px',
+              marginLeft: '-60px',
+            }}
+          >
+            <Grid
+              item
+              xs={8}
+              sx={{
+                marginTop: '-20px',
+              }}
+            >
+              <Typography
+                sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
+              >
+                ID: {tenant?.phoneNo || 'D-321'}
+              </Typography>
+              <Typography
+                sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
+              >
+                Register No:{' '}
+                {tenant?.cities
+                  ? tenant?.cities.map((city) => city).join(', ')
+                  : 'R-321'}
+              </Typography>
+              <Typography
+                sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
+              >
+                Tracker No: {tenant?.id || 'T-321'}
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={6}
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginLeft: '-290px',
+              }}
+            >
+              <Grid>
+                <Typography
+                  sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
+                >
+                  Owner Cnic :{tenant?.status || '333-0285351821'}
+                </Typography>
+                <Typography
+                  sx={{
+                    color: theme.palette.buttons.main,
+                    fontSize: '16px',
+                    marginTop: '10px',
+                  }}
+                >
+                  Original Document:{' '}
+                  <Button
+                    startIcon={<AddIcon />}
+                    variant="contained"
+                    color="secondary"
+                    style={{ marginLeft: '20px', borderRadius: '5px' }}
+                  >
+                    Vehicle Document
+                  </Button>
+                </Typography>
+
+                <Typography
+                  sx={{
+                    color: theme.palette.buttons.main,
+                    fontSize: '16px',
+                    marginTop: '10px',
+                  }}
+                >
+                  Inspection Report:{' '}
+                  <Button
+                    startIcon={<AddIcon />}
+                    variant="contained"
+                    color="secondary"
+                    style={{
+                      marginTop: '10px',
+                      marginLeft: '30px',
+                      borderRadius: '5px',
                     }}
                   >
-                    <Grid item xs={8}
-                    sx={{
-                      marginTop: '-20px',
-                    }}>
-                      <Typography
-                        sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
-                      >
-                        ID: {tenant?.phoneNo || 'D-321'}
-                      </Typography>
-                      <Typography
-                        sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
-                      >
-                        Register No:{' '}
-                        {tenant?.cities
-                          ? tenant?.cities.map((city) => city).join(', ')
-                          : 'R-321'}
-                      </Typography>
-                      <Typography
-                        sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
-                      >
-                        Tracker No: {tenant?.id || 'T-321'}
-                      </Typography>
-                    </Grid>
-                    <Grid
-                      item
-                      xs={6}
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        marginLeft: "-290px",
-                      }}
-                    >
-                      <Grid>
-                        <Typography
-                          sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
-                        >
-                          Owner Cnic :{tenant?.status || '333-0285351821'}
-                        </Typography>
-                        <Typography
-                          sx={{ color: theme.palette.buttons.main, fontSize: '16px', marginTop:"10px"}}
-                        >
-                          Original Document:{' '}
-                        <Button startIcon={<AddIcon />} variant="contained" color="secondary" style={{marginLeft:"20px", borderRadius: "5px"}}>
-                          Vehicle Document
-                        </Button>
-                      </Typography>
-
-                      <Typography
-                          sx={{ color: theme.palette.buttons.main, fontSize: '16px', marginTop:"10px"}}
-                        >
-                          Inspection Report:{' '}
-                        <Button startIcon={<AddIcon />} variant="contained" color="secondary" style={{ marginTop: "10px",marginLeft:"30px", borderRadius: "5px"}}>
-                          Inspection Report
-                        </Button>
-                      </Typography>
+                    Inspection Report
+                  </Button>
+                </Typography>
               </Grid>
             </Grid>
           </Grid>

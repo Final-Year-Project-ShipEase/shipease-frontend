@@ -61,7 +61,13 @@ const UserInfo = () => {
         }}
       >
         <MenuItem onClick={onClose}>Settings</MenuItem>
-        <MenuItem onClick={()=>{navigate('/admin/login')}}>Logout</MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate('/admin/login');
+          }}
+        >
+          Logout
+        </MenuItem>
       </Menu>
     );
   };
