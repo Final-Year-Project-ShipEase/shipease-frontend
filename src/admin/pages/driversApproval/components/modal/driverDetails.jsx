@@ -24,7 +24,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
     useState(false);
   const theme = useTheme();
   //const { createApplication, creatingApp } = useApplicationService();
-  const { getDriver, getDriverDetailsById } = useDriverService();
+  const { getDriver } = useDriverService();
 
   const [formData, setFormData] = useState({
     ID: '',
@@ -44,7 +44,6 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
   useEffect(() => {
     const fetchDriver = async () => {
       try {
-        console.log(driver_id);
         const driver = await getDriver(driver_id);
         setFormData({
           ID: driver.id,
@@ -63,7 +62,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
       } catch (err) {
         console.log(err);
       }
-    }; 
+    };
 
     if (driver_id) fetchDriver();
   }, [driver_id]);

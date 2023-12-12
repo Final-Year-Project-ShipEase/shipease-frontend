@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import PageHeader from './pageHeader';
 import TableData from './components/table/table';
 import { VehicleColumns, dummyVehicleData } from './_columns.js';
+import useVehicleApprovalService from '../../services/vehicleApprovalService.jsx';
+import Spinner from '../../../utils/spinner';
 
 const VehicleApproval = () => {
+  const { getVehiclesApproval } = useVehicleApprovalService();
+  const [vehiclesApproval, setVehiclesApproval] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const data = await getVehiclesApproval();
+        setVehiclesApproval(data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <Box
       sx={{
@@ -14,6 +33,7 @@ const VehicleApproval = () => {
         p: 2,
       }}
     >
+      {loading && <Spinner />}
       <Box
         sx={{
           display: 'flex',
@@ -26,7 +46,7 @@ const VehicleApproval = () => {
         <PageHeader />
       </Box>
       <Box sx={{ mt: 2 }}>
-        <TableData columns={VehicleColumns} rows={dummyVehicleData} />
+        <TableData columns={VehicleColumns} rows={vehiclesApproval} />
       </Box>
     </Box>
   );

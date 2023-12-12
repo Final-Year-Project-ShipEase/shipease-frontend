@@ -32,11 +32,11 @@ const NavigationItems = [
     link: '/admin/permissions',
     icon: <Person4OutlinedIcon style={{ color: '#565656' }} />,
   },
-  {
-    name: 'Announcements',
-    link: '/admin/announcements',
-    icon: <GppGoodOutlinedIcon style={{ color: '#565656' }} />,
-  },
+  // {
+  //   name: 'Announcements',
+  //   link: '/admin/announcements',
+  //   icon: <GppGoodOutlinedIcon style={{ color: '#565656' }} />,
+  // },
 ];
 
 export default NavigationItems;
