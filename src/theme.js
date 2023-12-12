@@ -75,6 +75,7 @@ const theme = createTheme({
       form: 'white',
       h5: 'gray',
       border: '1px solid lightgrey',
+      background: '#302E35',
     },
     spinner: {
       main: '#00668C',

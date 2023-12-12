@@ -35,6 +35,7 @@ const SignInPage = () => {
         alignItems: 'center',
         width: '100%',
         height: '100vh',
+        backgroundColor: theme.palette.page.background,
       }}
     >
       <div style={{ display: 'flex' }}>
@@ -46,9 +47,9 @@ const SignInPage = () => {
             src={require('../../resources/illustrator.png')}
             alt="Logo"
             style={{
-              marginLeft: '7%',
-              marginTop: '15%',
-              width: '100%',
+              marginLeft: '12%',
+              marginTop: '20%',
+              width: '95%',
               height: '70%',
             }}
           />
@@ -66,8 +67,8 @@ const SignInPage = () => {
             style={{
               backgroundColor: theme.palette.page.form,
               padding: '15%',
-              paddingTop: '11%',
-              paddingBottom: '11%',
+              paddingTop: '17%',
+              paddingBottom: '17%',
               borderTopLeftRadius: '10%',
               borderBottomLeftRadius: '10%',
             }}
