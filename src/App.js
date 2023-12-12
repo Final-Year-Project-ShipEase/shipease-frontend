@@ -12,6 +12,7 @@ import ManageTenantList from './admin/pages/manageTenantList/manageTenant';
 import TenantDashboard from './tenant/pages/tenantDashboard/tenantDashboard';
 import TenantSignIn from './tenant/pages/signIn/signIn';
 import AdminSignIn from './admin/pages/signin/signin';
+import TenantSignUp from './tenant/pages/signUp/signUp';
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
               <Route path="permissions" element={<Permissions />} />
               <Route path="announcements" element={<Announcements />} />
               <Route path="TenantSignin" element={<TenantSignIn />} />
+              <Route path="TenantSignup" element={<TenantSignUp />} />
               <Route path="tenantDashboard" element={<TenantDashboard />} />
             </Route>
           </Routes>
