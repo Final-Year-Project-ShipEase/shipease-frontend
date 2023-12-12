@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { Box, Button, Drawer, useTheme } from '@mui/material';
+import { Box, Button, Drawer, useTheme, useMediaQuery } from '@mui/material';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
 
-const Sidebar = ({ leftSpan }) => {
+const Sidebar = ({ leftSpan, isDrawerOpen }) => {
   const widthVal = (leftSpan / 12) * 100;
   const [activeButton, setActiveButton] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
+  const issmallScreen = useMediaQuery(theme.breakpoints.up(''));
 
   const handleClick = (item) => {
     navigate(item.link);
@@ -42,7 +44,7 @@ const Sidebar = ({ leftSpan }) => {
           whiteSpace: 'nowrap',
           fontSize: '14px',
           textTransform: 'none',
-          fontWeight: isActive ? 550 : 400,
+          fontWeight: isActive ? 500 : 200,
           lineHeight: '140%',
           height: '40px',
           justifyContent: 'left',
@@ -64,23 +66,26 @@ const Sidebar = ({ leftSpan }) => {
     );
   };
 
+  
   return (
     <Drawer
       elevation={4}
       variant="permanent"
+      open={isDrawerOpen && isLargeScreen}
       sx={{
-        width: `${widthVal}%`,
+        width: isDrawerOpen || isLargeScreen ? `${widthVal}%` : '0', // Set width to 0 when the drawer is closed
         flexShrink: 0,
         whiteSpace: 'nowrap',
         boxSizing: 'border-box',
         '& .MuiDrawer-paper': {
           mt: '7vh',
           py: '24px',
-          width: `${widthVal}%`,
+          width: isDrawerOpen || isLargeScreen ? `${widthVal}%` : '0', // Set width to 0 when the drawer is closed
           backgroundColor: theme.palette.buttonSidebar.hovertextcolor,
           boxShadow: theme.palette.buttonSidebar.sidebarshadow,
         },
       }}
+
     >
       <Box
         sx={{

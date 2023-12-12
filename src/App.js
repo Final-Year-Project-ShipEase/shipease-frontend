@@ -17,7 +17,7 @@ import AdminProtectedRoute from './admin/auth/protectedRoutes';
 import SignInPage from './admin/pages/signin/signin';
 import TenantProtectedRoute from './tenant/auth/protectedRoutes';
 import TenantNonLoginRoute from './tenant/auth/nonProtectedRoutes';
-import TenantSignInPage from './tenant/pages/signIn/signin';
+import TenantSignInPage from './tenant/pages/signin/signin';
 import TenantSignUpPage from './tenant/pages/signUp/signUp';
 import DriversGarage from './tenant/pages/driversGarage/driversGarage';
 import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
