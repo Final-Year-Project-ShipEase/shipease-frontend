@@ -24,6 +24,7 @@ import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
 import CreateDriver from './tenant/pages/createDriver/createDriver';
 import UseAdminAuth from './admin/auth/adminAuth';
 import Spinner from './utils/spinner';
+import CreateVehicle from './tenant/pages/createVehicle/createVehicle';
 
 const App = () => {
   const { loading } = UseAdminAuth();
@@ -56,6 +57,7 @@ const App = () => {
                           element={<VehiclesGarage />}
                         />
                         <Route path="addDriver" element={<CreateDriver />} />
+                        <Route path="addVehicle" element={<CreateVehicle />} />
                       </Route>
                       <Route path="*" element={<ErrorPage />}></Route>
                     </Routes>

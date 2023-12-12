@@ -20,15 +20,12 @@ function CreateDriver() {
   const fileInputRef = useRef(null);
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required'),
-    phoneNumber: Yup.string().required('Phone number is required'),
-    userName: Yup.string().required('User name is required'),
-    firstName: Yup.string().required('First name is required'),
-    middleName: Yup.string().required('Middle name is required'),
-    lastName: Yup.string().required('Last name is required'),
-    language: Yup.string().required('Language is required'),
+    name: Yup.string().required('Name is required'),
+    password: Yup.string().required('Password is required'),
+    phoneNumber: Yup.string().required('Phone Number is required'),
+    city: Yup.string().required('City is required'),
+    cnic: Yup.string().required('Cnic is required'),
+    trackerNo: Yup.string().required('Tracker number is required'),
     file: Yup.mixed().required('Cover Photo is required'),
   });
 
@@ -68,16 +65,13 @@ function CreateDriver() {
       </Typography>
       <Formik
         initialValues={{
-          email: '',
+          name: '',
+          password: '',
+          cnic: '',
+          status: '',
           phoneNumber: '',
-          userName: '',
-          firstName: '',
-          middleName: '',
-          lastName: '',
-          timeZone: '',
-          file: null,
-          sendEmail: false,
-          language: '',
+          city: '',
+          trackerNo: '',
         }}
         validationSchema={validationSchema}
         onSubmit={async (values) => {
@@ -189,12 +183,12 @@ function CreateDriver() {
                     <Box>
                       <Field
                         as={TextField}
-                        label={'Email Address'}
-                        name="email"
-                        placeholder={'jean@jrs.com'}
+                        label={'Name'}
+                        name="name"
+                        placeholder={'Ex : Hamza Idrees'}
                       />
                       <ErrorMessage
-                        name="email"
+                        name="name"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
@@ -202,12 +196,14 @@ function CreateDriver() {
                     </Box>
                     <Box>
                       <Field
-                        as={PhoneNumberInput}
-                        label={'Phone number'}
-                        name="phoneNumber"
+                        as={TextField}
+                        label={'Password'}
+                        name="password"
+                        placeholder={'Ex : hamza123'}
+                        type= "password"
                       />
                       <ErrorMessage
-                        name="phoneNumber"
+                        name="password"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
@@ -224,12 +220,12 @@ function CreateDriver() {
                     <Box>
                       <Field
                         as={TextField}
-                        label={'User Name'}
-                        placeholder={'Ex : John Doe'}
-                        name={'userName'}
+                        label={'Cnic'}
+                        placeholder={'Ex : xxxxx-xxxxxxx-x'}
+                        name={'cnic'}
                       />
                       <ErrorMessage
-                        name="userName"
+                        name="cnic"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
@@ -244,8 +240,8 @@ function CreateDriver() {
                     >
                       <Field
                         as={CustomSwitch}
-                        label={'Active Driver'}
-                        name={'sendEmail'}
+                        label={'Status'}
+                        name={'status'}
                       />
                     </Box>
                   </Box>
@@ -259,12 +255,12 @@ function CreateDriver() {
                     <Box>
                       <Field
                         as={TextField}
-                        label={'First Name'}
-                        placeholder={'Ex : John Doe'}
-                        name={'firstName'}
+                        label={'City'}
+                        placeholder={'Ex : faisalabad'}
+                        name={'city'}
                       />
                       <ErrorMessage
-                        name="firstName"
+                        name="city"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
@@ -273,12 +269,12 @@ function CreateDriver() {
                     <Box>
                       <Field
                         as={TextField}
-                        label={'Middle Name'}
-                        placeholder={'Ex : John Doe'}
-                        name={'middleName'}
+                        label={'Phone Number'}
+                        placeholder={'Ex : 03067566528'}
+                        name={'phoneNumber'}
                       />
                       <ErrorMessage
-                        name="middleName"
+                        name="phoneNumber"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
@@ -295,12 +291,12 @@ function CreateDriver() {
                     <Box>
                       <Field
                         as={TextField}
-                        label={'Last Name'}
-                        placeholder={'Ex : John Doe'}
-                        name={'lastName'}
+                        label={'Tracker No'}
+                        placeholder={'Ex : 2145243'}
+                        name={'trackerNo'}
                       />
                       <ErrorMessage
-                        name="lastName"
+                        name="trackerNo"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
@@ -314,20 +310,7 @@ function CreateDriver() {
                       mb: '40px',
                     }}
                   >
-                    <Box>
-                      <Field
-                        as={TextField}
-                        label={'Language'}
-                        placeholder={'English'}
-                        name={'language'}
-                      />
-                      <ErrorMessage
-                        name="language"
-                        render={(msg) => (
-                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
-                        )}
-                      />
-                    </Box>
+                   
                   </Box>
                   <Box
                     sx={{
