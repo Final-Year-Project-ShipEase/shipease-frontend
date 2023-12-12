@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import { useSnackbar } from '../../utils/snackbarContextProvider';
-import { useAdminAuth } from './adminAuth.jsx';
+import UseTenantAuth from './tenantAuth';
 
-const AdminProtectedRoute = () => {
-  const data = localStorage.getItem('adminData');
-  const { admin, setLoading, setAdmin } = useAdminAuth();
+const TenantProtectedRoute = () => {
+  const data = localStorage.getItem('tenantData');
+  const { admin, setLoading, setAdmin } = UseTenantAuth();
   const { show } = useSnackbar();
 
   useEffect(() => {
@@ -33,16 +33,17 @@ const AdminProtectedRoute = () => {
     verifyToken();
   }, [setLoading, setAdmin, data, show]);
 
+  const tenant = true;
   return (
     <div>
-      {admin ? (
+      {tenant ? (
         <>
           <Outlet />
         </>
       ) : (
-        <>{data ? <></> : <Navigate to="/superadmin/login" />}</>
+        <>{data ? <></> : <Navigate to="/login" />}</>
       )}
     </div>
   );
 };
-export default AdminProtectedRoute;
+export default TenantProtectedRoute;

@@ -1,17 +1,17 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useTheme } from '@mui/material';
 import React, { useState } from 'react';
-import UseAdminAuth from '../../auth/adminAuth';
+import UseTenantAuth from '../../auth/tenantAuth';
 import { useNavigate } from 'react-router-dom';
 
-const SignInPage = () => {
+const TenantSignInPage = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const theme = useTheme();
   const [message, setMessage] = useState('');
-  const { login, loading } = UseAdminAuth();
+  const { login, loading } = UseTenantAuth();
   const navigate = useNavigate();
 
   const handlePasswordVisibility = (event) => {
@@ -23,7 +23,7 @@ const SignInPage = () => {
   };
 
   const handleSignIn = () => {
-    navigate('/admin/dashboard');
+    navigate('/dashboard');
   };
 
   return (
@@ -77,7 +77,7 @@ const SignInPage = () => {
                 Please enter your details!
               </h5>
               <h2 style={{ marginTop: -15, fontSize: '170%' }}>
-                <strong>Admin Panel</strong>
+                <strong>Login Her</strong>
               </h2>
               <div name="username">
                 <label
@@ -102,7 +102,7 @@ const SignInPage = () => {
                   value={name}
                   placeholder="Muntazer Mehdi"
                 />
-              </div>
+                </div>
               <div name="password" style={{ marginTop: '2%' }}>
                 <label
                   style={{
@@ -224,4 +224,4 @@ const SignInPage = () => {
     </div>
   );
 };
-export default SignInPage;
+export default TenantSignInPage;

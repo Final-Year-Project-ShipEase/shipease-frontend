@@ -21,7 +21,7 @@ const Navbar = () => {
               }}
             >
               <img
-                src={require('../../resources/Background.png')}
+                src={require('../../resources/shipease.png')}
                 alt="ShipEase-logo"
               />
             </Box>

@@ -1,11 +1,11 @@
-import React from 'react';
-import { useSnackbar } from '../../commons/snackBarContextProvider';
+import { useState } from 'react';
 import CreateAxiosInstance from '../../utils/axiosInstance';
+import { useSnackbar } from '../../utils/snackbarContextProvider';
 
-const AdminAuth = () => {
+const UseAdminAuth = () => {
   const { show } = useSnackbar();
-  const [loading, setLoading] = React.useState(false);
-  const [admin, setAdmin] = React.useState(false);
+  const [loading, setLoading] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   const login = async (email, password) => {
     setLoading(true);
@@ -36,3 +36,5 @@ const AdminAuth = () => {
 
   return { login, logout, loading, admin, setLoading, setAdmin };
 };
+
+export default UseAdminAuth;

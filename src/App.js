@@ -15,13 +15,37 @@ import ErrorPage from './utils/errorPage404';
 import AdminNonLoginRoute from './admin/auth/nonProtectedRoutes';
 import AdminProtectedRoute from './admin/auth/protectedRoutes';
 import SignInPage from './admin/pages/signin/signin';
+import TenantProtectedRoute from './tenant/auth/protectedRoutes';
+import TenantNonLoginRoute from './tenant/auth/nonProtectedRoutes';
+import TenantSignInPage from './tenant/pages/signin/signin';
 
 const App = () => {
   return (
     <>
       <SnackbarProvider>
         <Router>
-          <Routes>
+          <Routes>  
+            <Route path="/error" element={<ErrorPage />} />
+            <Route element={<TenantNonLoginRoute />}>
+              <Route path="login" element={<TenantSignInPage />} />
+            </Route>
+
+            <Route element={<TenantProtectedRoute />}>
+              <Route
+                path="*"
+                element={
+                  <>
+                    <Routes>
+                      <Route element={<TenantLayout />}>
+                        <Route path="/" element={<TenantDashboard />} />
+                        <Route path="dashboard" element={<TenantDashboard />} />
+                        <Route path="*" element={<ErrorPage />}></Route>
+                      </Route>
+                    </Routes>
+                  </>
+                }
+              />
+            </Route>
             <Route path="/error" element={<ErrorPage />} />
             <Route element={<AdminNonLoginRoute />}>
               <Route path="admin/login" element={<SignInPage />} />
@@ -57,10 +81,6 @@ const App = () => {
                           path="announcements"
                           element={<Announcements />}
                         /> */}
-                        <Route
-                          path="tenantDashboard"
-                          element={<TenantDashboard />}
-                        />
                         <Route path="*" element={<ErrorPage />}></Route>
                         <Route path="*" element={<ErrorPage />}></Route>
                       </Route>
@@ -68,7 +88,6 @@ const App = () => {
                   </>
                 }
               />
-
             </Route>
           </Routes>
         </Router>

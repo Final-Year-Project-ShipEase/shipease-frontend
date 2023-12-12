@@ -279,7 +279,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
               fullWidth
               onClick={handleClose}
               sx={{
-                color: theme.palette.primary.white,
+                color: theme.palette.primary.black,
                 backgroundColor: theme.palette.buttons.cancel,
               }}
             >
