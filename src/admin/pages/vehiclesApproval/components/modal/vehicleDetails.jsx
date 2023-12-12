@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -19,13 +19,15 @@ import {
   Close as CloseIcon,
 } from '@mui/icons-material';
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
+import useVehicleService from '../../../../services/vehicleService.jsx';
 //import { useApplicationService } from '../../../../services/applicationService';
+import Spinner from '../../../../../utils/spinner';
 
-const VehicleDetailsModal = ({ open, handleClose, onSubmit }) => {
+const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const theme = useTheme();
-  //const { createApplication, creatingApp } = useApplicationService();
+  const { getVehicle } = useVehicleService();
 
   const [formData, setFormData] = useState({
     ID: '',
@@ -67,6 +69,31 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit }) => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    const getVehicleDetails = async () => {
+      try {
+        const vehicle = await getVehicle(tenantId);
+        setFormData({
+          ID: vehicle.id,
+          type: vehicle.type,
+          regNo: vehicle.regNo,
+          city: vehicle.location,
+          trackId: vehicle.trackId,
+          cnic: vehicle.ownerCnic,
+          incspectionRep: 'Inspection Report',
+          TrackerNo: vehicle.trackerNoo,
+          status: vehicle.status,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    if (tenantId) {
+      getVehicleDetails();
+    }
+  }, [tenantId]);
 
   return (
     <Dialog
@@ -122,6 +149,7 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="ID"
               name="ID"
@@ -132,6 +160,7 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="Type"
               name="type"
@@ -142,6 +171,7 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="Reg No."
               name="regNo"
@@ -152,6 +182,7 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="city"
               name="city"
@@ -162,6 +193,7 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="Tracker Id"
               name="Tracker Id"
@@ -172,20 +204,11 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="Owner Cnic"
               name="Owner Cnic"
               value={formData.cnic}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              margin="normal"
-              label="Vehicle Company"
-              name="Vehicle Company"
-              value={formData.vehicleCompany}
               onChange={handleChange}
             />
           </Grid>
@@ -215,6 +238,7 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="Inspection Report Vendor"
               name="inspectionRepVen"

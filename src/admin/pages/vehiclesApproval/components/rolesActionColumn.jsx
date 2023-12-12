@@ -22,7 +22,7 @@ const CustomIconButton = ({ children, onClick }) => {
   );
 };
 
-const VehicleActionColumn = ({ value, boxType }) => {
+const VehicleActionColumn = ({ value, boxType, setTenantId, setModalOpen }) => {
   const [isLockClicked, setIsLockClicked] = useState(false);
   const theme = useTheme();
   //const { delRole } = useRBACService();
@@ -32,7 +32,8 @@ const VehicleActionColumn = ({ value, boxType }) => {
   };
 
   const handleEdit = () => {
-    console.log('edit');
+    // setTenantId(value.vehicle_id);
+    setModalOpen(true);
   };
 
   const handleCopy = () => {
@@ -45,7 +46,6 @@ const VehicleActionColumn = ({ value, boxType }) => {
 
   const handleApprove = () => {
     //appDriver(value);
-    console.log(value);
     boxType('approved');
   };
 

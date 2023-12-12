@@ -136,8 +136,9 @@ export default function TableData({ columns, rows }) {
   const [visibleRows, setVisibleRows] = useState([]);
   const theme = useTheme();
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [boxType, setBoxType] = useState('');
+  const [tenantsId, setTenantsId] = useState('');
 
   const handleClose = () => {
     setOpen(false);
@@ -177,7 +178,11 @@ export default function TableData({ columns, rows }) {
 
   return (
     <Box sx={{ marginTop: '24px', overflowY: 'auto' }}>
-      <VehicleDetailsModal open={open} handleClose={handleClose} />
+      <VehicleDetailsModal
+        open={open}
+        handleClose={handleClose}
+        tenantId={tenantsId}
+      />
       <ConfirmAdd
         open={boxType === 'approved'}
         onClose={handleDialogClose}
@@ -264,12 +269,15 @@ export default function TableData({ columns, rows }) {
                                 if (column.id !== 'actions') {
                                   handleOpen(row);
                                 }
+                                setTenantsId(row.vehicle_id);
                               }}
                             >
                               {column.id === 'actions' ? (
                                 <RolesActionColumn
                                   value={row.id}
                                   boxType={setBoxType}
+                                  setTenantId={setTenantsId}
+                                  setModalOpen={setOpen}
                                 />
                               ) : (
                                 row[column.id]
