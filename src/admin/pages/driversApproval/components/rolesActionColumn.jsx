@@ -39,7 +39,7 @@ const DriverApprovalActionColumn = ({
   };
 
   const handleEdit = () => {
-    setDriverId(value);
+    setDriverId(value.driver_id);
     setModalOpen(true);
   };
 
