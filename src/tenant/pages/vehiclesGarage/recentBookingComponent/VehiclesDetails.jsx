@@ -3,7 +3,7 @@ import { Box, Button, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-import busImage from '../../../resources/image 1.png';
+import busImage from '../../../resources/image 2.png';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../../utils/spinner';
@@ -63,10 +63,10 @@ const VehiclesDetails = ({ tenantId }) => {
         </Button>
       </Box>
 
-      <Grid container spacing={2} sx={{ marginLeft: '65px'}}>
+      <Grid container spacing={2} sx={{ marginLeft: '55px'}}>
         <Grid item xs={3}>
           <img
-            style={{ borderRadius: '5px', height: '100%' }}
+            style={{ borderRadius: '5px', height: '50%' }}
             src={busImage}
             alt="Bus"
           />
@@ -75,7 +75,7 @@ const VehiclesDetails = ({ tenantId }) => {
                   <Grid
                     item
                     xs={6}
-                    sx={{marginLeft: "-140px", display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+                    sx={{marginLeft: "-100px", display: 'flex', flexDirection: 'row', alignItems: 'center' }}
                   >
                     <Grid
                     sx={{
@@ -98,7 +98,7 @@ const VehiclesDetails = ({ tenantId }) => {
                       flexDirection: 'row',
                       alignItems: 'center',
                       marginTop: '5px',
-                      marginLeft: "-110px",
+                      marginLeft: "-60px",
                     }}
                   >
                     <Grid item xs={8}
