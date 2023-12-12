@@ -3,7 +3,7 @@ import { Box, Button, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-import busImage from '../../../resources/image 1.png';
+import busImage from '../../../resources/image 2.png';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { useNavigate } from 'react-router-dom';
 import useTenantService from '../../../services/tenantService';
@@ -32,17 +32,21 @@ const TenantDetails = ({ tenantId }) => {
       sx={{
         backgroundColor: theme.palette.primary.backgroundColor,
         width: '100%',
-        height: '280px',
+        height: '290px',
         borderRadius: '10px',
       }}
     >
       {loading && <Spinner />}
+      <Grid container spacing={2} sx={{ marginLeft: '5%', mt: '2%' }}>
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
           padding: 1,
+          marginTop: '-10px',
+          marginLeft: '-3%',
+          marginBottom: '10px',
         }}
         onClick={() => {
           navigate('/admin/manageTenants');
@@ -50,7 +54,7 @@ const TenantDetails = ({ tenantId }) => {
       >
         <ArrowBackRoundedIcon
           sx={{
-            color: theme.palette.primary.main,
+            color: theme.palette.buttons.main,
             cursor: 'pointer',
           }}
         />
@@ -71,7 +75,12 @@ const TenantDetails = ({ tenantId }) => {
           <Grid
             item
             xs={6}
-            sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+            sx={{
+              marginLeft: '-140px',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}
           >
             <Grid>
               <Typography
@@ -99,7 +108,8 @@ const TenantDetails = ({ tenantId }) => {
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
-              marginTop: '30px',
+              marginLeft: '-140px',
+              marginTop: '30px', 
             }}
           >
             <Grid item xs={8}>
@@ -129,6 +139,7 @@ const TenantDetails = ({ tenantId }) => {
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
+                marginLeft: '-250px',
               }}
             >
               <Grid>
@@ -157,6 +168,7 @@ const TenantDetails = ({ tenantId }) => {
             </Grid>
           </Grid>
         </Grid>
+      </Grid>
       </Grid>
     </Card>
   );
