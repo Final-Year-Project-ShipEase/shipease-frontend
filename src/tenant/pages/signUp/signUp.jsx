@@ -32,7 +32,7 @@ const TenantSignUpPage = () => {
         alignItems: 'center',
         width: '100%',
         height: '100vh',
-        backgroundColor: theme.palette.page.main,
+        backgroundColor: theme.palette.page.background,
         overflow: 'hidden',
       }}
     >
@@ -66,8 +66,8 @@ const TenantSignUpPage = () => {
             style={{
               backgroundColor: theme.palette.page.form,
               padding: '15%',
-              paddingTop: '7%',
-              paddingBottom: '11%',
+              paddingTop: '17%',
+              paddingBottom: '17%',
               borderTopLeftRadius: '10%',
               borderBottomLeftRadius: '10%',
             }}
