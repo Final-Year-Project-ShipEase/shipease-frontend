@@ -18,16 +18,20 @@ import SignInPage from './admin/pages/signin/signin';
 import TenantProtectedRoute from './tenant/auth/protectedRoutes';
 import TenantNonLoginRoute from './tenant/auth/nonProtectedRoutes';
 import TenantSignInPage from './tenant/pages/signin/signin';
+import TenantSignUpPage from './tenant/pages/signUp/signUp';
+import DriversGarage from './tenant/pages/driversGarage/driversGarage';
+import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
 
 const App = () => {
   return (
     <>
       <SnackbarProvider>
         <Router>
-          <Routes>  
+          <Routes>
             <Route path="/error" element={<ErrorPage />} />
             <Route element={<TenantNonLoginRoute />}>
               <Route path="login" element={<TenantSignInPage />} />
+              <Route path="signup" element={<TenantSignUpPage />} />
             </Route>
 
             <Route element={<TenantProtectedRoute />}>
@@ -39,6 +43,14 @@ const App = () => {
                       <Route element={<TenantLayout />}>
                         <Route path="/" element={<TenantDashboard />} />
                         <Route path="dashboard" element={<TenantDashboard />} />
+                        <Route
+                          path="driversgarage"
+                          element={<DriversGarage />}
+                        />
+                        <Route
+                          path="vehiclesgarage"
+                          element={<VehiclesGarage />}
+                        />
                         <Route path="*" element={<ErrorPage />}></Route>
                       </Route>
                     </Routes>
