@@ -11,7 +11,7 @@ const ManageTenants = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100px',
+        height: '100%',
         padding: 2,
       }}
     >
@@ -19,14 +19,14 @@ const ManageTenants = () => {
         sx={{
           marginBottom: '-10px',
           width: '100%',
-          height: '280px',
           borderRadius: '10px',
+          boxShadow: '0px 2px 14px rgba(0, 0, 0, 1)',
         }}
       >
         <TenantDetails tenantId={id} />
       </Box>
 
-      <Box sx={{ mt: '32px', borderTop: '1px dashed #BEBEBE' }}>
+      <Box sx={{ mt: '30px', borderTop: '1px dashed black'}}>
         <TabComponent />
       </Box>
     </Box>
