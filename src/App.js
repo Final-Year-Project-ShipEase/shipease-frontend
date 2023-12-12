@@ -10,8 +10,6 @@ import AdminDashboard from './admin/pages/dashboard/dashboard';
 import { SnackbarProvider } from './utils/snackbarContextProvider';
 import ManageTenantList from './admin/pages/manageTenantList/manageTenant';
 import TenantDashboard from './tenant/pages/tenantDashboard/tenantDashboard';
-import DriversGarage from './tenant/pages/driversGarage/driversGarage';
-import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
 import TenantSignIn from './tenant/pages/signIn/signIn';
 import AdminSignIn from './admin/pages/signin/signin';
 
