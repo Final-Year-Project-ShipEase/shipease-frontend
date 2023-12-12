@@ -1,36 +1,21 @@
-const generateDummyData = () => {
-  const dummyData = [];
-
-  for (let i = 1; i <= 15; i++) {
-    dummyData.push({
-      id: i,
-      username: `username${i}`,
-      tenant: `Tenant ${i}`,
-      actions: `Action ${i}`,
-    });
-  }
-
-  return dummyData;
-};
-
 export const DriverColumns = [
   {
     id: 'id',
-    label: 'Driver ID',
+    label: 'Approval ID',
     width: '30%',
     numeric: false,
     disablePadding: false,
   },
   {
-    id: 'username',
-    label: 'Username',
+    id: 'driver_id',
+    label: 'Driver ID',
     width: '20%',
     numeric: false,
     disablePadding: false,
   },
   {
-    id: 'tenant',
-    label: 'Tenant Name',
+    id: 'tenant_id',
+    label: 'Tenant ID',
     width: '25%',
     numeric: false,
     disablePadding: false,
@@ -43,5 +28,3 @@ export const DriverColumns = [
     disablePadding: false,
   },
 ];
-
-export const dummyDriverData = generateDummyData();

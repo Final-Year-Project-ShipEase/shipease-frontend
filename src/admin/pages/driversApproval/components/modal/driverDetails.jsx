@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogTitle,
@@ -9,8 +9,6 @@ import {
   Button,
   Box,
   Grid,
-  Switch,
-  FormControlLabel,
   DialogContentText,
   useTheme,
 } from '@mui/material';
@@ -19,20 +17,20 @@ import {
   Close as CloseIcon,
 } from '@mui/icons-material';
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
-//import { useApplicationService } from '../../../../services/applicationService';
+import useDriverService from '../../../../services/driverService.jsx';
 
-const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
+const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const theme = useTheme();
   //const { createApplication, creatingApp } = useApplicationService();
+  const { getDriver, getDriverDetailsById } = useDriverService();
 
   const [formData, setFormData] = useState({
     ID: '',
     name: '',
     username: '',
     password: '',
-    email: '',
     phoneNo: '',
     cnic: '',
     LicenseNo: '',
@@ -42,6 +40,28 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
     LicenseImages: 'License Image',
     status: false,
   });
+
+  useEffect(() => {
+    const fetchDriver = async () => {
+      const driver = await getDriver(driver_id);
+      const driverDetails = await getDriverDetailsById(driver_id);
+      setFormData({
+        ID: driver.id,
+        name: driver.name,
+        username: driver.username,
+        password: driver.password,
+        phoneNo: driver.phoneNo,
+        cnic: driverDetails.cnic,
+        LicenseNo: driverDetails.liscence,
+        TrackerNo: driverDetails.trackerNo,
+        City: driverDetails.city,
+        Tenant: driver.tenant_id,
+        LicenseImages: driver.LicenseImages,
+        status: driver.status,
+      });
+    };
+    if (driver_id) fetchDriver();
+  }, [driver_id]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -56,19 +76,17 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
   };
 
   const handleAddConfirm = async () => {
-    const clientData = {
-      clientId: formData.ID,
-      name: formData.name,
-      email: formData.email,
-    };
-
-    try {
-      //await createApplication(clientData);
-      setIsConfirmationDialogOpen(false);
-      handleClose();
-    } catch (err) {
-      console.log(err);
-    }
+    // const clientData = {
+    //   clientId: formData.ID,
+    //   name: formData.name,
+    // };
+    // try {
+    //   //await createApplication(clientData);
+    //   setIsConfirmationDialogOpen(false);
+    //   handleClose();
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   return (
@@ -97,8 +115,14 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
       />
       <DialogTitle>
         <Box display="flex" alignItems="center" justifyContent="space-between">
-          <IconButton sx={{ p: 1, backgroundColor: '#D1FADF', color: 'green' }}>
-            <AddIcon />
+          <IconButton
+            sx={{
+              p: 1,
+              backgroundColor: theme.palette.buttons.approve,
+              color: theme.palette.buttons.white,
+            }}
+          >
+            <AddIcon color={theme.palette.buttons.white} />
           </IconButton>
           <IconButton onClick={handleClose}>
             <CloseIcon />
@@ -119,6 +143,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="ID"
               name="ID"
@@ -129,6 +154,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="Name"
               name="name"
@@ -139,6 +165,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="password"
               name="password"
@@ -149,6 +176,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="password"
               name="password"
@@ -159,6 +187,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="Phone No"
               name="Phone No"
@@ -169,16 +198,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
-              margin="normal"
-              label="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
+              disabled
               margin="normal"
               label="CNIC"
               name="CNIC"
@@ -189,6 +209,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="License No"
               name="License No"
@@ -199,6 +220,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="Tracker No"
               name="Tracker No"
@@ -209,6 +231,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="City"
               name="City"
@@ -219,6 +242,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
+              disabled
               margin="normal"
               label="Tenant"
               name="Tenant"
@@ -232,7 +256,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
               onChange={handleChange}
               variant="contained"
               sx={{
-                backgroundColor: theme.palette.secondary.main,
+                backgroundColor: theme.palette.buttons.approve,
                 color: 'white',
                 width: '100%',
                 height: '72%',
@@ -249,28 +273,27 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
               License Images
             </Button>
           </Grid>
-          <Box display="flex" ml={2} sx={{ width: '100%' }}>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={formData.status}
-                  onChange={handleSwitchChange}
-                  name="status"
-                />
-              }
-              label="Active"
-            />
-          </Box>
-          <Grid item xs={6}>
-            <Button fullWidth onClick={handleClose} sx={{ color: 'black' }}>
+          <Grid item xs={12} sm={6}></Grid>
+          <Grid item xs={12} sm={6}>
+            <Button
+              fullWidth
+              onClick={handleClose}
+              sx={{
+                color: theme.palette.primary.white,
+                backgroundColor: theme.palette.buttons.cancel,
+              }}
+            >
               Cancel
             </Button>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <Button
               fullWidth
               onClick={() => setIsConfirmationDialogOpen(true)}
-              color="success"
+              sx={{
+                color: theme.palette.primary.white,
+                backgroundColor: theme.palette.buttons.approve,
+              }}
               variant="contained"
             >
               Approve

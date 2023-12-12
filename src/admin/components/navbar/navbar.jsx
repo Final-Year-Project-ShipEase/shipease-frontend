@@ -13,7 +13,7 @@ const Navbar = () => {
     <AppBar position="fixed" elevation={3} sx={appBarStyles}>
       <Toolbar>
         <Grid container alignItems="center">
-          <Grid item xs={12} sm={4} md={7}>
+          <Grid item md={7}>
             <Box
               sx={{
                 display: 'flex',
@@ -26,7 +26,7 @@ const Navbar = () => {
               />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={4} md={2.5}>
+          <Grid item md={2.5}>
             <Box
               sx={{
                 display: 'flex',
@@ -56,7 +56,7 @@ const Navbar = () => {
               />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={4} md={2.5}>
+          <Grid item md={2.5}>
             <Box
               sx={{
                 display: 'flex',
