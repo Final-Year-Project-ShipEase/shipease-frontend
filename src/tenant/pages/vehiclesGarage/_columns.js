@@ -1,20 +1,3 @@
-const generateDummyData = () => {
-  const dummyData = [];
-
-  for (let i = 1; i <= 15; i++) {
-    dummyData.push({
-      id: i,
-      type: `Trucker trailor ${i}`,
-      city: `city ${i}`,
-      Company: `T-313${i}`,
-      report: `12-04-${i}`,
-      actions: `Action ${i}`,
-    });
-  }
-
-  return dummyData;
-};
-
 export const DriverColumns = [
   {
     id: 'type',
@@ -24,40 +7,31 @@ export const DriverColumns = [
     disablePadding: false,
   },
   {
-    id: 'id',
-    label: 'ID',
+    id: 'regNo',
+    label: 'Reg No',
     width: '30%',
     numeric: false,
     disablePadding: false,
   },
   {
-    id: 'city',
+    id: 'location',
     label: 'City',
-    width: '25%',
+    width: '20%',
     numeric: false,
     disablePadding: false,
   },
   {
-    id: 'Company',
-    label: 'Vehicle Company',
-    width: '25%',
-    numeric: false,
-    disablePadding: false,
-  },
-  {
-    id: 'report',
-    label: 'Report Vendor',
-    width: '25%',
+    id: 'status',
+    label: 'Status',
+    width: '20%',
     numeric: false,
     disablePadding: false,
   },
   {
     id: 'actions',
     label: 'Action',
-    width: '20%',
+    width: '10%',
     numeric: false,
     disablePadding: false,
   },
 ];
-
-export const dummyDriverData = generateDummyData();
