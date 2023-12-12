@@ -28,7 +28,6 @@ function CreateDriver() {
     firstName: Yup.string().required('First name is required'),
     middleName: Yup.string().required('Middle name is required'),
     lastName: Yup.string().required('Last name is required'),
-    timeZone: Yup.string().required('Timezone is required'),
     language: Yup.string().required('Language is required'),
     file: Yup.mixed().required('Cover Photo is required'),
   });

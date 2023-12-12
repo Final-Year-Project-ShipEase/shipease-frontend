@@ -13,9 +13,9 @@ const AdminProtectedRoute = () => {
     const verifyToken = async () => {
       setLoading(true);
       if (data) {
-        const token = JSON.parse(localStorage.getItem('adminData')).token;
+        const token = JSON.parse(localStorage.getItem('adminData'));
         await axios
-          .get(`/token/verify`, {
+          .get(`/admin/auth/protected`, {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then(() => {
@@ -30,13 +30,12 @@ const AdminProtectedRoute = () => {
       }
       setLoading(false);
     };
-    verifyToken();
   }, [setLoading, setAdmin, data, show]);
 
-  const admin1 = true;
+  useEffect(() => {}, [data]);
   return (
     <div>
-      {admin1 ? (
+      {data ? (
         <>
           <Outlet />
         </>
