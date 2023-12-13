@@ -25,13 +25,10 @@ function CreateDriver() {
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     password: Yup.string().required('Password is required'),
-    phoneNo: Yup.string().required('Phone Number is required'), // Changed to phoneNo
+    phoneNo: Yup.string().required('Phone number is required'),
     city: Yup.string().required('City is required'),
     cnic: Yup.string().required('Cnic is required'),
     trackerNo: Yup.string().required('Tracker number is required'),
-    status: Yup.mixed()
-      .oneOf(['Active', 'Inactive'], 'Status is invalid')
-      .required('Status is required'), // Added status validation
   });
 
   const handleDivClick = () => {
@@ -73,18 +70,25 @@ function CreateDriver() {
           name: '',
           password: '',
           cnic: '',
-          status: 'inactive',
-          phoneNumber: '',
+          phoneNo: '',
           city: '',
           trackerNo: '',
         }}
         validationSchema={validationSchema}
         onSubmit={async (values) => {
-          console.log(values);
+          const data = localStorage.getItem('tenantData');
+          const tenantId = JSON.parse(data).id;
           try {
-            const res = await createDriver(values);
-            const data = localStorage.getItem('tenantData');
-            const tenantId = JSON.parse(data).id;
+            const res = await createDriver({
+              name: values.name,
+              password: values.password,
+              cnic: values.cnic,
+              phoneNo: values.phoneNo,
+              city: values.city,
+              trackerNo: values.trackerNo,
+              status: 'Inactive',
+              tenant_id: tenantId,
+            });
 
             if (res.status === 201) {
               const res2 = await createDriverApproval({
@@ -294,13 +298,13 @@ function CreateDriver() {
                     </Box>
                     <Box>
                       <Field
-                        as={TextField}
+                        as={PhoneNumberInput}
                         label={'Phone Number'}
                         placeholder={'Ex : 03067566528'}
-                        name={'phoneNumber'}
+                        name={'phoneNo'}
                       />
                       <ErrorMessage
-                        name="phoneNumber"
+                        name="phoneNo"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
