@@ -3,6 +3,7 @@ import { useTheme } from '@mui/material';
 import React, { useState } from 'react';
 import UseAdminAuth from '../../auth/adminAuth';
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../../../utils/spinner';
 
 const SignInPage = () => {
   const [name, setName] = useState('');
@@ -22,7 +23,8 @@ const SignInPage = () => {
     setAcceptTerms(!acceptTerms);
   };
 
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
+    await login(name, password);
     navigate('/admin/dashboard');
   };
 
@@ -31,6 +33,7 @@ const SignInPage = () => {
       <header>{/* Header content */}</header>
       <main>
         {/* Body content */}
+        {loading && <Spinner />}
         <div style={{ display: 'flex' }}>
           <div
             name="image"
