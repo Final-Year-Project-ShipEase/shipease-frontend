@@ -318,6 +318,7 @@ function CreateVehicle() {
       </Formik>
     </Box>
   );
+
 }
 
 export default CreateVehicle;
