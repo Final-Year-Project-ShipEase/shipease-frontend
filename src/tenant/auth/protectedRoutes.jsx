@@ -6,7 +6,7 @@ import UseTenantAuth from './tenantAuth';
 
 const TenantProtectedRoute = () => {
   const data = localStorage.getItem('tenantData');
-  const { admin, setLoading, setAdmin } = UseTenantAuth();
+  const { tenant, setLoading, setTenant } = UseTenantAuth();
   const { show } = useSnackbar();
 
   useEffect(() => {
@@ -19,24 +19,22 @@ const TenantProtectedRoute = () => {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then(() => {
-            setAdmin(data);
+            setTenant(data);
           })
           .catch((error) => {
             console.error(error);
-            setAdmin(false);
+            setTenant(false);
             localStorage.removeItem('adminData');
             show('Logged out successfully');
           });
       }
       setLoading(false);
     };
-    verifyToken();
-  }, [setLoading, setAdmin, data, show]);
+  }, []);
 
-  const tenant = true;
   return (
     <div>
-      {tenant ? (
+      {data ? (
         <>
           <Outlet />
         </>

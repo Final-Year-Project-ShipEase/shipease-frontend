@@ -7,25 +7,48 @@ const UseAdminAuth = () => {
   const [loading, setLoading] = useState(false);
   const [admin, setAdmin] = useState(false);
 
-  const login = async (email, password) => {
+  const loginWithToken = async (username, password) => {
     setLoading(true);
     const axiosInstance = CreateAxiosInstance();
     await axiosInstance
-      .post(`/admin/login`, {
-        email,
+      .post(`/admin/auth/login`, {
+        username,
         password,
       })
       .then((response) => {
-        const data = response.data;
+        const data = response;
+        console.log(data);
         localStorage.setItem('adminData', JSON.stringify(data));
         setAdmin(data);
         show('Logged in successfully');
       })
       .catch((error) => {
         console.error(error);
-        show('Invalid credentials');
+        show('Invalid credentials', 'error');
       });
     setLoading(false);
+  };
+
+  const login = async (username, password) => {
+    setLoading(true);
+    const axiosInstance = CreateAxiosInstance();
+
+    try {
+      const response = await axiosInstance.post(`/adminlogin`, {
+        username,
+        password,
+      });
+
+      const data = response.data;
+      localStorage.setItem('adminData', JSON.stringify(data));
+      setAdmin(true);
+      show('Logged in successfully');
+    } catch (error) {
+      console.error(error);
+      show('Invalid credentials', 'error');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const logout = () => {

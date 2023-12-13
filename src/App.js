@@ -22,8 +22,11 @@ import TenantSignUpPage from './tenant/pages/signUp/signUp';
 import DriversGarage from './tenant/pages/driversGarage/driversGarage';
 import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
 import CreateDriver from './tenant/pages/createDriver/createDriver';
+import CreateVehicle from './tenant/pages/createVehicle/createVehicle';
+import UseAdminAuth from './admin/auth/adminAuth';
 
 const App = () => {
+  const { loading } = UseAdminAuth();
   return (
     <>
       <SnackbarProvider>
@@ -53,6 +56,7 @@ const App = () => {
                           element={<VehiclesGarage />}
                         />
                         <Route path="addDriver" element={<CreateDriver />} />
+                        <Route path="addVehicle" element={<CreateVehicle />} />
                       </Route>
                       <Route path="*" element={<ErrorPage />}></Route>
                     </Routes>
@@ -64,7 +68,6 @@ const App = () => {
             <Route element={<AdminNonLoginRoute />}>
               <Route path="admin/login" element={<SignInPage />} />
             </Route>
-
             <Route element={<AdminProtectedRoute />}>
               <Route
                 path="admin/*"

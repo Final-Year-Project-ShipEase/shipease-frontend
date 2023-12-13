@@ -11,6 +11,8 @@ import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined
 import image from '../../../icons/image.png';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import UseTenantAuth from '../../auth/tenantAuth';
+import { useNavigate } from 'react-router-dom';
 
 const imageStyles = { width: '35px', height: '35px', borderRadius: '50%' };
 const onlineDotStyles = {
@@ -32,6 +34,8 @@ const UserInfo = () => {
   const [isOnline, setIsOnline] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
+  const { logout } = UseTenantAuth();
+  const navigate = useNavigate();
 
   const handleClick = (event) => {
     event.stopPropagation();
@@ -59,7 +63,14 @@ const UserInfo = () => {
         }}
       >
         <MenuItem onClick={onClose}>Settings</MenuItem>
-        <MenuItem onClick={onClose}>Logout</MenuItem>
+        <MenuItem
+          onClick={() => {
+            logout();
+            navigate('/login');
+          }}
+        >
+          Logout
+        </MenuItem>
       </Menu>
     );
   };

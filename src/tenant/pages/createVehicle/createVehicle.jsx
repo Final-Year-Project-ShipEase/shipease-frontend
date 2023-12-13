@@ -7,28 +7,23 @@ import TextField from '../../components/inputs/textField/TextField.jsx';
 import PhoneNumberInput from '../../components/inputs/phoneNumberField/PhoneNumber.jsx';
 import CustomSwitch from '../../components/switch/Switch.jsx';
 import CustomButton from '../../components/buttons/CustomButton.jsx';
-import CustomButton2 from '../../components/buttons/CustomButton.jsx';
 import { ReactComponent as LeftArrorSvg } from './assets/leftArrow.svg';
 import { ReactComponent as CameraSvg } from './assets/camera.svg';
 import profileImage from './assets/user_image.png';
-import useDriverService from '../../../admin/services/driverService.jsx';
-import useDriverApprovalService from '../../../admin/services/driverApprovalServices.jsx';
+import useVehicleService from '../../../admin/services/vehicleService.jsx';
 
-function CreateDriver() {
+function CreateVehicle() {
   // const { createUser } = useUserService();
   const navigate = useNavigate();
-  const { createDriver } = useDriverService();
-  const { createDriverApproval } = useDriverApprovalService();
-
   const fileInputRef = useRef(null);
-
+  const { addVehicle } = useVehicleService();
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    password: Yup.string().required('Password is required'),
-    phoneNo: Yup.string().required('Phone number is required'),
-    city: Yup.string().required('City is required'),
-    cnic: Yup.string().required('Cnic is required'),
+    ownerCnic: Yup.string().required('Cnic is required'),
+    regNo: Yup.string().required('Registration number is required'),
+    type: Yup.string().required('Vehicle Type is required'),
+    location: Yup.string().required('Location is required'),
     trackerNo: Yup.string().required('Tracker number is required'),
+    file: Yup.mixed().required('Cover Photo is required'),
   });
 
   const handleDivClick = () => {
@@ -39,7 +34,7 @@ function CreateDriver() {
     <Box sx={{ py: '24px', px: '32px' }}>
       <Box sx={{ display: 'flex', alignItems: 'center', mb: '24px' }}>
         <LeftArrorSvg
-          onClick={() => navigate('/driversgarage')}
+          onClick={() => navigate('/vehiclesGarage')}
           style={{ cursor: 'pointer' }}
         />
         <Typography
@@ -52,7 +47,7 @@ function CreateDriver() {
             ml: '8px',
           }}
         >
-          Back To Drivers list
+          Back To Vehicle list
         </Typography>
       </Box>
       <Typography
@@ -63,48 +58,34 @@ function CreateDriver() {
           mb: '32px',
         }}
       >
-        Add a new Driver
+        Add a new Vehicle
       </Typography>
       <Formik
         initialValues={{
-          name: '',
-          password: '',
-          cnic: '',
-          phoneNo: '',
-          city: '',
+          ownerCnic: '',
+          regNo: '',
+          type: '',
+          status: '',
+          location: '',
           trackerNo: '',
         }}
         validationSchema={validationSchema}
         onSubmit={async (values) => {
+          // const res = await createUser(values);
+          // if (res.status === 201) navigate('/users');
           const data = localStorage.getItem('tenantData');
           const tenantId = JSON.parse(data).id;
-          try {
-            const res = await createDriver({
-              name: values.name,
-              password: values.password,
-              cnic: values.cnic,
-              phoneNo: values.phoneNo,
-              city: values.city,
-              trackerNo: values.trackerNo,
-              status: 'Inactive',
-              tenant_id: tenantId,
-            });
-            if (res.status === 201) {
-              const res2 = await createDriverApproval({
-                driverId: res.data.id,
-                tenantId: tenantId,
-                adminId: 1,
-                permission: 'rejected',
-                status: 'active',
-              });
-
-              if (res2.status === 201) {
-                navigate('/driversgarage');
-              }
-            }
-          } catch (error) {
-            console.error('Error during form submission:', error);
-          }
+          const res = await addVehicle({
+            driver_id: 1, //edit this
+            ownerCnic: values.ownerCnic,
+            regNo: values.regNo,
+            type: ['SUV', 'Sedan', 'Hatchback'],
+            status: 'Available',
+            location: values.location,
+            trackerNo: values.trackerNo,
+            tenant_id: tenantId,
+          });
+          if (res.status === 201) navigate('/vehiclesGarage');
         }}
       >
         {({ values, isSubmitting, setFieldValue, errors, touched, dirty }) => (
@@ -211,12 +192,12 @@ function CreateDriver() {
                     <Box>
                       <Field
                         as={TextField}
-                        label={'Name'}
-                        name="name"
-                        placeholder={'Ex : Hamza Idrees'}
+                        label={'Owner Cnic'}
+                        name="ownerCnic"
+                        placeholder={'Ex : xxxxx-xxxxxxx-x'}
                       />
                       <ErrorMessage
-                        name="name"
+                        name="ownerCnic"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
@@ -225,14 +206,12 @@ function CreateDriver() {
                     <Box>
                       <Field
                         as={TextField}
-                        label={'Password'}
-                        name="password"
-                        placeholder={'Ex : hamza123'}
-                        type="password"
-
+                        label={'Reg No'}
+                        name="regNo"
+                        placeholder={'Ex : LEB9305'}
                       />
                       <ErrorMessage
-                        name="password"
+                        name="regNo"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
@@ -249,12 +228,12 @@ function CreateDriver() {
                     <Box>
                       <Field
                         as={TextField}
-                        label={'Cnic'}
-                        placeholder={'Ex : xxxxx-xxxxxxx-x'}
-                        name={'cnic'}
+                        label={'Type'}
+                        placeholder={'Ex : car'}
+                        name={'type'}
                       />
                       <ErrorMessage
-                        name="cnic"
+                        name="type"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
@@ -284,44 +263,22 @@ function CreateDriver() {
                     <Box>
                       <Field
                         as={TextField}
-                        label={'City'}
+                        label={'Location'}
                         placeholder={'Ex : faisalabad'}
-                        name={'city'}
+                        name={'location'}
                       />
                       <ErrorMessage
-                        name="city"
+                        name="location"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
                       />
                     </Box>
-                    <Box>
-                      <Field
-                        as={PhoneNumberInput}
-                        label={'Phone Number'}
-                        placeholder={'Ex : 03067566528'}
-                        name={'phoneNo'}
-                      />
-                      <ErrorMessage
-                        name="phoneNo"
-                        render={(msg) => (
-                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
-                        )}
-                      />
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      mb: '40px',
-                    }}
-                  >
                     <Box>
                       <Field
                         as={TextField}
                         label={'Tracker No'}
-                        placeholder={'Ex : 2145243'}
+                        placeholder={'Ex : 254125'}
                         name={'trackerNo'}
                       />
                       <ErrorMessage
@@ -336,30 +293,22 @@ function CreateDriver() {
                     sx={{
                       display: 'flex',
                       justifyContent: 'space-between',
-                      mb: '40px',
-                    }}
-                  ></Box>
-
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
                     }}
                   >
                     <CustomButton
                       role={'secondary'}
                       customStyle={{ width: '361px' }}
-                      onClick={() => navigate('/driversgarage')}
+                      onClick={() => navigate('/users')}
                     >
                       Cancel
                     </CustomButton>
-                    <CustomButton2
+                    <CustomButton
                       type="submit"
                       role={'primary'}
                       customStyle={{ width: '361px' }}
                     >
                       Submit
-                    </CustomButton2>
+                    </CustomButton>
                   </Box>
                 </Box>
               </Box>
@@ -369,6 +318,7 @@ function CreateDriver() {
       </Formik>
     </Box>
   );
+
 }
 
-export default CreateDriver;
+export default CreateVehicle;

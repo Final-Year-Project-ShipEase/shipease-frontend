@@ -3,6 +3,7 @@ import { Box, Button, Drawer, useTheme, useMediaQuery } from '@mui/material';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
+import UseAdminAuth from '../../auth/adminAuth';
 
 const Sidebar = ({ leftSpan, isDrawerOpen }) => {
   const widthVal = (leftSpan / 12) * 100;
@@ -12,6 +13,7 @@ const Sidebar = ({ leftSpan, isDrawerOpen }) => {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
   const issmallScreen = useMediaQuery(theme.breakpoints.up(''));
+  const { logout } = UseAdminAuth();
 
   const handleClick = (item) => {
     navigate(item.link);
@@ -66,7 +68,49 @@ const Sidebar = ({ leftSpan, isDrawerOpen }) => {
     );
   };
 
-  
+  const CustomButton2 = ({ item, sx }) => {
+    const isActive = activeButton === item.name;
+
+    return (
+      <Button
+        sx={{
+          ...sx,
+          display: 'flex',
+          padding: '16px 16px 16px 32px',
+          alignItems: 'left',
+          gap: '3px',
+          alignSelf: 'stretch',
+          overflow: 'hidden',
+          color: theme.palette.buttonSidebar.ColorActive,
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          fontSize: '14px',
+          textTransform: 'none',
+          fontWeight: isActive ? 550 : 400,
+          lineHeight: '140%',
+          height: '40px',
+          justifyContent: 'left',
+          borderRight: isActive
+            ? theme.palette.buttonSidebar.borderright
+            : 'none',
+          backgroundColor: isActive
+            ? theme.palette.buttonSidebar.main
+            : theme.palette.buttonSidebar.BackgroundColorActive,
+          '&:hover': {
+            backgroundColor: theme.palette.buttonSidebar.main,
+          },
+        }}
+        onClick={() => {
+          logout();
+          navigate(item.link);
+        }}
+        startIcon={item.icon}
+      >
+        {item.name}
+      </Button>
+    );
+  };
+
   return (
     <Drawer
       elevation={4}
@@ -101,7 +145,7 @@ const Sidebar = ({ leftSpan, isDrawerOpen }) => {
         {NavigationItems.map((item, index) => (
           <CustomButton key={index} item={item} />
         ))}
-        <CustomButton
+        <CustomButton2
           item={{
             name: 'Log out',
             link: '/admin/login',

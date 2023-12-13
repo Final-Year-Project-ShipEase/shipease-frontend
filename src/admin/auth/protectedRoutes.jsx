@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import UseAdminAuth from './adminAuth';
 import axios from 'axios';
 import { useSnackbar } from '../../utils/snackbarContextProvider';
-import UseAdminAuth from './adminAuth';
-
 const AdminProtectedRoute = () => {
   const data = localStorage.getItem('adminData');
   const { admin, setLoading, setAdmin } = UseAdminAuth();
@@ -30,20 +29,15 @@ const AdminProtectedRoute = () => {
       }
       setLoading(false);
     };
-    verifyToken();
-  }, [setLoading, setAdmin, data, show]);
+  }, []);
 
-  const admin1 = true;
-  return (
-    <div>
-      {admin1 ? (
-        <>
-          <Outlet />
-        </>
-      ) : (
-        <>{data ? <></> : <Navigate to="/admin/login" />}</>
-      )}
-    </div>
-  );
+  if (!data) {
+    // Redirect to login if adminData is not present in localStorage
+    return <Navigate to="/admin/login" />;
+  }
+
+  // Render children components (Outlet) if adminData is present
+  return <Outlet />;
 };
+
 export default AdminProtectedRoute;
