@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import UseAdminAuth from './adminAuth';
 import axios from 'axios';
 import { useSnackbar } from '../../utils/snackbarContextProvider';
-import UseAdminAuth from './adminAuth';
-
 const AdminProtectedRoute = () => {
   const data = localStorage.getItem('adminData');
   const { admin, setLoading, setAdmin } = UseAdminAuth();
@@ -13,9 +12,9 @@ const AdminProtectedRoute = () => {
     const verifyToken = async () => {
       setLoading(true);
       if (data) {
-        const token = JSON.parse(localStorage.getItem('adminData'));
+        const token = JSON.parse(localStorage.getItem('adminData')).token;
         await axios
-          .get(`/admin/auth/protected`, {
+          .get(`/token/verify`, {
             headers: { Authorization: `Bearer ${token}` },
           })
           .then(() => {
@@ -30,19 +29,15 @@ const AdminProtectedRoute = () => {
       }
       setLoading(false);
     };
-  }, [setLoading, setAdmin, data, show]);
+  }, []);
 
-  useEffect(() => {}, [data]);
-  return (
-    <div>
-      {data ? (
-        <>
-          <Outlet />
-        </>
-      ) : (
-        <>{data ? <></> : <Navigate to="/admin/login" />}</>
-      )}
-    </div>
-  );
+  if (!data) {
+    // Redirect to login if adminData is not present in localStorage
+    return <Navigate to="/admin/login" />;
+  }
+
+  // Render children components (Outlet) if adminData is present
+  return <Outlet />;
 };
+
 export default AdminProtectedRoute;

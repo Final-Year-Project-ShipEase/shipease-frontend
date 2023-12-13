@@ -3,6 +3,7 @@ import { Box, Button, Drawer, useTheme } from '@mui/material';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
+import UseTenantAuth from '../../auth/tenantAuth';
 
 const Sidebar = ({ leftSpan }) => {
   const widthVal = (leftSpan / 12) * 100;
@@ -10,6 +11,7 @@ const Sidebar = ({ leftSpan }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
+  const { logout } = UseTenantAuth();
 
   const handleClick = (item) => {
     navigate(item.link);
@@ -64,6 +66,46 @@ const Sidebar = ({ leftSpan }) => {
     );
   };
 
+  const CustomButton2 = ({ item, sx }) => {
+    const isActive = activeButton === item.name;
+
+    return (
+      <Button
+        sx={{
+          ...sx,
+          display: 'flex',
+          padding: '16px 16px 16px 32px',
+          alignItems: 'left',
+          gap: '3px',
+          alignSelf: 'stretch',
+          overflow: 'hidden',
+          color: theme.palette.buttonSidebar.ColorActive,
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          fontSize: '14px',
+          textTransform: 'none',
+          fontWeight: isActive ? 550 : 400,
+          lineHeight: '140%',
+          height: '40px',
+          justifyContent: 'left',
+          borderRight: isActive
+            ? theme.palette.buttonSidebar.borderright
+            : 'none',
+          backgroundColor: isActive
+            ? theme.palette.buttonSidebar.main
+            : theme.palette.buttonSidebar.BackgroundColorActive,
+          '&:hover': {
+            backgroundColor: theme.palette.buttonSidebar.main,
+          },
+        }}
+        onClick={() => logout()}
+        startIcon={item.icon}
+      >
+        {item.name}
+      </Button>
+    );
+  };
+
   return (
     <Drawer
       elevation={4}
@@ -96,7 +138,7 @@ const Sidebar = ({ leftSpan }) => {
         {NavigationItems.map((item, index) => (
           <CustomButton key={index} item={item} />
         ))}
-        <CustomButton
+        <CustomButton2
           item={{
             name: 'Log out',
             link: '/login',

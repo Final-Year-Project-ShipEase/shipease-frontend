@@ -2,10 +2,10 @@ import { Navigate, Outlet } from 'react-router-dom';
 import UseTenantAuth from './tenantAuth';
 
 const TenantNonLoginRoute = () => {
-  const { admin } = UseTenantAuth();
+  const { tenant } = UseTenantAuth();
   return (
     <div>
-      {!admin ? (
+      {!tenant ? (
         <>
           <Outlet />
         </>
