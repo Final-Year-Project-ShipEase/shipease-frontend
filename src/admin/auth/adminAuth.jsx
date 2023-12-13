@@ -19,7 +19,7 @@ const UseAdminAuth = () => {
         const data = response;
         console.log(data);
         localStorage.setItem('adminData', JSON.stringify(data));
-        //setAdmin(data);
+        setAdmin(data);
         show('Logged in successfully');
       })
       .catch((error) => {
@@ -39,26 +39,22 @@ const UseAdminAuth = () => {
         password,
       });
 
-      const data = response;
+      const data = response.data;
       localStorage.setItem('adminData', JSON.stringify(data));
-      setAdmin(data);
+      setAdmin(true);
       show('Logged in successfully');
     } catch (error) {
       console.error(error);
-      admin
-        ? show('Logged in successfully')
-        : show('Invalid credentials', 'error');
+      show('Invalid credentials', 'error');
     } finally {
       setLoading(false);
     }
   };
 
   const logout = () => {
-    setLoading(true);
     localStorage.removeItem('adminData');
     setAdmin(false);
     show('Logged out successfully');
-    setLoading(false);
   };
 
   return { login, logout, loading, admin, setLoading, setAdmin };

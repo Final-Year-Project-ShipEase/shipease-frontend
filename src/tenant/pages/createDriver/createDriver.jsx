@@ -3,30 +3,35 @@ import { Box, Typography } from '@mui/material';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-
 import TextField from '../../components/inputs/textField/TextField.jsx';
 import PhoneNumberInput from '../../components/inputs/phoneNumberField/PhoneNumber.jsx';
 import CustomSwitch from '../../components/switch/Switch.jsx';
 import CustomButton from '../../components/buttons/CustomButton.jsx';
-
+import CustomButton2 from '../../components/buttons/CustomButton.jsx';
 import { ReactComponent as LeftArrorSvg } from './assets/leftArrow.svg';
 import { ReactComponent as CameraSvg } from './assets/camera.svg';
 import profileImage from './assets/user_image.png';
+import useDriverService from '../../../admin/services/driverService.jsx';
+import useDriverApprovalService from '../../../admin/services/driverApprovalServices.jsx';
 
 function CreateDriver() {
   // const { createUser } = useUserService();
   const navigate = useNavigate();
+  const { createDriver } = useDriverService();
+  const { createDriverApproval } = useDriverApprovalService();
 
   const fileInputRef = useRef(null);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     password: Yup.string().required('Password is required'),
-    phoneNumber: Yup.string().required('Phone Number is required'),
+    phoneNo: Yup.string().required('Phone Number is required'), // Changed to phoneNo
     city: Yup.string().required('City is required'),
     cnic: Yup.string().required('Cnic is required'),
     trackerNo: Yup.string().required('Tracker number is required'),
-    file: Yup.mixed().required('Cover Photo is required'),
+    status: Yup.mixed()
+      .oneOf(['Active', 'Inactive'], 'Status is invalid')
+      .required('Status is required'), // Added status validation
   });
 
   const handleDivClick = () => {
@@ -68,15 +73,36 @@ function CreateDriver() {
           name: '',
           password: '',
           cnic: '',
-          status: '',
+          status: 'inactive',
           phoneNumber: '',
           city: '',
           trackerNo: '',
         }}
         validationSchema={validationSchema}
         onSubmit={async (values) => {
-          // const res = await createUser(values);
-          // if (res.status === 201) navigate('/users');
+          console.log(values);
+          try {
+            const res = await createDriver(values);
+            const data = localStorage.getItem('tenantData');
+            const tenantId = JSON.parse(data).id;
+
+            if (res.status === 201) {
+              const res2 = await createDriverApproval({
+                driverId: res.data.id,
+                tenantId: tenantId,
+                adminId: 1,
+                permission: 'rejected',
+                status: 'active',
+              });
+
+              if (res2.status === 201) {
+                navigate('/driversgarage');
+              }
+            }
+          } catch (error) {
+            console.error('Error during form submission:', error);
+            // Handle errors, show error message, etc.
+          }
         }}
       >
         {({ values, isSubmitting, setFieldValue, errors, touched, dirty }) => (
@@ -200,7 +226,7 @@ function CreateDriver() {
                         label={'Password'}
                         name="password"
                         placeholder={'Ex : hamza123'}
-                        type= "password"
+                        type="password"
                       />
                       <ErrorMessage
                         name="password"
@@ -309,9 +335,7 @@ function CreateDriver() {
                       justifyContent: 'space-between',
                       mb: '40px',
                     }}
-                  >
-                   
-                  </Box>
+                  ></Box>
                   <Box
                     sx={{
                       display: 'flex',
@@ -321,17 +345,17 @@ function CreateDriver() {
                     <CustomButton
                       role={'secondary'}
                       customStyle={{ width: '361px' }}
-                      onClick={() => navigate('/users')}
+                      onClick={() => navigate('/driversgarage')}
                     >
                       Cancel
                     </CustomButton>
-                    <CustomButton
+                    <CustomButton2
                       type="submit"
                       role={'primary'}
                       customStyle={{ width: '361px' }}
                     >
                       Submit
-                    </CustomButton>
+                    </CustomButton2>
                   </Box>
                 </Box>
               </Box>

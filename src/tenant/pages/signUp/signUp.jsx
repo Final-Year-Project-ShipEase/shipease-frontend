@@ -32,7 +32,7 @@ const TenantSignUpPage = () => {
         alignItems: 'center',
         width: '100%',
         height: '100vh',
-        backgroundColor: theme.palette.page.main,
+        backgroundColor: theme.palette.page.background,
         overflow: 'hidden',
       }}
     >
@@ -66,8 +66,8 @@ const TenantSignUpPage = () => {
             style={{
               backgroundColor: theme.palette.page.form,
               padding: '15%',
-              paddingTop: '7%',
-              paddingBottom: '11%',
+              paddingTop: '17%',
+              paddingBottom: '17%',
               borderTopLeftRadius: '10%',
               borderBottomLeftRadius: '10%',
             }}
@@ -78,55 +78,8 @@ const TenantSignUpPage = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-              }}
-            >
-              <div
-                name="Firstname"
-                style={{ marginBottom: '16px', width: '48%' }}
-              >
-                <input
-                  type="text"
-                  id="firstname"
-                  style={{
-                    width: '100%',
-                    height: '40px',
-                    paddingLeft: '5%',
-                    border: 'none',
-                    borderBottom: `1px solid ${theme.palette.primary.black}`,
-                  }}
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
-                  placeholder="First Name"
-                />
-              </div>
-              <div
-                name="lastname"
-                style={{ marginBottom: '16px', width: '48%' }}
-              >
-                <div style={{ position: 'relative' }}>
-                  <input
-                    type="text"
-                    id="lastname"
-                    style={{
-                      width: '100%',
-                      height: '40px',
-                      paddingLeft: '5%',
-                      border: 'none',
-                      borderBottom: `1px solid ${theme.palette.primary.black}`,
-                    }}
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                    placeholder="Last Name"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
+                marginTop: '10px',
+                marginBottom: '16px',
               }}
             >
               <div
@@ -148,13 +101,11 @@ const TenantSignUpPage = () => {
                   placeholder="Username"
                 />
               </div>
-              <div
-                name="PhoneNo"
-                style={{ marginBottom: '16px', width: '48%' }}
-              >
+
+              <div name="Name" style={{ marginBottom: '16px', width: '48%' }}>
                 <input
                   type="text"
-                  id="phoneno"
+                  id="Name"
                   style={{
                     width: '100%',
                     height: '40px',
@@ -164,7 +115,7 @@ const TenantSignUpPage = () => {
                   }}
                   onChange={(e) => setName(e.target.value)}
                   value={name}
-                  placeholder="Phone No"
+                  placeholder="Name"
                 />
               </div>
             </div>
@@ -174,6 +125,8 @@ const TenantSignUpPage = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
+                marginTop: '10px',
+                marginBottom: '16px',
               }}
             >
               <div name="email" style={{ marginBottom: '16px', width: '48%' }}>
@@ -243,6 +196,8 @@ const TenantSignUpPage = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
+                marginTop: '10px',
+                marginBottom: '16px',
               }}
             >
               <div

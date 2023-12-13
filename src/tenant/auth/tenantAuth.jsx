@@ -5,7 +5,7 @@ import { useSnackbar } from '../../utils/snackbarContextProvider';
 const UseTenantAuth = () => {
   const { show } = useSnackbar();
   const [loading, setLoading] = useState(false);
-  const [admin, setAdmin] = useState(false);
+  const [tenant, setTenant] = useState(false);
 
   const loginWithToken = async (email, password) => {
     setLoading(true);
@@ -18,7 +18,7 @@ const UseTenantAuth = () => {
       .then((response) => {
         const data = response.data;
         localStorage.setItem('adminData', JSON.stringify(data));
-        setAdmin(data);
+        setTenant(data);
         show('Logged in successfully');
       })
       .catch((error) => {
@@ -40,7 +40,7 @@ const UseTenantAuth = () => {
 
       const data = response.data;
       localStorage.setItem('tenantData', JSON.stringify(data));
-      setAdmin(data);
+      setTenant(data);
       show('Logged in successfully');
     } catch (error) {
       console.error(error);
@@ -52,11 +52,18 @@ const UseTenantAuth = () => {
 
   const logout = () => {
     localStorage.removeItem('tenantData');
-    setAdmin(false);
+    setTenant(false);
     show('Logged out successfully');
   };
 
-  return { login, logout, loading, admin, setLoading, setAdmin };
+  return {
+    login,
+    logout,
+    loading,
+    tenant,
+    setLoading,
+    setTenant,
+  };
 };
 
 export default UseTenantAuth;
