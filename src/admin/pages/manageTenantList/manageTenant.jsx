@@ -39,12 +39,12 @@ const ManageTenantList = () => {
         justifyContent="space-between"
         alignItems="center"
         height="7%"
-        sx={{ mt: isSmallScreen ? '5%' : 2, marginTop: "-2%"}}
+        sx={{ mt: isSmallScreen ? '-8%' : -2}}
       >
         <PageHeader />
       </Grid>
 
-      <Grid item xs={2} sx={{ mt: isSmallScreen ? '15%' : 2 }} flex="1">
+      <Grid item xs={2} sx={{ mt: isSmallScreen ? '10%' : 2 }} flex="1">
         <TableData columns={TenantsColumns} rows={tenants} setLoading={setLoading} />
       </Grid>
     </Grid>
