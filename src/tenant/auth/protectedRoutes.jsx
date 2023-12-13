@@ -30,13 +30,11 @@ const TenantProtectedRoute = () => {
       }
       setLoading(false);
     };
-    verifyToken();
-  }, [setLoading, setAdmin, data, show]);
+  }, []);
 
-  const tenant = true;
   return (
     <div>
-      {tenant ? (
+      {data ? (
         <>
           <Outlet />
         </>
