@@ -5,11 +5,16 @@ import TableData from './components/table/table';
 import { VehicleColumns, dummyVehicleData } from './_columns.js';
 import useVehicleApprovalService from '../../services/vehicleApprovalService.jsx';
 import Spinner from '../../../utils/spinner';
+import { Grid } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 const VehicleApproval = () => {
   const { getRejectedApproval } = useVehicleApprovalService();
   const [vehiclesApproval, setVehiclesApproval] = useState([]);
   const [loading, setLoading] = useState(false);
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,30 +31,30 @@ const VehicleApproval = () => {
   }, [VehicleApproval]);
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        p: 2,
-      }}
-    >
-      {loading && <Spinner />}
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '100%',
-          height: '7%',
-        }}
+<Grid container direction="column" width="95%" height="100%" sx={{ margin: '40px' }}>
+      {loading && (
+        <Grid item>
+          <Spinner />
+        </Grid>
+      )}
+
+
+      <Grid
+        item
+        xs={1}
+        container
+        justifyContent="space-between"
+        alignItems="center"
+        height="7%"
+        sx={{ mt: isSmallScreen ? '-3%' : -2}}
       >
         <PageHeader />
-      </Box>
-      <Box sx={{ mt: 2 }}>
-        <TableData columns={VehicleColumns} rows={vehiclesApproval} />
-      </Box>
-    </Box>
+      </Grid>
+
+      <Grid item xs={2} sx={{ mt: isSmallScreen ? '5%' : -1 }} flex="1">
+      <TableData columns={VehicleColumns} rows={vehiclesApproval} />
+      </Grid>
+    </Grid>
   );
 };
 

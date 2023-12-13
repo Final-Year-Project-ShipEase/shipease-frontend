@@ -38,7 +38,7 @@ const DriversApproval = () => {
       >
         <PageHeader />
       </Grid>
-      <Grid item xs={2} sx={{ mt: isSmallScreen ? '10%' : 2 }} flex="1">
+      <Grid item xs={2} sx={{ mt: isSmallScreen ? '10%' : -1 }} flex="1">
       <TableData columns={DriverColumns} rows={driverData} />
       </Grid>
     </Grid>
