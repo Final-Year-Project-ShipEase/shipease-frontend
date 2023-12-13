@@ -104,7 +104,6 @@ function CreateDriver() {
             }
           } catch (error) {
             console.error('Error during form submission:', error);
-            // Handle errors, show error message, etc.
           }
         }}
       >
