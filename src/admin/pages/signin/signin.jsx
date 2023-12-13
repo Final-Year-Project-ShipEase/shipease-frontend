@@ -23,8 +23,8 @@ const SignInPage = () => {
     setAcceptTerms(!acceptTerms);
   };
 
-  const handleSignIn = async () => {
-    await login(name, password);
+  const handleSignIn = () => {
+    login(name, password);
     navigate('/admin/dashboard');
   };
 
