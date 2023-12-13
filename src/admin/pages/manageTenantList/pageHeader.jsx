@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Box,
+  Grid,
   InputLabel,
   FormControl,
   MenuItem,
@@ -17,6 +18,7 @@ const PageHeader = () => {
   const [Driver, setDriver] = React.useState('');
   const theme = useTheme();
   const navigate = useNavigate();
+
   const handleChange = (event) => {
     setDriver(event.target.value);
   };
@@ -26,21 +28,16 @@ const PageHeader = () => {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        width: '100%',
-      }}
+    <Grid
+      container
+      justifyContent="space-between"
+      alignItems="center"
+      spacing={2}
+      sx={{ width: '100%' }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 2,
-        }}
-      >
-        <FormControl>
+      {/* Grid 1 */}
+      <Grid item xs={12} md={2}>
+        <FormControl fullWidth>
           <InputLabel id="Driver-select-label">Driver</InputLabel>
           <Select
             id="Driver-select"
@@ -48,11 +45,7 @@ const PageHeader = () => {
             label="Driver"
             onChange={handleChange}
             sx={{
-              display: 'flex',
-              width: 125,
               height: 50,
-              alignItems: 'flex-start',
-              flexShrink: 0,
               backgroundColor: theme.palette.buttons.main,
               color: theme.palette.buttons.text,
               borderRadius: 4,
@@ -67,18 +60,18 @@ const PageHeader = () => {
             <MenuItem value={30}>Username</MenuItem>
           </Select>
         </FormControl>
+      </Grid>
+
+      {/* Grid 2 */}
+      <Grid item xs={12} md={4}>
         <TextField
           id="search"
           placeholder="Search Driver"
           variant="standard"
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
             padding: '10px 18px',
-            gap: 8,
-            width: 500,
             height: 50,
+            width: '100%',
             color: theme.palette.buttons.text,
             backgroundColor: theme.palette.buttons.main,
             borderRadius: 4,
@@ -93,19 +86,21 @@ const PageHeader = () => {
             ),
           }}
         />
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 2,
-          justifyContent: 'flex-end',
-        }}
-      >
-        <HeaderButton text={'Export'} onClick={onClickPermit} />
-        <HeaderButton text={'Reset'} onClick={onClickPermit} />
-      </Box>
-    </Box>
+      </Grid>
+
+      {/* Grid 3 - Empty grid, acting as spacer */}
+      <Grid item xs={12} md={2} />
+
+      {/* Grid 4 */}
+      <Grid item container xs={12} md={4} justifyContent="flex-end" spacing={2}>
+        <Grid item>
+          <HeaderButton text={'Export'} onClick={onClickPermit} />
+        </Grid>
+        <Grid item>
+          <HeaderButton text={'Reset'} onClick={onClickPermit} />
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
 
