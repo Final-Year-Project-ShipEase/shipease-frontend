@@ -157,7 +157,7 @@ export default function TableData({ columns, rows }) {
   }, [order, orderBy, rows, rowsPerPage, page]);
 
   return (
-    <Box sx={{ marginTop: '24px', overflowY: 'auto' }}>
+    <Box sx={{ marginTop: '-12px', overflowY: 'auto' }}>
       <Grid justifyContent="center">
         <Grid item xs={12} md={12}>
           <Box sx={{ width: '100%', borderRadius: '20px 20px 20px 20px' }}>

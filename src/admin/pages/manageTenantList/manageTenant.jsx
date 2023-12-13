@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Grid, useTheme, useMediaQuery } from '@mui/material';
 import PageHeader from './pageHeader';
 import TableData from './components/table/table';
 import { TenantsColumns } from './_columns.js';
@@ -10,6 +10,8 @@ const ManageTenantList = () => {
   const { getTenants } = useTenantService();
   const [tenants, setTenants] = useState([]);
   const [loading, setLoading] = useState(false);
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const fetchData = async () => {
     setLoading(true);
@@ -23,34 +25,29 @@ const ManageTenantList = () => {
   }, [loading]);
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        p: 2,
-      }}
-    >
-      {loading && <Spinner />}
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '100%',
-          height: '7%',
-        }}
+    <Grid container direction="column" width="95%" height="100%" sx={{ margin: '40px' }}>
+      {loading && (
+        <Grid item>
+          <Spinner />
+        </Grid>
+      )}
+
+      <Grid
+        item
+        xs={1}
+        container
+        justifyContent="space-between"
+        alignItems="center"
+        height="7%"
+        sx={{ mt: isSmallScreen ? '-8%' : -2}}
       >
         <PageHeader />
-      </Box>
-      <Box sx={{ mt: 2 }}>
-        <TableData
-          columns={TenantsColumns}
-          rows={tenants}
-          setLoading={setLoading}
-        />
-      </Box>
-    </Box>
+      </Grid>
+
+      <Grid item xs={2} sx={{ mt: isSmallScreen ? '10%' : 2 }} flex="1">
+        <TableData columns={TenantsColumns} rows={tenants} setLoading={setLoading} />
+      </Grid>
+    </Grid>
   );
 };
 

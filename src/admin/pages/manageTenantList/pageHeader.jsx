@@ -8,6 +8,7 @@ import {
   TextField,
   InputAdornment,
   useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
@@ -17,12 +18,14 @@ const PageHeader = () => {
   const [Driver, setDriver] = React.useState('');
   const theme = useTheme();
   const navigate = useNavigate();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Check if the screen is small
+
   const handleChange = (event) => {
     setDriver(event.target.value);
   };
 
   const onClickPermit = () => {
-    navigate('/');
+    navigate('/approval/drivers');
   };
 
   return (
@@ -31,6 +34,7 @@ const PageHeader = () => {
         display: 'flex',
         justifyContent: 'space-between',
         width: '100%',
+        marginTop: isSmallScreen ? '5%' : 0, // Apply margin top if the screen is small
       }}
     >
       <Box

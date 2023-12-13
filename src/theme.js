@@ -31,7 +31,7 @@ const theme = createTheme({
     },
     secondary: {
       main: '#71C4EF',
-      hover: '#509664',
+      hover: '#629DBC',
     },
     buttons: {
       main: '#FFFFFF',

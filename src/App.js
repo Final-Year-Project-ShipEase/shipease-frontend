@@ -24,9 +24,6 @@ import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
 import CreateDriver from './tenant/pages/createDriver/createDriver';
 import CreateVehicle from './tenant/pages/createVehicle/createVehicle';
 import UseAdminAuth from './admin/auth/adminAuth';
-import Spinner from './utils/spinner';
-import CreateVehicle from './tenant/pages/createVehicle/createVehicle';
-import CreateVehicle from './tenant/pages/createVehicle/createVehicle';
 
 const App = () => {
   const { loading } = UseAdminAuth();

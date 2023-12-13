@@ -4,11 +4,16 @@ import PageHeader from './pageHeader';
 import TableData from './components/table/table';
 import { DriverColumns } from './_columns.js';
 import useDriverApprovalService from '../../services/driverApprovalServices.jsx';
+import { Grid } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 const DriversApproval = () => {
   const { getRejectedApproval } = useDriverApprovalService();
   const [driverData, setDriverData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,29 +26,22 @@ const DriversApproval = () => {
   }, [driverData]);
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        p: 2,
-      }}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '100%',
-          height: '7%',
-        }}
+    <Grid container direction="column" width="95%" height="100%" sx={{ margin: '40px' }}>
+      <Grid
+        item
+        xs={1}
+        container
+        justifyContent="space-between"
+        alignItems="center"
+        height="7%"
+        sx={{ mt: isSmallScreen ? '-8%' : -2}}
       >
         <PageHeader />
-      </Box>
-      <Box sx={{ mt: 2 }}>
-        <TableData columns={DriverColumns} rows={driverData} />
-      </Box>
-    </Box>
+      </Grid>
+      <Grid item xs={2} sx={{ mt: isSmallScreen ? '10%' : -1 }} flex="1">
+      <TableData columns={DriverColumns} rows={driverData} />
+      </Grid>
+    </Grid>
   );
 };
 
