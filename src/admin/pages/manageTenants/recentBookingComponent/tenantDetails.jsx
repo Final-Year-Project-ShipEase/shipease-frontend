@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import useTenantService from '../../../services/tenantService';
 import Spinner from '../../../../utils/spinner';
 import { formatTimestamp } from '../../../../utils/timestamp';
+import { useMediaQuery } from '@mui/material';
+
 
 const TenantDetails = ({ tenantId }) => {
   const theme = useTheme();
@@ -16,6 +18,7 @@ const TenantDetails = ({ tenantId }) => {
   const [tenant, setTenant] = useState([]);
   const { getTenantById } = useTenantService();
   const [loading, setLoading] = useState(false);
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const fetchTenantData = async () => {
@@ -76,7 +79,7 @@ const TenantDetails = ({ tenantId }) => {
             item
             xs={6}
             sx={{
-              marginLeft: '-140px',
+              marginLeft: isSmallScreen ? '-20px' : '-140px',
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
@@ -108,7 +111,7 @@ const TenantDetails = ({ tenantId }) => {
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
-              marginLeft: '-140px',
+              marginLeft: isSmallScreen ? '-20px' : '-140px',
               marginTop: '30px', 
             }}
           >
@@ -139,7 +142,7 @@ const TenantDetails = ({ tenantId }) => {
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginLeft: '-250px',
+                marginLeft: isSmallScreen ? '-140px' : '-250px',
               }}
             >
               <Grid>

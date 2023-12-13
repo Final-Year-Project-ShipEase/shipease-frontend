@@ -11,7 +11,7 @@ const ManageTenants = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        height: '100%',
+        height: '100vh',
         padding: 2,
       }}
     >
