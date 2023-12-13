@@ -89,7 +89,6 @@ function CreateDriver() {
               status: 'Inactive',
               tenant_id: tenantId,
             });
-
             if (res.status === 201) {
               const res2 = await createDriverApproval({
                 driverId: res.data.id,
