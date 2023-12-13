@@ -106,7 +106,7 @@ const Navbar = () => {
                 justifyContent: 'center',
               }}
             >
-              <InputBase
+              {/* <InputBase
                 sx={{
                   border: '1px solid #ccc',
                   borderRadius: '14px',
@@ -125,7 +125,7 @@ const Navbar = () => {
                     }}
                   />
                 }
-              />
+              /> */}
             </Box>
           </Grid>
           <Grid item md={2.5}>
