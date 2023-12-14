@@ -20,7 +20,7 @@ const Sidebar = ({ leftSpan }) => {
 
   React.useEffect(() => {
     const currentPath = location.pathname;
-    const currentPathName = currentPath.split('/')[1];
+    const currentPathName = currentPath.split('/')[1]; // Update index to 1
     const currentPathNameCapitalized =
       currentPathName.charAt(0).toUpperCase() + currentPathName.slice(1);
     setActiveButton(currentPathNameCapitalized);

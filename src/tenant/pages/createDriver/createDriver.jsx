@@ -229,7 +229,6 @@ function CreateDriver() {
                         name="password"
                         placeholder={'Ex : hamza123'}
                         type="password"
-
                       />
                       <ErrorMessage
                         name="password"

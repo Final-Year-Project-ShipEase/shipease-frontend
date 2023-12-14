@@ -126,10 +126,10 @@ const SummaryCard = () => {
           }}
         >
           <SubCard
-            content="Driver's Approvals"
-            count={driverApprovals || 10}
+            content="Vehicle's Approvals"
+            count={vehicleApprovals || 10}
             onClick={() => {
-              navigate('/admin/driversApproval');
+              navigate('/admin/vehiclesApproval');
             }}
           />
           <SubCard content="User's Registered" count={15} />
