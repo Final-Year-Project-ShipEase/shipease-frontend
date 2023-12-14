@@ -1,40 +1,36 @@
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import Person4OutlinedIcon from '@mui/icons-material/Person4Outlined';
 import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
 import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined';
-
 const NavigationItems = [
   {
     name: 'Dashboard',
-    link: '/dashboard',
+    link: '/admin/dashboard',
     icon: <HomeOutlinedIcon style={{ color: '#565656' }} />,
   },
   {
-    name: 'Tenant Management',
-    link: '/managetenants',
+    name: 'ManageTenants',
+    link: '/admin/manageTenants',
     icon: <BadgeOutlinedIcon style={{ color: '#565656' }} />,
   },
   {
-    name: 'Drivers Approval',
-    link: '/approval/drivers',
-    icon: <PeopleAltOutlinedIcon style={{ color: '#565656' }} />,
+    name: 'Approval',
+    icon: <PersonAddAltOutlinedIcon style={{ color: '#565656' }} />,
+    link: '/admin/driversApproval',
   },
   {
-    name: 'Vehicles Approval',
-    link: '/approval/vehicles',
-    icon: <PersonAddAltOutlinedIcon style={{ color: '#565656' }} />,
+    name: 'DriversApproval',
+    link: '/admin/driversApproval',
+  },
+  {
+    name: 'VehiclesApproval',
+    link: '/admin/vehiclesApproval',
   },
   {
     name: 'Permissions',
-    link: '/permissions',
+    link: '/admin/permissions',
     icon: <Person4OutlinedIcon style={{ color: '#565656' }} />,
-  },
-  {
-    name: 'Announcements',
-    link: '/announcements',
-    icon: <GppGoodOutlinedIcon style={{ color: '#565656' }} />,
   },
 ];
 

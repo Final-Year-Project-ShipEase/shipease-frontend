@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-import { Box, Button, Drawer } from '@mui/material';
-
+import { Box, Button, Drawer, useTheme, useMediaQuery } from '@mui/material';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
+import UseAdminAuth from '../../auth/adminAuth';
 
-const Sidebar = ({ leftSpan }) => {
+const Sidebar = ({ leftSpan, isDrawerOpen }) => {
   const widthVal = (leftSpan / 12) * 100;
   const [activeButton, setActiveButton] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
+  const issmallScreen = useMediaQuery(theme.breakpoints.up(''));
+  const { logout } = UseAdminAuth();
 
   const handleClick = (item) => {
     navigate(item.link);
@@ -18,7 +22,7 @@ const Sidebar = ({ leftSpan }) => {
 
   React.useEffect(() => {
     const currentPath = location.pathname;
-    const currentPathName = currentPath.split('/')[1];
+    const currentPathName = currentPath.split('/')[2]; // Update index to 2
     const currentPathNameCapitalized =
       currentPathName.charAt(0).toUpperCase() + currentPathName.slice(1);
     setActiveButton(currentPathNameCapitalized);
@@ -33,26 +37,73 @@ const Sidebar = ({ leftSpan }) => {
           ...sx,
           display: 'flex',
           padding: '16px 16px 16px 32px',
-          alignItems: 'center',
-          gap: '8px',
+          alignItems: 'left',
+          gap: '3px',
           alignSelf: 'stretch',
           overflow: 'hidden',
-          color: isActive ? '#121212' : '#565656',
+          color: theme.palette.buttonSidebar.ColorActive,
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
-          fontSize: '16px',
+          fontSize: '14px',
+          textTransform: 'none',
+          fontWeight: isActive ? 500 : 200,
+          lineHeight: '140%',
+          height: '40px',
+          justifyContent: 'left',
+          borderRight: isActive
+            ? theme.palette.buttonSidebar.borderright
+            : 'none',
+          backgroundColor: isActive
+            ? theme.palette.buttonSidebar.main
+            : theme.palette.buttonSidebar.BackgroundColorActive,
+          '&:hover': {
+            backgroundColor: theme.palette.buttonSidebar.main,
+          },
+        }}
+        onClick={() => handleClick(item)}
+        startIcon={item.icon}
+      >
+        {item.name}
+      </Button>
+    );
+  };
+
+  const CustomButton2 = ({ item, sx }) => {
+    const isActive = activeButton === item.name;
+
+    return (
+      <Button
+        sx={{
+          ...sx,
+          display: 'flex',
+          padding: '16px 16px 16px 32px',
+          alignItems: 'left',
+          gap: '3px',
+          alignSelf: 'stretch',
+          overflow: 'hidden',
+          color: theme.palette.buttonSidebar.ColorActive,
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          fontSize: '14px',
           textTransform: 'none',
           fontWeight: isActive ? 550 : 400,
           lineHeight: '140%',
           height: '40px',
           justifyContent: 'left',
-          borderRight: isActive ? '4px solid #0061FF' : 'none',
-          backgroundColor: isActive ? '#EAEFFF' : 'transparent',
+          borderRight: isActive
+            ? theme.palette.buttonSidebar.borderright
+            : 'none',
+          backgroundColor: isActive
+            ? theme.palette.buttonSidebar.main
+            : theme.palette.buttonSidebar.BackgroundColorActive,
           '&:hover': {
-            backgroundColor: '#EAEFFF',
+            backgroundColor: theme.palette.buttonSidebar.main,
           },
         }}
-        onClick={() => handleClick(item)}
+        onClick={() => {
+          logout();
+          navigate(item.link);
+        }}
         startIcon={item.icon}
       >
         {item.name}
@@ -64,17 +115,18 @@ const Sidebar = ({ leftSpan }) => {
     <Drawer
       elevation={4}
       variant="permanent"
+      open={isDrawerOpen && isLargeScreen}
       sx={{
-        width: `${widthVal}%`,
+        width: isDrawerOpen || isLargeScreen ? `${widthVal}%` : '0', // Set width to 0 when the drawer is closed
         flexShrink: 0,
         whiteSpace: 'nowrap',
         boxSizing: 'border-box',
         '& .MuiDrawer-paper': {
           mt: '7vh',
           py: '24px',
-          width: `${widthVal}%`,
-          backgroundColor: '#ffffff',
-          boxShadow: '5px 2px 10px rgba(0, 0, 0, 0.1)',
+          width: isDrawerOpen || isLargeScreen ? `${widthVal}%` : '0', // Set width to 0 when the drawer is closed
+          backgroundColor: theme.palette.buttonSidebar.hovertextcolor,
+          boxShadow: theme.palette.buttonSidebar.sidebarshadow,
         },
       }}
     >
@@ -89,14 +141,18 @@ const Sidebar = ({ leftSpan }) => {
           padding: '0 0 3rem 0',
         }}
       >
-        {NavigationItems.map((item) => (
-          <CustomButton key={item.name} item={item} />
+        {NavigationItems.map((item, index) => (
+          <CustomButton key={index} item={item} />
         ))}
-        <CustomButton
+        <CustomButton2
           item={{
             name: 'Log out',
-            link: '/dashboard',
-            icon: <PowerSettingsNewOutlinedIcon style={{ color: '#565656' }} />,
+            link: '/admin/login',
+            icon: (
+              <PowerSettingsNewOutlinedIcon
+                style={{ color: theme.palette.buttonSidebar.ColorActive }}
+              />
+            ),
           }}
           sx={{ marginTop: 'auto' }}
         />
