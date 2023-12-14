@@ -10,11 +10,11 @@ const NavigationItems = [
   {
     name: 'Drivers Garage',
     icon: <PersonAddAltOutlinedIcon style={{ color: '#565656' }} />,
-    link: '/driversgarage',
+    link: '/driversGarage',
   },
   {
     name: 'Vehicles Garage',
-    link: '/vehiclesgarage',
+    link: '/vehiclesGarage',
     icon: <Person4OutlinedIcon style={{ color: '#565656' }} />,
   },
 ];
