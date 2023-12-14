@@ -25,7 +25,6 @@ const Sidebar = ({ leftSpan }) => {
       currentPathName.charAt(0).toUpperCase() + currentPathName.slice(1);
     setActiveButton(currentPathNameCapitalized);
   }, [location]);
-  
 
   const CustomButton = ({ item, sx }) => {
     const isActive = activeButton === item.name;

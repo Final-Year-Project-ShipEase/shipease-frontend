@@ -22,7 +22,6 @@ import {
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
 import useTenantService from '../../../../services/tenantService.jsx';
 
-
 const TenantDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
@@ -60,33 +59,35 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
     if (tenantId) fetchTenant();
   }, [tenantId]);
 
-
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     let error = false;
-  
+
     if (name === 'name' && !/^[A-Za-z ]+$/.test(value)) {
       // Display an error or handle the validation accordingly
       // For now, you can log an error to the console
-      console.error('Invalid characters in the name field. Only alphabets are allowed.');
+      console.error(
+        'Invalid characters in the name field. Only alphabets are allowed.'
+      );
       error = true;
     }
-  
+
     if (name === 'phoneNo' && !/^[0-9]+$/.test(value)) {
       // Display an error or handle the validation accordingly
       // For now, you can log an error to the console
-      console.error('Invalid characters in the phoneNo field. Only numbers are allowed.');
+      console.error(
+        'Invalid characters in the phoneNo field. Only numbers are allowed.'
+      );
       error = true;
     }
-  
+
     if (name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
       // Display an error or handle the validation accordingly
       // For now, you can log an error to the console
       console.error('Invalid email address.');
       error = true;
     }
-  
+
     // Set the respective error state based on the field
     if (name === 'name') {
       setNameError(error);
@@ -95,12 +96,10 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
     } else if (name === 'email') {
       setEmailError(error);
     }
-  
+
     // Update formData
     setFormData({ ...formData, [name]: value });
   };
-  
-  
 
   const handleSwitchChange = (e) => {
     setFormData({
@@ -191,17 +190,20 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-          <TextField
-          fullWidth
-          margin="normal"
-          label="Name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          error={nameError} // Add a state variable to track the error condition
-          helperText={nameError ? 'Invalid characters. Only alphabets are allowed.' : ''}
-        
-        />
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              error={nameError} // Add a state variable to track the error condition
+              helperText={
+                nameError
+                  ? 'Invalid characters. Only alphabets are allowed.'
+                  : ''
+              }
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -224,28 +226,32 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Phone No"
-            name="phoneNo"
-            value={formData.phoneNo}
-            onChange={handleChange}
-            error={phoneNoError}  // Set error prop based on the phoneNoError state
-            helperText={phoneNoError ? 'Invalid characters. Only numbers are allowed.' : ''}
-          />
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Phone No"
+              name="phoneNo"
+              value={formData.phoneNo}
+              onChange={handleChange}
+              error={phoneNoError} // Set error prop based on the phoneNoError state
+              helperText={
+                phoneNoError
+                  ? 'Invalid characters. Only numbers are allowed.'
+                  : ''
+              }
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            margin="normal"
-            label="Email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            error={emailError}  // Set error prop based on the emailError state
-            helperText={emailError ? 'Invalid email address.' : ''}
-          />
+            <TextField
+              fullWidth
+              margin="normal"
+              label="Email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              error={emailError} // Set error prop based on the emailError state
+              helperText={emailError ? 'Invalid email address.' : ''}
+            />
           </Grid>
           <Grid item xs={12} sm={12}>
             <Autocomplete

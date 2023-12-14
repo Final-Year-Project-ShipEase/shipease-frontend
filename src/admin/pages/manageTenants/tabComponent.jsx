@@ -103,7 +103,7 @@ const TabComponent = () => {
           />
         </Tabs>
       </Box>
-      <CustomTabPanel value={value} style={{margintop: "120px"}} index={0}>
+      <CustomTabPanel value={value} style={{ margintop: '120px' }} index={0}>
         <TableData columns={BookingColumns} rows={dummyBookingData} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>

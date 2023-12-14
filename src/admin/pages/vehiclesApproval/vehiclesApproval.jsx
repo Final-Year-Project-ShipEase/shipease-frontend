@@ -31,13 +31,18 @@ const VehicleApproval = () => {
   }, [VehicleApproval]);
 
   return (
-<Grid container direction="column" width="95%" height="100%" sx={{ margin: '40px' }}>
+    <Grid
+      container
+      direction="column"
+      width="95%"
+      height="100%"
+      sx={{ margin: '40px' }}
+    >
       {loading && (
         <Grid item>
           <Spinner />
         </Grid>
       )}
-
 
       <Grid
         item
@@ -46,13 +51,13 @@ const VehicleApproval = () => {
         justifyContent="space-between"
         alignItems="center"
         height="7%"
-        sx={{ mt: isSmallScreen ? '-3%' : -2}}
+        sx={{ mt: isSmallScreen ? '-3%' : -2 }}
       >
         <PageHeader />
       </Grid>
 
       <Grid item xs={2} sx={{ mt: isSmallScreen ? '5%' : -1 }} flex="1">
-      <TableData columns={VehicleColumns} rows={vehiclesApproval} />
+        <TableData columns={VehicleColumns} rows={vehiclesApproval} />
       </Grid>
     </Grid>
   );

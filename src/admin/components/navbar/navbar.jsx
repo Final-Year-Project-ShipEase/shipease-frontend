@@ -9,16 +9,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Sidebar from '../sidebar/sidebar.jsx';
 
-
 const Navbar = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
-  const leftSpan = 3; 
+  const leftSpan = 3;
 
   const handleDrawerOpen = () => {
-    
     setDrawerOpen(true);
   };
 
@@ -26,49 +24,44 @@ const Navbar = () => {
     setDrawerOpen(false);
   };
 
-
   if (isSmallScreen) {
     return (
       <>
-         <AppBar position="fixed" elevation={3} sx={appBarStyles}>
-        <Toolbar>
-          <Grid container alignItems="center">
-            <Grid item xs={2}>
-              {/* Menu icon for small screens */}
-              <IconButton
-              color="black"
-              edge="start"
-              sx={{ marginRight: '8px' }}
-              onClick={handleDrawerOpen}
-            >
-              <MenuIcon />
-            </IconButton>
+        <AppBar position="fixed" elevation={3} sx={appBarStyles}>
+          <Toolbar>
+            <Grid container alignItems="center">
+              <Grid item xs={2}>
+                {/* Menu icon for small screens */}
+                <IconButton
+                  color="black"
+                  edge="start"
+                  sx={{ marginRight: '8px' }}
+                  onClick={handleDrawerOpen}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Grid>
+              <Grid item xs={4}>
+                {/* Show only the logo on small screens */}
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                  }}
+                >
+                  <img
+                    src={require('../../resources/shipease.png')}
+                    alt="ShipEase-logo"
+                  />
+                </Box>
+              </Grid>
             </Grid>
-            <Grid item xs={4}>
-              {/* Show only the logo on small screens */}
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                }}
-              >
-                <img
-                  src={require('../../resources/shipease.png')}
-                  alt="ShipEase-logo"
-                />
-              </Box>
-            </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-        <Drawer
-  anchor="left"
-  open={isDrawerOpen}
-  onClose={handleDrawerClose}
->
-  {/* Pass isDrawerOpen to Sidebar */}
-  <Sidebar leftSpan={leftSpan} isDrawerOpen={isDrawerOpen} />
-</Drawer>
+          </Toolbar>
+        </AppBar>
+        <Drawer anchor="left" open={isDrawerOpen} onClose={handleDrawerClose}>
+          {/* Pass isDrawerOpen to Sidebar */}
+          <Sidebar leftSpan={leftSpan} isDrawerOpen={isDrawerOpen} />
+        </Drawer>
       </>
     );
   }

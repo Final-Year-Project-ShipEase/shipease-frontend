@@ -26,7 +26,7 @@ const ManageTenants = () => {
         <TenantDetails tenantId={id} />
       </Box>
 
-      <Box sx={{ mt: '30px', borderTop: '1px dashed black'}}>
+      <Box sx={{ mt: '30px', borderTop: '1px dashed black' }}>
         <TabComponent />
       </Box>
     </Box>

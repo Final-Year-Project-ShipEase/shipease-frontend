@@ -29,7 +29,13 @@ const SignInPage = () => {
   };
 
   return (
-    <div style={{ width: '100%', height: '100VH',         backgroundColor: theme.palette.page.background,}}>
+    <div
+      style={{
+        width: '100%',
+        height: '100VH',
+        backgroundColor: theme.palette.page.background,
+      }}
+    >
       <header>{/* Header content */}</header>
       <main>
         {/* Body content */}

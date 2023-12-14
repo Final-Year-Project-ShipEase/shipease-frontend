@@ -85,7 +85,6 @@ const TenantSignUpPage = () => {
                 marginBottom: '16px',
               }}
             >
-
               <div
                 name="username"
                 style={{ marginBottom: '16px', width: '48%' }}
@@ -106,10 +105,7 @@ const TenantSignUpPage = () => {
                 />
               </div>
 
-              <div
-                name="Name"
-                style={{ marginBottom: '16px', width: '48%' }}
-              >
+              <div name="Name" style={{ marginBottom: '16px', width: '48%' }}>
                 <input
                   type="text"
                   id="Name"

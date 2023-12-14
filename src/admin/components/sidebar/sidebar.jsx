@@ -129,7 +129,6 @@ const Sidebar = ({ leftSpan, isDrawerOpen }) => {
           boxShadow: theme.palette.buttonSidebar.sidebarshadow,
         },
       }}
-
     >
       <Box
         sx={{

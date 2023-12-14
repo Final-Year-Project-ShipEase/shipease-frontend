@@ -25,7 +25,13 @@ const ManageTenantList = () => {
   }, [loading]);
 
   return (
-    <Grid container direction="column" width="95%" height="100%" sx={{ margin: '40px' }}>
+    <Grid
+      container
+      direction="column"
+      width="95%"
+      height="100%"
+      sx={{ margin: '40px' }}
+    >
       {loading && (
         <Grid item>
           <Spinner />
@@ -39,13 +45,17 @@ const ManageTenantList = () => {
         justifyContent="space-between"
         alignItems="center"
         height="7%"
-        sx={{ mt: isSmallScreen ? '-8%' : -2}}
+        sx={{ mt: isSmallScreen ? '-8%' : -2 }}
       >
         <PageHeader />
       </Grid>
 
       <Grid item xs={2} sx={{ mt: isSmallScreen ? '10%' : 2 }} flex="1">
-        <TableData columns={TenantsColumns} rows={tenants} setLoading={setLoading} />
+        <TableData
+          columns={TenantsColumns}
+          rows={tenants}
+          setLoading={setLoading}
+        />
       </Grid>
     </Grid>
   );
