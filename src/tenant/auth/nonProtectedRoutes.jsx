@@ -1,8 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import UseTenantAuth from './tenantAuth';
 
 const TenantNonLoginRoute = () => {
-  const { tenant } = UseTenantAuth();
+  const tenant = JSON.parse(localStorage.getItem('tenantData'));
   return (
     <div>
       {!tenant ? (
@@ -10,7 +9,7 @@ const TenantNonLoginRoute = () => {
           <Outlet />
         </>
       ) : (
-        <Navigate to="/login" />
+        <Navigate to="/" />
       )}
     </div>
   );

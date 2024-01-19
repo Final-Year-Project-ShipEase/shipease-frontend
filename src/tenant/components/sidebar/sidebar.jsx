@@ -98,7 +98,10 @@ const Sidebar = ({ leftSpan }) => {
             backgroundColor: theme.palette.buttonSidebar.main,
           },
         }}
-        onClick={() => logout()}
+        onClick={() => {
+          logout();
+          handleClick(item);
+        }}
         startIcon={item.icon}
       >
         {item.name}

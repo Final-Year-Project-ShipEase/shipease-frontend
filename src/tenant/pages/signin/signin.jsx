@@ -14,8 +14,11 @@ const SignInPage = () => {
   const { tokenValidation } = UseTenantAuth();
 
   const validationSchema = Yup.object({
-    name: Yup.string().required('Required'),
-    password: Yup.string().required('Required'),
+    // name: Yup.string().required('Required'),
+    // password: Yup.string().required('Required'),
+    //TODO: remove this after testing
+    name: Yup.string(),
+    password: Yup.string(),
   });
 
   const handleAcceptTerms = () => {
@@ -63,14 +66,15 @@ const SignInPage = () => {
         >
           <Formik
             initialValues={{
-              name: '',
-              password: '',
+              //TODO: remove this after testing
+              name: 'Abdullah123',
+              password: '12345',
             }}
             validationSchema={validationSchema}
             onSubmit={async (values) => {
               try {
                 await tokenValidation(values.name, values.password);
-                navigate('/');
+                navigate('/dashboard');
               } catch (error) {
                 console.error('Login error:', error);
               }

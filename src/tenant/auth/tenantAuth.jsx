@@ -5,7 +5,7 @@ import CreateAxiosInstance from '../../utils/axiosNonProtectedInstance';
 const UseTenantAuth = () => {
   const { show } = useSnackbar();
   const [loading, setLoading] = useState(false);
-  const [tenant, setTenant] = useState(false);
+  const [tenant, setTenant] = useState();
 
   const axiosInstance = CreateAxiosInstance();
 
@@ -38,31 +38,13 @@ const UseTenantAuth = () => {
       if (response.status === 200) {
         const { tenant } = response.data;
         localStorage.setItem('tenantData', JSON.stringify(tenant));
-        setTenant(tenant);
         return true;
       }
     } catch (error) {
       localStorage.removeItem('tenantData');
-      show('Invalid credentials', 'error');
       return false;
     } finally {
       setLoading(false);
-    }
-  };
-
-  const login = async (username, password) => {
-    const response = await axiosInstance.post(`/tenantlogin`, {
-      username,
-      password,
-    });
-    try {
-      const data = response.data;
-      show('Logged in successfully');
-      //scheduleTokenRefresh();
-      return data;
-    } catch (error) {
-      show('Invalid credentials', 'error');
-      return false;
     }
   };
 
@@ -91,7 +73,6 @@ const UseTenantAuth = () => {
     tenant,
     setLoading,
     setTenant,
-    login,
   };
 };
 

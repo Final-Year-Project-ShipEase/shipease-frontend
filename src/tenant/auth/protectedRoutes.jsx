@@ -12,29 +12,44 @@ const TenantProtectedRoute = () => {
   const { show } = useSnackbar();
 
   useEffect(() => {
+    let isMounted = true;
+
     const verifyToken = async () => {
       setLoading(true);
+
       if (data) {
         const token = JSON.parse(localStorage.getItem('tenantData')).token;
-        await axios
-          .get(`${process.env.REACT_APP_BACKEND_URL}/tenant/auth/verify`, {
-            headers: { Authorization: `Bearer ${token}` },
-          })
-          .then(() => {
-            setTenant(data);
-            show('Logged in successfully');
-          })
-          .catch((error) => {
-            console.error(error);
+
+        try {
+          const response = await axios.get(
+            `${process.env.REACT_APP_BACKEND_URL}/tenant/auth/verify`,
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+
+          setTenant(data);
+          show('Logged in successfully');
+        } catch (error) {
+          console.error(error);
+
+          if (isMounted) {
             setTenant(false);
             localStorage.removeItem('userdata');
             show('Logged out successfully');
-          });
+          }
+        }
       }
-      setLoading(false);
+
+      if (isMounted) {
+        setLoading(false);
+      }
     };
+
     verifyToken();
-  }, [setLoading, setTenant, data, show]);
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+  
 
   if (loading) {
     return <Spinner />;
