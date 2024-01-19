@@ -3,28 +3,24 @@ import { Box, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UseTenantAuth from '../../auth/tenantAuth';
+import { Form, Formik } from 'formik';
+import * as Yup from 'yup';
 
 const SignInPage = () => {
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const theme = useTheme();
-  const [message, setMessage] = useState('');
   const navigate = useNavigate();
-  const { login, loading } = UseTenantAuth();
-  const handlePasswordVisibility = (event) => {
-    setShowPassword(!showPassword);
-  };
+  const { tokenValidation } = UseTenantAuth();
+
+  const validationSchema = Yup.object({
+    name: Yup.string().required('Required'),
+    password: Yup.string().required('Required'),
+  });
 
   const handleAcceptTerms = () => {
     setAcceptTerms(!acceptTerms);
   };
-
-  const handleSignIn = async () => {
-    await login(name, password);
-  };
-
   const handleSignUp = () => {
     navigate('/signup');
   };
@@ -65,201 +61,203 @@ const SignInPage = () => {
             zIndex: '1',
           }}
         >
-          <form
-            style={{
-              backgroundColor: theme.palette.page.form,
-              padding: '15%',
-              paddingTop: '17%',
-              paddingBottom: '17%',
-              borderTopLeftRadius: '10%',
-              borderBottomLeftRadius: '10%',
+          <Formik
+            initialValues={{
+              name: '',
+              password: '',
+            }}
+            validationSchema={validationSchema}
+            onSubmit={async (values) => {
+              try {
+                await tokenValidation(values.name, values.password);
+                navigate('/');
+              } catch (error) {
+                console.error('Login error:', error);
+              }
             }}
           >
-            <h2 style={{ marginTop: 10, fontSize: '250%' }}>Welcome back!</h2>
-            <h5
-              style={{
-                marginTop: -40,
-                fontSize: '89%',
-                color: theme.palette.page.h5,
-              }}
-            >
-              Please enter your details!
-            </h5>
-            <h2 style={{ marginTop: -15, fontSize: '170%' }}>
-              <strong>Sign In</strong>
-            </h2>
-            <div name="username">
-              <label
+            {(formikProps) => (
+              <Form
                 style={{
-                  fontSize: '12px',
-                  marginLeft: '1%',
-                  fontWeight: 'bold',
+                  backgroundColor: theme.palette.page.form,
+                  padding: '15%',
+                  paddingTop: '17%',
+                  paddingBottom: '17%',
+                  borderTopLeftRadius: '10%',
+                  borderBottomLeftRadius: '10%',
                 }}
               >
-                Username:
-              </label>
-              <input
-                type="text"
-                id="username"
-                style={{
-                  width: '100%',
-                  height: '40px',
-                  paddingLeft: '5%',
-                  border: theme.palette.page.border,
-                }}
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                placeholder="Muntazer Mehdi"
-              />
-            </div>
-            <div name="password" style={{ marginTop: '2%' }}>
-              <label
-                style={{
-                  fontSize: '12px',
-                  marginLeft: '1%',
-                  fontWeight: 'bold',
-                }}
-              >
-                Password:
-              </label>
-              <div style={{ position: 'relative' }}>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  id="password"
+                <h2 style={{ marginTop: 10, fontSize: '250%' }}>
+                  Welcome back!
+                </h2>
+                <h5
                   style={{
-                    width: '100%',
-                    height: '40px',
-                    paddingLeft: '5%',
-                    border: theme.palette.page.border,
+                    marginTop: -40,
+                    fontSize: '89%',
+                    color: theme.palette.page.h5,
                   }}
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  placeholder="Password"
-                />
-                {showPassword ? (
-                  <VisibilityOff
+                >
+                  Please enter your details!
+                </h5>
+                <h2 style={{ marginTop: -15, fontSize: '170%' }}>
+                  <strong>Sign In</strong>
+                </h2>
+                <div name="username">
+                  <label
                     style={{
-                      position: 'absolute',
-                      top: '50%',
-                      right: '10px',
-                      transform: 'translateY(-50%)',
-                      cursor: 'pointer',
+                      fontSize: '12px',
+                      marginLeft: '1%',
+                      fontWeight: 'bold',
                     }}
-                    onClick={handlePasswordVisibility}
-                  />
-                ) : (
-                  <Visibility
+                  >
+                    Username:
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
                     style={{
-                      position: 'absolute',
-                      top: '50%',
-                      right: '10px',
-                      transform: 'translateY(-50%)',
-                      cursor: 'pointer',
+                      width: '100%',
+                      height: '40px',
+                      paddingLeft: '5%',
+                      border: theme.palette.page.border,
                     }}
-                    onClick={handlePasswordVisibility}
+                    onChange={formikProps.handleChange}
+                    onBlur={formikProps.handleBlur}
+                    value={formikProps.values.name}
+                    error={formikProps.errors.name}
+                    placeholder="username"
                   />
-                )}
-              </div>
-            </div>
-            <div name="forgot" style={{ textAlign: 'right' }}>
-              <a
-                href="/forgot-password"
-                style={{
-                  color: theme.palette.secondary.main,
-                  fontSize: '88%',
-                }}
-              >
-                Forgot Password?
-              </a>
-            </div>
-            <div name="checkbox">
-              <label
-                style={{
-                  color: theme.palette.secondary.main,
-                  fontSize: '13px',
-                  marginLeft: '1%',
-                  fontWeight: 'bold',
-                }}
-              >
-                <input
-                  type="checkbox"
-                  checked={acceptTerms}
-                  onChange={handleAcceptTerms}
-                />
-                I accept the Terms and Conditions
-              </label>
-            </div>
+                </div>
+                <div name="password" style={{ marginTop: '2%' }}>
+                  <label
+                    style={{
+                      fontSize: '12px',
+                      marginLeft: '1%',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    Password:
+                  </label>
+                  <div style={{ position: 'relative' }}>
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      id="password"
+                      style={{
+                        width: '100%',
+                        height: '40px',
+                        paddingLeft: '5%',
+                        border: theme.palette.page.border,
+                      }}
+                      onChange={formikProps.handleChange}
+                      onBlur={formikProps.handleBlur}
+                      value={formikProps.values.password}
+                      error={formikProps.errors.password}
+                      placeholder="Password"
+                    />
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        right: '10px',
+                        transform: 'translateY(-50%)',
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </div>
+                  </div>
+                </div>
+                <div name="forgot" style={{ textAlign: 'right' }}>
+                  <a
+                    href="/forgot-password"
+                    style={{
+                      color: theme.palette.secondary.main,
+                      fontSize: '88%',
+                    }}
+                  >
+                    Forgot Password?
+                  </a>
+                </div>
+                <div name="checkbox">
+                  <label
+                    style={{
+                      color: theme.palette.secondary.main,
+                      fontSize: '13px',
+                      marginLeft: '1%',
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={acceptTerms}
+                      onChange={handleAcceptTerms}
+                    />
+                    I accept the Terms and Conditions
+                  </label>
+                </div>
 
-            <div name="button" style={{ width: '100%', height: '40%' }}>
-              <button
-                type="submit"
-                style={{
-                  backgroundColor: theme.palette.secondary.main,
-                  color: theme.palette.buttons.main,
-                  marginTop: '10px',
-                  padding: '10px 20px',
-                  fontSize: '16px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: '4px',
-                  boxShadow: theme.palette.buttons.boxShadow,
-                }}
-                onClick={() => {
-                  handleSignIn();
-                  navigate('/dashboard');
-                }}
-                onTouchStart={(e) =>
-                  (e.target.style.backgroundColor =
-                    theme.palette.secondary.hover)
-                }
-                onTouchEnd={(e) =>
-                  (e.target.style.backgroundColor =
-                    theme.palette.secondary.main)
-                }
-                onMouseEnter={(e) =>
-                  (e.target.style.backgroundColor =
-                    theme.palette.secondary.hover)
-                }
-                onMouseLeave={(e) =>
-                  (e.target.style.backgroundColor =
-                    theme.palette.secondary.main)
-                }
-              >
-                Sign In
-              </button>
-            </div>
-            <div name="button" style={{ width: '100%', height: '40%' }}>
-              <button
-                type="submit"
-                style={{
-                  backgroundColor: theme.palette.background.transparent,
-                  color: theme.palette.primary.black,
-                  marginTop: '10px',
-                  padding: '10px 20px',
-                  fontSize: '16px',
-                  border: 'none',
-                  cursor: 'pointer',
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: '4px',
-                  boxShadow: theme.palette.buttons.boxShadow,
-                }}
-                onClick={handleSignUp}
-                onTouchStart={(e) =>
-                  (e.target.style.backgroundColor =
-                    theme.palette.secondary.hover)
-                }
-                onTouchEnd={(e) =>
-                  (e.target.style.backgroundColor =
-                    theme.palette.secondary.main)
-                }
-              >
-                Sign Up
-              </button>
-            </div>
-          </form>
+                <div name="button" style={{ width: '100%', height: '40%' }}>
+                  <button
+                    type="submit"
+                    style={{
+                      backgroundColor: theme.palette.secondary.main,
+                      color: theme.palette.buttons.main,
+                      marginTop: '10px',
+                      padding: '10px 20px',
+                      fontSize: '16px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '4px',
+                      boxShadow: theme.palette.buttons.boxShadow,
+                    }}
+                    onTouchStart={(e) =>
+                      (e.target.style.backgroundColor =
+                        theme.palette.secondary.hover)
+                    }
+                    onTouchEnd={(e) =>
+                      (e.target.style.backgroundColor =
+                        theme.palette.secondary.main)
+                    }
+                  >
+                    {' '}
+                    Sign In
+                  </button>
+                </div>
+                <div name="button" style={{ width: '100%', height: '40%' }}>
+                  <button
+                    type="submit"
+                    style={{
+                      backgroundColor: theme.palette.background.transparent,
+                      color: theme.palette.primary.black,
+                      marginTop: '10px',
+                      padding: '10px 20px',
+                      fontSize: '16px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '4px',
+                      boxShadow: theme.palette.buttons.boxShadow,
+                    }}
+                    onClick={handleSignUp}
+                    onTouchStart={(e) =>
+                      (e.target.style.backgroundColor =
+                        theme.palette.secondary.hover)
+                    }
+                    onTouchEnd={(e) =>
+                      (e.target.style.backgroundColor =
+                        theme.palette.secondary.main)
+                    }
+                  >
+                    Sign Up
+                  </button>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
     </Box>
