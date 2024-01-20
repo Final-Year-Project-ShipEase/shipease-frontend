@@ -2,16 +2,16 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Box, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UseTenantAuth from '../../auth/tenantAuth';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import { useTenantAuth } from '../../auth/tenantAuth';
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
-  const { tokenValidation } = UseTenantAuth();
+  const { tokenValidation } = useTenantAuth();
 
   const validationSchema = Yup.object({
     // name: Yup.string().required('Required'),

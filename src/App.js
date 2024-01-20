@@ -23,90 +23,100 @@ import DriversGarage from './tenant/pages/driversGarage/driversGarage';
 import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
 import CreateDriver from './tenant/pages/createDriver/createDriver';
 import CreateVehicle from './tenant/pages/createVehicle/createVehicle';
-import UseAdminAuth from './admin/auth/adminAuth';
+import { TenantAuthProvider } from './tenant/auth/tenantAuth';
 
 const App = () => {
-  const { loading } = UseAdminAuth();
   return (
     <>
       <SnackbarProvider>
-        <Router>
-          <Routes>
-            <Route path="/error" element={<ErrorPage />} />
-            <Route element={<TenantNonLoginRoute />}>
-              <Route path="login" element={<TenantSignInPage />} />
-              <Route path="signup" element={<TenantSignUpPage />} />
-            </Route>
+        <TenantAuthProvider>
+          <Router>
+            <Routes>
+              <Route path="/error" element={<ErrorPage />} />
+              <Route element={<TenantNonLoginRoute />}>
+                <Route path="login" element={<TenantSignInPage />} />
+                <Route path="signup" element={<TenantSignUpPage />} />
+              </Route>
 
-            <Route element={<TenantProtectedRoute />}>
-              <Route
-                path="*"
-                element={
-                  <>
-                    <Routes>
-                      <Route element={<TenantLayout />}>
-                        <Route path="/" element={<TenantDashboard />} />
-                        <Route path="dashboard" element={<TenantDashboard />} />
-                        <Route
-                          path="driversgarage"
-                          element={<DriversGarage />}
-                        />
-                        <Route
-                          path="vehiclesgarage"
-                          element={<VehiclesGarage />}
-                        />
-                        <Route path="addDriver" element={<CreateDriver />} />
-                        <Route path="addVehicle" element={<CreateVehicle />} />
-                      </Route>
-                      <Route path="*" element={<ErrorPage />}></Route>
-                    </Routes>
-                  </>
-                }
-              />
-            </Route>
-            <Route path="/error" element={<ErrorPage />} />
-            <Route element={<AdminNonLoginRoute />}>
-              <Route path="admin/login" element={<SignInPage />} />
-            </Route>
-            <Route element={<AdminProtectedRoute />}>
-              <Route
-                path="admin/*"
-                element={
-                  <>
-                    <Routes>
-                      <Route element={<Layout />}>
-                        <Route path="/" element={<AdminDashboard />} />
-                        <Route path="dashboard" element={<AdminDashboard />} />
-                        <Route
-                          path="managetenants"
-                          element={<ManageTenantList />}
-                        />
-                        <Route
-                          path="managetenants/:id"
-                          element={<ManageTenants />}
-                        />
-                        <Route
-                          path="driversapproval"
-                          element={<DriversApproval />}
-                        />
-                        <Route
-                          path="vehiclesapproval"
-                          element={<VehiclesApproval />}
-                        />
-                        <Route path="permissions" element={<Permissions />} />
-                        {/* <Route
+              <Route element={<TenantProtectedRoute />}>
+                <Route
+                  path="*"
+                  element={
+                    <>
+                      <Routes>
+                        <Route element={<TenantLayout />}>
+                          <Route path="/" element={<TenantDashboard />} />
+                          <Route
+                            path="dashboard"
+                            element={<TenantDashboard />}
+                          />
+                          <Route
+                            path="driversgarage"
+                            element={<DriversGarage />}
+                          />
+                          <Route
+                            path="vehiclesgarage"
+                            element={<VehiclesGarage />}
+                          />
+                          <Route path="addDriver" element={<CreateDriver />} />
+                          <Route
+                            path="addVehicle"
+                            element={<CreateVehicle />}
+                          />
+                        </Route>
+                        <Route path="*" element={<ErrorPage />}></Route>
+                      </Routes>
+                    </>
+                  }
+                />
+              </Route>
+              <Route path="/error" element={<ErrorPage />} />
+              <Route element={<AdminNonLoginRoute />}>
+                <Route path="admin/login" element={<SignInPage />} />
+              </Route>
+              <Route element={<AdminProtectedRoute />}>
+                <Route
+                  path="admin/*"
+                  element={
+                    <>
+                      <Routes>
+                        <Route element={<Layout />}>
+                          <Route path="/" element={<AdminDashboard />} />
+                          <Route
+                            path="dashboard"
+                            element={<AdminDashboard />}
+                          />
+                          <Route
+                            path="managetenants"
+                            element={<ManageTenantList />}
+                          />
+                          <Route
+                            path="managetenants/:id"
+                            element={<ManageTenants />}
+                          />
+                          <Route
+                            path="driversapproval"
+                            element={<DriversApproval />}
+                          />
+                          <Route
+                            path="vehiclesapproval"
+                            element={<VehiclesApproval />}
+                          />
+                          <Route path="permissions" element={<Permissions />} />
+                          {/* <Route
                           path="announcements"
                           element={<Announcements />}
                         /> */}
-                      </Route>
-                      <Route path="*" element={<ErrorPage />}></Route>
-                    </Routes>
-                  </>
-                }
-              />
-            </Route>
-          </Routes>
-        </Router>
+                        </Route>
+                        <Route path="*" element={<ErrorPage />}></Route>
+                      </Routes>
+                    </>
+                  }
+                />
+              </Route>
+            </Routes>
+          </Router>
+        </TenantAuthProvider>
       </SnackbarProvider>
     </>
   );

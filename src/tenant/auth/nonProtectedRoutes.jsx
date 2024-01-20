@@ -1,7 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import { useTenantAuth } from './tenantAuth';
 
 const TenantNonLoginRoute = () => {
-  const tenant = JSON.parse(localStorage.getItem('tenantData'));
+  const { tenant } = useTenantAuth();
   return (
     <div>
       {!tenant ? (

@@ -1,14 +1,14 @@
 // TenantProtectedRoute.js
 import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import UseTenantAuth from './tenantAuth';
 import Spinner from '../../utils/spinner';
 import axios from 'axios';
 import { useSnackbar } from '../../utils/snackbarContextProvider';
+import { useTenantAuth } from './tenantAuth';
 
 const TenantProtectedRoute = () => {
   const data = JSON.parse(localStorage.getItem('tenantData'));
-  const { tenant, setLoading, setTenant, loading } = UseTenantAuth();
+  const { tenant, setLoading, setTenant, loading } = useTenantAuth();
   const { show } = useSnackbar();
 
   useEffect(() => {
@@ -20,23 +20,20 @@ const TenantProtectedRoute = () => {
       if (data) {
         const token = JSON.parse(localStorage.getItem('tenantData')).token;
 
-        try {
-          const response = await axios.get(
-            `${process.env.REACT_APP_BACKEND_URL}/tenant/auth/verify`,
-            { headers: { Authorization: `Bearer ${token}` } }
-          );
-
-          setTenant(data);
-          show('Logged in successfully');
-        } catch (error) {
-          console.error(error);
-
-          if (isMounted) {
+        await axios
+          .get(`${process.env.REACT_APP_BACKEND_URL}/tenant/auth/verify`, {
+            headers: { Authorization: `Bearer ${token}` },
+          })
+          .then((res) => {
+            setTenant(data);
+            show('Logged in successfully', 'success');
+          })
+          .catch((err) => {
+            console.error(err);
             setTenant(false);
-            localStorage.removeItem('userdata');
+            localStorage.removeItem('tenantData');
             show('Logged out successfully');
-          }
-        }
+          });
       }
 
       if (isMounted) {
@@ -49,7 +46,6 @@ const TenantProtectedRoute = () => {
       isMounted = false;
     };
   }, []);
-  
 
   if (loading) {
     return <Spinner />;

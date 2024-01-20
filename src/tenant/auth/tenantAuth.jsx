@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useSnackbar } from '../../utils/snackbarContextProvider';
 import CreateAxiosInstance from '../../utils/axiosNonProtectedInstance';
 
-const UseTenantAuth = () => {
+const TenantAuthContext = createContext();
+
+const TenantAuthProvider = ({ children }) => {
   const { show } = useSnackbar();
   const [loading, setLoading] = useState(false);
-  const [tenant, setTenant] = useState();
+  const [tenant, setTenant] = useState(false);
 
   const axiosInstance = CreateAxiosInstance();
 
@@ -50,8 +52,8 @@ const UseTenantAuth = () => {
 
   const logout = () => {
     localStorage.removeItem('tenantData');
+    
     setTenant(false);
-    show('Logged out successfully');
   };
 
   const scheduleTokenRefresh = () => {
@@ -65,7 +67,7 @@ const UseTenantAuth = () => {
   //   scheduleTokenRefresh();
   // }, []);
 
-  return {
+  const contextValue = {
     tokenValidation,
     logout,
     refreshToken,
@@ -74,6 +76,20 @@ const UseTenantAuth = () => {
     setLoading,
     setTenant,
   };
+
+  return (
+    <TenantAuthContext.Provider value={contextValue}>
+      {children}
+    </TenantAuthContext.Provider>
+  );
 };
 
-export default UseTenantAuth;
+const useTenantAuth = () => {
+  const context = useContext(TenantAuthContext);
+  if (context === undefined) {
+    throw new Error('useTenantAuth must be used within a TenantAuthProvider');
+  }
+  return context;
+};
+
+export { TenantAuthProvider, useTenantAuth };
