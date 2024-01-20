@@ -52,8 +52,8 @@ const TenantAuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('tenantData');
-    
     setTenant(false);
+    show('Logged out successfully', 'success');
   };
 
   const scheduleTokenRefresh = () => {
