@@ -8,6 +8,11 @@ const NavigationItems = [
     icon: <HomeOutlinedIcon style={{ color: '#565656' }} />,
   },
   {
+    name: 'Booking',
+    icon: <PersonAddAltOutlinedIcon style={{ color: '#565656' }} />,
+    link: '/booking',
+  },
+  {
     name: 'Drivers Garage',
     icon: <PersonAddAltOutlinedIcon style={{ color: '#565656' }} />,
     link: '/driversGarage',

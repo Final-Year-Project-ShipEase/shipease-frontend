@@ -24,6 +24,7 @@ import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
 import CreateDriver from './tenant/pages/createDriver/createDriver';
 import CreateVehicle from './tenant/pages/createVehicle/createVehicle';
 import UseAdminAuth from './admin/auth/adminAuth';
+import Booking from './tenant/pages/booking/booking';
 
 const App = () => {
   const { loading } = UseAdminAuth();
@@ -47,6 +48,10 @@ const App = () => {
                       <Route element={<TenantLayout />}>
                         <Route path="/" element={<TenantDashboard />} />
                         <Route path="dashboard" element={<TenantDashboard />} />
+                        <Route
+                          path="booking"
+                          element={<Booking/>}
+                        />
                         <Route
                           path="driversgarage"
                           element={<DriversGarage />}

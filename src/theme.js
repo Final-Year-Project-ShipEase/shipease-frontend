@@ -59,6 +59,9 @@ const theme = createTheme({
       iconColor: 'Green',
       poolback: '#D9D9D9',
       trasnparent: 'transparent',
+      bookingActiveStatus:'#FFAA29',
+      bookingReservedStatus:'red',
+      bookingCompletedStatus:'#71C4EF',
     },
     buttonSidebar: {
       main: 'rgba(0, 102, 140, 0.4)',
