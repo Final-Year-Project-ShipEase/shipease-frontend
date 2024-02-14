@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import UseAdminAuth from './adminAuth';
+import { useAdminAuth } from './adminAuth';
 
 const AdminNonLoginRoute = () => {
-  const { admin } = UseAdminAuth();
+  const { admin } = useAdminAuth();
   return (
     <div>
       {!admin ? (
@@ -10,7 +10,7 @@ const AdminNonLoginRoute = () => {
           <Outlet />
         </>
       ) : (
-        <Navigate to="/admin/login" />
+        <Navigate to="/admin/" />
       )}
     </div>
   );

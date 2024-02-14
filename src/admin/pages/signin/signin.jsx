@@ -1,9 +1,9 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useTheme } from '@mui/material';
 import React, { useState } from 'react';
-import UseAdminAuth from '../../auth/adminAuth';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../utils/spinner';
+import { useAdminAuth } from '../../auth/adminAuth';
 
 const SignInPage = () => {
   const [name, setName] = useState('');
@@ -12,7 +12,7 @@ const SignInPage = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const theme = useTheme();
   const [message, setMessage] = useState('');
-  const { login, loading } = UseAdminAuth();
+  const { tokenValidation, loading } = useAdminAuth();
   const navigate = useNavigate();
 
   const handlePasswordVisibility = (event) => {
@@ -23,8 +23,8 @@ const SignInPage = () => {
     setAcceptTerms(!acceptTerms);
   };
 
-  const handleSignIn = () => {
-    login(name, password);
+  const handleSignIn = async () => {
+    await tokenValidation(name, password);
     navigate('/admin/dashboard');
   };
 
