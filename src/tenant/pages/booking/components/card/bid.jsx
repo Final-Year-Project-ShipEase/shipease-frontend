@@ -1,12 +1,28 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import speaker from './resources/icons8-loudspeaker-32.png';
+import { useBookingService } from '../../../../../services/bookingServices';
 
 const Bid = () => {
     const theme = useTheme();
     const [bid, setBid] = useState(0);
+    const { getBookingList } = useBookingService();
+
+    useEffect(() => {
+        const fetchBooking = async () => {
+            try {
+                const response = await getBookingList();
+                console.log(response);
+                const bids = response.filter(booking => booking.status === 'bid');
+                setBid(bids.length);      
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchBooking();
+    }, []);
     return (
         <Box sx={{
             display:'flex',

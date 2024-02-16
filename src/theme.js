@@ -62,6 +62,7 @@ const theme = createTheme({
       bookingActiveStatus:'#FFAA29',
       bookingReservedStatus:'red',
       bookingCompletedStatus:'#71C4EF',
+      bookingBidStatus: 'green',
     },
     buttonSidebar: {
       main: 'rgba(0, 102, 140, 0.4)',

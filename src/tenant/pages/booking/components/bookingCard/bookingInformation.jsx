@@ -4,6 +4,9 @@ import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useBookingService } from '../../../../../services/bookingServices';
 import { useUserService } from '../../../../../services/userServices';
+import BookingDetailsModal from './bookingDetailModal';
+import { SettingsBackupRestoreOutlined } from '@mui/icons-material';
+
 
 
 const BookingInformation = () => {
@@ -12,6 +15,9 @@ const BookingInformation = () => {
     const {getUserList} = useUserService();
     const [users, setUser] = useState([]);
     const theme = useTheme();
+    const [openModal, setModal] = useState(false);
+
+    const [bookingId, setBookingId] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,10 +32,20 @@ const BookingInformation = () => {
             }
         };
         fetchData();
-    }, [getBookingList, getUserList]);
+    }, []);
+
+    const handleBookingClick = (bookingid) => {
+        setBookingId(bookingid);
+        setModal(true);
+    };
 
     return (
-     <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+     <Box sx={{ display: 'flex', flexWrap: 'wrap' }} >
+         <BookingDetailsModal 
+            open = {openModal}
+            handleClose={()=>setModal(false)}
+            booking_id={bookingId}
+        />
         {booking.map((bookings) => (
             <Box sx={{
                 backgroundColor: theme.palette.primary.backgroundColor,
@@ -38,7 +54,10 @@ const BookingInformation = () => {
                 borderRadius:'10px',
                 marginLeft:'20px',
                 marginBottom: '20px',
-            }}>
+            }} 
+            onClick={() => handleBookingClick(booking.id)} 
+            style={{ cursor: 'pointer' }}>
+                
                 <Box sx={{
                     display:'flex',
                     flexDirection:'column',
@@ -57,6 +76,7 @@ const BookingInformation = () => {
                                 backgroundColor:
                                 bookings.status == 'active' ? theme.palette.background.bookingActiveStatus
                                 : bookings.status == 'reserved' ? theme.palette.background.bookingReservedStatus
+                                : bookings.status == 'bid' ? theme.palette.background.bookingBidStatus
                                 : bookings.status == 'completed' ? theme.palette.background.bookingCompletedStatus:
                                 'transparent',
                                 borderRadius:'5px'

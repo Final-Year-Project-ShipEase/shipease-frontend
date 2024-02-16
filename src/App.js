@@ -25,6 +25,7 @@ import CreateDriver from './tenant/pages/createDriver/createDriver';
 import CreateVehicle from './tenant/pages/createVehicle/createVehicle';
 import UseAdminAuth from './admin/auth/adminAuth';
 import Booking from './tenant/pages/booking/booking';
+import BookingDetail from './tenant/pages/booking/components/bookingCard/bookingDetailModal';
 
 const App = () => {
   const { loading } = UseAdminAuth();
