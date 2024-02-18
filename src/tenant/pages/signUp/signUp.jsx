@@ -2,26 +2,39 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Box, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTenantServices } from '../../../services/tenantServices';
 
 const TenantSignUpPage = () => {
+  const [userName, setUserName] = useState('');
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [phoneNo, setPhoneNo] = useState('');
+  const [cities, setCities] = useState('');
   const theme = useTheme();
-  const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const {createTenant} = useTenantServices();
 
   const handlePasswordVisibility = (event) => {
     setShowPassword(!showPassword);
   };
 
-  const handleAcceptTerms = () => {
-    setAcceptTerms(!acceptTerms);
-  };
+  const handleSignIn = async () => {
+    try {
+      await createTenant({
+        username: userName,
+        name: name,
+        email: email,
+        password: password,
+        phoneNo: phoneNo,
+        cities: [cities],
+      });
 
-  const handleSignIn = () => {
-    navigate('/login');
+      navigate('/login');
+    } catch (error) {
+      console.error('Error signing up:', error);
+    }
   };
 
   return (
@@ -99,8 +112,8 @@ const TenantSignUpPage = () => {
                     border: 'none',
                     borderBottom: `1px solid ${theme.palette.primary.black}`,
                   }}
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
+                  onChange={(e) => setUserName(e.target.value)}
+                  value={userName}
                   placeholder="Username"
                 />
               </div>
@@ -119,7 +132,7 @@ const TenantSignUpPage = () => {
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                   placeholder="Name"
-                  placeholder="Name"
+
                 />
               </div>
             </div>
@@ -146,8 +159,8 @@ const TenantSignUpPage = () => {
                     border: 'none',
                     borderBottom: `1px solid ${theme.palette.primary.black}`,
                   }}
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                   placeholder="Email"
                 />
               </div>
@@ -157,7 +170,7 @@ const TenantSignUpPage = () => {
               >
                 <div style={{ position: 'relative' }}>
                   <input
-                    type="text"
+                    type={showPassword ? 'text' : 'password'} // Toggle input type between 'text' and 'password'
                     id="password"
                     style={{
                       width: '100%',
@@ -166,8 +179,8 @@ const TenantSignUpPage = () => {
                       border: 'none',
                       borderBottom: `1px solid ${theme.palette.primary.black}`,
                     }}
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
                     placeholder="Password"
                   />
                   {showPassword ? (
@@ -195,6 +208,7 @@ const TenantSignUpPage = () => {
                   )}
                 </div>
               </div>
+
             </div>
 
             <div
@@ -222,8 +236,8 @@ const TenantSignUpPage = () => {
                     border: 'none',
                     borderBottom: `1px solid ${theme.palette.primary.black}`,
                   }}
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
+                  onChange={(e) => setPhoneNo(e.target.value)}
+                  value={phoneNo}
                   placeholder="Phone No"
                 />
               </div>
@@ -238,8 +252,8 @@ const TenantSignUpPage = () => {
                     border: 'none',
                     borderBottom: `1px solid ${theme.palette.primary.black}`,
                   }}
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
+                  onChange={(e) => setCities(e.target.value)}
+                  value={cities}
                   placeholder="Cities"
                 />
               </div>
@@ -263,20 +277,20 @@ const TenantSignUpPage = () => {
                 }}
                 onClick={handleSignIn}
                 onTouchStart={(e) =>
-                  (e.target.style.backgroundColor =
-                    theme.palette.secondary.hover)
+                (e.target.style.backgroundColor =
+                  theme.palette.secondary.hover)
                 }
                 onTouchEnd={(e) =>
-                  (e.target.style.backgroundColor =
-                    theme.palette.secondary.main)
+                (e.target.style.backgroundColor =
+                  theme.palette.secondary.main)
                 }
                 onMouseEnter={(e) =>
-                  (e.target.style.backgroundColor =
-                    theme.palette.secondary.hover)
+                (e.target.style.backgroundColor =
+                  theme.palette.secondary.hover)
                 }
                 onMouseLeave={(e) =>
-                  (e.target.style.backgroundColor =
-                    theme.palette.secondary.main)
+                (e.target.style.backgroundColor =
+                  theme.palette.secondary.main)
                 }
               >
                 Create Account
