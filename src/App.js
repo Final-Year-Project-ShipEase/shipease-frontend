@@ -26,6 +26,7 @@ import CreateVehicle from './tenant/pages/createVehicle/createVehicle';
 import UseAdminAuth from './admin/auth/adminAuth';
 import Booking from './tenant/pages/booking/booking';
 import BookingDetail from './tenant/pages/booking/components/bookingCard/bookingDetailModal';
+import poolRequest from './tenant/pages/poolRequest/poolRequest'
 
 const App = () => {
   const { loading } = UseAdminAuth();
@@ -63,6 +64,10 @@ const App = () => {
                         />
                         <Route path="addDriver" element={<CreateDriver />} />
                         <Route path="addVehicle" element={<CreateVehicle />} />
+                        <Route
+                          path="poolRequest"
+                          element={<poolRequest />}
+                        />
                       </Route>
                       <Route path="*" element={<ErrorPage />}></Route>
                     </Routes>
