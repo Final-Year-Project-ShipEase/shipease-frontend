@@ -143,7 +143,20 @@ const PoolRequestInformation = () => {
                             color:theme.palette.primary.text,
                             padding:'10px'
                         }}>
-                            Date: {poolRequest.date}
+                            Date: {poolRequest.startDate}
+                        </Box>
+                    </Box>
+                    <Box sx={{
+                        display:'flex',
+                        flexDirection:'row',
+                        justifyContent: 'space-between'
+                    }}>
+                        <Box sx={{
+                            fontSize:'15px',
+                            color:theme.palette.primary.text,
+                            padding:'10px'
+                        }}>
+                            Date: {poolRequest.types}
                         </Box>
                     </Box>
                 </Box>
