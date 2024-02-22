@@ -67,6 +67,7 @@ const PoolRequestInformation = () => {
                             fontWeight:'bold',
                             color:theme.palette.primary.text,
                             padding:'10px',
+                            marginLeft: '20px',
                             marginTop: '10px'
                         }}>
                             <Box sx={{
@@ -84,6 +85,7 @@ const PoolRequestInformation = () => {
                         display: 'flex',
                         flexDirection: 'row',
                         justifyContent: 'space-between',
+                        marginLeft: '20px'
                     }}>
                         <Box sx={{
                             fontSize:'15px',
@@ -109,7 +111,9 @@ const PoolRequestInformation = () => {
                         <Box sx={{
                             fontSize:'12px',
                             color:theme.palette.primary.text,
-                            padding:'10px'
+                            padding:'10px',
+                            marginLeft: '20px',
+                            marginRight: '50px'
                         }}>
                             Est aspernatur nostrum et molestias perspiciatis eum vitae quia non quod iste ex cumque doloribus aut repellat
                         </Box>
