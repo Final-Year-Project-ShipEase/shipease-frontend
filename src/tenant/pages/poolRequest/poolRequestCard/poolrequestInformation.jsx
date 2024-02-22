@@ -46,9 +46,9 @@ const PoolRequestInformation = () => {
             <Box sx={{
                 backgroundColor: theme.palette.primary.backgroundColor,
                 width:'30%',
-                height:'40%',
+                height:'30%',
                 borderRadius:'10px',
-                marginLeft:'20px',
+                marginLeft:'35px',
                 marginBottom: '20px',
             }} 
             onClick={() => handlePoolRequestClick(poolRequest.id)} 
@@ -63,23 +63,19 @@ const PoolRequestInformation = () => {
                     flexDirection:'space-between',
                    }}>
                         <Box sx={{
-                            fontSize:'20px',
+                            fontSize:'15px',
                             fontWeight:'bold',
                             color:theme.palette.primary.text,
                             padding:'10px',
+                            marginTop: '10px'
                         }}>
                             <Box sx={{
-                                backgroundColor:
-                                poolRequest.types == 'active' ? theme.palette.background.bookingCompletedStatus
-                                : poolRequest.types == 'reserved' ? theme.palette.background.bookingReservedStatus
-                                : poolRequest.types == 'bid' ? theme.palette.background.bookingBidStatus
-                                : poolRequest.types == 'completed' ? theme.palette.background.bookingCompletedStatus:
-                                'transparent',
+                                backgroundColor:theme.palette.background.bookingCompletedStatus,
                                 borderRadius:'5px',
                                 paddingLeft: '10px',
                                 paddingRight: '10px'
                             }}>
-                                {poolRequest.types}
+                                Request
                             </Box>
                         </Box>
                     </Box> 
