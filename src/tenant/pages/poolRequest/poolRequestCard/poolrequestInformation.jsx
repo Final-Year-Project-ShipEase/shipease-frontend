@@ -2,31 +2,27 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { useBookingService } from '../../../../services/bookingServices';
-import { useUserService } from '../../../../services/userServices';
+import { usePoolRequestService } from '../../../../services/poolRequestServices';
 import PoolRequestDetailsModal from './poolrequestDetailModal';
 import { SettingsBackupRestoreOutlined } from '@mui/icons-material';
 
 
 
 const PoolRequestInformation = () => {
-    const [booking, setBookings] = useState([]);
-    const { getBookingList } = useBookingService();
-    const {getUserList} = useUserService();
+    const [poolRequest, setPoolRequests] = useState([]);
+    const { getPoolRequestList } = usePoolRequestService();
     const [users, setUser] = useState([]);
     const theme = useTheme();
     const [openModal, setModal] = useState(false);
 
-    const [bookingId, setBookingId] = useState('');
+    const [poolRequestId, setPoolRequestId] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const bookingRespone = await getBookingList();
-                const userResponse = await getUserList();
-                setBookings(bookingRespone);
-                console.log(bookingRespone);
-                setUser(userResponse); 
+                const PoolRequestRespone = await getPoolRequestList();
+                setPoolRequests(PoolRequestRespone);
+                console.log(PoolRequestRespone);
             } catch (error) {
                 console.log(error);
             }
@@ -34,8 +30,8 @@ const PoolRequestInformation = () => {
         fetchData();
     }, []);
 
-    const handleBookingClick = (bookingid) => {
-        setBookingId(bookingid);
+    const handlePoolRequestClick = (poolRequestId) => {
+        setPoolRequestId(poolRequestId);
         setModal(true);
     };
 
@@ -44,9 +40,9 @@ const PoolRequestInformation = () => {
          <PoolRequestDetailsModal
             open = {openModal}
             handleClose={()=>setModal(false)}
-            booking_id={bookingId}
+            poolRequest_id={poolRequestId}
         />
-        {booking.map((bookings) => (
+        {poolRequest.map((poolRequest) => (
             <Box sx={{
                 backgroundColor: theme.palette.primary.backgroundColor,
                 width:'30%',
@@ -55,7 +51,7 @@ const PoolRequestInformation = () => {
                 marginLeft:'20px',
                 marginBottom: '20px',
             }} 
-            onClick={() => handleBookingClick(booking.id)} 
+            onClick={() => handlePoolRequestClick(poolRequest.id)} 
             style={{ cursor: 'pointer' }}>
                 
                 <Box sx={{
@@ -74,14 +70,16 @@ const PoolRequestInformation = () => {
                         }}>
                             <Box sx={{
                                 backgroundColor:
-                                bookings.status == 'active' ? theme.palette.background.bookingActiveStatus
-                                : bookings.status == 'reserved' ? theme.palette.background.bookingReservedStatus
-                                : bookings.status == 'bid' ? theme.palette.background.bookingBidStatus
-                                : bookings.status == 'completed' ? theme.palette.background.bookingCompletedStatus:
+                                poolRequest.types == 'active' ? theme.palette.background.bookingCompletedStatus
+                                : poolRequest.types == 'reserved' ? theme.palette.background.bookingReservedStatus
+                                : poolRequest.types == 'bid' ? theme.palette.background.bookingBidStatus
+                                : poolRequest.types == 'completed' ? theme.palette.background.bookingCompletedStatus:
                                 'transparent',
-                                borderRadius:'5px'
+                                borderRadius:'5px',
+                                paddingLeft: '10px',
+                                paddingRight: '10px'
                             }}>
-                                {bookings.status}
+                                {poolRequest.types}
                             </Box>
                         </Box>
                     </Box> 
@@ -96,7 +94,7 @@ const PoolRequestInformation = () => {
                             color:theme.palette.primary.text,
                             paddingLeft:'10px'
                         }}>
-                            {bookings.pickup} - {bookings.dropoff}
+                            {poolRequest.city} - {poolRequest.destination}
                         </Box>
     
                         <Box sx={{
@@ -104,7 +102,7 @@ const PoolRequestInformation = () => {
                             color:theme.palette.primary.text,
                             paddingRight:'40px'
                         }}>
-                            {bookings.total_bill} PKR
+                            {poolRequest.price} PKR
                         </Box>
                     </Box>
     
@@ -131,7 +129,7 @@ const PoolRequestInformation = () => {
                             color:theme.palette.primary.text,
                             padding:'10px'
                         }}>
-                            Client: {users.find((user) => user.id === bookings.user_id)?.name}
+                            Tenant: {users.find((user) => user.id === poolRequest.user_id)?.name}
                         </Box>
                     </Box>
     
@@ -145,7 +143,7 @@ const PoolRequestInformation = () => {
                             color:theme.palette.primary.text,
                             padding:'10px'
                         }}>
-                            Date: {bookings.date}
+                            Date: {poolRequest.date}
                         </Box>
                     </Box>
                 </Box>
