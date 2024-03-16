@@ -31,22 +31,14 @@ const TenantProtectedRoute = () => {
           })
           .catch((error) => {
             setTenant(false);
-            localStorage.removeItem('adminData');
+            localStorage.removeItem('tenantData');
             show(error.message, 'error');
           });
       }
-
-      if (isMounted) {
-        setLoading(false);
-      }
     };
 
     verifyToken();
-    return () => {
-      isMounted = false;
-    };
-    verifyToken();
-  }, [data]);
+  }, []);
 
   if (!tenant) {
     return <Navigate to="/login" />;

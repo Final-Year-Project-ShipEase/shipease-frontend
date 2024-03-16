@@ -50,14 +50,11 @@ const TenantAuthProvider = ({ children }) => {
   //   scheduleTokenRefresh();
   // }, []);
 
-  const contextValue = {
-    tokenValidation,
+  const s = {
     logout,
-    refreshToken,
-    loading,
-    tenant,
     setLoading,
     setTenant,
+    login,
   };
 
   return (
