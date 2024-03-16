@@ -77,8 +77,10 @@ const SignInPage = () => {
             validationSchema={validationSchema}
             onSubmit={async (values) => {
               try {
-                await login(values.name, values.password);
-                navigate('/dashboard');
+                const loginSuccess = await login(values.name, values.password);
+                if (loginSuccess) {
+                  setTimeout(() => navigate('/dashboard'), 100); // Small delay
+                }
               } catch (error) {
                 console.error('Login error:', error);
               }

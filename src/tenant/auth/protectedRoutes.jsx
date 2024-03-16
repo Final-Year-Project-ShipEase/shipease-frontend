@@ -6,7 +6,7 @@ import { useTenantAuth } from './tenantAuth';
 import CreateAxiosInstance from '../../utils/axiosInstance';
 
 const TenantProtectedRoute = () => {
-  const data = JSON.parse(localStorage.getItem('tenantData')).data;
+  const data = JSON.parse(localStorage.getItem('tenantData'));
   const { tenant, setLoading, setTenant } = useTenantAuth();
   const { show } = useSnackbar();
   const axios = CreateAxiosInstance();
@@ -18,8 +18,8 @@ const TenantProtectedRoute = () => {
       if (data) {
         try {
           const response = await axios.get(`/tenant/auth/verify`, {
-            data: {
-              token: data.token,
+            headers: {
+              Authorization: `Bearer ${data?.data?.token}`,
             },
           });
           setTenant(response.data);

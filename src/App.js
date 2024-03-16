@@ -6,7 +6,6 @@ import DriversApproval from './admin/pages/driversApproval/driversApproval';
 import VehiclesApproval from './admin/pages/vehiclesApproval/vehiclesApproval';
 import Permissions from './admin/pages/permissions/permissions';
 import AdminDashboard from './admin/pages/dashboard/dashboard';
-import { SnackbarProvider } from './utils/snackbarContextProvider';
 import ManageTenantList from './admin/pages/manageTenantList/manageTenant';
 import TenantDashboard from './tenant/pages/tenantDashboard/tenantDashboard';
 import TenantLayout from './tenant/pages/layout/layout';
@@ -25,48 +24,46 @@ import CreateVehicle from './tenant/pages/createVehicle/createVehicle';
 
 const App = () => {
   return (
-    <SnackbarProvider>
-      <Router>
-        <Routes>
-          {/* Tenant Routes */}
-          <Route element={<TenantNonLoginRoute />}>
-            <Route path="login" element={<TenantSignInPage />} />
-            <Route path="signup" element={<TenantSignUpPage />} />
-          </Route>
+    <Router>
+      <Routes>
+        {/* Tenant Routes */}
+        <Route element={<TenantNonLoginRoute />}>
+          <Route path="login" element={<TenantSignInPage />} />
+          <Route path="signup" element={<TenantSignUpPage />} />
+        </Route>
 
-          <Route element={<TenantProtectedRoute />}>
-            <Route element={<TenantLayout />}>
-              <Route path="/" element={<TenantDashboard />} />
-              <Route path="dashboard" element={<TenantDashboard />} />
-              <Route path="driversgarage" element={<DriversGarage />} />
-              <Route path="vehiclesgarage" element={<VehiclesGarage />} />
-              <Route path="addDriver" element={<CreateDriver />} />
-              <Route path="addVehicle" element={<CreateVehicle />} />
-            </Route>
+        <Route element={<TenantProtectedRoute />}>
+          <Route element={<TenantLayout />}>
+            <Route path="/" element={<TenantDashboard />} />
+            <Route path="dashboard" element={<TenantDashboard />} />
+            <Route path="driversgarage" element={<DriversGarage />} />
+            <Route path="vehiclesgarage" element={<VehiclesGarage />} />
+            <Route path="addDriver" element={<CreateDriver />} />
+            <Route path="addVehicle" element={<CreateVehicle />} />
           </Route>
+        </Route>
 
-          {/* Admin Routes */}
-          <Route element={<AdminNonLoginRoute />}>
-            <Route path="admin/login" element={<SignInPage />} />
+        {/* Admin Routes */}
+        <Route element={<AdminNonLoginRoute />}>
+          <Route path="admin/login" element={<SignInPage />} />
+        </Route>
+
+        <Route element={<AdminProtectedRoute />}>
+          <Route element={<Layout />}>
+            <Route path="/" element={<AdminDashboard />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="managetenants" element={<ManageTenantList />} />
+            <Route path="managetenants/:id" element={<ManageTenants />} />
+            <Route path="driversapproval" element={<DriversApproval />} />
+            <Route path="vehiclesapproval" element={<VehiclesApproval />} />
+            <Route path="permissions" element={<Permissions />} />
           </Route>
+        </Route>
 
-          <Route element={<AdminProtectedRoute />}>
-            <Route element={<Layout />}>
-              <Route path="/" element={<AdminDashboard />} />
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="managetenants" element={<ManageTenantList />} />
-              <Route path="managetenants/:id" element={<ManageTenants />} />
-              <Route path="driversapproval" element={<DriversApproval />} />
-              <Route path="vehiclesapproval" element={<VehiclesApproval />} />
-              <Route path="permissions" element={<Permissions />} />
-            </Route>
-          </Route>
-
-          {/* Error Handling */}
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-      </Router>
-    </SnackbarProvider>
+        {/* Error Handling */}
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </Router>
   );
 };
 

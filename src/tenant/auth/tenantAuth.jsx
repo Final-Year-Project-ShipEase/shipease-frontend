@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from 'react';
-import { useSnackbar } from '../../utils/snackbarContextProvider';
 import CreateAxiosInstance from '../../utils/axiosInstance';
-
+import { useSnackbar } from '../../utils/snackbarContextProvider';
 const TenantAuthContext = createContext();
 
 const TenantAuthProvider = ({ children }) => {
@@ -23,13 +22,15 @@ const TenantAuthProvider = ({ children }) => {
           return;
         }
         localStorage.setItem('tenantData', JSON.stringify(response.data));
+        show('Logged in successfully');
       })
       .catch((error) => {
-        show(error.message, 'error');
+        console.error(error);
+        show('error', 'error');
       });
 
     setLoading(false);
-    return;
+    return true;
   };
 
   const logout = () => {
@@ -53,6 +54,7 @@ const TenantAuthProvider = ({ children }) => {
     logout,
     setLoading,
     setTenant,
+    tenant,
     login,
   };
 
