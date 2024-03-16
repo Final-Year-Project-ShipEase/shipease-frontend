@@ -1,4 +1,8 @@
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import {
+  LogoDevOutlined,
+  Visibility,
+  VisibilityOff,
+} from '@mui/icons-material';
 import { Box, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +15,7 @@ const SignInPage = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const theme = useTheme();
   const navigate = useNavigate();
-  const { tokenValidation } = useTenantAuth();
+  const { login } = useTenantAuth();
 
   const validationSchema = Yup.object({
     // name: Yup.string().required('Required'),
@@ -67,13 +71,13 @@ const SignInPage = () => {
           <Formik
             initialValues={{
               //TODO: remove this after testing
-              name: 'Abdullah123',
-              password: '12345',
+              name: 'hamza',
+              password: '1234',
             }}
             validationSchema={validationSchema}
             onSubmit={async (values) => {
               try {
-                await tokenValidation(values.name, values.password);
+                await login(values.name, values.password);
                 navigate('/dashboard');
               } catch (error) {
                 console.error('Login error:', error);

@@ -1,19 +1,17 @@
 // AdminProtectedRoute.js
 import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import Spinner from '../../utils/spinner';
 import { useSnackbar } from '../../utils/snackbarContextProvider';
 import CreateAxiosInstance from '../../utils/axiosInstance';
+import { useAdminAuth } from './adminAuth';
 
 const AdminProtectedRoute = () => {
   const data = localStorage.getItem('adminData');
   const { admin, adminLogin, setLoading, setAdmin, setAdminLogin } =
-    UseAdminAuth();
+    useAdminAuth();
   const { show } = useSnackbar();
-
+  const axios = CreateAxiosInstance();
   useEffect(() => {
-    let isMounted = true;
-
     const verifyToken = async () => {
       setLoading(true);
 

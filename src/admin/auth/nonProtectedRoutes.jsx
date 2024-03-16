@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import UseAdminAuth from './adminAuth';
 import { useEffect } from 'react';
+import { useAdminAuth } from './adminAuth';
 
 const AdminNonLoginRoute = () => {
-  const { adminLogin } = UseAdminAuth();
+  const { adminLogin } = useAdminAuth();
 
   useEffect(() => {}, [adminLogin]);
 

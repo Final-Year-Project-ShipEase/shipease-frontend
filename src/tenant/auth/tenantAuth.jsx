@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import { useSnackbar } from '../../utils/snackbarContextProvider';
-import CreateAxiosInstance from '../../utils/axiosNonProtectedInstance';
+import CreateAxiosInstance from '../../utils/axiosInstance';
 
 const TenantAuthContext = createContext();
 
@@ -22,15 +22,14 @@ const TenantAuthProvider = ({ children }) => {
           show(response.data.message, 'error');
           return;
         }
-
         localStorage.setItem('tenantData', JSON.stringify(response.data));
-        setTenant(response.data);
       })
       .catch((error) => {
         show(error.message, 'error');
       });
 
     setLoading(false);
+    return;
   };
 
   const logout = () => {
@@ -39,18 +38,18 @@ const TenantAuthProvider = ({ children }) => {
     show('Logged out successfully', 'success');
   };
 
-  const scheduleTokenRefresh = () => {
-    const refreshInterval = 2 * 55 * 1000;
-    setInterval(() => {
-      refreshToken();
-    }, refreshInterval);
-  };
+  // const scheduleTokenRefresh = () => {
+  //   const refreshInterval = 2 * 55 * 1000;
+  //   setInterval(() => {
+  //     refreshToken();
+  //   }, refreshInterval);
+  // };
 
   // useEffect(() => {
   //   scheduleTokenRefresh();
   // }, []);
 
-  const s = {
+  const contextValue = {
     logout,
     setLoading,
     setTenant,

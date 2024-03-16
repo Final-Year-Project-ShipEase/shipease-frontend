@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import { useSnackbar } from '../../utils/snackbarContextProvider';
-import CreateAxiosInstance from '../../utils/axiosNonProtectedInstance';
+import CreateAxiosInstance from '../../utils/axiosInstance';
 
 const AdminAuthContext = createContext();
 
@@ -39,7 +39,7 @@ const AdminAuthProvider = ({ children }) => {
     show('Logged out successfully');
   };
 
-  return {
+  const contextValue = {
     login,
     logout,
     loading,
@@ -49,6 +49,12 @@ const AdminAuthProvider = ({ children }) => {
     adminLogin,
     setAdminLogin,
   };
+
+  return (
+    <AdminAuthContext.Provider value={contextValue}>
+      {children}
+    </AdminAuthContext.Provider>
+  );
 };
 
 const useAdminAuth = () => {
