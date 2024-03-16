@@ -3,11 +3,9 @@ import { useEffect } from 'react';
 import { useAdminAuth } from './adminAuth';
 
 const AdminNonLoginRoute = () => {
-  const { adminLogin } = useAdminAuth();
+  const { admin } = useAdminAuth();
 
-  useEffect(() => {}, [adminLogin]);
-
-  if (adminLogin) {
+  if (admin) {
     return <Navigate to="/admin/dashboard" />;
   }
   return <Outlet />;

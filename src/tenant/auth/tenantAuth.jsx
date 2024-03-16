@@ -22,7 +22,6 @@ const TenantAuthProvider = ({ children }) => {
           return;
         }
         localStorage.setItem('tenantData', JSON.stringify(response.data));
-        show('Logged in successfully');
       })
       .catch((error) => {
         console.error(error);

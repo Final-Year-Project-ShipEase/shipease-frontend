@@ -11,7 +11,6 @@ const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const theme = useTheme();
-  const [message, setMessage] = useState('');
   const { login, loading } = useAdminAuth();
   const navigate = useNavigate();
 
@@ -23,9 +22,16 @@ const SignInPage = () => {
     setAcceptTerms(!acceptTerms);
   };
 
-  const handleSignIn = async () => {
-    await login(name, password);
-    navigate('/admin/dashboard');
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      const loginSuccess = await login(name, password);
+      if (loginSuccess) {
+        setTimeout(() => navigate('/admin/dashboard'), 100);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+    }
   };
 
   return (

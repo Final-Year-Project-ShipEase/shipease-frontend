@@ -48,9 +48,8 @@ const App = () => {
           <Route path="admin/login" element={<SignInPage />} />
         </Route>
 
-        <Route element={<AdminProtectedRoute />}>
+        <Route path="/admin" element={<AdminProtectedRoute />}>
           <Route element={<Layout />}>
-            <Route path="/" element={<AdminDashboard />} />
             <Route path="dashboard" element={<AdminDashboard />} />
             <Route path="managetenants" element={<ManageTenantList />} />
             <Route path="managetenants/:id" element={<ManageTenants />} />

@@ -8,34 +8,40 @@ const AdminAuthProvider = ({ children }) => {
   const { show } = useSnackbar();
   const [loading, setLoading] = useState(false);
   const [admin, setAdmin] = useState(false);
-  const [adminLogin, setAdminLogin] = useState(false);
+  const axiosInstance = CreateAxiosInstance();
 
   const login = async (username, password) => {
-    const axiosInstance = CreateAxiosInstance();
-    await axiosInstance
-      .post(`/admin/auth/login`, {
+    try {
+      const response = await axiosInstance.post(`/admin/auth/login`, {
         username,
         password,
-      })
-      .then((response) => {
-        if (response.status !== 200) {
-          show('Invalid credentials', 'error');
-        }
-        const data = response;
-        localStorage.setItem('adminData', JSON.stringify(data));
-      })
-      .catch((error) => {
-        show(error.message, 'error');
-        return false;
       });
+      localStorage.setItem('adminData', JSON.stringify(response.data));
+      show('Logged in successfully', 'success');
+      return true;
+    } catch (error) {
+      if (error.response) {
+        const message = error.response.data.message || 'Login failed';
+        const status = error.response.status;
 
-    return true;
+        if (status === 401) {
+          show('Invalid credentials, please try again.', 'error');
+        } else {
+          show(message, 'error');
+        }
+      } else if (error.request) {
+        show('No response from server', 'error');
+      } else {
+        show('Error: ' + error.message, 'error');
+      }
+
+      return false;
+    }
   };
 
   const logout = () => {
     localStorage.removeItem('adminData');
     setAdmin(false);
-    setAdminLogin(false);
     show('Logged out successfully');
   };
 
@@ -46,8 +52,6 @@ const AdminAuthProvider = ({ children }) => {
     admin,
     setLoading,
     setAdmin,
-    adminLogin,
-    setAdminLogin,
   };
 
   return (

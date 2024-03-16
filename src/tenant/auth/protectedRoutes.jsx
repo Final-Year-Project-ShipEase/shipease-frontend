@@ -23,7 +23,7 @@ const TenantProtectedRoute = () => {
             },
           });
           setTenant(response.data);
-          show('Welcome back', 'success');
+          show('Login Success', 'success');
         } catch (error) {
           setTenant(false);
           localStorage.removeItem('tenantData');
