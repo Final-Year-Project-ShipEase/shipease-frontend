@@ -12,7 +12,7 @@ const SignInPage = () => {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const theme = useTheme();
   const [message, setMessage] = useState('');
-  const { tokenValidation, loading } = useAdminAuth();
+  const { login, loading } = useAdminAuth();
   const navigate = useNavigate();
 
   const handlePasswordVisibility = (event) => {
@@ -24,7 +24,7 @@ const SignInPage = () => {
   };
 
   const handleSignIn = async () => {
-    await tokenValidation(name, password);
+    await login(name, password);
     navigate('/admin/dashboard');
   };
 

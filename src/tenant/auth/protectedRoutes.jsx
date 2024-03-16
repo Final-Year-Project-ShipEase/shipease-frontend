@@ -1,15 +1,15 @@
 // TenantProtectedRoute.js
 import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import Spinner from '../../utils/spinner';
-import axios from 'axios';
 import { useSnackbar } from '../../utils/snackbarContextProvider';
-import { useTenantAuth } from './tenantAuth';
+import UseTenantAuth from './tenantAuth';
+import CreateAxiosInstance from '../../utils/axiosInstance';
 
 const TenantProtectedRoute = () => {
   const data = JSON.parse(localStorage.getItem('tenantData'));
   const { tenant, setLoading, setTenant, loading } = useTenantAuth();
   const { show } = useSnackbar();
+  const axios = CreateAxiosInstance();
 
   useEffect(() => {
     let isMounted = true;
@@ -19,20 +19,20 @@ const TenantProtectedRoute = () => {
 
       if (data) {
         const token = JSON.parse(localStorage.getItem('tenantData')).token;
-
         await axios
-          .get(`${process.env.REACT_APP_BACKEND_URL}/tenant/auth/verify`, {
-            headers: { Authorization: `Bearer ${token}` },
+          .get(`/tenant/auth/verify`, {
+            data: {
+              token: token,
+            },
           })
           .then((res) => {
             setTenant(data);
-            show('Logged in successfully', 'success');
+            show('Welcome back', 'success');
           })
-          .catch((err) => {
-            console.error(err);
+          .catch((error) => {
             setTenant(false);
-            localStorage.removeItem('tenantData');
-            show('Logged out successfully');
+            localStorage.removeItem('adminData');
+            show(error.message, 'error');
           });
       }
 
@@ -45,23 +45,14 @@ const TenantProtectedRoute = () => {
     return () => {
       isMounted = false;
     };
-  }, []);
+    verifyToken();
+  }, [data]);
 
-  if (loading) {
-    return <Spinner />;
+  if (!tenant) {
+    return <Navigate to="/login" />;
   }
 
-  return (
-    <div>
-      {tenant ? (
-        <>
-          <Outlet />
-        </>
-      ) : (
-        <Navigate to="/login" />
-      )}
-    </div>
-  );
+  return <Outlet />;
 };
 
 export default TenantProtectedRoute;

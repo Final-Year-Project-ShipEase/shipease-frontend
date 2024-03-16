@@ -7,83 +7,48 @@ const AdminAuthContext = createContext();
 const AdminAuthProvider = ({ children }) => {
   const { show } = useSnackbar();
   const [loading, setLoading] = useState(false);
-  const [admin, setadmin] = useState(false);
+  const [admin, setAdmin] = useState(false);
+  const [adminLogin, setAdminLogin] = useState(false);
 
-  const axiosInstance = CreateAxiosInstance();
-
-  const refreshToken = async () => {
-    const adminData = localStorage.getItem('adminData');
-    console.log(adminData);
-    try {
-      const response = await axiosInstance.post(`/admin/auth/refresh`, {
-        refreshToken: adminData.refreshToken,
-      });
-
-      const { accessToken } = response.data;
-      adminData.token = accessToken;
-      localStorage.setItem('adminData', JSON.stringify(adminData));
-      return true;
-    } catch (error) {
-      show('Session expired. Please login again', 'error');
-      return false;
-    }
-  };
-
-  const tokenValidation = async (username, password) => {
-    setLoading(true);
-    try {
-      const response = await axiosInstance.post(`/admin/auth/login`, {
+  const login = async (username, password) => {
+    const axiosInstance = CreateAxiosInstance();
+    await axiosInstance
+      .post(`/admin/auth/login`, {
         username,
         password,
+      })
+      .then((response) => {
+        if (response.status !== 200) {
+          show('Invalid credentials', 'error');
+        }
+        const data = response;
+        localStorage.setItem('adminData', JSON.stringify(data));
+      })
+      .catch((error) => {
+        show(error.message, 'error');
+        return false;
       });
 
-      if (response.status === 200) {
-        const { admin } = response.data;
-        localStorage.setItem('adminData', JSON.stringify(admin));
-        show('Logged in successfully', 'success');
-        return true;
-      }
-    } catch (error) {
-      localStorage.removeItem('adminData');
-      show('Invalid credentials', 'error');
-      return false;
-    } finally {
-      setLoading(false);
-    }
+    return true;
   };
 
   const logout = () => {
     localStorage.removeItem('adminData');
-    setadmin(false);
-    show('Logged out successfully', 'success');
+    setAdmin(false);
+    setAdminLogin(false);
+    show('Logged out successfully');
   };
 
-  const scheduleTokenRefresh = () => {
-    const refreshInterval = 2 * 55 * 1000;
-    setInterval(() => {
-      refreshToken();
-    }, refreshInterval);
-  };
-
-  // useEffect(() => {
-  //   scheduleTokenRefresh();
-  // }, []);
-
-  const contextValue = {
-    tokenValidation,
+  return {
+    login,
     logout,
-    refreshToken,
     loading,
     admin,
     setLoading,
-    setadmin,
+    setAdmin,
+    adminLogin,
+    setAdminLogin,
   };
-
-  return (
-    <AdminAuthContext.Provider value={contextValue}>
-      {children}
-    </AdminAuthContext.Provider>
-  );
 };
 
 const useAdminAuth = () => {

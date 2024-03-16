@@ -9,45 +9,28 @@ const TenantAuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [tenant, setTenant] = useState(false);
 
-  const axiosInstance = CreateAxiosInstance();
-
-  const refreshToken = async () => {
-    const tenantData = localStorage.getItem('tenantData');
-    console.log(tenantData);
-    try {
-      const response = await axiosInstance.post(`/tenant/auth/refresh`, {
-        refreshToken: tenantData.refreshToken,
-      });
-
-      const { accessToken } = response.data;
-      tenantData.token = accessToken;
-      localStorage.setItem('tenantData', JSON.stringify(tenantData));
-      return true;
-    } catch (error) {
-      show('Session expired. Please login again', 'error');
-      return false;
-    }
-  };
-
-  const tokenValidation = async (username, password) => {
+  const login = async (username, password) => {
     setLoading(true);
-    try {
-      const response = await axiosInstance.post(`/tenant/auth/login`, {
+    const axiosInstance = CreateAxiosInstance();
+    await axiosInstance
+      .post(`/tenant/auth/login`, {
         username,
         password,
+      })
+      .then((response) => {
+        if (response.status !== 200) {
+          show(response.data.message, 'error');
+          return;
+        }
+
+        localStorage.setItem('tenantData', JSON.stringify(response.data));
+        setTenant(response.data);
+      })
+      .catch((error) => {
+        show(error.message, 'error');
       });
 
-      if (response.status === 200) {
-        const { tenant } = response.data;
-        localStorage.setItem('tenantData', JSON.stringify(tenant));
-        return true;
-      }
-    } catch (error) {
-      localStorage.removeItem('tenantData');
-      return false;
-    } finally {
-      setLoading(false);
-    }
+    setLoading(false);
   };
 
   const logout = () => {
