@@ -14,7 +14,6 @@ const Bid = () => {
         const fetchBooking = async () => {
             try {
                 const response = await getBookingList();
-                console.log(response);
                 const bids = response.filter(booking => booking.status === 'bid');
                 setBid(bids.length);      
             } catch (error) {

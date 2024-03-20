@@ -16,60 +16,46 @@ import {
   AddCircleOutline as AddIcon,
   Close as CloseIcon,
 } from '@mui/icons-material';
-import {useBookingService} from '../../../../../services/bookingServices.jsx';
+import { useBookingService } from '../../../../../services/bookingServices.jsx';
 import { useUserService } from '../../../../../services/userServices.jsx';
 import ConfirmAdd from '../dialog/ConfirmAdd.jsx';
 
-const BookingDetailsModal = ({ open, handleClose, onSubmit, booking_id }) => {
-  const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] = useState(false);
-    const { updateBooking,getBooking } = useBookingService();
-    const {getUser} = useUserService();
-    const theme = useTheme();
-
-  const [formData, setFormData] = useState({
-    name: '',
-    phoneNo: '',
-    city: '',
-    pickup: '',
-    dropoff: '',
-    price: '',
-    status: '',
-    date: '',
-  });
+const BookingDetailsModal = ({ open, handleClose, onSubmit, booking }) => {
+  const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
+    useState(false);
+  const { updateBooking } = useBookingService();
+  const theme = useTheme();
+  const [formData, setFormData] = useState({});
+  const { getUser } = useUserService();
 
   useEffect(() => {
     const fetchData = async () => {
-        try {
-            const bookingRespone = await getBooking(5);
-            const userResponse = await getUser(1);
-            setFormData({
-                name: userResponse.name,
-                phoneNo: userResponse.phoneNo,
-                city: userResponse.city,
-                pickup: bookingRespone.pickup,
-                dropoff: bookingRespone.dropoff,
-                price: bookingRespone.total_bill,
-                status:bookingRespone.status,
-                date: new Date(bookingRespone.date).toISOString().substr(0,10),
-            });   
-        } catch (error) {
-            console.log(error);
-        }
+      try {
+        //change array to object
+        const bookings = booking[0];
+        setFormData({
+          name: bookings.name,
+          phoneNo: bookings.phoneNo,
+          city: bookings.city,
+          pickup: bookings.pickup,
+          dropoff: bookings.dropoff,
+          price: bookings.total_bill,
+          status: bookings.status,
+          date: bookings.date,
+        });
+
+        const user = await getUser(bookings.user_id);
+        setFormData((prev) => ({
+          ...prev,
+          name: user.name,
+          phoneNo: user.phoneNo,
+        }));
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchData();
-}, [getBooking, getUser]);
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSwitchChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.checked,
-    });
-  };
+  }, [booking]);
 
   const handleAddConfirm = async () => {
     const setFormData = {
@@ -140,7 +126,6 @@ const BookingDetailsModal = ({ open, handleClose, onSubmit, booking_id }) => {
               label="Name"
               name="name"
               value={formData.name}
-              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -151,7 +136,6 @@ const BookingDetailsModal = ({ open, handleClose, onSubmit, booking_id }) => {
               label="Phone No"
               name="Phone No"
               value={formData.phoneNo}
-              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -162,7 +146,6 @@ const BookingDetailsModal = ({ open, handleClose, onSubmit, booking_id }) => {
               label="Pickup Location"
               name="pickup"
               value={formData.pickup}
-              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -173,7 +156,6 @@ const BookingDetailsModal = ({ open, handleClose, onSubmit, booking_id }) => {
               label="Dropoff Location"
               name="dropoff"
               value={formData.dropoff}
-              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -184,7 +166,6 @@ const BookingDetailsModal = ({ open, handleClose, onSubmit, booking_id }) => {
               label="Price"
               name="price"
               value={formData.price}
-              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -195,10 +176,9 @@ const BookingDetailsModal = ({ open, handleClose, onSubmit, booking_id }) => {
               label="City"
               name="City"
               value={formData.city}
-              onChange={handleChange}
             />
           </Grid>
-          
+
           <Grid item xs={12} sm={6}>
             <Button
               fullWidth
