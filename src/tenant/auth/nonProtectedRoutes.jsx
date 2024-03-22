@@ -1,19 +1,13 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import UseTenantAuth from './tenantAuth';
+import { useTenantAuth } from './tenantAuth';
 
 const TenantNonLoginRoute = () => {
-  const { tenant } = UseTenantAuth();
-  return (
-    <div>
-      {!tenant ? (
-        <>
-          <Outlet />
-        </>
-      ) : (
-        <Navigate to="/login" />
-      )}
-    </div>
-  );
+  const { tenant } = useTenantAuth();
+  if (tenant) {
+    return <Navigate to="/" />;
+  }
+
+  return <Outlet />;
 };
 
 export default TenantNonLoginRoute;
