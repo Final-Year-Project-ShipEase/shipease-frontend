@@ -3,7 +3,7 @@ import { Box, Button, Drawer, useTheme, useMediaQuery } from '@mui/material';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
-import UseAdminAuth from '../../auth/adminAuth';
+import { useAdminAuth } from '../../auth/adminAuth';
 
 const Sidebar = ({ leftSpan, isDrawerOpen }) => {
   const widthVal = (leftSpan / 12) * 100;
@@ -13,7 +13,7 @@ const Sidebar = ({ leftSpan, isDrawerOpen }) => {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
   const issmallScreen = useMediaQuery(theme.breakpoints.up(''));
-  const { logout } = UseAdminAuth();
+  const { logout } = useAdminAuth();
 
   const handleClick = (item) => {
     navigate(item.link);

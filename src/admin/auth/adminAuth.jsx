@@ -1,53 +1,41 @@
-import { useState } from 'react';
-import CreateAxiosInstance from '../../utils/axiosInstance';
+import { createContext, useContext, useState } from 'react';
 import { useSnackbar } from '../../utils/snackbarContextProvider';
+import CreateAxiosInstance from '../../utils/axiosInstance';
 
-const UseAdminAuth = () => {
+const AdminAuthContext = createContext();
+
+const AdminAuthProvider = ({ children }) => {
   const { show } = useSnackbar();
   const [loading, setLoading] = useState(false);
   const [admin, setAdmin] = useState(false);
-
-  const loginWithToken = async (username, password) => {
-    setLoading(true);
-    const axiosInstance = CreateAxiosInstance();
-    await axiosInstance
-      .post(`/admin/auth/login`, {
-        username,
-        password,
-      })
-      .then((response) => {
-        const data = response;
-        console.log(data);
-        localStorage.setItem('adminData', JSON.stringify(data));
-        setAdmin(data);
-        show('Logged in successfully');
-      })
-      .catch((error) => {
-        console.error(error);
-        show('Invalid credentials', 'error');
-      });
-    setLoading(false);
-  };
+  const axiosInstance = CreateAxiosInstance();
 
   const login = async (username, password) => {
-    setLoading(true);
-    const axiosInstance = CreateAxiosInstance();
-
     try {
-      const response = await axiosInstance.post(`/adminlogin`, {
+      const response = await axiosInstance.post(`/admin/auth/login`, {
         username,
         password,
       });
-
-      const data = response.data;
-      localStorage.setItem('adminData', JSON.stringify(data));
-      setAdmin(true);
-      show('Logged in successfully');
+      localStorage.setItem('adminData', JSON.stringify(response.data));
+      show('Logged in successfully', 'success');
+      return true;
     } catch (error) {
-      console.error(error);
-      show('Invalid credentials', 'error');
-    } finally {
-      setLoading(false);
+      if (error.response) {
+        const message = error.response.data.message || 'Login failed';
+        const status = error.response.status;
+
+        if (status === 401) {
+          show('Invalid credentials, please try again.', 'error');
+        } else {
+          show(message, 'error');
+        }
+      } else if (error.request) {
+        show('No response from server', 'error');
+      } else {
+        show('Error: ' + error.message, 'error');
+      }
+
+      return false;
     }
   };
 
@@ -57,7 +45,28 @@ const UseAdminAuth = () => {
     show('Logged out successfully');
   };
 
-  return { login, logout, loading, admin, setLoading, setAdmin };
+  const contextValue = {
+    login,
+    logout,
+    loading,
+    admin,
+    setLoading,
+    setAdmin,
+  };
+
+  return (
+    <AdminAuthContext.Provider value={contextValue}>
+      {children}
+    </AdminAuthContext.Provider>
+  );
 };
 
-export default UseAdminAuth;
+const useAdminAuth = () => {
+  const context = useContext(AdminAuthContext);
+  if (context === undefined) {
+    throw new Error('useadminAuth must be used within a adminAuthProvider');
+  }
+  return context;
+};
+
+export { AdminAuthProvider, useAdminAuth };

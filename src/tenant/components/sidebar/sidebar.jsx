@@ -3,7 +3,7 @@ import { Box, Button, Drawer, useTheme } from '@mui/material';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
-import UseTenantAuth from '../../auth/tenantAuth';
+import { useTenantAuth } from '../../auth/tenantAuth';
 
 const Sidebar = ({ leftSpan }) => {
   const widthVal = (leftSpan / 12) * 100;
@@ -11,7 +11,7 @@ const Sidebar = ({ leftSpan }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
-  const { logout } = UseTenantAuth();
+  const { logout } = useTenantAuth();
 
   const handleClick = (item) => {
     navigate(item.link);
@@ -98,7 +98,10 @@ const Sidebar = ({ leftSpan }) => {
             backgroundColor: theme.palette.buttonSidebar.main,
           },
         }}
-        onClick={() => logout()}
+        onClick={() => {
+          logout();
+          handleClick(item);
+        }}
         startIcon={item.icon}
       >
         {item.name}
