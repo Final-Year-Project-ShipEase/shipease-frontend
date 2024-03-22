@@ -1,9 +1,9 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useTheme } from '@mui/material';
 import React, { useState } from 'react';
-import UseAdminAuth from '../../auth/adminAuth';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../utils/spinner';
+import { useAdminAuth } from '../../auth/adminAuth';
 
 const SignInPage = () => {
   const [name, setName] = useState('');
@@ -11,8 +11,7 @@ const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const theme = useTheme();
-  const [message, setMessage] = useState('');
-  const { login, loading } = UseAdminAuth();
+  const { login, loading } = useAdminAuth();
   const navigate = useNavigate();
 
   const handlePasswordVisibility = (event) => {
@@ -23,9 +22,16 @@ const SignInPage = () => {
     setAcceptTerms(!acceptTerms);
   };
 
-  const handleSignIn = () => {
-    login(name, password);
-    navigate('/admin/dashboard');
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      const loginSuccess = await login(name, password);
+      if (loginSuccess) {
+        setTimeout(() => navigate('/admin/dashboard'), 100);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+    }
   };
 
   return (

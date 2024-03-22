@@ -1,69 +1,75 @@
-import { useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import CreateAxiosInstance from '../../utils/axiosInstance';
 import { useSnackbar } from '../../utils/snackbarContextProvider';
+const TenantAuthContext = createContext();
 
-const UseTenantAuth = () => {
+const TenantAuthProvider = ({ children }) => {
   const { show } = useSnackbar();
   const [loading, setLoading] = useState(false);
   const [tenant, setTenant] = useState(false);
 
-  const loginWithToken = async (email, password) => {
-    setLoading(true);
-    const axiosInstance = CreateAxiosInstance();
-    await axiosInstance
-      .post(`/admin/login`, {
-        email,
-        password,
-      })
-      .then((response) => {
-        const data = response.data;
-        localStorage.setItem('adminData', JSON.stringify(data));
-        setTenant(data);
-        show('Logged in successfully');
-      })
-      .catch((error) => {
-        console.error(error);
-        show('Invalid credentials');
-      });
-    setLoading(false);
-  };
-
   const login = async (username, password) => {
     setLoading(true);
     const axiosInstance = CreateAxiosInstance();
-
-    try {
-      const response = await axiosInstance.post(`tenantlogin`, {
+    await axiosInstance
+      .post(`/tenant/auth/login`, {
         username,
         password,
+      })
+      .then((response) => {
+        if (response.status !== 200) {
+          show(response.data.message, 'error');
+          return;
+        }
+        localStorage.setItem('tenantData', JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.error(error);
+        show('error', 'error');
       });
 
-      const data = response.data;
-      localStorage.setItem('tenantData', JSON.stringify(data));
-      setTenant(data);
-      show('Logged in successfully');
-    } catch (error) {
-      console.error(error);
-      show('Invalid credentials', 'error');
-    } finally {
-      setLoading(false);
-    }
+    setLoading(false);
+    return true;
   };
 
   const logout = () => {
     localStorage.removeItem('tenantData');
     setTenant(false);
-    show('Logged out successfully');
+    show('Logged out successfully', 'success');
   };
 
-  return {
-    login,
+  // const scheduleTokenRefresh = () => {
+  //   const refreshInterval = 2 * 55 * 1000;
+  //   setInterval(() => {
+  //     refreshToken();
+  //   }, refreshInterval);
+  // };
+
+  // useEffect(() => {
+  //   scheduleTokenRefresh();
+  // }, []);
+
+  const contextValue = {
     logout,
-    loading,
-    tenant,
     setLoading,
     setTenant,
+    tenant,
+    login,
   };
+
+  return (
+    <TenantAuthContext.Provider value={contextValue}>
+      {children}
+    </TenantAuthContext.Provider>
+  );
 };
 
-export default UseTenantAuth;
+const useTenantAuth = () => {
+  const context = useContext(TenantAuthContext);
+  if (context === undefined) {
+    throw new Error('useTenantAuth must be used within a TenantAuthProvider');
+  }
+  return context;
+};
+
+export { TenantAuthProvider, useTenantAuth };
