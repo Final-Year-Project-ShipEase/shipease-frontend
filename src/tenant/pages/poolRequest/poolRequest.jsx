@@ -6,8 +6,8 @@ import PoolRequestInformation from './poolRequestCard/poolrequestInformation';
 const poolRequest = () => {
     return (
         <>
-            <PageHeader></PageHeader>
-            <PoolRequestInformation></PoolRequestInformation>
+            <PageHeader />
+            <PoolRequestInformation />
         </>
     )
 };
