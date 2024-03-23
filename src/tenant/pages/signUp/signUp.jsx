@@ -132,7 +132,6 @@ const TenantSignUpPage = () => {
                   onChange={(e) => setName(e.target.value)}
                   value={name}
                   placeholder="Name"
-
                 />
               </div>
             </div>
