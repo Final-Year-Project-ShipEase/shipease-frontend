@@ -21,6 +21,8 @@ import DriversGarage from './tenant/pages/driversGarage/driversGarage';
 import VehiclesGarage from './tenant/pages/vehiclesGarage/vehiclesGarage';
 import CreateDriver from './tenant/pages/createDriver/createDriver';
 import CreateVehicle from './tenant/pages/createVehicle/createVehicle';
+import Booking from './tenant/pages/booking/booking';
+import BookingDetail from './tenant/pages/booking/components/bookingCard/bookingDetailModal';
 
 const App = () => {
   return (
@@ -40,6 +42,7 @@ const App = () => {
             <Route path="vehiclesgarage" element={<VehiclesGarage />} />
             <Route path="addDriver" element={<CreateDriver />} />
             <Route path="addVehicle" element={<CreateVehicle />} />
+            <Route path="booking" element={<Booking />} />
           </Route>
         </Route>
 
