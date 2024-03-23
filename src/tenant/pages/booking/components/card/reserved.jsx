@@ -14,7 +14,6 @@ const Reserved = () => {
         const fetchBooking = async () => {
             try {
                 const response = await getBookingList();
-                console.log(response);
                 const reservedBookings = response.filter(booking => booking.status === 'reserved');
                 setReserved(reservedBookings.length);      
             } catch (error) {

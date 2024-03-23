@@ -9,20 +9,22 @@ import Reserved from './components/card/reserved';
 
 const Booking = () => {
     return (
-        <>
-            <PageHeader></PageHeader>
-            <Box sx={{
-                display: 'flex',
-                flexDirection: 'row',
-            }}>
-                <Bid></Bid>
-                <Completed></Completed>
-                <Active></Active>
-                <Reserved></Reserved>
-            </Box>
-            <BookingInformation></BookingInformation>
-        </>
-    )
+      <>
+        <PageHeader />
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+          }}
+        >
+          <Bid />
+          <Completed />
+          <Active />
+          <Reserved />
+        </Box>
+        <BookingInformation />
+      </>
+    );
 };
 
 export default Booking;

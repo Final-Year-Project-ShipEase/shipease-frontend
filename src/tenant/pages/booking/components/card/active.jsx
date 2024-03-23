@@ -14,7 +14,6 @@ const Active = () => {
         const fetchBooking = async () => {
             try {
                 const response = await getBookingList();
-                console.log(response);
                 const activeBookings = response.filter(booking => booking.status === 'active');
                 setActive(activeBookings.length);      
             } catch (error) {

@@ -15,7 +15,6 @@ const Completed = () => {
         const fetchBooking = async () => {
             try {
                 const response = await getBookingList();
-                console.log(response);
                 const completedBookings = response.filter(booking => booking.status === 'completed');
                 setComplete(completedBookings.length);      
             } catch (error) {
