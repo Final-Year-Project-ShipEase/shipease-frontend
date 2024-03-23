@@ -22,6 +22,11 @@ const NavigationItems = [
     link: '/vehiclesGarage',
     icon: <Person4OutlinedIcon style={{ color: '#565656' }} />,
   },
+  {
+    name: 'Pool Requests',
+    link: '/poolRequest',
+    icon: <Person4OutlinedIcon style={{ color: '#565656' }} />,
+  },
 ];
 
 export default NavigationItems;
