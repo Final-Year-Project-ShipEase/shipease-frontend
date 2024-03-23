@@ -23,6 +23,7 @@ import CreateDriver from './tenant/pages/createDriver/createDriver';
 import CreateVehicle from './tenant/pages/createVehicle/createVehicle';
 import Booking from './tenant/pages/booking/booking';
 import BookingDetail from './tenant/pages/booking/components/bookingCard/bookingDetailModal';
+import PoolRequest from './tenant/pages/poolRequest/poolRequest';
 
 const App = () => {
   return (
@@ -43,6 +44,8 @@ const App = () => {
             <Route path="addDriver" element={<CreateDriver />} />
             <Route path="addVehicle" element={<CreateVehicle />} />
             <Route path="booking" element={<Booking />} />
+            <Route path="booking/:id" element={<BookingDetail />} />
+            <Route path="poolrequest" element={<PoolRequest />} />
           </Route>
         </Route>
 
