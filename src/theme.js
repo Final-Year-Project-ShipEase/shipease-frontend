@@ -28,6 +28,9 @@ const theme = createTheme({
       blackColor: 'Black',
       white: 'white',
       black: 'black',
+      yellow: '#FFAA29',
+      green: '#54BA4A',
+      purple: '#B33CC7',
     },
     secondary: {
       main: '#71C4EF',
@@ -59,9 +62,9 @@ const theme = createTheme({
       iconColor: 'Green',
       poolback: '#D9D9D9',
       trasnparent: 'transparent',
-      bookingActiveStatus:'#FFAA29',
-      bookingReservedStatus:'red',
-      bookingCompletedStatus:'#71C4EF',
+      bookingActiveStatus: '#FFAA29',
+      bookingReservedStatus: 'red',
+      bookingCompletedStatus: '#71C4EF',
       bookingBidStatus: 'green',
     },
     buttonSidebar: {

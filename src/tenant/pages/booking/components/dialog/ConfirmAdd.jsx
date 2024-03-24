@@ -46,10 +46,10 @@ const ConfirmAdd = ({ open, onClose, onConfirm, loading }) => {
             </IconButton>
             <Box m={2}>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                Booking Details
+                Confirm Payment
               </Typography>
               <Typography variant="subtitle2">
-                Are you sure you want to approve this Booking?
+                Are you sure you want to approve this Booking's Payment?
               </Typography>
             </Box>
           </Box>

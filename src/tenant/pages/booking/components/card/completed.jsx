@@ -54,7 +54,7 @@ const Completed = () => {
               alignItems: 'center',
               color: theme.palette.primary.color1,
               borderRadius: '50%',
-              backgroundColor: '#54BA4A',
+              backgroundColor: theme.palette.primary.yellow,
               width: '40px',
               height: '40px',
               padding: '5px',

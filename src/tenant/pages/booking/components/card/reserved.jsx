@@ -55,7 +55,7 @@ const Reserved = () => {
             alignItems: 'center',
             color: theme.palette.primary.color1,
             borderRadius: '50%',
-            backgroundColor: '#B33CC7',
+            backgroundColor: theme.palette.primary.purple,
             width: '40px',
             height: '40px',
             padding: '5px',

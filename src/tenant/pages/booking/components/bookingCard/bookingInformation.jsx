@@ -21,16 +21,25 @@ const BookingInformation = () => {
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const bookingRespone = await getBookingList();
+          const bookingResponse = await getBookingList();
           const userResponse = await getUserList();
-          setBookings(bookingRespone);
+
+          // Sort booking based on booking status
+          const sortedBooking = bookingResponse.sort((a, b) => {
+            const order = { active: 1, reserved: 2, completed: 3 };
+            return order[a.status] - order[b.status];
+          });
+
+          setBookings(sortedBooking);
           setUser(userResponse);
         } catch (error) {
           console.log(error);
         }
       };
+
       fetchData();
     }, []);
+    
 
     const handleBookingClick = (bookingid) => {
       setBookingId(bookingid);
@@ -38,7 +47,7 @@ const BookingInformation = () => {
     };
 
     return (
-      <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap' }} ml={4}>
         <BookingDetailsModal
           open={openModal}
           handleClose={() => setModal(false)}
@@ -48,11 +57,15 @@ const BookingInformation = () => {
           <Box
             sx={{
               backgroundColor: theme.palette.primary.backgroundColor,
+              backgroundColor:
+                bookings.status == 'completed'
+                  ? theme.palette.primary.color1
+                  : theme.palette.primary.backgroundColor,
               width: '30%',
               height: '40%',
               borderRadius: '10px',
-              marginLeft: '20px',
-              marginBottom: '20px',
+              marginBottom: '2%',
+              marginRight: '2%',
             }}
             onClick={() => handleBookingClick(booking.id)}
             style={{ cursor: 'pointer' }}
@@ -81,16 +94,14 @@ const BookingInformation = () => {
                     sx={{
                       backgroundColor:
                         bookings.status == 'active'
-                          ? theme.palette.background.bookingActiveStatus
+                          ? theme.palette.primary.green
                           : bookings.status == 'reserved'
-                            ? theme.palette.background.bookingReservedStatus
-                            : bookings.status == 'bid'
-                              ? theme.palette.background.bookingBidStatus
-                              : bookings.status == 'completed'
-                                ? theme.palette.background
-                                    .bookingCompletedStatus
-                                : 'transparent',
-                      borderRadius: '5px',
+                            ? theme.palette.primary.purple
+                            : bookings.status == 'completed'
+                              ? theme.palette.primary.yellow
+                              : 'transparent',
+                      borderRadius: '3px',
+                      padding: '3px',
                     }}
                   >
                     {bookings.status}

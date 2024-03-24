@@ -55,7 +55,7 @@ const Active = () => {
             alignItems: 'center',
             color: theme.palette.primary.color1,
             borderRadius: '50%',
-            backgroundColor: '#FFAA29',
+            backgroundColor: theme.palette.primary.green,
             width: '40px',
             height: '40px',
             padding: '5px',
