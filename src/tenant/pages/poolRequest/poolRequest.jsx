@@ -1,15 +1,19 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import PageHeader from './pageHeader';
 import PoolRequestInformation from './poolRequestCard/poolrequestInformation';
 
 const poolRequest = () => {
-    return (
-        <>
-            <PageHeader />
-            <PoolRequestInformation />
-        </>
-    )
+  return (
+    <Grid container>
+      <Grid item xs={12}>
+        <PageHeader />
+      </Grid>
+      <Grid item xs={12}>
+        <PoolRequestInformation />
+      </Grid>
+    </Grid>
+  );
 };
 
 export default poolRequest;
