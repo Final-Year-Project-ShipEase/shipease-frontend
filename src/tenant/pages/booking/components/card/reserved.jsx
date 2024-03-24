@@ -54,6 +54,11 @@ const Reserved = () => {
             justifyContent: 'center',
             alignItems: 'center',
             color: theme.palette.primary.color1,
+            borderRadius: '50%',
+            backgroundColor: '#B33CC7',
+            width: '40px',
+            height: '40px',
+            padding: '5px',
           }}
         >
           <CampaignIcon
