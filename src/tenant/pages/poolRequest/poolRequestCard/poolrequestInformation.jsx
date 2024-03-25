@@ -5,7 +5,6 @@ import { usePoolRequestService } from '../../../../services/poolRequestServices'
 import { useBookingService } from '../../../../services/bookingServices';
 import { formatTimestamp } from '../../../../utils/timestamp';
 
-// Sub-component for individual PoolRequest card
 const PoolRequestCard = ({ poolRequest, handleOnClick }) => {
   const theme = useTheme();
   return (
@@ -13,11 +12,11 @@ const PoolRequestCard = ({ poolRequest, handleOnClick }) => {
       sx={{
         backgroundColor: theme.palette.primary.main,
         width: '30%',
-        height: 'auto', // Adjusted for content
+        height: 'auto',
         borderRadius: '10px',
         marginBottom: '2%',
         marginRight: '2%',
-        padding: '10px',
+        padding: '1%',
         cursor: 'pointer',
         '&:hover': {
           backgroundColor: theme.palette.primary.light,
@@ -101,8 +100,9 @@ const PoolRequestCard = ({ poolRequest, handleOnClick }) => {
               marginRight: '50px',
             }}
           >
-            Est aspernatur nostrum et molestias perspiciatis eum vitae quia non
-            quod iste ex cumque doloribus aut repellat
+            {poolRequest?.bookingDetails?.description
+              ? poolRequest?.bookingDetails?.description
+              : 'No description provided'}
           </Box>
           <Box
             sx={{
@@ -119,9 +119,11 @@ const PoolRequestCard = ({ poolRequest, handleOnClick }) => {
   );
 };
 
-// Main component for PoolRequest information
 const PoolRequestInformation = () => {
-  const [poolRequests, setPoolRequests] = useState([]);
+  const [poolRequests, setPoolRequests] = useState({
+    currentTenant: [],
+    otherTenants: [],
+  });
   const { getPoolRequestList } = usePoolRequestService();
   const { getBooking } = useBookingService();
   const [openModal, setModal] = useState(false);
@@ -143,14 +145,28 @@ const PoolRequestInformation = () => {
             }
           })
         );
-        setPoolRequests(enhancedPoolRequests);
+
+        // Separate and sort the pool requests by tenant
+        const currentTenantId = localStorage.getItem('tenantData')?.data?.id;
+        console.log(currentTenantId);
+        const currentTenantRequests = enhancedPoolRequests
+          .filter((request) => request.tenant_id === currentTenantId)
+          .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+        const otherTenantRequests = enhancedPoolRequests
+          .filter((request) => request.tenant_id !== currentTenantId)
+          .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+
+        setPoolRequests({
+          currentTenant: currentTenantRequests,
+          otherTenants: otherTenantRequests,
+        });
       } catch (fetchError) {
         console.error('Failed to fetch data:', fetchError);
         setError('Failed to load pool requests. Please try again later.');
       }
     };
     fetchData();
-  }, [getPoolRequestList, getBooking]);
+  }, []);
 
   const handlePoolRequestClick = (id) => {
     setPoolRequestId(id);
@@ -172,13 +188,50 @@ const PoolRequestInformation = () => {
         handleClose={() => setModal(false)}
         poolRequest_id={poolRequestId}
       />
-      {poolRequests.map((request) => (
-        <PoolRequestCard
-          key={request.id}
-          poolRequest={request}
-          handleOnClick={handlePoolRequestClick}
-        />
-      ))}
+      <Box
+        sx={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'Column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Typography variant="h4" sx={{ color: 'primary.main', mb: 2 }}>
+          My Active Pool Requests
+        </Typography>
+        <Box sx={{ display: 'flex' }}>
+          {poolRequests.currentTenant.map((poolRequest) => (
+            <PoolRequestCard
+              key={poolRequest.id}
+              poolRequest={poolRequest}
+              handleOnClick={handlePoolRequestClick}
+            />
+          ))}
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'Column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Typography variant="h4" sx={{ color: 'primary.main', mb: 2 }}>
+          Other Pool Requests
+        </Typography>
+        <Box>
+          {poolRequests.otherTenants.map((poolRequest) => (
+            <PoolRequestCard
+              key={poolRequest.id}
+              poolRequest={poolRequest}
+              handleOnClick={handlePoolRequestClick}
+            />
+          ))}
+        </Box>
+      </Box>
     </Box>
   );
 };
