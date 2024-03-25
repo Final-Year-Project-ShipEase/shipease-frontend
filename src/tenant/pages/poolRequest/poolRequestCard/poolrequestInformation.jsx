@@ -4,6 +4,7 @@ import PoolRequestDetailsModal from './poolrequestDetailModal';
 import { usePoolRequestService } from '../../../../services/poolRequestServices';
 import { useBookingService } from '../../../../services/bookingServices';
 import { formatTimestamp } from '../../../../utils/timestamp';
+import Spinner from '../../../../utils/spinner';
 
 const PoolRequestCard = ({ poolRequest, handleOnClick }) => {
   const theme = useTheme();
@@ -124,14 +125,18 @@ const PoolRequestInformation = () => {
     currentTenant: [],
     otherTenants: [],
   });
+
+  const currentTenantId = localStorage.getItem('tenantData')?.data?.id || 2;
   const { getPoolRequestList } = usePoolRequestService();
   const { getBooking } = useBookingService();
   const [openModal, setModal] = useState(false);
   const [poolRequestId, setPoolRequestId] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const poolRequestResponse = await getPoolRequestList();
         const enhancedPoolRequests = await Promise.all(
@@ -141,25 +146,29 @@ const PoolRequestInformation = () => {
               return { ...request, bookingDetails };
             } catch (bookingError) {
               console.error('Booking fetch error:', bookingError);
-              return request; // Return request without booking details on error
+              return request;
             }
           })
         );
 
-        // Separate and sort the pool requests by tenant
-        const currentTenantId = localStorage.getItem('tenantData')?.data?.id;
-        console.log(currentTenantId);
+        console.log(enhancedPoolRequests);
+
         const currentTenantRequests = enhancedPoolRequests
-          .filter((request) => request.tenant_id === currentTenantId)
+          .filter(
+            (request) => request.bookingDetails.tenant_id === currentTenantId
+          )
           .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
         const otherTenantRequests = enhancedPoolRequests
-          .filter((request) => request.tenant_id !== currentTenantId)
+          .filter(
+            (request) => request.bookingDetails.tenant_id !== currentTenantId
+          )
           .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
 
         setPoolRequests({
           currentTenant: currentTenantRequests,
           otherTenants: otherTenantRequests,
         });
+        setLoading(false);
       } catch (fetchError) {
         console.error('Failed to fetch data:', fetchError);
         setError('Failed to load pool requests. Please try again later.');
@@ -182,7 +191,8 @@ const PoolRequestInformation = () => {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', m: 4 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', padding: 2, m: 4 }}>
+      {loading && <Spinner />}
       <PoolRequestDetailsModal
         open={openModal}
         handleClose={() => setModal(false)}
@@ -200,7 +210,14 @@ const PoolRequestInformation = () => {
         <Typography variant="h4" sx={{ color: 'primary.main', mb: 2 }}>
           My Active Pool Requests
         </Typography>
-        <Box sx={{ display: 'flex' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'left',
+            flexDirection: 'row',
+          }}
+        >
           {poolRequests.currentTenant.map((poolRequest) => (
             <PoolRequestCard
               key={poolRequest.id}
@@ -222,7 +239,14 @@ const PoolRequestInformation = () => {
         <Typography variant="h4" sx={{ color: 'primary.main', mb: 2 }}>
           Other Pool Requests
         </Typography>
-        <Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'left',
+            flexDirection: 'row',
+          }}
+        >
           {poolRequests.otherTenants.map((poolRequest) => (
             <PoolRequestCard
               key={poolRequest.id}

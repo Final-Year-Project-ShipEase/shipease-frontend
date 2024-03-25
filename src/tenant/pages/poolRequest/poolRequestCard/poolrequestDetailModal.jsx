@@ -19,7 +19,7 @@ import {
 import {useBookingService} from '../../../../services/bookingServices.jsx';
 import ConfirmAdd from '../dialog/ConfirmAdd.jsx';
 
-const PoolRequestDetailsModal = ({ open, handleClose, onSubmit, booking_id }) => {
+const   PoolRequestDetailsModal = ({ open, handleClose, onSubmit, booking_id }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
   useState(false);
 const theme = useTheme();

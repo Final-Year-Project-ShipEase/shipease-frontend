@@ -41,8 +41,8 @@ const PoolRequestModal = ({ open, handleClose, onSubmit }) => {
           show(err.message, 'error');
         });
     };
-    fetchBookingList();
-  }, []);
+    if (open) fetchBookingList();
+  }, [open]);
 
   const [formData, setFormData] = useState({
     type: '',
