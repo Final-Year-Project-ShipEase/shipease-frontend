@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './admin/pages/layout/layout';
 import ManageTenants from './admin/pages/manageTenants/manageTenants';
@@ -24,51 +24,59 @@ import CreateVehicle from './tenant/pages/createVehicle/createVehicle';
 import Booking from './tenant/pages/booking/booking';
 import BookingDetail from './tenant/pages/booking/components/bookingCard/bookingDetailModal';
 import PoolRequest from './tenant/pages/poolRequest/poolRequest';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { lightTheme, darkTheme } from './theme';
 
 const App = () => {
+  const [mode, setMode] = useState('light');
+  const theme = mode === 'light' ? lightTheme : darkTheme;
+
   return (
-    <Router>
-      <Routes>
-        {/* Tenant Routes */}
-        <Route element={<TenantNonLoginRoute />}>
-          <Route path="login" element={<TenantSignInPage />} />
-          <Route path="signup" element={<TenantSignUpPage />} />
-        </Route>
-
-        <Route element={<TenantProtectedRoute />}>
-          <Route element={<TenantLayout />}>
-            <Route path="/" element={<TenantDashboard />} />
-            <Route path="dashboard" element={<TenantDashboard />} />
-            <Route path="driversgarage" element={<DriversGarage />} />
-            <Route path="vehiclesgarage" element={<VehiclesGarage />} />
-            <Route path="addDriver" element={<CreateDriver />} />
-            <Route path="addVehicle" element={<CreateVehicle />} />
-            <Route path="booking" element={<Booking />} />
-            <Route path="booking/:id" element={<BookingDetail />} />
-            <Route path="poolrequest" element={<PoolRequest />} />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Router>
+        <Routes>
+          {/* Tenant Routes */}
+          <Route element={<TenantNonLoginRoute />}>
+            <Route path="login" element={<TenantSignInPage />} />
+            <Route path="signup" element={<TenantSignUpPage />} />
           </Route>
-        </Route>
 
-        {/* Admin Routes */}
-        <Route element={<AdminNonLoginRoute />}>
-          <Route path="admin/login" element={<SignInPage />} />
-        </Route>
-
-        <Route path="/admin" element={<AdminProtectedRoute />}>
-          <Route element={<Layout />}>
-            <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="managetenants" element={<ManageTenantList />} />
-            <Route path="managetenants/:id" element={<ManageTenants />} />
-            <Route path="driversapproval" element={<DriversApproval />} />
-            <Route path="vehiclesapproval" element={<VehiclesApproval />} />
-            <Route path="permissions" element={<Permissions />} />
+          <Route element={<TenantProtectedRoute />}>
+            <Route element={<TenantLayout />}>
+              <Route path="/" element={<TenantDashboard />} />
+              <Route path="dashboard" element={<TenantDashboard />} />
+              <Route path="driversgarage" element={<DriversGarage />} />
+              <Route path="vehiclesgarage" element={<VehiclesGarage />} />
+              <Route path="addDriver" element={<CreateDriver />} />
+              <Route path="addVehicle" element={<CreateVehicle />} />
+              <Route path="booking" element={<Booking />} />
+              <Route path="booking/:id" element={<BookingDetail />} />
+              <Route path="poolrequest" element={<PoolRequest />} />
+            </Route>
           </Route>
-        </Route>
 
-        {/* Error Handling */}
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-    </Router>
+          {/* Admin Routes */}
+          <Route element={<AdminNonLoginRoute />}>
+            <Route path="admin/login" element={<SignInPage />} />
+          </Route>
+
+          <Route path="/admin" element={<AdminProtectedRoute />}>
+            <Route element={<Layout />}>
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="managetenants" element={<ManageTenantList />} />
+              <Route path="managetenants/:id" element={<ManageTenants />} />
+              <Route path="driversapproval" element={<DriversApproval />} />
+              <Route path="vehiclesapproval" element={<VehiclesApproval />} />
+              <Route path="permissions" element={<Permissions />} />
+            </Route>
+          </Route>
+
+          {/* Error Handling */}
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 };
 

@@ -12,14 +12,24 @@ import {
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import HeaderButton from '../../../commons/buttons/headerButton';
 import BlueModalButton from '../../../commons/buttons/blueModalButton';
-
+import PoolRequestModal from './modal/poolReq';
 
 const PageHeader = () => {
   const [Client, setClient] = React.useState('');
   const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
   const handleChange = (event) => {
     setClient(event.target.value);
   };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Box
       sx={{
@@ -29,6 +39,7 @@ const PageHeader = () => {
         padding: '20px',
       }}
     >
+      <PoolRequestModal open={open} handleClose={handleClose} />
       <Box
         sx={{
           display: 'flex',
