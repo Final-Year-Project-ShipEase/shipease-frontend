@@ -52,6 +52,7 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
   }, [open]);
 
   const [formData, setFormData] = useState({
+    id: '',
     type: '',
     space: '',
     date: '',
@@ -59,6 +60,7 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
     dropoff: '',
     booking: '',
     description: '',
+    price: '',
   });
 
   useEffect(() => {
@@ -81,6 +83,8 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
             pickup: selectedBooking.pickup,
             dropoff: selectedBooking.dropoff,
             date: formatTimestamp(selectedBooking.date),
+            price: selectedBooking.total_bill,
+            id: selectedBooking.id,
           }));
         }
       } catch (err) {
@@ -89,7 +93,7 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
     };
 
     fetchVehicle();
-  }, [vehicleId]); // Only re-run the effect if vehicleId changes
+  }, [vehicleId]);
 
   const handleChangeBooking = async (event) => {
     const { value } = event.target;
@@ -115,9 +119,32 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
   };
 
   const handleAddConfirm = async () => {
+    const {
+      id,
+      type,
+      space,
+      date,
+      pickup,
+      dropoff,
+      description,
+      price,
+      // width,
+      // height
+    } = formData;
+
     try {
-      await createPoolRequest(formData);
-      onSubmit();
+      await createPoolRequest({
+        booking_id: id,
+        types: type[0],
+        // space,
+        startDate: date,
+        city: pickup,
+        destination: dropoff,
+        // description,
+        price,
+        // width,
+        // height,
+      });
       handleClose();
       show('Pool Request created successfully', 'success');
     } catch (err) {
