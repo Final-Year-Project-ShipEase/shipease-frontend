@@ -18,6 +18,7 @@ const PageHeader = () => {
   const [Client, setClient] = React.useState('');
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const currentTenantId = localStorage.getItem('tenantData')?.data?.id || 2;
   const handleChange = (event) => {
     setClient(event.target.value);
   };
@@ -39,7 +40,11 @@ const PageHeader = () => {
         padding: '20px',
       }}
     >
-      <PoolRequestModal open={open} handleClose={handleClose} />
+      <PoolRequestModal
+        open={open}
+        handleClose={handleClose}
+        tenantId={currentTenantId}
+      />
       <Box
         sx={{
           display: 'flex',
@@ -109,7 +114,10 @@ const PageHeader = () => {
           justifyContent: 'flex-end',
         }}
       >
-        <BlueModalButton text={'Create Pool Request'} />
+        <BlueModalButton
+          text={'Create Pool Request'}
+          onClick={handleClickOpen}
+        />
         <HeaderButton text={'Export'} />
       </Box>
     </Box>

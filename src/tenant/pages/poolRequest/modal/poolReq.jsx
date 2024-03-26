@@ -11,6 +11,7 @@ import {
   Grid,
   DialogContentText,
   useTheme,
+  MenuItem,
 } from '@mui/material';
 import {
   AddCircleOutline as AddIcon,
@@ -20,27 +21,33 @@ import ConfirmAdd from '../dialog/ConfirmAdd.jsx';
 import { usePoolRequestService } from '../../../../services/poolRequestServices.jsx';
 import { useBookingService } from '../../../../services/bookingServices.jsx';
 import { useSnackbar } from '../../../../utils/snackbarContextProvider.jsx';
+import { formatTimestamp } from '../../../../utils/timestamp.js';
+import { useVehicleService } from '../../../../services/vehicleServices.jsx';
 
-const PoolRequestModal = ({ open, handleClose, onSubmit }) => {
+const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const theme = useTheme();
   const { createPoolRequest } = usePoolRequestService();
   const { getBookingListByTenantId } = useBookingService();
   const [bookingList, setBookingList] = useState([]);
-  const tenantId = localStorage.getItem('tenantData')?.data?.id;
   const { show } = useSnackbar();
+  const [vehicleId, setVehicleId] = useState('');
+  const { getVehicle } = useVehicleService();
+  const [vehicle, setVehicle] = useState({});
 
   useEffect(() => {
     const fetchBookingList = async () => {
-      const data = await getBookingListByTenantId(tenantId)
+      await getBookingListByTenantId(tenantId)
         .then((response) => {
           setBookingList(response);
         })
         .catch((err) => {
           show(err.message, 'error');
         });
+      console.log(bookingList);
     };
+
     if (open) fetchBookingList();
   }, [open]);
 
@@ -50,9 +57,50 @@ const PoolRequestModal = ({ open, handleClose, onSubmit }) => {
     date: '',
     pickup: '',
     dropoff: '',
-    booking_id: '',
+    booking: '',
     description: '',
   });
+
+  useEffect(() => {
+    const fetchVehicle = async () => {
+      if (!vehicleId) return; // Exit if no vehicleId is set
+
+      try {
+        const response = await getVehicle(vehicleId);
+        setVehicle(response);
+        // Here, we have the vehicle details. Now, we can set up our formData properly.
+        // We should only do this if the related booking is already selected and available.
+        if (formData.booking) {
+          const selectedBooking = bookingList.find(
+            (booking) => booking.id === formData.booking
+          );
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            type: response.type,
+            space: response.space,
+            pickup: selectedBooking.pickup,
+            dropoff: selectedBooking.dropoff,
+            date: formatTimestamp(selectedBooking.date),
+          }));
+        }
+      } catch (err) {
+        show(err.message, 'error');
+      }
+    };
+
+    fetchVehicle();
+  }, [vehicleId]); // Only re-run the effect if vehicleId changes
+
+  const handleChangeBooking = async (event) => {
+    const { value } = event.target;
+    const selectedBooking = bookingList.find((booking) => booking.id === value);
+    setVehicleId(selectedBooking.vehicle_id);
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      booking: value,
+    }));
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -67,17 +115,14 @@ const PoolRequestModal = ({ open, handleClose, onSubmit }) => {
   };
 
   const handleAddConfirm = async () => {
-    // const clientData = {
-    //   clientId: formData.ID,
-    //   name: formData.name,
-    // };
-    // try {
-    //   //await createApplication(clientData);
-    //   setIsConfirmationDialogOpen(false);
-    //   handleClose();
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      await createPoolRequest(formData);
+      onSubmit();
+      handleClose();
+      show('Pool Request created successfully', 'success');
+    } catch (err) {
+      show(err.message, 'error');
+    }
   };
 
   return (
@@ -123,14 +168,32 @@ const PoolRequestModal = ({ open, handleClose, onSubmit }) => {
           variant="h6"
           sx={{ fontWeight: 'bold', color: 'black' }}
         >
-          Driver Details
+          Create Pool Request
         </DialogContentText>
         <Typography variant="subtitle2">
-          Following are the Driver Details
+          Add the following details to create Pool Request
         </Typography>
       </DialogTitle>
       <DialogContent>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} p={1}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              select
+              label="booking"
+              name="booking"
+              value={formData.booking}
+              onChange={handleChangeBooking}
+              variant="outlined"
+            >
+              {bookingList.map((booking) => (
+                <MenuItem key={booking.id} value={booking.id}>
+                  {booking.pickup} - {booking.dropoff}, Time -{' '}
+                  {formatTimestamp(booking.date)}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
               fullWidth
@@ -181,16 +244,6 @@ const PoolRequestModal = ({ open, handleClose, onSubmit }) => {
               variant="outlined"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              label="booking_id"
-              name="booking_id"
-              value={formData.booking_id}
-              onChange={handleChange}
-              variant="outlined"
-            />
-          </Grid>
           <Grid item xs={12} sm={12}>
             <TextField
               fullWidth
@@ -203,7 +256,6 @@ const PoolRequestModal = ({ open, handleClose, onSubmit }) => {
           </Grid>
         </Grid>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}></Grid>
           <Grid item xs={12} sm={6}>
             <Button
               fullWidth
