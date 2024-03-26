@@ -131,19 +131,20 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
       // width,
       // height
     } = formData;
+    const width = 85;
+    const height = 85;
 
     try {
       await createPoolRequest({
         booking_id: id,
         types: type[0],
-        // space,
         startDate: date,
         city: pickup,
         destination: dropoff,
         // description,
         price,
-        // width,
-        // height,
+        width,
+        height,
       });
       handleClose();
       show('Pool Request created successfully', 'success');
