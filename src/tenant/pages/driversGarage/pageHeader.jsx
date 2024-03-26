@@ -63,9 +63,9 @@ const PageHeader = () => {
               disableUnderline: true,
             }}
           >
-            <MenuItem value={10}>ID</MenuItem>
-            <MenuItem value={20}>Tenant ID</MenuItem>
-            <MenuItem value={30}>Username</MenuItem>
+            <MenuItem value={10}>Username</MenuItem>
+            <MenuItem value={20}>Name</MenuItem>
+            <MenuItem value={30}>Email</MenuItem>
           </Select>
         </FormControl>
         <TextField
