@@ -11,302 +11,288 @@ import {
   Grid,
   DialogContentText,
   useTheme,
+  MenuItem,
 } from '@mui/material';
 import {
   AddCircleOutline as AddIcon,
   Close as CloseIcon,
 } from '@mui/icons-material';
-import {useBookingService} from '../../../../services/bookingServices.jsx';
 import ConfirmAdd from '../dialog/ConfirmAdd.jsx';
+import { usePoolRequestService } from '../../../../services/poolRequestServices.jsx';
+import { useBookingService } from '../../../../services/bookingServices.jsx';
+import { useSnackbar } from '../../../../utils/snackbarContextProvider.jsx';
+import { formatTimestamp } from '../../../../utils/timestamp.js';
+import { useVehicleService } from '../../../../services/vehicleServices.jsx';
 
-const   PoolRequestDetailsModal = ({ open, handleClose, onSubmit, booking_id }) => {
+const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
-  useState(false);
-const theme = useTheme();
-//const { createApplication, creatingApp } = useApplicationService();
-const { getpoolRequest } = useBookingService();
+    useState(false);
+  const theme = useTheme();
+  const { getPoolRequest } = usePoolRequestService();
+  const [poolRequest, setPoolRequest] = useState({});
+  const { show } = useSnackbar();
+  const [vehicleId, setVehicleId] = useState('');
+  const { getVehicle } = useVehicleService();
+  const [vehicle, setVehicle] = useState({});
 
-const [formData, setFormData] = useState({
-  ID: '',
-  name: '',
-  username: '',
-  password: '',
-  phoneNo: '',
-  cnic: '',
-  LicenseNo: '',
-  TrackerNo: '',
-  City: '',
-  Tenant: '',
-  LicenseImages: 'License Image',
-  status: false,
-});
+  useEffect(() => {
+    const fetchPRList = async () => {
+      await getPoolRequest(prID)
+        .then((response) => {
+          setPoolRequest(response);
+          setFormData({
+            id: response.booking_id,
+            type: response.types,
+            space: response.space,
+            date: formatTimestamp(response.startDate),
+            pickup: response.city,
+            dropoff: response.destination,
+            price: response.price,
+            width: response.width,
+            height: response.height,
+          });
+        })
+        .catch((err) => {
+          show(err.message, 'error');
+        });
+      console.log(bookingList);
+    };
 
-useEffect(() => {
-  const fetchDriver = async () => {
+    if (open) fetchPRList();
+  }, [open]);
+
+  const [formData, setFormData] = useState({
+    id: '',
+    type: '',
+    space: '',
+    date: '',
+    pickup: '',
+    dropoff: '',
+    booking: '',
+    description: '',
+    price: '',
+    width: '',
+    height: '',
+  });
+
+  const handleChangeBooking = async (event) => {
+    const { value } = event.target;
+    const selectedBooking = bookingList.find((booking) => booking.id === value);
+    setVehicleId(selectedBooking.vehicle_id);
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      booking: value,
+    }));
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSwitchChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.checked,
+    });
+  };
+
+  const handleAddConfirm = async () => {
+    const {
+      id,
+      type,
+      space,
+      date,
+      pickup,
+      dropoff,
+      description,
+      price,
+      // width,
+      // height
+    } = formData;
+    const width = 85;
+    const height = 85;
+
     try {
-      const driver = await getpoolRequest(booking_id);
-      setFormData({
-        ID: driver.id,
-        name: driver.name,
-        username: driver.username,
-        password: driver.password,
-        phoneNo: driver.phoneNo,
-        cnic: driver.cnic,
-        LicenseNo: '12345678',
-        TrackerNo: driver.trackerNo,
-        City: driver.city,
-        Tenant: driver.tenant_id,
-        LicenseImages: driver.LicenseImages,
-        status: driver.status,
+      await createPoolRequest({
+        booking_id: id,
+        types: type[0],
+        startDate: date,
+        city: pickup,
+        destination: dropoff,
+        // description,
+        price,
+        width,
+        height,
       });
+      handleClose();
+      show('Pool Request created successfully', 'success');
     } catch (err) {
-      console.log(err);
+      show(err.message, 'error');
     }
   };
 
-  if (booking_id) fetchDriver();
-}, [booking_id]);
-
-const handleChange = (event) => {
-  const { name, value } = event.target;
-  setFormData({ ...formData, [name]: value });
-};
-
-const handleSwitchChange = (e) => {
-  setFormData({
-    ...formData,
-    [e.target.name]: e.target.checked,
-  });
-};
-
-const handleAddConfirm = async () => {
-  // const clientData = {
-  //   clientId: formData.ID,
-  //   name: formData.name,
-  // };
-  // try {
-  //   //await createApplication(clientData);
-  //   setIsConfirmationDialogOpen(false);
-  //   handleClose();
-  // } catch (err) {
-  //   console.log(err);
-  // }
-};
-
-return (
-  <Dialog
-    open={open}
-    onClose={handleClose}
-    maxWidth="md"
-    sx={{
-      '& .MuiDialog-paper': {
-        width: '100%',
-        margin: 0,
-        borderRadius: 7,
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        backgroundColor: '#F5F5F5',
-      },
-    }}
-  >
-    <ConfirmAdd
-      open={isConfirmationDialogOpen}
-      onClose={() => setIsConfirmationDialogOpen(false)}
-      onConfirm={handleAddConfirm}
-      //loading={creatingApp}
-      entity="username"
-    />
-    <DialogTitle>
-      <Box display="flex" alignItems="center" justifyContent="space-between">
-        <IconButton
-          sx={{
-            p: 1,
-            backgroundColor: theme.palette.buttons.approve,
-            color: theme.palette.buttons.white,
-          }}
+  return (
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      maxWidth="md"
+      sx={{
+        '& .MuiDialog-paper': {
+          width: '100%',
+          margin: 0,
+          borderRadius: 7,
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundColor: '#F5F5F5',
+        },
+      }}
+    >
+      <ConfirmAdd
+        open={isConfirmationDialogOpen}
+        onClose={() => setIsConfirmationDialogOpen(false)}
+        onConfirm={handleAddConfirm}
+        //loading={creatingApp}
+        entity="username"
+      />
+      <DialogTitle>
+        <Box display="flex" alignItems="center" justifyContent="space-between">
+          <IconButton
+            sx={{
+              p: 1,
+              backgroundColor: theme.palette.buttons.approve,
+              color: theme.palette.buttons.white,
+            }}
+          >
+            <AddIcon color={theme.palette.buttons.white} />
+          </IconButton>
+          <IconButton onClick={handleClose}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+        <DialogContentText
+          variant="h6"
+          sx={{ fontWeight: 'bold', color: 'black' }}
         >
-          <AddIcon color={theme.palette.buttons.white} />
-        </IconButton>
-        <IconButton onClick={handleClose}>
-          <CloseIcon />
-        </IconButton>
-      </Box>
-      <DialogContentText
-        variant="h6"
-        sx={{ fontWeight: 'bold', color: 'black' }}
-      >
-        Driver Details
-      </DialogContentText>
-      <Typography variant="subtitle2">
-        Following are the Driver Details
-      </Typography>
-    </DialogTitle>
-    <DialogContent>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            disabled
-            margin="normal"
-            label="ID"
-            name="ID"
-            value={formData.ID}
-            onChange={handleChange}
-          />
+          Create Pool Request
+        </DialogContentText>
+        <Typography variant="subtitle2">
+          Add the following details to create Pool Request
+        </Typography>
+      </DialogTitle>
+      <DialogContent>
+        <Grid container spacing={2} p={1}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              select
+              label="booking"
+              name="booking"
+              value={formData.booking}
+              onChange={handleChangeBooking}
+              variant="outlined"
+            >
+              {bookingList.map((booking) => (
+                <MenuItem key={booking.id} value={booking.id}>
+                  {booking.pickup} - {booking.dropoff}, Time -{' '}
+                  {formatTimestamp(booking.date)}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="type"
+              name="type"
+              value={formData.type}
+              onChange={handleChange}
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="space"
+              name="space"
+              value={formData.space}
+              onChange={handleChange}
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="pickup"
+              name="pickup"
+              value={formData.pickup}
+              onChange={handleChange}
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="dropoff"
+              name="dropoff"
+              value={formData.dropoff}
+              onChange={handleChange}
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextField
+              fullWidth
+              label="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              variant="outlined"
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            disabled
-            margin="normal"
-            label="Name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-          />
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <Button
+              fullWidth
+              onClick={handleClose}
+              sx={{
+                color: theme.palette.primary.black,
+                backgroundColor: theme.palette.buttons.cancel,
+              }}
+            >
+              Cancel
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Button
+              fullWidth
+              onClick={() => setIsConfirmationDialogOpen(true)}
+              sx={{
+                color: theme.palette.primary.white,
+                backgroundColor: theme.palette.buttons.approve,
+              }}
+              variant="contained"
+            >
+              Approve
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            disabled
-            margin="normal"
-            label="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            disabled
-            margin="normal"
-            label="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            disabled
-            margin="normal"
-            label="Phone No"
-            name="Phone No"
-            value={formData.phoneNo}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            disabled
-            margin="normal"
-            label="CNIC"
-            name="CNIC"
-            value={formData.cnic}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            disabled
-            margin="normal"
-            label="License No"
-            name="License No"
-            value={formData.LicenseNo}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            disabled
-            margin="normal"
-            label="Tracker No"
-            name="Tracker No"
-            value={formData.TrackerNo}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            disabled
-            margin="normal"
-            label="City"
-            name="City"
-            value={formData.City}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            disabled
-            margin="normal"
-            label="Tenant"
-            name="Tenant"
-            value={formData.Tenant}
-            onChange={handleChange}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Button
-            name="License Images"
-            onChange={handleChange}
-            variant="contained"
-            sx={{
-              backgroundColor: theme.palette.buttons.approve,
-              color: 'white',
-              width: '100%',
-              height: '72%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              mt: 2,
-              ':hover': {
-                backgroundColor: theme,
-              },
-            }}
-            startIcon={<AddIcon />}
-          >
-            License Images
-          </Button>
-        </Grid>
-        <Grid item xs={12} sm={6}></Grid>
-        <Grid item xs={12} sm={6}>
-          <Button
-            fullWidth
-            onClick={handleClose}
-            sx={{
-              color: theme.palette.primary.black,
-              backgroundColor: theme.palette.buttons.cancel,
-            }}
-          >
-            Cancel
-          </Button>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Button
-            fullWidth
-            onClick={() => setIsConfirmationDialogOpen(true)}
-            sx={{
-              color: theme.palette.primary.white,
-              backgroundColor: theme.palette.buttons.approve,
-            }}
-            variant="contained"
-          >
-            Approve
-          </Button>
-        </Grid>
-      </Grid>
-    </DialogContent>
-  </Dialog>
-);
+      </DialogContent>
+    </Dialog>
+  );
 };
 
 export default PoolRequestDetailsModal;

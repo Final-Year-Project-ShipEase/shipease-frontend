@@ -176,6 +176,11 @@ const PoolRequestInformation = () => {
     setModal(true);
   };
 
+  const handlePoolRequestView = (id) => {
+    setPoolRequestId(id);
+    setModal(true);
+  };
+
   if (error) {
     return (
       <Typography color="error" sx={{ ml: 4 }}>
@@ -190,7 +195,7 @@ const PoolRequestInformation = () => {
       <PoolRequestDetailsModal
         open={openModal}
         handleClose={() => setModal(false)}
-        poolRequest_id={poolRequestId}
+        prID={poolRequestId}
       />
       <Box
         sx={{
@@ -257,7 +262,7 @@ const PoolRequestInformation = () => {
             <PoolRequestCard
               key={poolRequest.id}
               poolRequest={poolRequest}
-              handleOnClick={handlePoolRequestClick}
+              handleOnClick={handlePoolRequestView}
             />
           ))}
         </Box>

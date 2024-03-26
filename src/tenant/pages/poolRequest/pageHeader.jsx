@@ -53,7 +53,7 @@ const PageHeader = () => {
         }}
       >
         <FormControl>
-          <InputLabel id="Client-select-label">Client</InputLabel>
+          <InputLabel id="Client-select-label">Search</InputLabel>
           <Select
             id="Client-select"
             value={Client}
@@ -74,14 +74,14 @@ const PageHeader = () => {
               disableUnderline: true,
             }}
           >
-            <MenuItem value={10}>Client</MenuItem>
-            <MenuItem value={20}>Client1</MenuItem>
-            <MenuItem value={30}>Client2</MenuItem>
+            <MenuItem value={10}>Pick up</MenuItem>
+            <MenuItem value={20}>Drop Off</MenuItem>
+            <MenuItem value={30}>Tenant</MenuItem>
           </Select>
         </FormControl>
         <TextField
           id="search"
-          placeholder="Search User"
+          placeholder="Search Pool Requests"
           variant="standard"
           sx={{
             display: 'flex',
@@ -118,7 +118,7 @@ const PageHeader = () => {
           text={'Create Pool Request'}
           onClick={handleClickOpen}
         />
-        <HeaderButton text={'Export'} />
+        {/* <HeaderButton text={'Export'} /> */}
       </Box>
     </Box>
   );
