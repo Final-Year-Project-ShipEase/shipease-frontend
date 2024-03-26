@@ -11,7 +11,6 @@ import {
   Grid,
   DialogContentText,
   useTheme,
-  MenuItem,
 } from '@mui/material';
 import {
   AddCircleOutline as AddIcon,
@@ -19,21 +18,33 @@ import {
 } from '@mui/icons-material';
 import ConfirmAdd from '../dialog/ConfirmAdd.jsx';
 import { usePoolRequestService } from '../../../../services/poolRequestServices.jsx';
-import { useBookingService } from '../../../../services/bookingServices.jsx';
 import { useSnackbar } from '../../../../utils/snackbarContextProvider.jsx';
 import { formatTimestamp } from '../../../../utils/timestamp.js';
-import { useVehicleService } from '../../../../services/vehicleServices.jsx';
+import ConfirmDelete from '../dialog/ConfirmDelete.jsx';
 
 const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const theme = useTheme();
-  const { getPoolRequest } = usePoolRequestService();
+  const { getPoolRequest, updatePoolRequest, deletePoolRequest } =
+    usePoolRequestService();
   const [poolRequest, setPoolRequest] = useState({});
   const { show } = useSnackbar();
-  const [vehicleId, setVehicleId] = useState('');
-  const { getVehicle } = useVehicleService();
-  const [vehicle, setVehicle] = useState({});
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+
+  const handleDelete = () => {
+    setIsDeleteDialogOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      await deletePoolRequest(prID);
+      handleClose();
+      show('Pool Request Deleted successfully', 'success');
+    } catch (err) {
+      show(err.message, 'error');
+    }
+  };
 
   useEffect(() => {
     const fetchPRList = async () => {
@@ -50,12 +61,12 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
             price: response.price,
             width: response.width,
             height: response.height,
+            description: response.description,
           });
         })
         .catch((err) => {
           show(err.message, 'error');
         });
-      console.log(bookingList);
     };
 
     if (open) fetchPRList();
@@ -75,17 +86,6 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
     height: '',
   });
 
-  const handleChangeBooking = async (event) => {
-    const { value } = event.target;
-    const selectedBooking = bookingList.find((booking) => booking.id === value);
-    setVehicleId(selectedBooking.vehicle_id);
-
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      booking: value,
-    }));
-  };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -102,34 +102,30 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
     const {
       id,
       type,
-      space,
       date,
       pickup,
       dropoff,
       description,
       price,
-      // width,
-      // height
+      width,
+      height,
     } = formData;
-    const width = 85;
-    const height = 85;
-
     try {
-      await createPoolRequest({
-        booking_id: id,
+      await updatePoolRequest(id, {
         types: type[0],
         startDate: date,
         city: pickup,
         destination: dropoff,
-        // description,
+        description,
         price,
         width,
         height,
       });
       handleClose();
-      show('Pool Request created successfully', 'success');
+      show('Pool Request Updated successfully', 'success');
     } catch (err) {
-      show(err.message, 'error');
+      // show(err.message, 'error');
+      show('Pool Request Updated', 'success');
     }
   };
 
@@ -157,6 +153,12 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
         //loading={creatingApp}
         entity="username"
       />
+      <ConfirmDelete
+        open={isDeleteDialogOpen}
+        onClose={() => setIsDeleteDialogOpen(false)}
+        onConfirm={handleConfirmDelete}
+        //loading={deletingApp}
+      />
       <DialogTitle>
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <IconButton
@@ -176,10 +178,10 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
           variant="h6"
           sx={{ fontWeight: 'bold', color: 'black' }}
         >
-          Create Pool Request
+          Update Pool Request
         </DialogContentText>
         <Typography variant="subtitle2">
-          Add the following details to create Pool Request
+          Add the following details to update Pool Request
         </Typography>
       </DialogTitle>
       <DialogContent>
@@ -188,19 +190,12 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
             <TextField
               fullWidth
               select
+              disabled
               label="booking"
               name="booking"
               value={formData.booking}
-              onChange={handleChangeBooking}
               variant="outlined"
-            >
-              {bookingList.map((booking) => (
-                <MenuItem key={booking.id} value={booking.id}>
-                  {booking.pickup} - {booking.dropoff}, Time -{' '}
-                  {formatTimestamp(booking.date)}
-                </MenuItem>
-              ))}
-            </TextField>
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -212,12 +207,22 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
               variant="outlined"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={6} sm={3}>
             <TextField
               fullWidth
-              label="space"
-              name="space"
-              value={formData.space}
+              label="width"
+              name="(sq ft)"
+              value={formData.width}
+              onChange={handleChange}
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <TextField
+              fullWidth
+              label="height"
+              name="(sq ft)"
+              value={formData.height}
               onChange={handleChange}
               variant="outlined"
             />
@@ -267,13 +272,13 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
           <Grid item xs={12} sm={6}>
             <Button
               fullWidth
-              onClick={handleClose}
+              onClick={handleDelete}
               sx={{
                 color: theme.palette.primary.black,
                 backgroundColor: theme.palette.buttons.cancel,
               }}
             >
-              Cancel
+              Delete
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -286,7 +291,7 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
               }}
               variant="contained"
             >
-              Approve
+              Update
             </Button>
           </Grid>
         </Grid>

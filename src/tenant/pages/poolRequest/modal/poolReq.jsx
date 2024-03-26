@@ -54,7 +54,8 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
   const [formData, setFormData] = useState({
     id: '',
     type: '',
-    space: '',
+    width: '',
+    height: '',
     date: '',
     pickup: '',
     dropoff: '',
@@ -85,6 +86,8 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
             date: formatTimestamp(selectedBooking.date),
             price: selectedBooking.total_bill,
             id: selectedBooking.id,
+            width: response.width,
+            height: response.height,
           }));
         }
       } catch (err) {
@@ -122,18 +125,14 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
     const {
       id,
       type,
-      space,
       date,
       pickup,
       dropoff,
       description,
       price,
-      // width,
-      // height
+      width,
+      height,
     } = formData;
-    const width = 85;
-    const height = 85;
-
     try {
       await createPoolRequest({
         booking_id: id,
@@ -141,7 +140,7 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
         startDate: date,
         city: pickup,
         destination: dropoff,
-        // description,
+        description,
         price,
         width,
         height,
@@ -232,12 +231,22 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
               variant="outlined"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={6} sm={3}>
             <TextField
               fullWidth
-              label="space"
-              name="space"
-              value={formData.space}
+              label="width"
+              name="(sq ft)"
+              value={formData.width}
+              onChange={handleChange}
+              variant="outlined"
+            />
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <TextField
+              fullWidth
+              label="height"
+              name="(sq ft)"
+              value={formData.height}
               onChange={handleChange}
               variant="outlined"
             />
