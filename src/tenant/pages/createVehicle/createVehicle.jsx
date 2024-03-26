@@ -68,6 +68,10 @@ function CreateVehicle() {
           status: '',
           location: '',
           trackerNo: '',
+          width: '',
+          height: '',
+          cost: '',
+          // TODO: utalize these fields
         }}
         validationSchema={validationSchema}
         onSubmit={async (values) => {

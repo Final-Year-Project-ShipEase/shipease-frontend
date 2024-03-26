@@ -6,8 +6,12 @@ import Sidebar from '../../components/sidebar/sidebar';
 
 const TenantLayout = () => {
   const theme = useTheme();
-  const leftSpan = 1.5;
-  const rigthSpan = 12 - leftSpan;
+
+  const leftSpanMd = 1;
+  const leftSpanSm = 3;
+  const rightSpanMd = 8;
+  const rightSpanSm = 9; 
+
   return (
     <Box
       sx={{
@@ -28,27 +32,40 @@ const TenantLayout = () => {
         sx={{
           backgroundColor: theme.palette.page.main,
           minHeight: '93vh',
+          flexGrow: 1,
         }}
       >
-        <Grid container>
+        <Grid
+          container
+          sx={{
+            display: 'flex',
+            flexDirection: 'Column',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+          }}
+        >
           <Grid
             item
-            md={leftSpan}
-            xs={leftSpan}
-            lg={leftSpan}
+            lg={leftSpanMd}
+            md={leftSpanMd}
+            sm={leftSpanSm}
+            xs={12}
             sx={{ backgroundColor: '#FAFAFA' }}
           >
-            <Sidebar leftSpan={leftSpan} />
+            <Sidebar />
           </Grid>
           <Grid
             item
-            md={rigthSpan}
+            lg={rightSpanMd}
+            md={rightSpanMd}
+            sm={rightSpanSm}
+            xs={12}
             sx={{
               backgroundColor: theme.palette.page.main,
               minHeight: '93vh',
             }}
           >
-            <Outlet context={[rigthSpan, leftSpan]} />
+            <Outlet />
           </Grid>
         </Grid>
       </Box>

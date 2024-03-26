@@ -1,32 +1,47 @@
-import React, { useState } from 'react';
-import { Box, Button, Drawer, useTheme, useMediaQuery } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import {
+  Box,
+  Button,
+  Drawer,
+  IconButton,
+  useTheme,
+  useMediaQuery,
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu'; // For the toggle button
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
 import { useAdminAuth } from '../../auth/adminAuth';
 
-const Sidebar = ({ leftSpan, isDrawerOpen }) => {
-  const widthVal = (leftSpan / 12) * 100;
+const Sidebar = ({ leftSpan }) => {
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
+  const [isDrawerOpen, setIsDrawerOpen] = useState(isLargeScreen); // State to toggle drawer visibility
   const [activeButton, setActiveButton] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
-  const theme = useTheme();
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
-  const issmallScreen = useMediaQuery(theme.breakpoints.up(''));
   const { logout } = useAdminAuth();
+
+  useEffect(() => {
+    setIsDrawerOpen(isLargeScreen);
+  }, [isLargeScreen]);
+
+  useEffect(() => {
+    const currentPath = location.pathname;
+    const currentPathName = currentPath.split('/')[2];
+    const currentPathNameCapitalized =
+      currentPathName.charAt(0).toUpperCase() + currentPathName.slice(1);
+    setActiveButton(currentPathNameCapitalized);
+  }, [location]);
 
   const handleClick = (item) => {
     navigate(item.link);
     setActiveButton(item.name);
   };
 
-  React.useEffect(() => {
-    const currentPath = location.pathname;
-    const currentPathName = currentPath.split('/')[2]; // Update index to 2
-    const currentPathNameCapitalized =
-      currentPathName.charAt(0).toUpperCase() + currentPathName.slice(1);
-    setActiveButton(currentPathNameCapitalized);
-  }, [location]);
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
 
   const CustomButton = ({ item, sx }) => {
     const isActive = activeButton === item.name;
@@ -112,52 +127,63 @@ const Sidebar = ({ leftSpan, isDrawerOpen }) => {
   };
 
   return (
-    <Drawer
-      elevation={4}
-      variant="permanent"
-      open={isDrawerOpen && isLargeScreen}
-      sx={{
-        width: isDrawerOpen || isLargeScreen ? `${widthVal}%` : '0', // Set width to 0 when the drawer is closed
-        flexShrink: 0,
-        whiteSpace: 'nowrap',
-        boxSizing: 'border-box',
-        '& .MuiDrawer-paper': {
-          mt: '7vh',
-          py: '24px',
-          width: isDrawerOpen || isLargeScreen ? `${widthVal}%` : '0', // Set width to 0 when the drawer is closed
-          backgroundColor: theme.palette.buttonSidebar.hovertextcolor,
-          boxShadow: theme.palette.buttonSidebar.sidebarshadow,
-        },
-      }}
-    >
-      <Box
+    <>
+      <IconButton
+        onClick={toggleDrawer}
         sx={{
-          display: 'flex',
-          justifyContent: 'start',
-          alignItems: 'center',
-          flexDirection: 'column',
-          width: '100%',
-          height: '100%',
-          padding: '0 0 3rem 0',
+          display: isLargeScreen ? 'none' : 'flex',
+          position: 'absolute',
+          top: 8,
+          left: 8,
+          zIndex: theme.zIndex.drawer + 1,
         }}
       >
-        {NavigationItems.map((item, index) => (
-          <CustomButton key={index} item={item} />
-        ))}
-        <CustomButton2
-          item={{
-            name: 'Log out',
-            link: '/admin/login',
-            icon: (
-              <PowerSettingsNewOutlinedIcon
-                style={{ color: theme.palette.buttonSidebar.ColorActive }}
-              />
-            ),
+        <MenuIcon />
+      </IconButton>
+      <Drawer
+        elevation={4}
+        variant={isLargeScreen ? 'permanent' : 'temporary'}
+        open={isDrawerOpen}
+        onClose={toggleDrawer}
+        // Adjusted styles for responsiveness
+        sx={{
+          '& .MuiDrawer-paper': {
+            mt: '9vh',
+            py: '24px',
+            backgroundColor: theme.palette.buttonSidebar.hovertextcolor,
+            boxShadow: theme.palette.buttonSidebar.sidebarshadow,
+          },
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'start',
+            alignItems: 'center',
+            flexDirection: 'column',
+            width: '100%',
+            height: '100%',
+            padding: '0 0 3rem 0',
           }}
-          sx={{ marginTop: 'auto' }}
-        />
-      </Box>
-    </Drawer>
+        >
+          {NavigationItems.map((item, index) => (
+            <CustomButton key={index} item={item} />
+          ))}
+          <CustomButton2
+            item={{
+              name: 'Log out',
+              link: '/admin/login',
+              icon: (
+                <PowerSettingsNewOutlinedIcon
+                  style={{ color: theme.palette.buttonSidebar.ColorActive }}
+                />
+              ),
+            }}
+            sx={{ marginTop: 'auto' }}
+          />
+        </Box>
+      </Drawer>
+    </>
   );
 };
 
