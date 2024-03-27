@@ -97,9 +97,13 @@ function CreateVehicle() {
           formData.append('location', values.location);
           formData.append('trackerNo', values.trackerNo);
           formData.append('tenant_id', tenantId);
+          formData.append('width', values.width);
+          formData.append('height', values.height);
+          formData.append('cost', values.cost);
+
           try {
             const res = await addVehicle(formData);
-            if (res.status === 200) {
+            if (res.status === 200 || res.status === 201) {
               navigate('/vehiclesGarage');
               show('Vehicle added successfully: ');
             }
@@ -285,6 +289,42 @@ function CreateVehicle() {
                     <Box>
                       <Field
                         as={TextField}
+                        label={'Width'}
+                        placeholder={'sq ft'}
+                        name={'width'}
+                      />
+                      <ErrorMessage
+                        name="width"
+                        render={(msg) => (
+                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
+                        )}
+                      />
+                    </Box>
+                    <Box>
+                      <Field
+                        as={TextField}
+                        label={'Height'}
+                        placeholder={'sq ft'}
+                        name={'height'}
+                      />
+                      <ErrorMessage
+                        name="height"
+                        render={(msg) => (
+                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
+                        )}
+                      />
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      mb: 2,
+                    }}
+                  >
+                    <Box>
+                      <Field
+                        as={TextField}
                         label={'Location'}
                         placeholder={'Ex : faisalabad'}
                         name={'location'}
@@ -307,6 +347,28 @@ function CreateVehicle() {
                         as={CustomSwitch}
                         label={'Status'}
                         name={'status'}
+                      />
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      mb: 2,
+                    }}
+                  >
+                    <Box>
+                      <Field
+                        as={TextField}
+                        label={'Cost'}
+                        placeholder={'Cost per km'}
+                        name={'cost'}
+                      />
+                      <ErrorMessage
+                        name="cost"
+                        render={(msg) => (
+                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
+                        )}
                       />
                     </Box>
                   </Box>
