@@ -51,7 +51,7 @@ const Sidebar = ({ leftSpan }) => {
         sx={{
           ...sx,
           display: 'flex',
-          padding: '16px 16px 16px 32px',
+          padding: '16px 16px 16px 16px',
           alignItems: 'left',
           gap: '3px',
           alignSelf: 'stretch',
@@ -149,7 +149,7 @@ const Sidebar = ({ leftSpan }) => {
         sx={{
           '& .MuiDrawer-paper': {
             mt: '9vh',
-            py: '24px',
+            paddingBottom: '24px',
             backgroundColor: theme.palette.buttonSidebar.hovertextcolor,
             boxShadow: theme.palette.buttonSidebar.sidebarshadow,
           },

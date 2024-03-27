@@ -64,7 +64,6 @@ const PageHeader = () => {
           >
             <MenuItem value={10}>Vehicle</MenuItem>
             <MenuItem value={20}>Type</MenuItem>
-            <MenuItem value={30}>Username</MenuItem>
           </Select>
         </FormControl>
         <TextField
