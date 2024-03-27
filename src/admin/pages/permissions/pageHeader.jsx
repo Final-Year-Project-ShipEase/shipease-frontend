@@ -1,36 +1,15 @@
 import React from 'react';
-import {
-  Box,
-  InputLabel,
-  FormControl,
-  MenuItem,
-  Select,
-  TextField,
-  InputAdornment,
-  useTheme,
-  Grid,
-} from '@mui/material';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { Typography, useTheme, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import HeaderButton from '../../../commons/buttons/headerButton';
 import AddModalButton from '../../../commons/buttons/addModal';
 import AddPermissionModal from './components/modal/addPermission';
 
 const PageHeader = () => {
-  const [Driver, setDriver] = React.useState('');
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
-  const navigate = useNavigate();
-  const handleChange = (event) => {
-    setDriver(event.target.value);
-  };
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const onClickPermit = () => {
-    // navigate('/approval/drivers');
   };
 
   const onAddPermission = () => {
@@ -49,7 +28,18 @@ const PageHeader = () => {
         open={open}
         handleClose={handleClose}
       />
-      
+      <Grid item xs={12} md={6}>
+        <Typography
+          variant="h4"
+          sx={{
+            color: theme.palette.primary.main,
+            fontWeight: 'bold',
+          }}
+        >
+          Permissions
+        </Typography>
+      </Grid>
+
       <Grid
         item
         xs={12}
