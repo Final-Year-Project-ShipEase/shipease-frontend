@@ -12,7 +12,7 @@ const ManageTenants = () => {
         display: 'flex',
         flexDirection: 'column',
         height: '100vh',
-        padding: 2,
+        padding: 4,
       }}
     >
       <Box
