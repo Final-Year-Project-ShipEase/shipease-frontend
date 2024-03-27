@@ -66,7 +66,7 @@ const PageHeader = () => {
               disableUnderline: true,
             }}
           >
-            <MenuItem value={10}>ID</MenuItem>
+            <MenuItem value={10}>Name</MenuItem>
             <MenuItem value={20}>Tenant ID</MenuItem>
             <MenuItem value={30}>Username</MenuItem>
           </Select>
@@ -106,8 +106,8 @@ const PageHeader = () => {
           justifyContent: 'flex-end',
         }}
       >
-        <HeaderButton text={'Export'} onClick={onClickPermit} />
-        <HeaderButton text={'Reset'} onClick={onClickPermit} />
+        <HeaderButton text={'Search'} onClick={onClickPermit} />
+        {/* <HeaderButton text={'Reset'} onClick={onClickPermit} /> */}
       </Box>
     </Box>
   );

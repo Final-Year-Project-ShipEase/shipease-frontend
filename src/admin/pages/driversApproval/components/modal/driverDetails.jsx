@@ -49,7 +49,6 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
           ID: driver.id,
           name: driver.name,
           username: driver.username,
-          password: driver.password,
           phoneNo: driver.phoneNo,
           cnic: driver.cnic,
           LicenseNo: '12345678',
@@ -163,28 +162,6 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
               label="Name"
               name="name"
               value={formData.name}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              disabled
-              margin="normal"
-              label="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              disabled
-              margin="normal"
-              label="password"
-              name="password"
-              value={formData.password}
               onChange={handleChange}
             />
           </Grid>

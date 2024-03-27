@@ -77,7 +77,8 @@ function CreateDriver() {
         validationSchema={validationSchema}
         onSubmit={async (values) => {
           const data = localStorage.getItem('tenantData');
-          const tenantId = JSON.parse(data).id;
+          const tenantId = JSON.parse(data).data.id;
+          console.log('tenantId', tenantId);
           try {
             const res = await createDriver({
               name: values.name,
@@ -90,10 +91,11 @@ function CreateDriver() {
               tenant_id: tenantId,
             });
             if (res.status === 201) {
+              console.log(res.driver.id);
               const res2 = await createDriverApproval({
-                driverId: res.data.id,
-                tenantId: tenantId,
-                adminId: 1,
+                driver_id: res.driver.id,
+                tenant_id: tenantId,
+                admin_id: 1,
                 permission: 'rejected',
                 status: 'active',
               });
