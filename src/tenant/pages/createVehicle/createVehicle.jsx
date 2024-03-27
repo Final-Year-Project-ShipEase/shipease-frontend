@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -11,19 +11,23 @@ import { ReactComponent as LeftArrorSvg } from './assets/leftArrow.svg';
 import { ReactComponent as CameraSvg } from './assets/camera.svg';
 import profileImage from './assets/user_image.png';
 import useVehicleService from '../../../admin/services/vehicleService.jsx';
+import { useSnackbar } from '../../../utils/snackbarContextProvider.jsx';
 
 function CreateVehicle() {
   // const { createUser } = useUserService();
+
+  const [selectedFile, setSelectedFile] = useState('');
+
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const { addVehicle } = useVehicleService();
+  const { show } = useSnackbar();
   const validationSchema = Yup.object().shape({
     ownerCnic: Yup.string().required('Cnic is required'),
     regNo: Yup.string().required('Registration number is required'),
     type: Yup.string().required('Vehicle Type is required'),
     location: Yup.string().required('Location is required'),
     trackerNo: Yup.string().required('Tracker number is required'),
-    file: Yup.mixed().required('Cover Photo is required'),
   });
 
   const handleDivClick = () => {
@@ -74,25 +78,39 @@ function CreateVehicle() {
           // TODO: utalize these fields
         }}
         validationSchema={validationSchema}
-        onSubmit={async (values) => {
-          // const res = await createUser(values);
-          // if (res.status === 201) navigate('/users');
+        onSubmit={async (values, { setSubmitting }) => {
+          if (!selectedFile) {
+            show('Please select an image', 'error');
+            return;
+          }
+
           const data = localStorage.getItem('tenantData');
-          const tenantId = JSON.parse(data).id;
-          const res = await addVehicle({
-            driver_id: 1, //edit this
-            ownerCnic: values.ownerCnic,
-            regNo: values.regNo,
-            type: ['SUV', 'Sedan', 'Hatchback'],
-            status: 'Available',
-            location: values.location,
-            trackerNo: values.trackerNo,
-            tenant_id: tenantId,
-          });
-          if (res.status === 201) navigate('/vehiclesGarage');
+          const tenantId = JSON.parse(data).data.id;
+
+          const formData = new FormData();
+          formData.append('image', selectedFile.split(',')[1]);
+          formData.append('driver_id', '2'); // edit this
+          formData.append('ownerCnic', values.ownerCnic);
+          formData.append('regNo', values.regNo);
+          formData.append('type', values.type);
+          formData.append('status', 'Available');
+          formData.append('location', values.location);
+          formData.append('trackerNo', values.trackerNo);
+          formData.append('tenant_id', tenantId);
+          try {
+            const res = await addVehicle(formData);
+            if (res.status === 200) {
+              navigate('/vehiclesGarage');
+              show('Vehicle added successfully: ');
+            }
+          } catch (error) {
+            show(`Error: ${error}`, 'error');
+          }
+
+          setSubmitting(false);
         }}
       >
-        {({ values, isSubmitting, setFieldValue, errors, touched, dirty }) => (
+        {({}) => (
           <Form>
             <Box>
               <Box
@@ -112,7 +130,7 @@ function CreateVehicle() {
                   onClick={handleDivClick}
                 >
                   <img
-                    src={values.file || profileImage}
+                    src={selectedFile || profileImage}
                     style={{
                       height: '100%',
                       width: '100%',
@@ -167,9 +185,8 @@ function CreateVehicle() {
                       const file = event.currentTarget.files[0];
                       if (file) {
                         const reader = new FileReader();
-                        reader.onload = (e) =>
-                          setFieldValue('file', e.target.result);
                         reader.readAsDataURL(file);
+                        reader.onload = () => setSelectedFile(reader.result);
                       }
                     }}
                   />
@@ -182,15 +199,15 @@ function CreateVehicle() {
                 </Box>
                 <Box
                   sx={{
-                    width: '60%',
-                    ml: '32px',
+                    width: '50%',
+                    ml: 5,
                   }}
                 >
                   <Box
                     sx={{
                       display: 'flex',
                       justifyContent: 'space-between',
-                      mb: '24px',
+                      mb: 2,
                     }}
                   >
                     <Box>
@@ -226,7 +243,7 @@ function CreateVehicle() {
                     sx={{
                       display: 'flex',
                       justifyContent: 'space-between',
-                      mb: '40px',
+                      mb: 2,
                     }}
                   >
                     <Box>
@@ -238,41 +255,6 @@ function CreateVehicle() {
                       />
                       <ErrorMessage
                         name="type"
-                        render={(msg) => (
-                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
-                        )}
-                      />
-                    </Box>
-                    <Box
-                      sx={{
-                        width: '361px',
-                        display: 'flex',
-                        alignItems: 'end',
-                      }}
-                    >
-                      <Field
-                        as={CustomSwitch}
-                        label={'Status'}
-                        name={'status'}
-                      />
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      mb: '16px',
-                    }}
-                  >
-                    <Box>
-                      <Field
-                        as={TextField}
-                        label={'Location'}
-                        placeholder={'Ex : faisalabad'}
-                        name={'location'}
-                      />
-                      <ErrorMessage
-                        name="location"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
@@ -297,19 +279,54 @@ function CreateVehicle() {
                     sx={{
                       display: 'flex',
                       justifyContent: 'space-between',
+                      mb: 2,
+                    }}
+                  >
+                    <Box>
+                      <Field
+                        as={TextField}
+                        label={'Location'}
+                        placeholder={'Ex : faisalabad'}
+                        name={'location'}
+                      />
+                      <ErrorMessage
+                        name="location"
+                        render={(msg) => (
+                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
+                        )}
+                      />
+                    </Box>
+                    <Box
+                      sx={{
+                        width: '361px',
+                        display: 'flex',
+                        alignItems: 'end',
+                      }}
+                    >
+                      <Field
+                        as={CustomSwitch}
+                        label={'Status'}
+                        name={'status'}
+                      />
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'flex-end',
                     }}
                   >
                     <CustomButton
                       role={'secondary'}
-                      customStyle={{ width: '361px' }}
-                      onClick={() => navigate('/users')}
+                      onClick={() => navigate('/driversgarage')}
+                      customStyle={{ width: '5rem' }}
                     >
                       Cancel
                     </CustomButton>
                     <CustomButton
                       type="submit"
                       role={'primary'}
-                      customStyle={{ width: '361px' }}
+                      customStyle={{ width: '5rem', marginLeft: '1rem' }}
                     >
                       Submit
                     </CustomButton>
