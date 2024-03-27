@@ -71,7 +71,7 @@ const Order = () => {
               marginLeft: '25%',
             }}
           >
-            25
+            3
           </Typography>
         </div>
       </CardContent>

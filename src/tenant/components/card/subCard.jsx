@@ -110,7 +110,7 @@ const SubCard = ({ content, count, data }) => {
               color: theme.palette.text.secondary,
             }}
           >
-            User's Register This Month
+            {content}
           </Typography>
         </div>
 
