@@ -199,15 +199,15 @@ function CreateDriver() {
                 </Box>
                 <Box
                   sx={{
-                    width: '60%',
-                    ml: '32px',
+                    width: '50%',
+                    ml: 5,
                   }}
                 >
                   <Box
                     sx={{
                       display: 'flex',
                       justifyContent: 'space-between',
-                      mb: '24px',
+                      mb: 2,
                     }}
                   >
                     <Box>
@@ -244,7 +244,7 @@ function CreateDriver() {
                     sx={{
                       display: 'flex',
                       justifyContent: 'space-between',
-                      mb: '40px',
+                      mb: 2,
                     }}
                   >
                     <Box>
@@ -256,41 +256,6 @@ function CreateDriver() {
                       />
                       <ErrorMessage
                         name="cnic"
-                        render={(msg) => (
-                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
-                        )}
-                      />
-                    </Box>
-                    <Box
-                      sx={{
-                        width: '361px',
-                        display: 'flex',
-                        alignItems: 'end',
-                      }}
-                    >
-                      <Field
-                        as={CustomSwitch}
-                        label={'Status'}
-                        name={'status'}
-                      />
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      mb: '16px',
-                    }}
-                  >
-                    <Box>
-                      <Field
-                        as={TextField}
-                        label={'City'}
-                        placeholder={'Ex : faisalabad'}
-                        name={'city'}
-                      />
-                      <ErrorMessage
-                        name="city"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
@@ -315,7 +280,42 @@ function CreateDriver() {
                     sx={{
                       display: 'flex',
                       justifyContent: 'space-between',
-                      mb: '40px',
+                      mb: 2,
+                    }}
+                  >
+                    <Box>
+                      <Field
+                        as={TextField}
+                        label={'City'}
+                        placeholder={'Ex : faisalabad'}
+                        name={'city'}
+                      />
+                      <ErrorMessage
+                        name="city"
+                        render={(msg) => (
+                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
+                        )}
+                      />
+                    </Box>
+                    <Box
+                      sx={{
+                        width: '361px',
+                        display: 'flex',
+                        alignItems: 'end',
+                      }}
+                    >
+                      <Field
+                        as={CustomSwitch}
+                        label={'Status'}
+                        name={'status'}
+                      />
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      mb: 2,
                     }}
                   >
                     <Box>
@@ -333,31 +333,24 @@ function CreateDriver() {
                       />
                     </Box>
                   </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      mb: '40px',
-                    }}
-                  ></Box>
 
                   <Box
                     sx={{
                       display: 'flex',
-                      justifyContent: 'space-between',
+                      justifyContent: 'flex-end',
                     }}
                   >
                     <CustomButton
                       role={'secondary'}
-                      customStyle={{ width: '361px' }}
                       onClick={() => navigate('/driversgarage')}
+                      customStyle={{ width: '5rem' }}
                     >
                       Cancel
                     </CustomButton>
                     <CustomButton2
                       type="submit"
                       role={'primary'}
-                      customStyle={{ width: '361px' }}
+                      customStyle={{ width: '5rem', marginLeft: '1rem' }}
                     >
                       Submit
                     </CustomButton2>
