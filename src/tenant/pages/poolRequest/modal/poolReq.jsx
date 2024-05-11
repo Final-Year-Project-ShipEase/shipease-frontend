@@ -35,6 +35,7 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
   const [vehicleId, setVehicleId] = useState('');
   const { getVehicle } = useVehicleService();
   const [vehicle, setVehicle] = useState({});
+  const [booking, setBooking] = useState({});
 
   useEffect(() => {
     const fetchBookingList = async () => {
@@ -77,6 +78,7 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
           const selectedBooking = bookingList.find(
             (booking) => booking.id === formData.booking
           );
+          setBooking(selectedBooking);
           setFormData((prevFormData) => ({
             ...prevFormData,
             type: response.type,
@@ -122,28 +124,21 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
   };
 
   const handleAddConfirm = async () => {
-    const {
-      id,
-      type,
-      date,
-      pickup,
-      dropoff,
-      description,
-      price,
-      width,
-      height,
-    } = formData;
+    console.log(formData);
+    const { id, type, pickup, dropoff, description, price, width, height } =
+      formData;
     try {
       await createPoolRequest({
         booking_id: id,
         types: type[0],
-        startDate: date,
+        startDate: booking.date,
         city: pickup,
         destination: dropoff,
         description,
         price,
         width,
         height,
+        status: 'active',
       });
       handleClose();
       show('Pool Request created successfully', 'success');
@@ -234,8 +229,8 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
           <Grid item xs={6} sm={3}>
             <TextField
               fullWidth
-              label="width"
-              name="(sq ft)"
+              placeholder="width"
+              name="width"
               value={formData.width}
               onChange={handleChange}
               variant="outlined"
@@ -244,8 +239,8 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
           <Grid item xs={6} sm={3}>
             <TextField
               fullWidth
-              label="height"
-              name="(sq ft)"
+              placeholder="height"
+              name="height"
               value={formData.height}
               onChange={handleChange}
               variant="outlined"

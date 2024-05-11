@@ -18,14 +18,14 @@ const TenantAuthProvider = ({ children }) => {
       })
       .then((response) => {
         if (response.status !== 200) {
-          show(response.data.message, 'error');
+          show('Invalid Credentials', 'error');
           return;
         }
         localStorage.setItem('tenantData', JSON.stringify(response.data));
       })
       .catch((error) => {
         console.error(error);
-        show('error', 'error');
+        show('something went wrong', 'error');
       });
 
     setLoading(false);
