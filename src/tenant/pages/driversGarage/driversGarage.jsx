@@ -6,21 +6,29 @@ import TableData from './components/table/table';
 import { DriverColumns } from './_columns.js';
 import useDriverService from '../../../admin/services/driverService';
 import CreateDriver from '../createDriver/createDriver.jsx';
+import { useSnackbar } from '../../../utils/snackbarContextProvider.jsx';
+import Spinner from '../../../utils/spinner.jsx';
 
 const DriversGarage = () => {
   const { getDriverByTenantId } = useDriverService();
   const [drivers, setDrivers] = useState([]);
-  const [driverId, setDriverId] = useState('');
+  const [driverId, setDriverId] = useState(
+    localStorage.getItem('tenantData')?.data?.id || 2
+  );
+  const [Loading, setLoading] = useState(true);
+  const { show } = useSnackbar();
 
-  const id = 1;
   useEffect(() => {
     const fetchDrivers = async () => {
-      try {
-        const response = await getDriverByTenantId(id);
-        setDrivers(response.tenants);
-      } catch (error) {
-        console.log(error);
-      }
+      setLoading(true);
+      await getDriverByTenantId(driverId)
+        .then((response) => {
+          setDrivers(response.tenants);
+        })
+        .catch((err) => {
+          show(err.message, 'error');
+        });
+      setLoading(false);
     };
     fetchDrivers();
   }, []);
@@ -33,6 +41,7 @@ const DriversGarage = () => {
         padding: 2,
       }}
     >
+      {Loading && <Spinner />}
       <Box
         sx={{
           marginBottom: '-10px',

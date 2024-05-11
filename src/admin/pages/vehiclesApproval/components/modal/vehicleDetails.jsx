@@ -22,12 +22,14 @@ import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
 import useVehicleService from '../../../../services/vehicleService.jsx';
 //import { useApplicationService } from '../../../../services/applicationService';
 import Spinner from '../../../../../utils/spinner';
+import { useSnackbar } from '../../../../../utils/snackbarContextProvider.jsx';
 
 const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const theme = useTheme();
   const { getVehicle } = useVehicleService();
+  const { show } = useSnackbar();
 
   const [formData, setFormData] = useState({
     ID: '',
@@ -55,25 +57,23 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
   };
 
   const handleAddConfirm = async () => {
-    const clientData = {
-      clientId: formData.ID,
-      name: formData.name,
-      trackId: formData.trackId,
-    };
+    // const clientData = {
+    //   clientId: formData.ID,
+    //   name: formData.name,
+    //   trackId: formData.trackId,
+    // };
 
-    try {
-      //await createApplication(clientData);
-      setIsConfirmationDialogOpen(false);
-      handleClose();
-    } catch (err) {
-      console.log(err);
-    }
+    //await createApplication(clientData);
+    setIsConfirmationDialogOpen(false);
+    // show('Vehicle Approved', 'Success');
+    handleClose();
   };
 
   useEffect(() => {
     const getVehicleDetails = async () => {
       try {
         const vehicle = await getVehicle(tenantId);
+        console.log(vehicle)
         setFormData({
           ID: vehicle.id,
           type: vehicle.type,
@@ -245,29 +245,6 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
               value={formData.incspectionRep}
               onChange={handleChange}
             />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Button
-              name="InsepctionRep"
-              onChange={handleChange}
-              variant="contained"
-              sx={{
-                backgroundColor: theme.palette.secondary.main,
-                color: 'white',
-                width: '100%',
-                height: '72%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                mt: 2,
-                ':hover': {
-                  backgroundColor: theme,
-                },
-              }}
-              startIcon={<AddIcon />}
-            >
-              Inspection Report
-            </Button>
           </Grid>
           <Box display="flex" ml={2} sx={{ width: '100%' }}>
             <FormControlLabel

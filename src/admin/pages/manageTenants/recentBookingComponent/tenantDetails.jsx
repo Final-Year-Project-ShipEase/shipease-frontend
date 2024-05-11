@@ -36,6 +36,7 @@ const TenantDetails = ({ tenantId }) => {
         width: '100%',
         height: '290px',
         borderRadius: '10px',
+        boxShadow: '0px 2px 14px rgba(0, 0, 0, 1)',
       }}
     >
       {loading && <Spinner />}
@@ -49,6 +50,8 @@ const TenantDetails = ({ tenantId }) => {
             marginTop: '-10px',
             marginLeft: '-3%',
             marginBottom: '10px',
+            backgroundColor: theme.palette.secondary.hover,
+            borderRadius: '10px',
           }}
           onClick={() => {
             navigate('/admin/manageTenants');
@@ -58,6 +61,8 @@ const TenantDetails = ({ tenantId }) => {
             sx={{
               color: theme.palette.buttons.main,
               cursor: 'pointer',
+              fontSize: '20px',
+              marginRight: '5px',
             }}
           />
           <Button sx={{ color: theme.palette.buttons.main, fontSize: '12px' }}>
@@ -78,7 +83,7 @@ const TenantDetails = ({ tenantId }) => {
               item
               xs={6}
               sx={{
-                marginLeft: isSmallScreen ? '-20px' : '-140px',
+                marginLeft: isSmallScreen ? '-20px' : '-120px',
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -110,7 +115,7 @@ const TenantDetails = ({ tenantId }) => {
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
-                marginLeft: isSmallScreen ? '-20px' : '-140px',
+                marginLeft: isSmallScreen ? '-20px' : '-120px',
                 marginTop: '30px',
               }}
             >
@@ -148,7 +153,7 @@ const TenantDetails = ({ tenantId }) => {
                   <Typography
                     sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
                   >
-                    Status :{tenant?.status || 'Active'}
+                    Status : {tenant?.status || 'Active'}
                   </Typography>
                   <Typography
                     sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}

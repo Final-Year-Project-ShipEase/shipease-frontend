@@ -201,7 +201,7 @@ const BookingDetailsModal = ({ open, handleClose, onSubmit, booking }) => {
               }}
               variant="contained"
             >
-              Approve
+              Payment Confirm
             </Button>
           </Grid>
         </Grid>

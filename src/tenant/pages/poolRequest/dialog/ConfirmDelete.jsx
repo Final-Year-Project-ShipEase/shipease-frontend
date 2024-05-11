@@ -9,47 +9,27 @@ import {
   Box,
   Checkbox,
   CircularProgress,
-  useTheme,
 } from '@mui/material';
 import {
   Close as CloseIcon,
   AddCircleOutline as AddIcon,
 } from '@mui/icons-material';
 
-const ConfirmAdd = ({ open, onClose, onConfirm, loading }) => {
-  const theme = useTheme();
+const ConfirmDelete = ({ open, onClose, onConfirm, loading }) => {
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      maxWidth="xs"
-      fullWidth
-      sx={{
-        '& .MuiDialog-paper': {
-          backgroundColor: theme.palette.background.default,
-          color: theme.palette.text.primary,
-          boxShadow: theme.shadows[5],
-          borderRadius: 4,
-        },
-      }}
-    >
+    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       <DialogTitle>
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <Box display="flex" alignItems="center">
-            <IconButton
-              style={{
-                backgroundColor: theme.palette.background.iconBackground,
-                color: theme.palette.background.iconColor,
-              }}
-            >
+            <IconButton style={{ backgroundColor: '#ffcccb', color: 'red' }}>
               <AddIcon />
             </IconButton>
             <Box m={2}>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                Confirm Payment
+                Delete Application
               </Typography>
               <Typography variant="subtitle2">
-                Are you sure you want to approve this Booking's Payment?
+                Are you sure you want to delete this application?
               </Typography>
             </Box>
           </Box>
@@ -64,21 +44,11 @@ const ConfirmAdd = ({ open, onClose, onConfirm, loading }) => {
           <Typography variant="subtitle2">Don't show again</Typography>
         </Box>
         <Box>
-          <Button
-            onClick={onClose}
-            sx={{ color: theme.palette.primary.blackColor }}
-          >
+          <Button onClick={onClose} sx={{ color: 'black' }}>
             Close
           </Button>
-          <Button
-            onClick={onConfirm}
-            sx={{
-              color: theme.palette.primary.white,
-              backgroundColor: theme.palette.buttons.approve,
-            }}
-            variant="contained"
-          >
-            {loading ? <CircularProgress /> : 'Confirm'}
+          <Button onClick={onConfirm} variant="contained">
+            {loading ? <CircularProgress /> : 'Delete'}
           </Button>
         </Box>
       </DialogActions>
@@ -86,4 +56,4 @@ const ConfirmAdd = ({ open, onClose, onConfirm, loading }) => {
   );
 };
 
-export default ConfirmAdd;
+export default ConfirmDelete;

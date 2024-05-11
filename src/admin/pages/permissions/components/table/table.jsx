@@ -119,7 +119,7 @@ const CustomTable = () => {
                   justifyContent="space-between"
                 >
                   {role}
-                  <EditOutlinedIcon />
+                  {/* <EditOutlinedIcon /> */}
                 </Grid>
               </Box>
             </TableCell>

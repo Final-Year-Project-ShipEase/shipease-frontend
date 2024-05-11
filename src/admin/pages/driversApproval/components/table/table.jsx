@@ -150,7 +150,7 @@ export default function TableData({ columns, rows }) {
   };
 
   const handleOpen = (row) => {
-    setDriverId(row.driver_id);
+    setDriverId(row.id);
     setOpen(true);
   };
 

@@ -5,19 +5,26 @@ import TableData from './components/table/table';
 import { VehicleColumns } from './_columns.js';
 import { useVehicleService } from '../../../services/vehicleServices.jsx';
 import Spinner from '../../../utils/spinner.jsx';
+import { useSnackbar } from '../../../utils/snackbarContextProvider.jsx';
 
 const VehiclesGarage = () => {
-  const id = 1;
+  const id = localStorage.getItem('tenantData')?.data?.id || 2;
   const { getVehicleByTenantId } = useVehicleService();
   const [vehicleList, setVehicleList] = useState([]);
   const [Loading, setLoading] = useState(true);
   const [tenantId, setTenantId] = useState('');
+  const { show } = useSnackbar();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getVehicleByTenantId(1);
-        setVehicleList(response.tenants);
+        await getVehicleByTenantId(id)
+          .then((response) => {
+            setVehicleList(response.tenants);
+          })
+          .catch((err) => {
+            show(err.message, 'error');
+          });
         setLoading(false);
       } catch (error) {
         console.log(error);

@@ -4,11 +4,10 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import ArrowCircleUpRoundedIcon from '@mui/icons-material/ArrowCircleUpRounded';
 import ArrowCircleDownRoundedIcon from '@mui/icons-material/ArrowCircleDownRounded';
-import dummyTenantData from './dummyTenantData';
 import { useTheme } from '@mui/material/styles';
 import { LineChart, Line, Tooltip, ResponsiveContainer } from 'recharts';
 
-const SubCard = ({ content, count, onClick }) => {
+const SubCard = ({ content, count, onClick, data }) => {
   const [isIncreasing, setIsIncreasing] = useState(true); // Initial state
 
   const theme = useTheme();
@@ -110,7 +109,7 @@ const SubCard = ({ content, count, onClick }) => {
         </div>
 
         <ResponsiveContainer width={250} height={120}>
-          <LineChart data={dummyTenantData}>
+          <LineChart data={data}>
             <Tooltip />
             <Line
               type="monotoneX"

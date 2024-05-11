@@ -19,6 +19,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { useVehicleService } from '../../../services/vehicleServices';
 import useDriverService from '../../services/driverService';
+import { useBookingService } from '../../../services/bookingServices';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,6 +54,8 @@ const TabComponent = () => {
   const { getDriverByTenantId } = useDriverService();
   const [vehicleList, setVehicleList] = useState();
   const [driverList, setDriverList] = useState();
+  const [bookingList, setBookingList] = useState([]);
+  const { getBookingListByTenantId } = useBookingService();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,6 +74,20 @@ const TabComponent = () => {
         console.log(error);
       }
     };
+    const fetchBookingData = async () => {
+      try {
+        await getBookingListByTenantId(id)
+          .then((response) => {
+            setBookingList(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchBookingData();
     fetchDriverData();
     fetchData();
   }, []);
@@ -104,7 +121,7 @@ const TabComponent = () => {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} style={{ margintop: '120px' }} index={0}>
-        <TableData columns={BookingColumns} rows={dummyBookingData} />
+        <TableData columns={BookingColumns} rows={bookingList} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <TableData columns={VehicleColumns} rows={vehicleList} />

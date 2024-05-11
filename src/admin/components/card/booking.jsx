@@ -77,7 +77,7 @@ const Booking = () => {
             Total
           </Typography>
           <Typography sx={{ fontWeight: 'bold', marginTop: '-40px' }}>
-            1500
+            16
           </Typography>
         </div>
 
@@ -95,7 +95,7 @@ const Booking = () => {
             Today
           </Typography>
           <Typography sx={{ fontWeight: 'bold', marginTop: '-10px' }}>
-            25
+            3
           </Typography>
         </div>
       </CardContent>

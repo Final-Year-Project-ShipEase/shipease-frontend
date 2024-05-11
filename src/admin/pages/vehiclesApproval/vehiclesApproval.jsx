@@ -8,9 +8,11 @@ import Spinner from '../../../utils/spinner';
 import { Grid } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import useVehicleService from '../../services/vehicleService.jsx';
 
 const VehicleApproval = () => {
   const { getRejectedApproval } = useVehicleApprovalService();
+  const { getVehicles } = useVehicleService();
   const [vehiclesApproval, setVehiclesApproval] = useState([]);
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
@@ -20,7 +22,7 @@ const VehicleApproval = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getRejectedApproval();
+        const data = await getVehicles();
         setVehiclesApproval(data);
         setLoading(false);
       } catch (error) {

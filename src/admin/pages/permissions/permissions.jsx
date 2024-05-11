@@ -10,7 +10,7 @@ const Permissions = () => {
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
-        p: 2,
+        p: 4,
       }}
     >
       <Box

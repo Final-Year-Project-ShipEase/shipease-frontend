@@ -7,6 +7,10 @@ import useTenantService from '../../services/tenantService';
 import { useNavigate } from 'react-router-dom';
 import useDriverApprovalService from '../../services/driverApprovalServices';
 import useVehicleApprovalService from '../../services/vehicleApprovalService';
+import vehicleData from '../../components/card/dummyVehicleApproval';
+import driverData from '../../components/card/dummyDriverApproval';
+import tenantData from '../../components/card/dummyTenantRegistered';
+import userData from '../../components/card/dummyUserRegistration';
 
 const SummaryCard = () => {
   const { getTenants } = useTenantService();
@@ -97,6 +101,7 @@ const SummaryCard = () => {
             onClick={() => {
               navigate('/admin/manageTenants');
             }}
+            data={tenantData}
           />
           <SubCard
             content="Drivers Approvals"
@@ -104,6 +109,7 @@ const SummaryCard = () => {
             onClick={() => {
               navigate('/admin/driversApproval');
             }}
+            data={driverData}
           />
         </div>
       </CardContent>
@@ -131,8 +137,9 @@ const SummaryCard = () => {
             onClick={() => {
               navigate('/admin/vehiclesApproval');
             }}
+            data={vehicleData}
           />
-          <SubCard content="User's Registered" count={15} />
+          <SubCard content="User's Registered" count={15} data={userData} />
         </div>
       </CardContent>
     </Card>

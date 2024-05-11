@@ -10,6 +10,8 @@ import { toContainHTML } from '@testing-library/jest-dom/matchers';
 const Order = () => {
   const theme = useTheme();
   const totalOrders = dummyOrderData.reduce((a, b) => a + b.orders, 0);
+  const length = dummyOrderData.length;
+  const avgOrder = totalOrders / length;
 
   return (
     <Card sx={{ width: '100%', borderRadius: 5, height: '280px' }}>
@@ -79,7 +81,7 @@ const Order = () => {
               marginLeft: '25%',
             }}
           >
-            {totalOrders}
+            {avgOrder}
           </Typography>
         </div>
       </CardContent>

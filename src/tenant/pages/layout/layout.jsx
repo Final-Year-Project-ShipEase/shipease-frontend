@@ -46,6 +46,7 @@ const TenantLayout = () => {
             sx={{
               backgroundColor: theme.palette.page.main,
               minHeight: '93vh',
+              paddingLeft: '1rem',
             }}
           >
             <Outlet context={[rigthSpan, leftSpan]} />

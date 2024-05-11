@@ -269,7 +269,7 @@ export default function TableData({ columns, rows }) {
                                 if (column.id !== 'actions') {
                                   handleOpen(row);
                                 }
-                                setTenantsId(row.vehicle_id);
+                                setTenantsId(row.id);
                               }}
                             >
                               {column.id === 'actions' ? (

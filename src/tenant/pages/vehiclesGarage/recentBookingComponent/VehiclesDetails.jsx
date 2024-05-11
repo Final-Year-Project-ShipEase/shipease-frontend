@@ -9,6 +9,7 @@ import Spinner from '../../../../utils/spinner';
 import AddIcon from '@mui/icons-material/Add';
 import PageHeader from '../pageHeader';
 import { useVehicleService } from '../../../../services/vehicleServices';
+import VehicleImage from '../../driversGarage/components/vehicleImage';
 
 const VehiclesDetails = ({ tenantId }) => {
   const theme = useTheme();
@@ -58,11 +59,22 @@ const VehiclesDetails = ({ tenantId }) => {
       </Box>
       <Grid container spacing={2} sx={{ mt: '2%', ml: '5%' }}>
         <Grid item xs={3}>
-          <img
-            style={{ borderRadius: '5px', height: '50%' }}
-            src={busImage}
-            alt="Bus"
-          />
+          <Box
+            sx={{
+              width: '100px',
+              height: '100px',
+            }}
+          >
+            {vehicle.image ? (
+              <VehicleImage image={vehicle.image} />
+            ) : (
+              <img
+                style={{ borderRadius: '5px', height: '200px', width: '200px' }}
+                src={busImage}
+                alt="Bus"
+              />
+            )}
+          </Box>
         </Grid>
         <Grid item xs={9}>
           <Grid

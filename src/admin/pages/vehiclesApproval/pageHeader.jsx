@@ -22,7 +22,7 @@ const PageHeader = () => {
   };
 
   const onClickPermit = () => {
-    navigate('/approval/drivers');
+    // navigate('/approval/drivers');
   };
 
   return (
@@ -45,7 +45,7 @@ const PageHeader = () => {
           <Select
             id="Driver-select"
             value={Driver}
-            label="Driver"
+            label="Vehicle"
             onChange={handleChange}
             sx={{
               display: 'flex',
@@ -62,14 +62,13 @@ const PageHeader = () => {
               disableUnderline: true,
             }}
           >
-            <MenuItem value={10}>ID</MenuItem>
-            <MenuItem value={20}>Tenant ID</MenuItem>
-            <MenuItem value={30}>Username</MenuItem>
+            <MenuItem value={10}>Vehicle</MenuItem>
+            <MenuItem value={20}>Type</MenuItem>
           </Select>
         </FormControl>
         <TextField
           id="search"
-          placeholder="Search Driver"
+          placeholder="Search Vehicle"
           variant="standard"
           sx={{
             display: 'flex',
@@ -102,8 +101,7 @@ const PageHeader = () => {
           justifyContent: 'flex-end',
         }}
       >
-        <HeaderButton text={'Export'} onClick={onClickPermit} />
-        <HeaderButton text={'Reset'} onClick={onClickPermit} />
+        <HeaderButton text={'Search'} onClick={onClickPermit} />
       </Box>
     </Box>
   );
