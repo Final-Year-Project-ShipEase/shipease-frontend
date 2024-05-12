@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CardViewImage from '../../components/card/welcome';
 import SummaryCard from '../../components/card/summary';
 import Booking from '../../components/card/booking';
@@ -8,11 +8,23 @@ import Order from '../../components/card/order';
 import MessageBox from '../../components/card/UserCommunication';
 import PoolRequestBox from '../../components/card/poolRequestBox';
 import { Grid, Box } from '@mui/material';
+import { usePoolRequestService } from '../../../services/poolRequestServices';
 
 const TenantDashboard = () => {
   const name = JSON.parse(localStorage.getItem('tenantData'))?.data.name || '';
   const [tenantName, setTenantName] = useState(name);
   const [revenue, setRevenue] = useState('250K');
+  const { getPoolRequestList } = usePoolRequestService();
+  const [poolRequestList, setPoolRequestList] = useState([]);
+
+  useEffect(() => {
+    const fetchPoolRequest = async () => {
+      const poolRequestList = await getPoolRequestList();
+      setPoolRequestList(poolRequestList);
+      console.log(poolRequestList);
+    };
+    fetchPoolRequest();
+  }, []);
 
   return (
     <Box
@@ -46,7 +58,7 @@ const TenantDashboard = () => {
           <Order></Order>
         </Grid>
         <Grid item md={4} xs={12}>
-          <PoolRequestBox></PoolRequestBox>
+          <PoolRequestBox poolRequestList={poolRequestList} />
         </Grid>
       </Grid>
     </Box>

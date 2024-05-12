@@ -5,7 +5,7 @@ import DriverDetail from './poolRequest';
 import { Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-const PoolRequestBox = () => {
+const PoolRequestBox = ({ poolRequestList }) => {
   const theme = useTheme();
   return (
     <Card
@@ -32,12 +32,14 @@ const PoolRequestBox = () => {
               fontWeight: 'bold',
               textAlign: 'center',
               color: 'white',
-              marginBottom: '-2px',
+              marginBottom: '10px',
             }}
           >
-            Pool Request
+            Active Pool Requests
           </Typography>
-          <DriverDetail />
+          {poolRequestList?.map((poolRequest, index) => (
+            <DriverDetail key={index} poolRequest={poolRequest} />
+          ))}
         </div>
       </CardContent>
     </Card>
