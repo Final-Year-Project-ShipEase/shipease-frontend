@@ -5,27 +5,27 @@ const NavigationItems = [
   {
     name: 'Dashboard',
     link: '/dashboard',
-    icon: <HomeOutlinedIcon style={{ color: '#565656' }} />,
+    icon: <HomeOutlinedIcon />,
   },
   {
     name: 'Booking',
-    icon: <PersonAddAltOutlinedIcon style={{ color: '#565656' }} />,
+    icon: <PersonAddAltOutlinedIcon />,
     link: '/booking',
   },
   {
     name: 'Drivers Garage',
-    icon: <PersonAddAltOutlinedIcon style={{ color: '#565656' }} />,
+    icon: <PersonAddAltOutlinedIcon />,
     link: '/driversGarage',
   },
   {
     name: 'Vehicles Garage',
     link: '/vehiclesGarage',
-    icon: <Person4OutlinedIcon style={{ color: '#565656' }} />,
+    icon: <Person4OutlinedIcon />,
   },
   {
     name: 'Pool Requests',
     link: '/poolRequest',
-    icon: <Person4OutlinedIcon style={{ color: '#565656' }} />,
+    icon: <Person4OutlinedIcon />,
   },
 ];
 

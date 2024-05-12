@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import DriverDetail from './poolRequest';
@@ -37,12 +37,7 @@ const PoolRequestBox = () => {
           >
             Pool Request
           </Typography>
-          <DriverDetail></DriverDetail>
-          <DriverDetail></DriverDetail>
-          <DriverDetail></DriverDetail>
-          <DriverDetail></DriverDetail>
-          <DriverDetail></DriverDetail>
-          <DriverDetail></DriverDetail>
+          <DriverDetail />
         </div>
       </CardContent>
     </Card>

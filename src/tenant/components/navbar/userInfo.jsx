@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   IconButton,
@@ -29,8 +29,8 @@ const onlineDotStyles = {
 };
 
 const UserInfo = () => {
-  const [name, setName] = useState('Hamza Idrees');
-  const [post, setPost] = useState('Software Engineer');
+  const tenantData = JSON.parse(localStorage.getItem('tenantData'));
+  const [name, setName] = useState(tenantData.data.name);
   const [isOnline, setIsOnline] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();

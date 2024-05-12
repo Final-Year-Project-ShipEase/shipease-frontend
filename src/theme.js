@@ -32,6 +32,13 @@ const lightTheme = createTheme({
       green: '#54BA4A',
       purple: '#B33CC7',
     },
+    sidebar: {
+      main: '#00668C',
+      hover: '#007c91',
+      active: '#007c91',
+      text: '#FFFFFF',
+      buttonHover: '#007c91',
+    },
     secondary: {
       main: '#71C4EF',
       hover: '#629DBC',

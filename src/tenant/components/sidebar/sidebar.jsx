@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Drawer, useTheme } from '@mui/material';
+import { Box, Button, Drawer, Grid, useTheme } from '@mui/material';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
 import { useTenantAuth } from '../../auth/tenantAuth';
+import Logo from '../../../commons/resouces/logo.svg';
 
 const Sidebar = ({ widthVal }) => {
   const [activeButton, setActiveButton] = useState('');
@@ -20,7 +21,7 @@ const Sidebar = ({ widthVal }) => {
   }, [location]);
 
   const CustomButton = ({ item }) => {
-    const isActive = activeButton === item.name;
+    const isActive = activeButton.toLowerCase() === item.name.toLowerCase();
     return (
       <Button
         sx={{
@@ -28,10 +29,10 @@ const Sidebar = ({ widthVal }) => {
           justifyContent: 'flex-start',
           padding: '10px 24px',
           color: isActive
-            ? theme.palette.primary.main
-            : theme.palette.text.primary,
+            ? theme.palette.sidebar.text
+            : theme.palette.sidebar.text,
           backgroundColor: isActive
-            ? theme.palette.action.selected
+            ? theme.palette.sidebar.active
             : 'transparent',
           '&:hover': {
             backgroundColor: theme.palette.action.hover,
@@ -59,22 +60,54 @@ const Sidebar = ({ widthVal }) => {
     <Drawer
       variant="permanent"
       sx={{
-        width: `${widthVal}%`,
+        width: `${(widthVal * 100) / 12}%`,
         flexShrink: 0,
+        backgroundColor: theme.palette.sidebar.main,
         '& .MuiDrawer-paper': {
-          width: `${widthVal}%`,
+          width: `${(widthVal * 100) / 12}%`,
           boxSizing: 'border-box',
-          marginTop: '7vh',
+          backgroundColor: theme.palette.sidebar.main,
         },
       }}
     >
-      <Box sx={{ overflow: 'auto' }}>
-        {NavigationItems.map((item, index) => (
-          <CustomButton key={index} item={item} />
-        ))}
-        <CustomButton
-          item={{ name: 'Log out', icon: <PowerSettingsNewOutlinedIcon /> }}
+      {' '}
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '1rem',
+        }}
+      >
+        <img
+          src={Logo}
+          alt="ShipEase-logo"
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
         />
+      </Box>
+      <Box sx={{ overflow: 'auto' }}>
+        <Grid
+          container
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}
+        >
+          <Grid item xs={12}>
+            {NavigationItems.map((item, index) => (
+              <CustomButton key={index} item={item} />
+            ))}
+          </Grid>
+          <Grid item xs={12}>
+            <CustomButton
+              item={{ name: 'Log out', icon: <PowerSettingsNewOutlinedIcon /> }}
+            />
+          </Grid>
+        </Grid>
       </Box>
     </Drawer>
   );

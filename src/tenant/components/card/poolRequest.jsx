@@ -73,7 +73,7 @@ const DriverDetail = () => {
           color: theme.palette.buttons.color,
           backgroundColor: theme.palette.background.poolback,
           fontSize: '14px',
-          border: theme.palette.buttons.borderbutton, // Set border width, style, and color
+          border: theme.palette.buttons.borderbutton,
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',

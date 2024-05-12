@@ -30,17 +30,15 @@ const SubCard = ({ content, count, data }) => {
           marginTop: '-10px',
         }}
       >
+        <Typography sx={{ fontWeight: 'bold', fontSize: 12 }}>
+          {content}
+        </Typography>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Typography
-            sx={{ width: 55, height: 40, fontWeight: 'bold', fontSize: 25 }}
-          >
-            {count}
-          </Typography>
           <div
             style={{
-              marginLeft: '60px',
-              marginTop: '2px',
               display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
               alignItems: 'center',
             }}
           >
@@ -62,7 +60,7 @@ const SubCard = ({ content, count, data }) => {
                     color: theme.palette.secondary.main,
                   }}
                 >
-                  +{Math.abs(count)}%
+                  +{Math.abs((count * 6) / (count - 3))}%
                 </Typography>
               </>
             ) : (
@@ -104,13 +102,12 @@ const SubCard = ({ content, count, data }) => {
           <Typography
             sx={{
               width: '100%',
-              height: 25,
               fontWeight: 'bold',
-              fontSize: '12px',
+              fontSize: '25px',
               color: theme.palette.text.secondary,
             }}
           >
-            {content}
+            {count}
           </Typography>
         </div>
 
