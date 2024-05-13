@@ -20,6 +20,7 @@ function CreateVehicle() {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const licenseFileInputRef = useRef(null);
+  const inspectionFileInputRef = useRef(null);
   const { addVehicle } = useVehicleService();
   const { show } = useSnackbar();
   const validationSchema = Yup.object().shape({
@@ -30,9 +31,14 @@ function CreateVehicle() {
     trackerNo: Yup.string().required('Tracker number is required'),
   });
   const [selectedLicenseFile, setSelectedLicenseFile] = useState('');
+  const [selectedInspectionFile, setSelectedInspectionFile] = useState('');
 
   const handleLicenseDivClick = () => {
     licenseFileInputRef.current.click();
+  };
+
+  const handleInspectionDivClick = () => {
+    inspectionFileInputRef.current.click();
   };
 
   const handleDivClick = () => {
@@ -81,6 +87,7 @@ function CreateVehicle() {
           height: '',
           cost: '',
           licenseImage: '',
+          inspectionImage: '',
           // TODO: utalize these fields
         }}
         validationSchema={validationSchema}
@@ -95,7 +102,7 @@ function CreateVehicle() {
 
           const formData = new FormData();
           formData.append('image', selectedFile.split(',')[1]);
-          formData.append('driver_id', '2'); // edit this
+          formData.append('driver_id', '2');
           formData.append('ownerCnic', values.ownerCnic);
           formData.append('regNo', values.regNo);
           formData.append('type', values.type);
@@ -108,10 +115,14 @@ function CreateVehicle() {
           formData.append('cost', values.cost);
           formData.append('LicenseImage', selectedLicenseFile.split(',')[1]);
           formData.append('approved', 'false');
+          formData.append(
+            'inspectionImage',
+            selectedInspectionFile.split(',')[1]
+          );
 
           try {
             const res = await addVehicle(formData);
-            console.log(res);
+            console.log('res', res);
             if (res.status === 200 || res.status === 201) {
               navigate('/vehiclesGarage');
               show('Vehicle added successfully: ');
@@ -478,23 +489,131 @@ function CreateVehicle() {
                       </Box>
                     </Box>
                   </Box>
+
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      mb: 2,
+                    }}
+                  >
+                    <Box></Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        mt: 3,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: '340px',
+                          height: '50px',
+                          borderRadius: '43px',
+                          position: 'relative',
+                          cursor: 'pointer',
+                          backgroundColor: 'green',
+                        }}
+                        onClick={handleInspectionDivClick}
+                      >
+                        <img
+                          src={selectedInspectionFile || profileImage}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            borderRadius: '10px',
+                          }}
+                          alt="Profile"
+                        />
+                        <div
+                          style={{
+                            position: 'absolute',
+                            backgroundColor: '#000000B2',
+                            top: '0px',
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '10px',
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              height: '100%',
+                              width: '100%',
+                            }}
+                          >
+                            <div>
+                              <Typography
+                                sx={{ color: 'white', textAlign: 'center' }}
+                              >
+                                Click to upload Inspection Document
+                              </Typography>
+                            </div>
+                          </div>
+                        </div>
+                        <input
+                          ref={inspectionFileInputRef}
+                          id="inspection-file"
+                          name="inspection-file"
+                          type="file"
+                          className="hidden"
+                          style={{ display: 'none' }}
+                          accept=".png,.jpeg,.jpg"
+                          onChange={(event) => {
+                            const file = event.currentTarget.files[0];
+                            if (file) {
+                              const extension = file.name
+                                .split('.')
+                                .pop()
+                                .toLowerCase();
+                              if (
+                                extension === 'png' ||
+                                extension === 'jpeg' ||
+                                extension === 'jpg'
+                              ) {
+                                const reader = new FileReader();
+                                reader.readAsDataURL(file);
+                                reader.onload = () =>
+                                  setSelectedInspectionFile(reader.result);
+                              } else {
+                                // Show error message or handle invalid file type
+                                console.error(
+                                  'Invalid file type. Only PNG and JPEG files are accepted.'
+                                );
+                              }
+                            }
+                          }}
+                        />
+                        <ErrorMessage
+                          name="file"
+                          render={(msg) => (
+                            <Typography sx={{ color: 'red' }}>{msg}</Typography>
+                          )}
+                        />
+                      </Box>
+                    </Box>
+                  </Box>
+
                   <Box
                     sx={{
                       display: 'flex',
                       justifyContent: 'flex-end',
+                      mt: 3,
                     }}
                   >
                     <CustomButton
                       role={'secondary'}
                       onClick={() => navigate('/driversgarage')}
-                      customStyle={{ width: '5rem' }}
+                      customStyle={{ width: '10rem' }}
                     >
                       Cancel
                     </CustomButton>
                     <CustomButton
                       type="submit"
                       role={'primary'}
-                      customStyle={{ width: '5rem', marginLeft: '1rem' }}
+                      customStyle={{ width: '10rem', marginLeft: '1rem' }}
                     >
                       Submit
                     </CustomButton>

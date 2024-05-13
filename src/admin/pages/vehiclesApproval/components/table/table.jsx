@@ -187,6 +187,7 @@ export default function TableData({ columns, rows, handleApprove }) {
         open={open}
         handleClose={handleClose}
         tenantId={tenantsId}
+        handleApproval={handleApprove}
       />
       <ConfirmAdd
         open={boxType === 'approved'}

@@ -23,31 +23,66 @@ import useVehicleService from '../../../../services/vehicleService.jsx';
 //import { useApplicationService } from '../../../../services/applicationService';
 import Spinner from '../../../../../utils/spinner';
 import { useSnackbar } from '../../../../../utils/snackbarContextProvider.jsx';
+import { Lightbox } from 'react-modal-image';
 
-const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
+const VehicleDetailsModal = ({
+  open,
+  handleClose,
+  onSubmit,
+  tenantId,
+  handleApproval,
+}) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const theme = useTheme();
   const { getVehicle } = useVehicleService();
   const { show } = useSnackbar();
+  const [isOpen, setIsOpen] = useState(false);
+  const [image, setImage] = useState(null);
+  const [imageData, setImageData] = useState(null);
+  const [inspectionReport, setInspectionReport] = useState(null);
+  const [inspectionReportData, setInspectionReportData] = useState(null);
+  const [isInspectionReportOpen, setIsInspectionReportOpen] = useState(false);
+
+  const closeInspectionReportLightbox = () => {
+    setIsInspectionReportOpen(false);
+  };
+
+  const openInspectionReportLightbox = () => {
+    const base64String = btoa(
+      String.fromCharCode(...new Uint8Array(inspectionReportData?.data))
+    );
+    const base64Image = `data:image/png;base64,${base64String}`;
+    setInspectionReport(base64Image);
+    setIsInspectionReportOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setIsOpen(false);
+  };
+
+  const openLightbox = () => {
+    const base64String = btoa(
+      String.fromCharCode(...new Uint8Array(imageData?.data))
+    );
+    const base64Image = `data:image/png;base64,${base64String}`;
+    setImage(base64Image);
+    setIsOpen(true);
+  };
 
   const [formData, setFormData] = useState({
     ID: '',
     type: '',
     regNo: '',
     city: '',
-    trackId: '',
     vehicleCompany: '',
     cnic: '',
-    incspectionRep: '',
     TrackerNo: '',
     status: false,
+    width: '',
+    height: '',
+    cost: '',
   });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
   const handleSwitchChange = (e) => {
     setFormData({
@@ -62,10 +97,11 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
     //   name: formData.name,
     //   trackId: formData.trackId,
     // };
-
+    await handleApproval(tenantId);
     //await createApplication(clientData);
     setIsConfirmationDialogOpen(false);
     // show('Vehicle Approved', 'Success');
+
     handleClose();
   };
 
@@ -73,18 +109,22 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
     const getVehicleDetails = async () => {
       try {
         const vehicle = await getVehicle(tenantId);
-        console.log(vehicle)
+        console.log(vehicle);
         setFormData({
           ID: vehicle.id,
           type: vehicle.type,
           regNo: vehicle.regNo,
           city: vehicle.location,
-          trackId: vehicle.trackId,
           cnic: vehicle.ownerCnic,
-          incspectionRep: 'Inspection Report',
-          TrackerNo: vehicle.trackerNoo,
+          TrackerNo: vehicle.trackerNo,
           status: vehicle.status,
+          width: vehicle.width,
+          height: vehicle.height,
+          cost: vehicle.cost,
         });
+        setImageData(vehicle?.LicenseImage);
+        setInspectionReportData(vehicle?.inspectionImage);
+        console.log('ImageData', imageData);
       } catch (err) {
         console.log(err);
       }
@@ -112,6 +152,16 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
         },
       }}
     >
+      {isOpen && imageData ? (
+        <Lightbox large={image} onClose={closeLightbox} alt="Vehicle Image" />
+      ) : null}
+      {isInspectionReportOpen && inspectionReportData ? (
+        <Lightbox
+          large={inspectionReport}
+          onClose={closeInspectionReportLightbox}
+          alt="Inspection Report"
+        />
+      ) : null}
       <ConfirmAdd
         open={isConfirmationDialogOpen}
         onClose={() => setIsConfirmationDialogOpen(false)}
@@ -151,21 +201,9 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
               fullWidth
               disabled
               margin="normal"
-              label="ID"
-              name="ID"
-              value={formData.ID}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              disabled
-              margin="normal"
               label="Type"
               name="type"
               value={formData.type}
-              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -176,7 +214,6 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
               label="Reg No."
               name="regNo"
               value={formData.regNo}
-              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -187,7 +224,6 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
               label="city"
               name="city"
               value={formData.city}
-              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -197,8 +233,7 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
               margin="normal"
               label="Tracker Id"
               name="Tracker Id"
-              value={formData.trackId}
-              onChange={handleChange}
+              value={formData.TrackerNo}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -209,13 +244,42 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
               label="Owner Cnic"
               name="Owner Cnic"
               value={formData.cnic}
-              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              disabled
+              margin="normal"
+              label="Width"
+              name="width"
+              value={formData.width}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              disabled
+              margin="normal"
+              label="Height"
+              name="height"
+              value={formData.height}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              disabled
+              margin="normal"
+              label="Cost"
+              name="cost"
+              value={formData.cost}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
             <Button
               name="vehicleDocs"
-              onChange={handleChange}
               variant="contained"
               sx={{
                 backgroundColor: theme.palette.secondary.main,
@@ -231,20 +295,33 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
                 },
               }}
               startIcon={<AddIcon />}
+              onClick={openLightbox}
             >
               Vehicle Documents
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              disabled
-              margin="normal"
-              label="Inspection Report Vendor"
-              name="inspectionRepVen"
-              value={formData.incspectionRep}
-              onChange={handleChange}
-            />
+            <Button
+              name="inspectionDocs"
+              variant="contained"
+              sx={{
+                backgroundColor: theme.palette.secondary.main,
+                color: 'white',
+                width: '100%',
+                height: '72%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mt: 2,
+                ':hover': {
+                  backgroundColor: theme,
+                },
+              }}
+              startIcon={<AddIcon />}
+              onClick={openInspectionReportLightbox}
+            >
+              Inspection Report
+            </Button>
           </Grid>
           <Box display="flex" ml={2} sx={{ width: '100%' }}>
             <FormControlLabel
