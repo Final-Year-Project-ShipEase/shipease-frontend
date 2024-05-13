@@ -35,17 +35,9 @@ const DriverApprovalActionColumn = ({
   const { deleteDriverApproval, approveDriver, rejectDriver } =
     useDriverApprovalService();
 
-  const handleLockClick = () => {
-    setIsLockClicked(!isLockClicked);
-  };
-
   const handleEdit = () => {
     setDriverId(value.driver_id);
     setModalOpen(true);
-  };
-
-  const handleCopy = () => {
-    console.log('copy');
   };
 
   const handleDelete = () => {
@@ -56,13 +48,6 @@ const DriverApprovalActionColumn = ({
     //appDriver(value);
     boxType('approved');
     await approveDriver(value.id);
-    handleDelete();
-  };
-
-  const handleRemove = async () => {
-    //remDriver(value);
-    boxType('removed');
-    await rejectDriver(value.id);
     handleDelete();
   };
 
@@ -84,33 +69,9 @@ const DriverApprovalActionColumn = ({
         />
       </CustomIconButton>
       <CustomIconButton>
-        <FileCopySharpIcon
-          style={{ color: theme.palette.actionButton.main }}
-          onClick={handleCopy}
-        />
-      </CustomIconButton>
-      <CustomIconButton
-        onClick={handleLockClick}
-        color={isLockClicked ? '#e196a3' : 'grey'}
-      >
-        <LockIcon
-          style={{
-            color: isLockClicked
-              ? theme.palette.actionButton.hover
-              : theme.palette.actionButton.main,
-          }}
-        />
-      </CustomIconButton>
-      <CustomIconButton>
         <DoneOutlinedIcon
           style={{ color: theme.palette.actionButton.main }}
           onClick={handleApprove}
-        />
-      </CustomIconButton>
-      <CustomIconButton>
-        <RemoveOutlinedIcon
-          style={{ color: theme.palette.actionButton.main }}
-          onClick={handleRemove}
         />
       </CustomIconButton>
       <CustomIconButton>

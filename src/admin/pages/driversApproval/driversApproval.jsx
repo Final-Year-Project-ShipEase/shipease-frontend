@@ -23,23 +23,50 @@ const DriversApproval = () => {
       setLoading(true);
       const response = await getRejectedApproval();
       setDriverData(response);
+      console.log('Driver Data', response);
       setLoading(false);
     };
+
+    fetchData();
+
+    return () => {
+      // Clean up any resources if necessary
+    };
+  }, []);
+
+  useEffect(() => {
     const fetchDriverData = async () => {
       setLoading(true);
-      driverData.forEach(async (driver) => {
-        await getDriver(driver.driver_id)
-          .then((response) => {
-            setDrivers((prev) => [...prev, response]);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+      const driverPromises = driverData.map(async (driver) => {
+        try {
+          const response = await getDriver(driver.driver_id);
+          console.log(response);
+          return response;
+        } catch (error) {
+          console.log(error);
+          return null;
+        }
       });
+
+      Promise.all(driverPromises)
+        .then((driverResponses) => {
+          setDrivers(driverResponses.filter(Boolean));
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
     };
-    fetchData();
-    fetchDriverData();
-  }, [driverData, getDriver, getRejectedApproval]);
+
+    if (driverData.length > 0) {
+      fetchDriverData();
+    }
+
+    return () => {
+      // Clean up any resources if necessary
+    };
+  }, [driverData]);
 
   return (
     <Grid
