@@ -11,8 +11,7 @@ import { useTheme } from '@mui/material/styles';
 import useVehicleService from '../../services/vehicleService.jsx';
 
 const VehicleApproval = () => {
-  const { getRejectedApproval } = useVehicleApprovalService();
-  const { getVehicles } = useVehicleService();
+  const { getVehicles, approveVehicle } = useVehicleService();
   const [vehiclesApproval, setVehiclesApproval] = useState([]);
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
@@ -31,6 +30,14 @@ const VehicleApproval = () => {
     };
     fetchData();
   }, []);
+
+  const handleApprove = async (id) => {
+    try {
+      await approveVehicle(id);
+    } catch (error) {
+      console.log("There's an error in approving the vehicle");
+    }
+  };
 
   return (
     <Grid
@@ -59,7 +66,11 @@ const VehicleApproval = () => {
       </Grid>
 
       <Grid item xs={2} sx={{ mt: isSmallScreen ? '5%' : -1 }} flex="1">
-        <TableData columns={VehicleColumns} rows={vehiclesApproval} />
+        <TableData
+          columns={VehicleColumns}
+          rows={vehiclesApproval}
+          handleApprove={handleApprove}
+        />
       </Grid>
     </Grid>
   );

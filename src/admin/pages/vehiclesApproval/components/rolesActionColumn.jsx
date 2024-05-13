@@ -23,23 +23,21 @@ const CustomIconButton = ({ children, onClick }) => {
   );
 };
 
-const VehicleActionColumn = ({ value, boxType, setTenantId, setModalOpen }) => {
+const VehicleActionColumn = ({
+  value,
+  boxType,
+  setTenantId,
+  setModalOpen,
+  handleApproval,
+}) => {
   const [isLockClicked, setIsLockClicked] = useState(false);
   const theme = useTheme();
   //const { delRole } = useRBACService();
   const { deleteVehicleApproval } = useVehicleApprovalService();
 
-  const handleLockClick = () => {
-    setIsLockClicked(!isLockClicked);
-  };
-
   const handleEdit = () => {
     // setTenantId(value.vehicle_id);
     setModalOpen(true);
-  };
-
-  const handleCopy = () => {
-    console.log('copy');
   };
 
   const handleDelete = async () => {
@@ -50,7 +48,7 @@ const VehicleActionColumn = ({ value, boxType, setTenantId, setModalOpen }) => {
   const handleApprove = async () => {
     //appDriver(value);
     boxType('approved');
-    //approveDriver(value.id);
+    handleApproval(value);
   };
 
   const handleRemove = () => {
@@ -74,24 +72,6 @@ const VehicleActionColumn = ({ value, boxType, setTenantId, setModalOpen }) => {
         <EditNoteIcon
           style={{ color: theme.palette.actionButton.main }}
           onClick={handleEdit}
-        />
-      </CustomIconButton>
-      <CustomIconButton>
-        <FileCopySharpIcon
-          style={{ color: theme.palette.actionButton.main }}
-          onClick={handleCopy}
-        />
-      </CustomIconButton>
-      <CustomIconButton
-        onClick={handleLockClick}
-        color={isLockClicked ? '#e196a3' : 'grey'}
-      >
-        <LockIcon
-          style={{
-            color: isLockClicked
-              ? theme.palette.actionButton.hover
-              : theme.palette.actionButton.main,
-          }}
         />
       </CustomIconButton>
       <CustomIconButton>

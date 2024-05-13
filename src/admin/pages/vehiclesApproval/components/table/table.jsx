@@ -129,7 +129,7 @@ EnhancedTableHead.propTypes = {
   ).isRequired,
 };
 
-export default function TableData({ columns, rows }) {
+export default function TableData({ columns, rows, handleApprove }) {
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('');
   const [page, setPage] = useState(0);
@@ -145,6 +145,11 @@ export default function TableData({ columns, rows }) {
   };
 
   const handleDialogClose = () => {
+    setBoxType('');
+  };
+
+  const handleApproval = () => {
+    handleApprove(tenantsId);
     setBoxType('');
   };
 
@@ -186,7 +191,7 @@ export default function TableData({ columns, rows }) {
       <ConfirmAdd
         open={boxType === 'approved'}
         onClose={handleDialogClose}
-        onConfirm={handleDialogClose}
+        onConfirm={handleApproval}
       />
       <ConfirmDelete
         open={boxType === 'removed'}
@@ -278,6 +283,7 @@ export default function TableData({ columns, rows }) {
                                   boxType={setBoxType}
                                   setTenantId={setTenantsId}
                                   setModalOpen={setOpen}
+                                  handleApproval={handleApprove}
                                 />
                               ) : (
                                 row[column.id]

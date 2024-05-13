@@ -111,6 +111,7 @@ function CreateVehicle() {
 
           try {
             const res = await addVehicle(formData);
+            console.log(res);
             if (res.status === 200 || res.status === 201) {
               navigate('/vehiclesGarage');
               show('Vehicle added successfully: ');

@@ -15,7 +15,7 @@ export function useVehicleService() {
 
   const addVehicle = async (data) => {
     const response = await axiosInstance.post('/vehicle', data);
-    return response.data;
+    return response;
   };
 
   const updateVehicle = async (id, data) => {
@@ -28,12 +28,18 @@ export function useVehicleService() {
     return response.data;
   };
 
+  const approveVehicle = async (id) => {
+    const response = await axiosInstance.put(`/vehicle/${id}/approve`);
+    return response.data;
+  };
+
   return {
     getVehicles,
     getVehicle,
     addVehicle,
     updateVehicle,
     deleteVehicle,
+    approveVehicle,
   };
 }
 
