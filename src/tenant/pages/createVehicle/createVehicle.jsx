@@ -107,6 +107,7 @@ function CreateVehicle() {
           formData.append('height', values.height);
           formData.append('cost', values.cost);
           formData.append('LicenseImage', selectedLicenseFile.split(',')[1]);
+          formData.append('approved', 'false');
 
           try {
             const res = await addVehicle(formData);

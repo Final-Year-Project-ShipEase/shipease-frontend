@@ -26,11 +26,11 @@ const VehicleApproval = () => {
         setVehiclesApproval(data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        console.log("There's an error in fetching the data");
       }
     };
     fetchData();
-  }, [VehicleApproval]);
+  }, []);
 
   return (
     <Grid

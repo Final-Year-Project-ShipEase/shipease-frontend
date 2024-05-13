@@ -51,7 +51,6 @@ const VehicleActionColumn = ({ value, boxType, setTenantId, setModalOpen }) => {
     //appDriver(value);
     boxType('approved');
     //approveDriver(value.id);
-    await deleteVehicleApproval(value);
   };
 
   const handleRemove = () => {

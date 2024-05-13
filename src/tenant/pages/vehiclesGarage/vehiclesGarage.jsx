@@ -8,7 +8,7 @@ import Spinner from '../../../utils/spinner.jsx';
 import { useSnackbar } from '../../../utils/snackbarContextProvider.jsx';
 
 const VehiclesGarage = () => {
-  const id = localStorage.getItem('tenantData')?.data?.id || 2;
+  const id = JSON.parse(localStorage.getItem('tenantData')).data.id || 2;
   const { getVehicleByTenantId } = useVehicleService();
   const [vehicleList, setVehicleList] = useState([]);
   const [Loading, setLoading] = useState(true);

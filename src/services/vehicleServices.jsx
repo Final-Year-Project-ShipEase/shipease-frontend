@@ -33,7 +33,13 @@ export function useVehicleService() {
     return response.data;
   };
 
+  const approveVehicle = async (id) => {
+    const response = await axiosInstance.put(`/vehicle/${id}/approve`);
+    return response.data;
+  };
+
   return {
+    approveVehicle,
     getVehicleList,
     getVehicle,
     updateVehicle,
