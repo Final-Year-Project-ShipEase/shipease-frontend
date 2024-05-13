@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import TextField from '../../components/inputs/textField/TextField.jsx';
-import PhoneNumberInput from '../../components/inputs/phoneNumberField/PhoneNumber.jsx';
 import CustomSwitch from '../../components/switch/Switch.jsx';
 import CustomButton from '../../components/buttons/CustomButton.jsx';
 import { ReactComponent as LeftArrorSvg } from './assets/leftArrow.svg';
@@ -20,6 +19,7 @@ function CreateVehicle() {
 
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const licenseFileInputRef = useRef(null);
   const { addVehicle } = useVehicleService();
   const { show } = useSnackbar();
   const validationSchema = Yup.object().shape({
@@ -29,6 +29,11 @@ function CreateVehicle() {
     location: Yup.string().required('Location is required'),
     trackerNo: Yup.string().required('Tracker number is required'),
   });
+  const [selectedLicenseFile, setSelectedLicenseFile] = useState('');
+
+  const handleLicenseDivClick = () => {
+    licenseFileInputRef.current.click();
+  };
 
   const handleDivClick = () => {
     fileInputRef.current.click();
@@ -75,6 +80,7 @@ function CreateVehicle() {
           width: '',
           height: '',
           cost: '',
+          licenseImage: '',
           // TODO: utalize these fields
         }}
         validationSchema={validationSchema}
@@ -100,6 +106,7 @@ function CreateVehicle() {
           formData.append('width', values.width);
           formData.append('height', values.height);
           formData.append('cost', values.cost);
+          formData.append('LicenseImage', selectedLicenseFile.split(',')[1]);
 
           try {
             const res = await addVehicle(formData);
@@ -184,7 +191,7 @@ function CreateVehicle() {
                     type="file"
                     className="hidden"
                     style={{ display: 'none' }}
-                    accept="image/*"
+                    accept=".png,.jpeg,.jpg"
                     onChange={(event) => {
                       const file = event.currentTarget.files[0];
                       if (file) {
@@ -370,6 +377,103 @@ function CreateVehicle() {
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
                       />
+                    </Box>
+
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        mt: 3,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: '340px',
+                          height: '50px',
+                          borderRadius: '43px',
+                          position: 'relative',
+                          cursor: 'pointer',
+                          backgroundColor: 'green',
+                        }}
+                        onClick={handleLicenseDivClick}
+                      >
+                        <img
+                          src={selectedLicenseFile || profileImage}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            borderRadius: '10px',
+                          }}
+                          alt="Profile"
+                        />
+                        <div
+                          style={{
+                            position: 'absolute',
+                            backgroundColor: '#000000B2',
+                            top: '0px',
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '10px',
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              height: '100%',
+                              width: '100%',
+                            }}
+                          >
+                            <div>
+                              <Typography
+                                sx={{ color: 'white', textAlign: 'center' }}
+                              >
+                                Click to upload Vehicle Document
+                              </Typography>
+                            </div>
+                          </div>
+                        </div>
+                        <input
+                          ref={licenseFileInputRef}
+                          id="license-file"
+                          name="license-file"
+                          type="file"
+                          className="hidden"
+                          style={{ display: 'none' }}
+                          accept=".png,.jpeg,.jpg"
+                          onChange={(event) => {
+                            const file = event.currentTarget.files[0];
+                            if (file) {
+                              const extension = file.name
+                                .split('.')
+                                .pop()
+                                .toLowerCase();
+                              if (
+                                extension === 'png' ||
+                                extension === 'jpeg' ||
+                                extension === 'jpg'
+                              ) {
+                                const reader = new FileReader();
+                                reader.readAsDataURL(file);
+                                reader.onload = () =>
+                                  setSelectedLicenseFile(reader.result);
+                              } else {
+                                // Show error message or handle invalid file type
+                                console.error(
+                                  'Invalid file type. Only PNG and JPEG files are accepted.'
+                                );
+                              }
+                            }
+                          }}
+                        />
+                        <ErrorMessage
+                          name="file"
+                          render={(msg) => (
+                            <Typography sx={{ color: 'red' }}>{msg}</Typography>
+                          )}
+                        />
+                      </Box>
                     </Box>
                   </Box>
                   <Box
