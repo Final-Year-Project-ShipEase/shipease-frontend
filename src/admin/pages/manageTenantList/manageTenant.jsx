@@ -9,6 +9,7 @@ import Spinner from '../../../utils/spinner';
 const ManageTenantList = () => {
   const { getTenants } = useTenantService();
   const [tenants, setTenants] = useState([]);
+  const [filteredTenants, setFilteredTenants] = useState([]);
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -17,12 +18,22 @@ const ManageTenantList = () => {
     setLoading(true);
     const data = await getTenants();
     setTenants(data);
+    setFilteredTenants(data);
     setLoading(false);
   };
 
   useEffect(() => {
     fetchData();
-  }, [loading]);
+  }, []);
+
+  const handleSearch = (searchTerm) => {
+    const filteredData = tenants.filter((tenant) =>
+      Object.values(tenant).some((value) =>
+        String(value).toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+    setFilteredTenants(filteredData);
+  };
 
   return (
     <Grid
@@ -32,31 +43,13 @@ const ManageTenantList = () => {
       height="100%"
       sx={{ margin: '40px' }}
     >
-      {loading && (
-        <Grid item>
-          <Spinner />
-        </Grid>
-      )}
-
-      <Grid
-        item
-        xs={1}
-        container
-        justifyContent="space-between"
-        alignItems="center"
-        height="7%"
-        sx={{ mt: isSmallScreen ? '-8%' : -2 }}
-      >
-        <PageHeader />
-      </Grid>
-
-      <Grid item xs={2} sx={{ mt: isSmallScreen ? '10%' : 2 }} flex="1">
-        <TableData
-          columns={TenantsColumns}
-          rows={tenants}
-          setLoading={setLoading}
-        />
-      </Grid>
+      {loading && <Spinner />}
+      <PageHeader onSearch={handleSearch} />
+      <TableData
+        columns={TenantsColumns}
+        rows={filteredTenants}
+        setLoading={setLoading}
+      />
     </Grid>
   );
 };

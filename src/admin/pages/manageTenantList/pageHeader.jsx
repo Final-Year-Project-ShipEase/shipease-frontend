@@ -14,19 +14,9 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
 import HeaderButton from '../../../commons/buttons/headerButton';
 
-const PageHeader = () => {
-  const [Driver, setDriver] = React.useState('');
+const PageHeader = ({ onSearch }) => {
   const theme = useTheme();
-  const navigate = useNavigate();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Check if the screen is small
-
-  const handleChange = (event) => {
-    setDriver(event.target.value);
-  };
-
-  const onClickPermit = () => {
-    // navigate('/approval/drivers');
-  };
 
   return (
     <Box
@@ -44,36 +34,11 @@ const PageHeader = () => {
           gap: 2,
         }}
       >
-        <FormControl>
-          <InputLabel id="Driver-select-label">Tenant</InputLabel>
-          <Select
-            id="Driver-select"
-            value={Driver}
-            label="Driver"
-            onChange={handleChange}
-            sx={{
-              display: 'flex',
-              width: 125,
-              height: 50,
-              alignItems: 'flex-start',
-              flexShrink: 0,
-              backgroundColor: theme.palette.buttons.main,
-              color: theme.palette.buttons.text,
-              borderRadius: 4,
-            }}
-            inputProps={{
-              label: 'Driver',
-              disableUnderline: true,
-            }}
-          >
-            <MenuItem value={10}>Name</MenuItem>
-            <MenuItem value={20}>Status</MenuItem>
-          </Select>
-        </FormControl>
         <TextField
           id="search"
           placeholder="Search Tenant"
           variant="standard"
+          onChange={(e) => onSearch(e.target.value)}
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -96,17 +61,6 @@ const PageHeader = () => {
             ),
           }}
         />
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 2,
-          justifyContent: 'flex-end',
-        }}
-      >
-        <HeaderButton text={'Search'} onClick={onClickPermit} />
-        {/* <HeaderButton text={'Reset'} onClick={onClickPermit} /> */}
       </Box>
     </Box>
   );

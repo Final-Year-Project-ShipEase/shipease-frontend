@@ -1,72 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import { Box } from '@mui/material';
+import { Grid, useTheme, useMediaQuery } from '@mui/material';
 import PageHeader from './pageHeader';
 import TableData from './components/table/table';
 import { DriverColumns } from './_columns.js';
 import useDriverApprovalService from '../../services/driverApprovalServices.jsx';
-import { Grid } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 import useDriverService from '../../services/driverService.jsx';
 
 const DriversApproval = () => {
   const { getRejectedApproval } = useDriverApprovalService();
-  const [driverData, setDriverData] = useState([]);
+  const [drivers, setDrivers] = useState([]);
+  const [filteredDrivers, setFilteredDrivers] = useState([]);
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const { getDriver } = useDriverService();
-  const [drivers, setDrivers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       const response = await getRejectedApproval();
-      setDriverData(response);
-      console.log('Driver Data', response);
+      if (response) {
+        const fetchDetails = async () => {
+          const details = await Promise.all(
+            response.map(async (item) => {
+              try {
+                return await getDriver(item.driver_id);
+              } catch (error) {
+                console.error('Failed to fetch driver details', error);
+                return null;
+              }
+            })
+          );
+          const validDrivers = details.filter(Boolean);
+          setDrivers(validDrivers);
+          setFilteredDrivers(validDrivers);
+        };
+        fetchDetails();
+      }
       setLoading(false);
     };
-
     fetchData();
-
-    return () => {
-      // Clean up any resources if necessary
-    };
   }, []);
 
-  useEffect(() => {
-    const fetchDriverData = async () => {
-      setLoading(true);
-      const driverPromises = driverData.map(async (driver) => {
-        try {
-          const response = await getDriver(driver.driver_id);
-          console.log(response);
-          return response;
-        } catch (error) {
-          console.log(error);
-          return null;
-        }
-      });
-
-      Promise.all(driverPromises)
-        .then((driverResponses) => {
-          setDrivers(driverResponses.filter(Boolean));
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.log(error);
-          setLoading(false);
-        });
-    };
-
-    if (driverData.length > 0) {
-      fetchDriverData();
-    }
-
-    return () => {
-      // Clean up any resources if necessary
-    };
-  }, [driverData]);
+  const handleSearch = (searchTerm) => {
+    const filteredData = drivers.filter((driver) =>
+      Object.keys(driver).some((key) =>
+        String(driver[key]).toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+    setFilteredDrivers(filteredData);
+  };
 
   return (
     <Grid
@@ -85,10 +68,10 @@ const DriversApproval = () => {
         height="7%"
         sx={{ mt: isSmallScreen ? '-8%' : -2 }}
       >
-        <PageHeader />
+        <PageHeader onSearch={handleSearch} />
       </Grid>
       <Grid item xs={2} sx={{ mt: isSmallScreen ? '10%' : -1 }} flex="1">
-        <TableData columns={DriverColumns} rows={drivers} />
+        <TableData columns={DriverColumns} rows={filteredDrivers} />
       </Grid>
     </Grid>
   );

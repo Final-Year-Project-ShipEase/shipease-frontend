@@ -1,32 +1,16 @@
 import React from 'react';
 import {
   Box,
-  InputLabel,
-  FormControl,
-  MenuItem,
-  Select,
   TextField,
   InputAdornment,
   useTheme,
   useMediaQuery,
 } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import { useNavigate } from 'react-router-dom';
-import HeaderButton from '../../../commons/buttons/headerButton';
 
-const PageHeader = () => {
-  const [Driver, setDriver] = React.useState('');
+const PageHeader = ({ onSearch }) => {
   const theme = useTheme();
-  const navigate = useNavigate();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Check if the screen is small
-
-  const handleChange = (event) => {
-    setDriver(event.target.value);
-  };
-
-  const onClickPermit = () => {
-    navigate('/approval/drivers');
-  };
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Box
@@ -34,81 +18,27 @@ const PageHeader = () => {
         display: 'flex',
         justifyContent: 'space-between',
         width: '100%',
-        marginTop: isSmallScreen ? '5%' : 0, // Apply margin top if the screen is small
+        marginTop: isSmallScreen ? '5%' : 0,
       }}
     >
-      <Box
+      <TextField
+        id="search"
+        placeholder="Search Driver"
+        variant="outlined"
+        onChange={(e) => onSearch(e.target.value)}
         sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 2,
+          width: 500,
+          backgroundColor: theme.palette.background.paper,
+          borderRadius: 1,
         }}
-      >
-        <FormControl>
-          <InputLabel id="Driver-select-label">Driver</InputLabel>
-          <Select
-            id="Driver-select"
-            value={Driver}
-            label="Driver"
-            onChange={handleChange}
-            sx={{
-              display: 'flex',
-              width: 125,
-              height: 50,
-              alignItems: 'flex-start',
-              flexShrink: 0,
-              backgroundColor: theme.palette.buttons.main,
-              color: theme.palette.buttons.text,
-              borderRadius: 4,
-            }}
-            inputProps={{
-              label: 'Driver',
-              disableUnderline: true,
-            }}
-          >
-            <MenuItem value={10}>Name</MenuItem>
-            <MenuItem value={20}>Tenant ID</MenuItem>
-            <MenuItem value={30}>Username</MenuItem>
-          </Select>
-        </FormControl>
-        <TextField
-          id="search"
-          placeholder="Search Driver"
-          variant="standard"
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            padding: '10px 18px',
-            gap: 8,
-            width: 500,
-            height: 50,
-            color: theme.palette.buttons.text,
-            backgroundColor: theme.palette.buttons.main,
-            borderRadius: 4,
-            boxShadow: theme.palette.shadows.customButton1,
-          }}
-          InputProps={{
-            disableUnderline: true,
-            endAdornment: (
-              <InputAdornment position="end">
-                <SearchOutlinedIcon color="action" />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 2,
-          justifyContent: 'flex-end',
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchOutlinedIcon />
+            </InputAdornment>
+          ),
         }}
-      >
-        <HeaderButton text={'Search'} onClick={onClickPermit} />
-        {/* <HeaderButton text={'Reset'} onClick={onClickPermit} /> */}
-      </Box>
+      />
     </Box>
   );
 };
