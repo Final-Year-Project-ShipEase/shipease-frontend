@@ -17,11 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar
-      position="fixed"
-      elevation={3}
-      sx={{ zIndex: theme.zIndex.drawer + 1, ...appBarStyles }}
-    >
+    <AppBar position="fixed" elevation={3} sx={{ ...appBarStyles }}>
       <Toolbar>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>

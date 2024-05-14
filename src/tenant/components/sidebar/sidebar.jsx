@@ -32,10 +32,10 @@ const Sidebar = ({ widthVal }) => {
             ? theme.palette.sidebar.text
             : theme.palette.sidebar.text,
           backgroundColor: isActive
-            ? theme.palette.sidebar.active
+            ? 'rgba(255, 255, 255, 0.2)'
             : 'transparent',
           '&:hover': {
-            backgroundColor: theme.palette.action.hover,
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
           },
           width: '100%',
           textTransform: 'none',

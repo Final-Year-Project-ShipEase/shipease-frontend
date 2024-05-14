@@ -7,16 +7,17 @@ import {
   useTheme,
   useMediaQuery,
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu'; // For the toggle button
+import MenuIcon from '@mui/icons-material/Menu';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
 import { useAdminAuth } from '../../auth/adminAuth';
+import Logo from '../../../commons/resouces/logo.svg';
 
-const Sidebar = ({ leftSpan }) => {
+const Sidebar = ({ widthVal }) => {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up('lg'));
-  const [isDrawerOpen, setIsDrawerOpen] = useState(isLargeScreen); // State to toggle drawer visibility
+  const [isDrawerOpen, setIsDrawerOpen] = useState(isLargeScreen);
   const [activeButton, setActiveButton] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,7 +57,7 @@ const Sidebar = ({ leftSpan }) => {
           gap: '3px',
           alignSelf: 'stretch',
           overflow: 'hidden',
-          color: theme.palette.buttonSidebar.ColorActive,
+          color: theme.palette.sidebar.text,
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
           fontSize: '14px',
@@ -69,10 +70,10 @@ const Sidebar = ({ leftSpan }) => {
             ? theme.palette.buttonSidebar.borderright
             : 'none',
           backgroundColor: isActive
-            ? theme.palette.buttonSidebar.main
+            ? 'rgba(255, 255, 255, 0.2)'
             : theme.palette.buttonSidebar.BackgroundColorActive,
           '&:hover': {
-            backgroundColor: theme.palette.buttonSidebar.main,
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
           },
         }}
         onClick={() => handleClick(item)}
@@ -96,13 +97,13 @@ const Sidebar = ({ leftSpan }) => {
           gap: '3px',
           alignSelf: 'stretch',
           overflow: 'hidden',
-          color: theme.palette.buttonSidebar.ColorActive,
+          color: theme.palette.sidebar.text,
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
           fontSize: '14px',
           textTransform: 'none',
           fontWeight: isActive ? 550 : 400,
-          lineHeight: '140%',
+          lineHeight: '100%',
           height: '40px',
           justifyContent: 'left',
           borderRight: isActive
@@ -145,16 +146,32 @@ const Sidebar = ({ leftSpan }) => {
         variant={isLargeScreen ? 'permanent' : 'temporary'}
         open={isDrawerOpen}
         onClose={toggleDrawer}
-        // Adjusted styles for responsiveness
         sx={{
+          width: `${(widthVal * 100) / 12}%`,
           '& .MuiDrawer-paper': {
-            mt: '9vh',
-            paddingBottom: '24px',
-            backgroundColor: theme.palette.buttonSidebar.hovertextcolor,
+            width: `${(widthVal * 100) / 12}%`,
+            backgroundColor: theme.palette.sidebar.main,
             boxShadow: theme.palette.buttonSidebar.sidebarshadow,
           },
         }}
       >
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1rem',
+          }}
+        >
+          <img
+            src={Logo}
+            alt="ShipEase-logo"
+            style={{
+              width: '100%',
+              height: '100%',
+            }}
+          />
+        </Box>
         <Box
           sx={{
             display: 'flex',
@@ -175,7 +192,7 @@ const Sidebar = ({ leftSpan }) => {
               link: '/admin/login',
               icon: (
                 <PowerSettingsNewOutlinedIcon
-                  style={{ color: theme.palette.buttonSidebar.ColorActive }}
+                  style={{ color: theme.palette.sidebar.text }}
                 />
               ),
             }}

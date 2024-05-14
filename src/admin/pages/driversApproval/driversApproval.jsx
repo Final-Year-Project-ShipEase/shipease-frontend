@@ -70,7 +70,7 @@ const DriversApproval = () => {
       >
         <PageHeader onSearch={handleSearch} />
       </Grid>
-      <Grid item xs={2} sx={{ mt: isSmallScreen ? '10%' : -1 }} flex="1">
+      <Grid item xs={2} sx={{ mt: isSmallScreen ? '10%' : 2 }} flex="1">
         <TableData columns={DriverColumns} rows={filteredDrivers} />
       </Grid>
     </Grid>

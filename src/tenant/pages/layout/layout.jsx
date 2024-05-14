@@ -6,7 +6,7 @@ import Sidebar from '../../components/sidebar/sidebar';
 
 const TenantLayout = () => {
   const theme = useTheme();
-  const leftSpan = 1.5; // Adjust this as needed for your layout
+  const leftSpan = 1.5;
   return (
     <Box
       sx={{

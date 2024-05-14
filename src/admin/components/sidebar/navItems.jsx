@@ -7,16 +7,16 @@ const NavigationItems = [
   {
     name: 'Dashboard',
     link: '/admin/dashboard',
-    icon: <HomeOutlinedIcon style={{ color: '#565656' }} />,
+    icon: <HomeOutlinedIcon />,
   },
   {
     name: 'ManageTenants',
     link: '/admin/manageTenants',
-    icon: <BadgeOutlinedIcon style={{ color: '#565656' }} />,
+    icon: <BadgeOutlinedIcon />,
   },
   {
     name: 'Approval',
-    icon: <PersonAddAltOutlinedIcon style={{ color: '#565656' }} />,
+    icon: <PersonAddAltOutlinedIcon />,
     link: '/admin/driversApproval',
   },
   {
@@ -30,7 +30,7 @@ const NavigationItems = [
   {
     name: 'Permissions',
     link: '/admin/permissions',
-    icon: <Person4OutlinedIcon style={{ color: '#565656' }} />,
+    icon: <Person4OutlinedIcon />,
   },
 ];
 
