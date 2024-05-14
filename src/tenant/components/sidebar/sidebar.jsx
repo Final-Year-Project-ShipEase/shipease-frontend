@@ -19,6 +19,11 @@ const Sidebar = ({ widthVal }) => {
     setActiveButton(currentPath);
   }, [location]);
 
+  const logoutButton = () => {
+    logout();
+    navigate('/login');
+  };
+
   const CustomButton = ({ item }) => {
     // remove space and convert to lowercase for comparison from item.name
     const isActive =
@@ -43,7 +48,11 @@ const Sidebar = ({ widthVal }) => {
         }}
         startIcon={item.icon}
         onClick={() => {
-          navigate(item.link);
+          if (item.name === 'Log out') {
+            logout();
+          } else {
+            navigate(item.link);
+          }
           setActiveButton(item.name);
         }}
       >
@@ -94,7 +103,6 @@ const Sidebar = ({ widthVal }) => {
       <Box sx={{ padding: '10px', borderTop: '1px solid #ccc' }}>
         <CustomButton
           item={{ name: 'Log out', icon: <PowerSettingsNewOutlinedIcon /> }}
-          onClick={logout}
         />
       </Box>
     </Drawer>
