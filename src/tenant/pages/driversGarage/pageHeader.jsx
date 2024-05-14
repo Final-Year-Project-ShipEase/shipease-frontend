@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderButton from '../../../commons/buttons/headerButton';
 import AddModalButton from '../../../commons/buttons/addModal';
 
-const PageHeader = () => {
+const PageHeader = ({ onSearch }) => {
   const [Driver, setDriver] = React.useState('');
   const theme = useTheme();
   const navigate = useNavigate();
@@ -41,37 +41,11 @@ const PageHeader = () => {
           gap: 2,
         }}
       >
-        <FormControl>
-          <InputLabel id="Driver-select-label">Driver</InputLabel>
-          <Select
-            id="Driver-select"
-            value={Driver}
-            label="Driver"
-            onChange={handleChange}
-            sx={{
-              display: 'flex',
-              width: 125,
-              height: 50,
-              alignItems: 'flex-start',
-              flexShrink: 0,
-              backgroundColor: theme.palette.buttons.main,
-              color: theme.palette.buttons.text,
-              borderRadius: 4,
-            }}
-            inputProps={{
-              label: 'Driver',
-              disableUnderline: true,
-            }}
-          >
-            <MenuItem value={10}>Username</MenuItem>
-            <MenuItem value={20}>Name</MenuItem>
-            <MenuItem value={30}>Email</MenuItem>
-          </Select>
-        </FormControl>
         <TextField
           id="search"
           placeholder="Search Driver"
           variant="standard"
+          onChange={(e) => onSearch(e.target.value)}
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -103,7 +77,6 @@ const PageHeader = () => {
           justifyContent: 'flex-end',
         }}
       >
-        <HeaderButton text={'Export'} onClick={onClickPermit} />
         <AddModalButton
           text={'Add Driver'}
           onClick={() => {

@@ -10,28 +10,39 @@ import { useSnackbar } from '../../../utils/snackbarContextProvider.jsx';
 import Spinner from '../../../utils/spinner.jsx';
 
 const DriversGarage = () => {
-  const { getDriverByTenantId } = useDriverService();
-  const [drivers, setDrivers] = useState([]);
   const [driverId, setDriverId] = useState(
     localStorage.getItem('tenantData')?.data?.id || 2
   );
-  const [Loading, setLoading] = useState(true);
+  const { getDriverByTenantId } = useDriverService();
+  const [drivers, setDrivers] = useState([]);
+  const [filteredDrivers, setFilteredDrivers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { show } = useSnackbar();
 
   useEffect(() => {
     const fetchDrivers = async () => {
       setLoading(true);
-      await getDriverByTenantId(driverId)
-        .then((response) => {
-          setDrivers(response.tenants);
-        })
-        .catch((err) => {
-          show(err.message, 'error');
-        });
-      setLoading(false);
+      try {
+        const response = await getDriverByTenantId(driverId);
+        setDrivers(response.tenants);
+        setFilteredDrivers(response.tenants);
+      } catch (error) {
+        show(error.message, 'error');
+      } finally {
+        setLoading(false);
+      }
     };
     fetchDrivers();
   }, []);
+
+  const handleSearch = (searchTerm) => {
+    const filtered = drivers.filter((driver) =>
+      Object.keys(driver).some((key) =>
+        String(driver[key]).toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+    setFilteredDrivers(filtered);
+  };
 
   return (
     <Box
@@ -41,7 +52,7 @@ const DriversGarage = () => {
         padding: 2,
       }}
     >
-      {Loading && <Spinner />}
+      {loading && <Spinner />}
       <Box
         sx={{
           marginBottom: '-10px',
@@ -51,7 +62,7 @@ const DriversGarage = () => {
           boxShadow: '0px 2px 14px rgba(0, 0, 0, 1)',
         }}
       >
-        <DriversDetails driverId={driverId} />
+        <DriversDetails driverId={driverId} onSearch={handleSearch} />
       </Box>
 
       <Box sx={{ mt: '30px', borderTop: '1px dashed black' }}>

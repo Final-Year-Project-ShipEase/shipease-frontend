@@ -12,7 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import useDriverService from '../../../../admin/services/driverService';
 import PageHeader from '../pageHeader';
 
-const DriversDetails = ({ driverId }) => {
+const DriversDetails = ({ driverId, onSearch }) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [driver, setDriver] = useState({});
@@ -56,7 +56,7 @@ const DriversDetails = ({ driverId }) => {
           marginTop: '35px',
         }}
       >
-        <PageHeader />
+        <PageHeader onSearch={onSearch} />
       </Box>
 
       <Grid container spacing={2} sx={{ marginLeft: '5%', mt: '2%' }}>
