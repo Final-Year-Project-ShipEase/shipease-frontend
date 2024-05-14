@@ -2,15 +2,22 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
-import dummyOrderData from './dummyOrderData';
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  ResponsiveContainer,
+  LabelList,
+} from 'recharts';
+import tenantOrderData from './dummyOrderData';
 import { useTheme } from '@mui/material/styles';
 
 const Order = () => {
   const theme = useTheme();
 
   return (
-    <Card sx={{ width: '100%', borderRadius: 5 }}>
+    <Card sx={{ width: '100%', borderRadius: 5, height: '100%' }}>
       <CardContent
         style={{
           display: 'flex',
@@ -22,19 +29,18 @@ const Order = () => {
         <Typography sx={{ fontWeight: 'bold', marginBottom: '10px' }}>
           Total Orders
         </Typography>
-        <ResponsiveContainer width="90%" height={140}>
+        <ResponsiveContainer width="90%" height={190}>
           <PieChart>
             <Pie
-              data={dummyOrderData}
+              data={tenantOrderData}
               cx="50%"
               cy="50%"
               innerRadius={40}
-              outerRadius={60}
-              fill={theme.palette.primary.color}
-              paddingAngle={5}
+              outerRadius={70}
+              fill={theme.palette.pieChart.COLORS}
               dataKey="orders"
             >
-              {dummyOrderData.map((entry, index) => (
+              {tenantOrderData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={
@@ -44,6 +50,26 @@ const Order = () => {
                   }
                 />
               ))}
+              <LabelList
+                dataKey="month"
+                position="outside"
+                style={{
+                  fill: 'black',
+                  fontStyle: 'italic',
+                  fontWeight: 'bold',
+                }}
+                stroke="none"
+                offset={10}
+                angle={-30}
+              />
+
+              <LabelList
+                dataKey="orders"
+                position="inside"
+                style={{ fill: 'black' }}
+                offset={10}
+                angle={30}
+              />
             </Pie>
             <Tooltip />
           </PieChart>
@@ -56,19 +82,18 @@ const Order = () => {
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            marginTop: '-5%',
-            marginLeft: '10%',
+            justifyContent: 'center',
           }}
         >
           <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>
-            Average Order per Month
+            Average Order per Month:
           </Typography>
           <Typography
             sx={{
               fontWeight: 'bold',
               borderRadius: '5px',
               color: 'purple',
-              marginLeft: '25%',
+              marginLeft: '5%',
             }}
           >
             3

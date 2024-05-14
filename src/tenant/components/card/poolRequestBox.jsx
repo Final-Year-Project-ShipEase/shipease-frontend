@@ -11,7 +11,7 @@ const PoolRequestBox = ({ poolRequestList }) => {
     <Card
       sx={{
         width: '100%',
-        height: 250,
+        height: '100%',
         borderRadius: 5,
         overflow: 'auto',
         backgroundColor: theme.palette.primary.backgroundColor,

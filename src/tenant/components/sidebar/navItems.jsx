@@ -24,7 +24,7 @@ const NavigationItems = [
   },
   {
     name: 'Pool Requests',
-    link: '/poolRequest',
+    link: '/poolRequests',
     icon: <Person4OutlinedIcon />,
   },
 ];

@@ -13,8 +13,11 @@ import {
 } from 'recharts';
 
 const topPerformingDrivers = [
-  { name: 'Tenant 1', value: 400 },
-  { name: 'Tenant 2', value: 300 },
+  { name: 'Driver 1', value: 400 },
+  { name: 'Driver 2', value: 300 },
+  { name: 'Driver 3', value: 300 },
+  { name: 'Driver 4', value: 200 },
+  { name: 'Driver 5', value: 100 },
 ];
 
 const CustomTooltip = ({ active, payload }) => {
@@ -47,10 +50,18 @@ const TopDriver = ({ tenantName, totalRevenue }) => {
           component="div"
           sx={{ fontWeight: 'bold', textAlign: 'center' }}
         >
-          Top Performing Drivers
+          Top Performing Drivers: {tenantName}
         </Typography>
 
-        <ResponsiveContainer width="100%" height={195}>
+        <ResponsiveContainer
+          width="100%"
+          height={195}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           <PieChart>
             <Pie
               data={topPerformingDrivers}
@@ -71,12 +82,7 @@ const TopDriver = ({ tenantName, totalRevenue }) => {
                 />
               ))}
             </Pie>
-            <Legend
-              align="center"
-              verticalAlign="bottom"
-              height={46}
-              style={{ marginTop: '1%' }}
-            />
+            <CustomTooltip />
           </PieChart>
         </ResponsiveContainer>
 
@@ -99,7 +105,6 @@ const TopDriver = ({ tenantName, totalRevenue }) => {
               style={{
                 display: 'flex',
                 justifyContent: 'center',
-                marginTop: '-13px',
               }}
             >
               <button
@@ -108,7 +113,7 @@ const TopDriver = ({ tenantName, totalRevenue }) => {
                   borderRadius: '10px',
                   color: 'black',
                   backgroundColor: theme.palette.primary.color1,
-                  padding: '10px 20px',
+                  padding: '10px',
                   cursor: 'pointer',
                   border: 'none',
                 }}

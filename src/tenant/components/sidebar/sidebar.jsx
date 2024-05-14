@@ -15,22 +15,22 @@ const Sidebar = ({ widthVal }) => {
 
   useEffect(() => {
     const currentPath = location.pathname.split('/')[1];
-    const currentPathName =
-      currentPath.charAt(0).toUpperCase() + currentPath.slice(1);
-    setActiveButton(currentPathName);
+    // Normalize the path to capitalize the first letter
+    setActiveButton(currentPath);
   }, [location]);
 
   const CustomButton = ({ item }) => {
-    const isActive = activeButton.toLowerCase() === item.name.toLowerCase();
+    // remove space and convert to lowercase for comparison from item.name
+    const isActive =
+      activeButton.toLowerCase() === item.name.replace(/\s/g, '').toLowerCase();
+
     return (
       <Button
         sx={{
           display: 'flex',
           justifyContent: 'flex-start',
           padding: '10px 24px',
-          color: isActive
-            ? theme.palette.sidebar.text
-            : theme.palette.sidebar.text,
+          color: theme.palette.sidebar.text,
           backgroundColor: isActive
             ? 'rgba(255, 255, 255, 0.2)'
             : 'transparent',
@@ -43,11 +43,7 @@ const Sidebar = ({ widthVal }) => {
         }}
         startIcon={item.icon}
         onClick={() => {
-          if (item.name === 'Log out') {
-            logout();
-          } else {
-            navigate(item.link);
-          }
+          navigate(item.link);
           setActiveButton(item.name);
         }}
       >
@@ -62,15 +58,17 @@ const Sidebar = ({ widthVal }) => {
       sx={{
         width: `${(widthVal * 100) / 12}%`,
         flexShrink: 0,
-        backgroundColor: theme.palette.sidebar.main,
+        display: 'flex',
+        flexDirection: 'column',
         '& .MuiDrawer-paper': {
           width: `${(widthVal * 100) / 12}%`,
           boxSizing: 'border-box',
+          display: 'flex',
+          flexDirection: 'column',
           backgroundColor: theme.palette.sidebar.main,
         },
       }}
     >
-      {' '}
       <Box
         sx={{
           display: 'flex',
@@ -84,30 +82,20 @@ const Sidebar = ({ widthVal }) => {
           alt="ShipEase-logo"
           style={{
             width: '100%',
-            height: '100%',
+            height: 'auto',
           }}
         />
       </Box>
-      <Box sx={{ overflow: 'auto' }}>
-        <Grid
-          container
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}
-        >
-          <Grid item xs={12}>
-            {NavigationItems.map((item, index) => (
-              <CustomButton key={index} item={item} />
-            ))}
-          </Grid>
-          <Grid item xs={12}>
-            <CustomButton
-              item={{ name: 'Log out', icon: <PowerSettingsNewOutlinedIcon /> }}
-            />
-          </Grid>
-        </Grid>
+      <Box sx={{ overflow: 'auto', flex: '1 1 auto' }}>
+        {NavigationItems.map((item, index) => (
+          <CustomButton key={index} item={item} />
+        ))}
+      </Box>
+      <Box sx={{ padding: '10px', borderTop: '1px solid #ccc' }}>
+        <CustomButton
+          item={{ name: 'Log out', icon: <PowerSettingsNewOutlinedIcon /> }}
+          onClick={logout}
+        />
       </Box>
     </Drawer>
   );

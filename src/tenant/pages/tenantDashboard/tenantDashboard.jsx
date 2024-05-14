@@ -12,8 +12,8 @@ import { usePoolRequestService } from '../../../services/poolRequestServices';
 
 const TenantDashboard = () => {
   const name = JSON.parse(localStorage.getItem('tenantData'))?.data.name || '';
-  const [tenantName, setTenantName] = useState(name);
-  const [revenue, setRevenue] = useState('250K');
+  const [tenantName] = useState(name);
+  const [revenue] = useState('250K');
   const { getPoolRequestList } = usePoolRequestService();
   const [poolRequestList, setPoolRequestList] = useState([]);
 
@@ -37,25 +37,22 @@ const TenantDashboard = () => {
     >
       <Grid container spacing={2}>
         <Grid item md={3} xs={12}>
-          <CardViewImage name={tenantName}></CardViewImage>
+          <CardViewImage name={tenantName} />
         </Grid>
         <Grid item md={5} xs={12}>
-          <SummaryCard></SummaryCard>
+          <SummaryCard />
         </Grid>
         <Grid item md={4} xs={12}>
-          <Booking></Booking>
+          <Booking />
         </Grid>
-        <Grid item md={8} xs={12}>
-          <Performance></Performance>
-        </Grid>
-        <Grid item md={4} xs={12}>
-          <TopTenant tenantName={tenantName} totalRevenue={revenue}></TopTenant>
+        <Grid item md={12} xs={12}>
+          <Performance />
         </Grid>
         <Grid item md={4} xs={12}>
-          <MessageBox></MessageBox>
+          <TopTenant tenantName={tenantName} totalRevenue={revenue} />
         </Grid>
         <Grid item md={4} xs={12}>
-          <Order></Order>
+          <Order />
         </Grid>
         <Grid item md={4} xs={12}>
           <PoolRequestBox poolRequestList={poolRequestList} />

@@ -52,7 +52,7 @@ const App = () => {
               <Route path="addVehicle" element={<CreateVehicle />} />
               <Route path="booking" element={<Booking />} />
               <Route path="booking/:id" element={<BookingDetail />} />
-              <Route path="poolrequest" element={<PoolRequest />} />
+              <Route path="poolrequests" element={<PoolRequest />} />
             </Route>
           </Route>
 
