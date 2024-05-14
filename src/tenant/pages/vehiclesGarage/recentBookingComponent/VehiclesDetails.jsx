@@ -12,7 +12,7 @@ import { useVehicleService } from '../../../../services/vehicleServices';
 import VehicleImage from '../../driversGarage/components/vehicleImage';
 import { Lightbox } from 'react-modal-image';
 
-const VehiclesDetails = ({ tenantId }) => {
+const VehiclesDetails = ({ tenantId, onSearch }) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [vehicle, setVehicle] = useState([]);
@@ -100,7 +100,7 @@ const VehiclesDetails = ({ tenantId }) => {
           marginTop: '35px',
         }}
       >
-        <PageHeader />
+        <PageHeader onSearch={onSearch} />
       </Box>
       <Grid container spacing={2} sx={{ mt: '2%', ml: '5%' }}>
         <Grid item xs={3}>
