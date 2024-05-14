@@ -16,6 +16,9 @@ import { useNavigate } from 'react-router-dom';
 const topPerformingTenants = [
   { name: 'Tenant 1', value: 400 },
   { name: 'Tenant 2', value: 300 },
+  { name: 'Tenant 3', value: 300 },
+  { name: 'Tenant 4', value: 200 },
+  { name: 'Tenant 5', value: 100 },
 ];
 
 const CustomTooltip = ({ active, payload }) => {
@@ -49,7 +52,7 @@ const TopTenant = ({ tenantName, totalRevenue }) => {
           component="div"
           sx={{ fontWeight: 'bold', textAlign: 'center' }}
         >
-          Top Performing Tenants
+          Top Performing Tenant: {tenantName}
         </Typography>
 
         <ResponsiveContainer width="100%" height={195}>
@@ -61,7 +64,7 @@ const TopTenant = ({ tenantName, totalRevenue }) => {
               cx="50%"
               cy="50%"
               outerRadius={70}
-              innerRadius={60} // Set the inner radius for the transparent part
+              innerRadius={60}
               startAngle={230}
               endAngle={-50}
               label
@@ -73,12 +76,7 @@ const TopTenant = ({ tenantName, totalRevenue }) => {
                 />
               ))}
             </Pie>
-            <Legend
-              align="center"
-              verticalAlign="bottom"
-              height={46}
-              style={{ marginTop: '1%' }}
-            />
+            <Tooltip content={<CustomTooltip />} />
           </PieChart>
         </ResponsiveContainer>
 

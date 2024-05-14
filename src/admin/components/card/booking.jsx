@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import dummyBookingData from './dummyBookingData.js';
+import bookingData from './dummyBookingData.js';
 import { useTheme } from '@mui/material/styles';
 import {
   LineChart,
@@ -42,7 +42,7 @@ const Booking = () => {
           height={180}
           style={{ marginLeft: '-5%', marginRight: '5%' }}
         >
-          <LineChart data={dummyBookingData}>
+          <LineChart data={bookingData}>
             <CartesianGrid
               vertical={true}
               horizontal={false}
@@ -77,7 +77,7 @@ const Booking = () => {
             Total
           </Typography>
           <Typography sx={{ fontWeight: 'bold', marginTop: '-40px' }}>
-            16
+            22
           </Typography>
         </div>
 
