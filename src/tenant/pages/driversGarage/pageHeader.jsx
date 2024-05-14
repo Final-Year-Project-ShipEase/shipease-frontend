@@ -15,16 +15,8 @@ import HeaderButton from '../../../commons/buttons/headerButton';
 import AddModalButton from '../../../commons/buttons/addModal';
 
 const PageHeader = ({ onSearch }) => {
-  const [Driver, setDriver] = React.useState('');
   const theme = useTheme();
   const navigate = useNavigate();
-  const handleChange = (event) => {
-    setDriver(event.target.value);
-  };
-
-  const onClickPermit = () => {
-    navigate('/approval/drivers');
-  };
 
   return (
     <Box
