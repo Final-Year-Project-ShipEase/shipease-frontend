@@ -1,27 +1,14 @@
 import React from 'react';
-import {
-  Box,
-  InputLabel,
-  FormControl,
-  MenuItem,
-  Select,
-  TextField,
-  InputAdornment,
-  useTheme,
-} from '@mui/material';
+import { Box, TextField, InputAdornment, useTheme } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import HeaderButton from '../../../commons/buttons/headerButton';
 import BlueModalButton from '../../../commons/buttons/blueModalButton';
 import PoolRequestModal from './modal/poolReq';
 
-const PageHeader = () => {
-  const [Client, setClient] = React.useState('');
+const PageHeader = ({ onSearch }) => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const currentTenantId = localStorage.getItem('tenantData')?.data?.id || 2;
-  const handleChange = (event) => {
-    setClient(event.target.value);
-  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -52,37 +39,11 @@ const PageHeader = () => {
           gap: 2,
         }}
       >
-        <FormControl>
-          <InputLabel id="Client-select-label">Search</InputLabel>
-          <Select
-            id="Client-select"
-            value={Client}
-            label="Client"
-            onChange={handleChange}
-            sx={{
-              display: 'flex',
-              width: 125,
-              height: 50,
-              alignItems: 'flex-start',
-              flexShrink: 0,
-              backgroundColor: theme.palette.buttons.main,
-              color: theme.palette.buttons.text,
-              borderRadius: 4,
-            }}
-            inputProps={{
-              label: 'Client',
-              disableUnderline: true,
-            }}
-          >
-            <MenuItem value={10}>Pick up</MenuItem>
-            <MenuItem value={20}>Drop Off</MenuItem>
-            <MenuItem value={30}>Tenant</MenuItem>
-          </Select>
-        </FormControl>
         <TextField
           id="search"
           placeholder="Search Pool Requests"
           variant="standard"
+          onChange={(e) => onSearch(e.target.value)}
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -118,7 +79,6 @@ const PageHeader = () => {
           text={'Create Pool Request'}
           onClick={handleClickOpen}
         />
-        {/* <HeaderButton text={'Export'} /> */}
       </Box>
     </Box>
   );

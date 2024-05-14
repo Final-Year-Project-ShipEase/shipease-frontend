@@ -10,6 +10,10 @@ const PoolRequest = () => {
     currentTenant: [],
     otherTenants: [],
   });
+  const [filteredPoolRequests, setFilteredPoolRequests] = useState({
+    currentTenant: [],
+    otherTenants: [],
+  });
 
   const currentTenantId = localStorage.getItem('tenantData')?.data?.id || 2;
   const { getPoolRequestList } = usePoolRequestService();
@@ -34,22 +38,22 @@ const PoolRequest = () => {
           })
         );
 
-        const currentTenantRequests = enhancedPoolRequests
-          .filter(
-            (request) => request.bookingDetails.tenant_id === currentTenantId
-          )
-          .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
-        const otherTenantRequests = enhancedPoolRequests
-          .filter(
-            (request) => request.bookingDetails.tenant_id !== currentTenantId
-          )
-          .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
-
         setPoolRequests({
-          currentTenant: currentTenantRequests,
-          otherTenants: otherTenantRequests,
+          currentTenant: enhancedPoolRequests.filter(
+            (request) => request.bookingDetails.tenant_id === currentTenantId
+          ),
+          otherTenants: enhancedPoolRequests.filter(
+            (request) => request.bookingDetails.tenant_id !== currentTenantId
+          ),
         });
-        console.log('Pool requests:', poolRequests);
+        setFilteredPoolRequests({
+          currentTenant: enhancedPoolRequests.filter(
+            (request) => request.bookingDetails.tenant_id === currentTenantId
+          ),
+          otherTenants: enhancedPoolRequests.filter(
+            (request) => request.bookingDetails.tenant_id !== currentTenantId
+          ),
+        });
         setLoading(false);
       } catch (fetchError) {
         console.error('Failed to fetch data:', fetchError);
@@ -59,14 +63,35 @@ const PoolRequest = () => {
     fetchData();
   }, []);
 
+  const handleSearch = (searchTerm) => {
+    if (!searchTerm.trim()) {
+      setFilteredPoolRequests(poolRequests);
+      return;
+    }
+    const searchLowerCase = searchTerm.toLowerCase();
+    const filtered = {
+      currentTenant: poolRequests.currentTenant.filter((request) =>
+        Object.values(request).some((value) =>
+          String(value).toLowerCase().includes(searchLowerCase)
+        )
+      ),
+      otherTenants: poolRequests.otherTenants.filter((request) =>
+        Object.values(request).some((value) =>
+          String(value).toLowerCase().includes(searchLowerCase)
+        )
+      ),
+    };
+    setFilteredPoolRequests(filtered);
+  };
+
   return (
     <Grid container>
       <Grid item xs={12}>
-        <PageHeader />
+        <PageHeader onSearch={handleSearch} />
       </Grid>
       <Grid item xs={12}>
         <PoolRequestInformation
-          poolRequests={poolRequests}
+          poolRequests={filteredPoolRequests}
           error={error}
           loading={loading}
         />
