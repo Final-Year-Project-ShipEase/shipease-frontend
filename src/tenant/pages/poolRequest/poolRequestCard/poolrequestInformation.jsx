@@ -1,37 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, useTheme, useMediaQuery } from '@mui/material';
 import PoolRequestDetailsModal from './poolrequestDetailModal';
-import { usePoolRequestService } from '../../../../services/poolRequestServices';
-import { useBookingService } from '../../../../services/bookingServices';
-import { formatTimestamp } from '../../../../utils/timestamp';
+import { formatTimestampWithoutTime } from '../../../../utils/timestamp';
 import Spinner from '../../../../utils/spinner';
 
 const PoolRequestCard = ({ poolRequest, handleOnClick }) => {
   const theme = useTheme();
   const matchesSm = useMediaQuery(theme.breakpoints.down('sm'));
-  const cardWidth = matchesSm ? '90%' : '450px';
+  const cardWidth = matchesSm ? '90%' : '100%';
   const cardHeight = 'auto';
   const cardMinHeight = '200px';
 
   return (
     <Box
       sx={{
-        backgroundColor: theme.palette.primary.main,
-        width: '100%',
-        maxWidth: cardWidth,
-        height: cardHeight,
-        minHeight: cardMinHeight,
+        backgroundColor: theme.palette.primary.backgroundColor,
+        backgroundColor:
+          poolRequest.status == 'completed'
+            ? 'transparent'
+            : theme.palette.primary.color1,
+        width: '30%',
+        height: '40%',
         borderRadius: '10px',
-        margin: '1%',
-        padding: '10px',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-        cursor: 'pointer',
-        '&:hover': {
-          boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
-        },
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
+        marginBottom: '2%',
+        marginRight: '2%',
+        boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)',
+        border: '1px solid rgba(0,0,0,0.1)',
+        padding: '1%',
       }}
       onClick={() => handleOnClick(poolRequest.id)}
     >
@@ -49,6 +44,7 @@ const PoolRequestCard = ({ poolRequest, handleOnClick }) => {
             backgroundColor: theme.palette.background.bookingCompletedStatus,
             fontWeight: 'bold',
             color: theme.palette.primary.contrastText,
+            marginBottom: '4px',
           }}
           p={1}
         >
@@ -58,10 +54,10 @@ const PoolRequestCard = ({ poolRequest, handleOnClick }) => {
           variant="subtitle1"
           sx={{
             fontWeight: 'bold',
-            color: theme.palette.primary.contrastText,
+            color: theme.palette.primary.black,
           }}
         >
-          {poolRequest.types}
+          Vehicle Type: {poolRequest.types}
         </Typography>
       </Box>
       <Box
@@ -74,8 +70,11 @@ const PoolRequestCard = ({ poolRequest, handleOnClick }) => {
         <Typography
           variant="body1"
           sx={{
-            color: theme.palette.primary.contrastText,
+            color: theme.palette.primary.black,
             marginBottom: '4px',
+            fontVariant: 'small-caps',
+            fontWeight: 'bold',
+            fontSize: '18px',
           }}
         >
           {poolRequest.city} - {poolRequest.destination}
@@ -84,92 +83,41 @@ const PoolRequestCard = ({ poolRequest, handleOnClick }) => {
         <Typography
           variant="body2"
           sx={{
-            color: theme.palette.primary.contrastText,
+            color: theme.palette.primary.black,
           }}
         >
-          {poolRequest.bookingDetails.total_bill} PKR
+          Rs. {poolRequest.bookingDetails.total_bill} PKR
         </Typography>
       </Box>
       <Typography
         variant="body2"
         sx={{
-          color: theme.palette.primary.contrastText,
+          color: theme.palette.primary.black,
           textOverflow: 'ellipsis',
           overflow: 'hidden',
         }}
       >
-        {poolRequest?.bookingDetails?.description || 'No description provided'}
+        {poolRequest?.bookingDetails.description || 'No description provided'}
       </Typography>
 
       <Typography
         variant="body2"
         sx={{
-          color: theme.palette.primary.contrastText,
-          marginTop: '8px', // Push the date to the bottom
+          color: theme.palette.primary.black,
+          marginTop: '8px',
         }}
       >
-        Date: {formatTimestamp(poolRequest.startDate)}
+        Departure Date: {formatTimestampWithoutTime(poolRequest.startDate)}
       </Typography>
     </Box>
   );
 };
 
-const PoolRequestInformation = () => {
-  const [poolRequests, setPoolRequests] = useState({
-    currentTenant: [],
-    otherTenants: [],
-  });
-
-  const currentTenantId = localStorage.getItem('tenantData')?.data?.id || 2;
-  const { getPoolRequestList } = usePoolRequestService();
-  const { getBooking } = useBookingService();
+const PoolRequestInformation = ({ poolRequests, error, loading }) => {
   const [openModal, setModal] = useState(false);
   const [poolRequestId, setPoolRequestId] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
   const theme = useTheme();
   const matchesSm = useMediaQuery(theme.breakpoints.down('sm'));
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const poolRequestResponse = await getPoolRequestList();
-        const enhancedPoolRequests = await Promise.all(
-          poolRequestResponse.map(async (request) => {
-            try {
-              const bookingDetails = await getBooking(request.booking_id);
-              return { ...request, bookingDetails };
-            } catch (bookingError) {
-              console.error('Booking fetch error:', bookingError);
-              return request;
-            }
-          })
-        );
-
-        const currentTenantRequests = enhancedPoolRequests
-          .filter(
-            (request) => request.bookingDetails.tenant_id === currentTenantId
-          )
-          .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
-        const otherTenantRequests = enhancedPoolRequests
-          .filter(
-            (request) => request.bookingDetails.tenant_id !== currentTenantId
-          )
-          .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
-
-        setPoolRequests({
-          currentTenant: currentTenantRequests,
-          otherTenants: otherTenantRequests,
-        });
-        setLoading(false);
-      } catch (fetchError) {
-        console.error('Failed to fetch data:', fetchError);
-        setError('Failed to load pool requests. Please try again later.');
-      }
-    };
-    fetchData();
-  }, []);
 
   const handlePoolRequestClick = (id) => {
     setPoolRequestId(id);
@@ -202,8 +150,6 @@ const PoolRequestInformation = () => {
           width: '100%',
           display: 'flex',
           flexDirection: 'Column',
-          justifyContent: 'center',
-          alignItems: 'center',
         }}
       >
         <Typography variant="h4" sx={{ color: 'primary.main' }}>
@@ -212,7 +158,6 @@ const PoolRequestInformation = () => {
         <Box
           sx={{
             display: 'flex',
-            overflowX: 'auto',
             padding: matchesSm ? '8px' : '16px',
             '&::-webkit-scrollbar': {
               height: '10px',
@@ -237,8 +182,6 @@ const PoolRequestInformation = () => {
           width: '100%',
           display: 'flex',
           flexDirection: 'Column',
-          justifyContent: 'center',
-          alignItems: 'center',
         }}
       >
         <Typography variant="h4" sx={{ color: 'primary.main' }}>
@@ -247,7 +190,6 @@ const PoolRequestInformation = () => {
         <Box
           sx={{
             display: 'flex',
-            overflowX: 'auto',
             padding: matchesSm ? '8px' : '16px',
             '&::-webkit-scrollbar': {
               height: '10px',
