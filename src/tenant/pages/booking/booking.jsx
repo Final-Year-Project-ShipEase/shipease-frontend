@@ -30,6 +30,17 @@ const Booking = () => {
         });
 
         setBookings(sortedBooking);
+        setComplete(
+          sortedBooking.filter((booking) => booking.status === 'completed')
+            .length
+        );
+        setActive(
+          sortedBooking.filter((booking) => booking.status === 'active').length
+        );
+        setReserved(
+          sortedBooking.filter((booking) => booking.status === 'reserved')
+            .length
+        );
         setFilteredBookings(sortedBooking);
         setUser(userResponse);
       } catch (error) {
@@ -50,7 +61,12 @@ const Booking = () => {
   };
 
   return (
-    <Grid container>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <Grid item xs={12}>
         <PageHeader onSearch={handleSearch} />
       </Grid>
@@ -59,17 +75,27 @@ const Booking = () => {
           sx={{
             display: 'flex',
             flexDirection: 'row',
+            justifyContent: 'space-between',
+            padding: '2%',
           }}
         >
-          <Completed complete={complete} />
-          <Active active={active} />
-          <Reserved reserved={reserved} />
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={2.5}>
+              <Completed complete={complete} />
+            </Grid>
+            <Grid item xs={12} md={2.5}>
+              <Active active={active} />
+            </Grid>
+            <Grid item xs={12} md={3}>
+              <Reserved reserved={reserved} />
+            </Grid>
+          </Grid>
         </Box>
       </Grid>
       <Grid item xs={12}>
         <BookingInformation booking={filteredBookings} users={user} />
       </Grid>
-    </Grid>
+    </Box>
   );
 };
 

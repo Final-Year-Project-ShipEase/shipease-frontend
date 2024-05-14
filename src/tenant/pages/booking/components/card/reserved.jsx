@@ -14,14 +14,43 @@ const Reserved = ({ reserved }) => {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: theme.palette.primary.backgroundColor,
-        width: '11%',
-        height: '10%',
         borderRadius: '10px',
-        marginLeft: '3%',
-        marginBottom: '3%',
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        border: '1px solid #00668C',
+        height: '100%',
+        padding: '10px',
       }}
     >
+      {' '}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            fontSize: '20px',
+            color: theme.palette.primary.black,
+          }}
+        >
+          Reserved Bookings
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            fontSize: '24px',
+            fontWeight: 'bold',
+            marginTop: '10px',
+            color: theme.palette.primary.black,
+          }}
+        >
+          {reserved}
+        </Box>
+      </Box>
       <Box
         sx={{
           display: 'flex',
@@ -40,46 +69,18 @@ const Reserved = ({ reserved }) => {
             color: theme.palette.primary.color1,
             borderRadius: '50%',
             backgroundColor: theme.palette.primary.purple,
-            width: '40px',
-            height: '40px',
             padding: '5px',
+            width: '60%',
+            height: '60%',
           }}
         >
           <CampaignIcon
             sx={{
               color: theme.palette.primary.text,
+              width: '100%',
+              height: '100%',
             }}
           />
-        </Box>
-      </Box>
-
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '60%',
-        }}
-      >
-        <Box
-          sx={{
-            display: 'flex',
-            fontSize: '20px',
-            fontWeight: 'bold',
-            color: theme.palette.primary.text,
-          }}
-        >
-          {reserved}
-        </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            fontSize: '12px',
-            color: theme.palette.primary.text,
-          }}
-        >
-          Reserved
         </Box>
       </Box>
     </Box>
