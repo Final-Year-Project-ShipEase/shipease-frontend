@@ -15,7 +15,6 @@ import useDriverService from '../../../admin/services/driverService.jsx';
 import useDriverApprovalService from '../../../admin/services/driverApprovalServices.jsx';
 
 function CreateDriver() {
-  // const { createUser } = useUserService();
   const navigate = useNavigate();
   const { createDriver } = useDriverService();
   const { createDriverApproval } = useDriverApprovalService();

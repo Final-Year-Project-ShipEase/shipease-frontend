@@ -28,12 +28,20 @@ export function usePoolRequestService(){
         return response.data;
     };
 
+    const bookPoolRequest = async (id, data) => {
+      const response = await axiosInstance.post(
+        `/poolRequest/${id}/book`,
+        data
+      );
+      return response.data;
+    };
 
     return {
-        getPoolRequestList,
-        getPoolRequest,
-        updatePoolRequest,
-        deletePoolRequest,
-        createPoolRequest,
+      getPoolRequestList,
+      getPoolRequest,
+      updatePoolRequest,
+      deletePoolRequest,
+      createPoolRequest,
+      bookPoolRequest,
     };
 }

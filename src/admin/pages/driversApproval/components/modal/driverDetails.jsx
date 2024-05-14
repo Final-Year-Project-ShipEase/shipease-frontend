@@ -18,13 +18,14 @@ import {
 } from '@mui/icons-material';
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
 import useDriverService from '../../../../services/driverService.jsx';
+import useDriverApprovalService from '../../../../services/driverApprovalServices.jsx';
 
 const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const theme = useTheme();
-  //const { createApplication, creatingApp } = useApplicationService();
-  const { getDriver } = useDriverService();
+  const { approveDriver } = useDriverApprovalService();
+  const { getDriver: getDriverReq } = useDriverService();
 
   const [formData, setFormData] = useState({
     ID: '',
@@ -44,7 +45,7 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
   useEffect(() => {
     const fetchDriver = async () => {
       try {
-        const driver = await getDriver(driver_id);
+        const driver = await getDriverReq(driver_id);
         setFormData({
           ID: driver.id,
           name: driver.name,
@@ -79,17 +80,12 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
   };
 
   const handleAddConfirm = async () => {
-    // const clientData = {
-    //   clientId: formData.ID,
-    //   name: formData.name,
-    // };
-    // try {
-    //   //await createApplication(clientData);
-    //   setIsConfirmationDialogOpen(false);
-    //   handleClose();
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    handleClose();
+  };
+
+  const handleAddConfirm2 = async () => {
+    await approveDriver(driver_id);
+    handleClose();
   };
 
   return (

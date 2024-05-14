@@ -35,7 +35,7 @@ const VehicleDetailsModal = ({
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const theme = useTheme();
-  const { getVehicle } = useVehicleService();
+  const { getVehicle: getVehicleReq } = useVehicleService();
   const { show } = useSnackbar();
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState(null);
@@ -108,7 +108,7 @@ const VehicleDetailsModal = ({
   useEffect(() => {
     const getVehicleDetails = async () => {
       try {
-        const vehicle = await getVehicle(tenantId);
+        const vehicle = await getVehicleReq(tenantId);
         console.log(vehicle);
         setFormData({
           ID: vehicle.id,

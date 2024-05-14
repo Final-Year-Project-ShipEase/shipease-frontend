@@ -7,7 +7,7 @@ import useDriverApprovalService from '../../services/driverApprovalServices.jsx'
 import useDriverService from '../../services/driverService.jsx';
 
 const DriversApproval = () => {
-  const { getRejectedApproval } = useDriverApprovalService();
+  const { getRejectedApproval: getDriverApprovals } = useDriverApprovalService();
   const [drivers, setDrivers] = useState([]);
   const [filteredDrivers, setFilteredDrivers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ const DriversApproval = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const response = await getRejectedApproval();
+      const response = await getDriverApprovals();
       if (response) {
         const fetchDetails = async () => {
           const details = await Promise.all(

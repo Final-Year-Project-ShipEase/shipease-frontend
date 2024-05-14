@@ -10,7 +10,7 @@ import { useSnackbar } from '../../../utils/snackbarContextProvider.jsx';
 import Spinner from '../../../utils/spinner.jsx';
 
 const DriversGarage = () => {
-  const [driverId, setDriverId] = useState(
+  const [tenantId, setDriverId] = useState(
     localStorage.getItem('tenantData')?.data?.id || 2
   );
   const { getDriverByTenantId } = useDriverService();
@@ -23,7 +23,7 @@ const DriversGarage = () => {
     const fetchDrivers = async () => {
       setLoading(true);
       try {
-        const response = await getDriverByTenantId(driverId);
+        const response = await getDriverByTenantId(tenantId);
         setDrivers(response.tenants);
         setFilteredDrivers(response.tenants);
       } catch (error) {
@@ -62,7 +62,7 @@ const DriversGarage = () => {
           boxShadow: '0px 2px 14px rgba(0, 0, 0, 1)',
         }}
       >
-        <DriversDetails driverId={driverId} onSearch={handleSearch} />
+        <DriversDetails driverId={tenantId} onSearch={handleSearch} />
       </Box>
 
       <Box sx={{ mt: '30px', borderTop: '1px dashed black' }}>
