@@ -1,29 +1,11 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import CampaignIcon from '@mui/icons-material/Campaign';
-import { useBookingService } from '../../../../../services/bookingServices';
 
-const Active = () => {
+const Active = ({ active }) => {
   const theme = useTheme();
-  const [active, setActive] = useState(0);
-  const { getBookingList } = useBookingService();
 
-  useEffect(() => {
-    const fetchBooking = async () => {
-      try {
-        const response = await getBookingList();
-        const activeBookings = response.filter(
-          (booking) => booking.status === 'active'
-        );
-        setActive(activeBookings.length);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchBooking();
-  }, []);
   return (
     <Box
       sx={{

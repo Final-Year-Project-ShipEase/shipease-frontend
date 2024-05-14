@@ -5,25 +5,9 @@ import { useTheme } from '@mui/material/styles';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import { useBookingService } from '../../../../../services/bookingServices';
 
-const Reserved = () => {
+const Reserved = ({ reserved }) => {
   const theme = useTheme();
-  const [reserved, setReserved] = useState(0);
-  const { getBookingList } = useBookingService();
 
-  useEffect(() => {
-    const fetchBooking = async () => {
-      try {
-        const response = await getBookingList();
-        const reservedBookings = response.filter(
-          (booking) => booking.status === 'reserved'
-        );
-        setReserved(reservedBookings.length);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchBooking();
-  }, []);
   return (
     <Box
       sx={{
