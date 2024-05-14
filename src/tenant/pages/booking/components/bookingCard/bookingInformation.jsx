@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import BookingDetailsModal from './bookingDetailModal';
-
-
+import { formatTimestampWithoutTime } from '../../../../../utils/timestamp';
 
 const BookingInformation = ({ booking, users }) => {
   const theme = useTheme();
@@ -29,13 +28,15 @@ const BookingInformation = ({ booking, users }) => {
             backgroundColor: theme.palette.primary.backgroundColor,
             backgroundColor:
               bookings.status == 'completed'
-                ? theme.palette.primary.color1
-                : theme.palette.primary.backgroundColor,
+                ? 'transparent'
+                : theme.palette.primary.color1,
             width: '30%',
             height: '40%',
             borderRadius: '10px',
             marginBottom: '2%',
             marginRight: '2%',
+            boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.2)',
+            border: '1px solid rgba(0,0,0,0.1)',
           }}
           onClick={() => handleBookingClick(booking.id)}
           style={{ cursor: 'pointer' }}
@@ -72,6 +73,7 @@ const BookingInformation = ({ booking, users }) => {
                             : 'transparent',
                     borderRadius: '3px',
                     padding: '3px',
+                    fontVariant: 'small-caps',
                   }}
                 >
                   {bookings.status}
@@ -88,9 +90,11 @@ const BookingInformation = ({ booking, users }) => {
             >
               <Box
                 sx={{
-                  fontSize: '15px',
-                  color: theme.palette.primary.text,
+                  fontSize: '20px',
+                  color: theme.palette.primary.black,
                   paddingLeft: '10px',
+                  fontWeight: 'bold',
+                  fontVariant: 'small-caps',
                 }}
               >
                 {bookings.pickup} - {bookings.dropoff}
@@ -99,11 +103,11 @@ const BookingInformation = ({ booking, users }) => {
               <Box
                 sx={{
                   fontSize: '15px',
-                  color: theme.palette.primary.text,
+                  color: theme.palette.primary.black,
                   paddingRight: '40px',
                 }}
               >
-                {bookings.total_bill} PKR
+                Rs. {bookings.total_bill} PKR
               </Box>
             </Box>
 
@@ -116,7 +120,7 @@ const BookingInformation = ({ booking, users }) => {
               <Box
                 sx={{
                   fontSize: '12px',
-                  color: theme.palette.primary.text,
+                  color: theme.palette.primary.black,
                   padding: '10px',
                 }}
               >
@@ -135,7 +139,7 @@ const BookingInformation = ({ booking, users }) => {
                 sx={{
                   fontSize: '15px',
                   fontWeight: 'bold',
-                  color: theme.palette.primary.text,
+                  color: theme.palette.primary.black,
                   padding: '10px',
                 }}
               >
@@ -154,11 +158,11 @@ const BookingInformation = ({ booking, users }) => {
               <Box
                 sx={{
                   fontSize: '15px',
-                  color: theme.palette.primary.text,
+                  color: theme.palette.primary.black,
                   padding: '10px',
                 }}
               >
-                Date: {bookings.date}
+                Date: {formatTimestampWithoutTime(bookings.date)}
               </Box>
             </Box>
           </Box>

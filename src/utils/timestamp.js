@@ -15,6 +15,19 @@ export function formatTimestamp(timestamp) {
   return formattedDate;
 }
 
+export function formatTimestampWithoutTime(timestamp) {
+  const date = new Date(timestamp);
+
+  const day = date.getDate();
+  const month = date.toLocaleString('en-US', { month: 'long' });
+  const year = date.getFullYear();
+
+  const formattedDay = getFormattedDay(day);
+
+  const formattedDate = `${formattedDay} ${month} ${year}`;
+  return formattedDate;
+}
+
 function getFormattedDay(day) {
   if (day > 3 && day < 21) return day + 'th';
   switch (day % 10) {
