@@ -7,8 +7,7 @@ export const appBarStyles = {
   position: 'fixed',
   py: 'auto',
   px: 'auto',
-  width: '100%',
-  zIndex: '100',
+  width: '100%', 
   justifyContent: 'space-between',
   '.logo': {
     display: 'flex',

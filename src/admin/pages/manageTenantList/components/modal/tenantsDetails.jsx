@@ -72,7 +72,12 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
       error = true;
     }
 
-    if (name === 'phoneNo' && !/^[0-9]+$/.test(value)) {
+    if (
+      name === 'phoneNo' &&
+      !/^[0-9]+$/.test(value) &&
+      value.length < 11 &&
+      value.length > 12
+    ) {
       // Display an error or handle the validation accordingly
       // For now, you can log an error to the console
       console.error(
@@ -115,7 +120,6 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
       email: formData.email,
       phoneNo: formData.phoneNo,
       status: formData.status,
-      password: formData.password,
       cities: formData.cities,
     };
     try {
@@ -212,16 +216,6 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
               label="Username"
               name="username"
               value={formData.username}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              margin="normal"
-              label="Password"
-              name="password"
-              value={formData.password}
               onChange={handleChange}
             />
           </Grid>

@@ -15,8 +15,11 @@ import {
   TablePagination,
   Typography,
   useTheme,
+  Button,
 } from '@mui/material';
 import RolesActionColumn from '../rolesActionColumn.jsx';
+import { mkConfig, generateCsv, download } from 'export-to-csv';
+import SystemUpdateAltIcon from '@mui/icons-material/SystemUpdateAlt';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -164,6 +167,17 @@ export default function TableData({ columns, rows, setTenantId }) {
     );
   }, [order, orderBy, rows, rowsPerPage, page]);
 
+  const csvConfig = mkConfig({
+    fieldSeparator: ',',
+    decimalSeparator: '.',
+    useKeysAsHeaders: true,
+  });
+
+  const handleExportData = () => {
+    const csv = generateCsv(csvConfig)(visibleRows);
+    download(csvConfig)(csv);
+  };
+
   return (
     <Box sx={{ marginTop: '24px', overflowY: 'auto' }}>
       <Grid justifyContent="center">
@@ -178,6 +192,12 @@ export default function TableData({ columns, rows, setTenantId }) {
                   '5px 7px 8px rgba(0, 0, 0, 0.1), 6px 8px 16px rgba(0, 0, 0, 0.1)',
               }}
             >
+              <Button onClick={handleExportData}>
+                <SystemUpdateAltIcon />
+                <Typography sx={{ ms: 4, textDecoration: 'none' }}>
+                  Export to CSV
+                </Typography>
+              </Button>
               <TableContainer
                 component="div"
                 sx={{

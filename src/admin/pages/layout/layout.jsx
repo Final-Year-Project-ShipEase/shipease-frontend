@@ -7,7 +7,6 @@ import Sidebar from '../../components/sidebar/sidebar';
 const Layout = () => {
   const theme = useTheme();
   const leftSpan = 1.5;
-  const rigthSpan = 12 - leftSpan;
   return (
     <Box
       sx={{
@@ -24,31 +23,19 @@ const Layout = () => {
       >
         <Navbar />
       </Box>
-      <Box
-        sx={{
-          backgroundColor: theme.palette.page.main,
-          minHeight: '93vh',
-        }}
-      >
-        <Grid container>
-          <Grid
-            item
-            md={leftSpan}
-            xs={leftSpan}
-            lg={leftSpan}
-            sx={{ backgroundColor: '#FAFAFA' }}
-          >
-            <Sidebar leftSpan={leftSpan} />
+      <Box sx={{}}>
+        <Grid container spacing={0}>
+          <Grid item md={leftSpan} xs={leftSpan} lg={leftSpan}>
+            <Sidebar widthVal={leftSpan} />
           </Grid>
           <Grid
             item
-            md={rigthSpan}
+            md={12 - leftSpan}
             sx={{
-              backgroundColor: theme.palette.page.main,
-              minHeight: '93vh',
+              paddingLeft: '1rem',
             }}
           >
-            <Outlet context={[rigthSpan, leftSpan]} />
+            <Outlet context={[12 - leftSpan, leftSpan]} />
           </Grid>
         </Grid>
       </Box>

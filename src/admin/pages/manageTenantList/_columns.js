@@ -17,9 +17,9 @@ const generateDummyData = () => {
 
 export const TenantsColumns = [
   {
-    id: 'id',
-    label: 'Tenant ID',
-    width: '30%',
+    id: 'name',
+    label: 'Tenant Name',
+    width: '15%',
     numeric: false,
     disablePadding: false,
   },
@@ -31,15 +31,22 @@ export const TenantsColumns = [
     disablePadding: false,
   },
   {
-    id: 'status',
-    label: 'Status',
-    width: '15%',
+    id: 'email',
+    label: 'Email Address',
+    width: '30%',
     numeric: false,
     disablePadding: false,
   },
   {
-    id: 'name',
-    label: 'Tenant Name',
+    id: 'phoneNo',
+    label: 'Contact',
+    width: '30%',
+    numeric: false,
+    disablePadding: false,
+  },
+  {
+    id: 'status',
+    label: 'Status',
     width: '15%',
     numeric: false,
     disablePadding: false,

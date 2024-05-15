@@ -1,59 +1,48 @@
 import React from 'react';
-import { useTheme } from '@mui/material/styles';
-import { AppBar, Box, Toolbar, Grid } from '@mui/material';
-import { appBarStyles } from './config.js';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Grid,
+  IconButton,
+  useTheme,
+  useMediaQuery,
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import UserInfo from './userInfo';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
+import { appBarStyles } from './config';
 
-const Navbar = () => {
+const Navbar = ({ handleDrawerToggle }) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <AppBar position="fixed" elevation={3} sx={appBarStyles}>
+    <AppBar position="fixed" sx={{ ...appBarStyles }}>
       <Toolbar>
-        <Grid container alignItems="center">
-          <Grid item md={7}>
+        <Grid container alignItems="center" justifyContent="space-between">
+          <Grid item>
+            {isMobile && (
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
             <Box
               sx={{
                 display: 'flex',
-                alignItems: 'flex-start',
+                alignItems: 'center',
               }}
             >
               <img
                 src={require('../../resources/shipease.png')}
                 alt="ShipEase-logo"
+                style={{ height: isMobile ? '30px' : '40px' }}
               />
-            </Box>
-          </Grid>
-          <Grid item md={2.5}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'flex-end ',
-                justifyContent: 'center',
-              }}
-            >
-              {/* <InputBase
-                sx={{
-                  border: '1px solid #ccc',
-                  borderRadius: '14px',
-                  backgroundColor: theme.palette.buttonSidebar.main,
-                  paddingLeft: '15px',
-                  width: '100%',
-                  color: theme.palette.buttonSidebar.ColorActiveHover,
-                }}
-                placeholder="Search..."
-                inputProps={{ 'aria-label': 'search' }}
-                startAdornment={
-                  <SearchIcon
-                    sx={{
-                      color: theme.palette.buttonSidebar.ColorActiveHover,
-                      marginRight: '18px',
-                    }}
-                  />
-                }
-              /> */}
             </Box>
           </Grid>
           <Grid item md={2.5}>

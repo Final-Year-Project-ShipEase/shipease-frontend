@@ -12,7 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import useDriverService from '../../../../admin/services/driverService';
 import PageHeader from '../pageHeader';
 
-const DriversDetails = ({ driverId }) => {
+const DriversDetails = ({ driverId, onSearch }) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [driver, setDriver] = useState({});
@@ -56,7 +56,7 @@ const DriversDetails = ({ driverId }) => {
           marginTop: '35px',
         }}
       >
-        <PageHeader />
+        <PageHeader onSearch={onSearch} />
       </Box>
 
       <Grid container spacing={2} sx={{ marginLeft: '5%', mt: '2%' }}>
@@ -80,18 +80,18 @@ const DriversDetails = ({ driverId }) => {
           >
             <Grid>
               <Typography
-                sx={{ color: theme.palette.buttons.main, fontSize: '20px' }}
+                sx={{
+                  color: theme.palette.buttons.main,
+                  fontSize: '27px',
+                  fontWeight: 'bold',
+                }}
               >
                 {driver?.name || 'John Doe'}
               </Typography>
               <Typography
-                sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
+                sx={{ color: theme.palette.buttons.main, fontSize: '12px' }}
               >
-                @{driver?.username || 'hello123'}
-              </Typography>
-              <Typography
-                sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
-              >
+                @{driver?.username || 'hello123'} /{' '}
                 {driver?.email || 'hello123@gmail.com'}
               </Typography>
             </Grid>
@@ -166,7 +166,7 @@ const DriversDetails = ({ driverId }) => {
                     marginTop: '10px',
                   }}
                 >
-                  license Digital Copy :{' '}
+                  License Digital Copy :{' '}
                   <Button
                     startIcon={<AddIcon />}
                     variant="contained"

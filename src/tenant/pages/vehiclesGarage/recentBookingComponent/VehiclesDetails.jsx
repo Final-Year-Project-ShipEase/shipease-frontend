@@ -9,13 +9,47 @@ import Spinner from '../../../../utils/spinner';
 import AddIcon from '@mui/icons-material/Add';
 import PageHeader from '../pageHeader';
 import { useVehicleService } from '../../../../services/vehicleServices';
+import VehicleImage from '../../driversGarage/components/vehicleImage';
+import { Lightbox } from 'react-modal-image';
 
-const VehiclesDetails = ({ tenantId }) => {
+const VehiclesDetails = ({ tenantId, onSearch }) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [vehicle, setVehicle] = useState([]);
   const [loading, setLoading] = useState(false);
   const { getVehicle } = useVehicleService();
+  const [isOpen, setIsOpen] = useState(false);
+  const [image, setImage] = useState(null);
+  const [imageData, setImageData] = useState(null);
+  const [inspectionReport, setInspectionReport] = useState(null);
+  const [inspectionReportData, setInspectionReportData] = useState(null);
+  const [isInspectionReportOpen, setIsInspectionReportOpen] = useState(false);
+
+  const openInspectionReport = () => {
+    const base64String = btoa(
+      String.fromCharCode(...new Uint8Array(inspectionReportData?.data))
+    );
+    const base64Image = `data:image/png;base64,${base64String}`;
+    setInspectionReport(base64Image);
+    setIsInspectionReportOpen(true);
+  };
+
+  const closeInspectionReport = () => {
+    setIsInspectionReportOpen(false);
+  };
+
+  const closeLightbox = () => {
+    setIsOpen(false);
+  };
+
+  const openLightbox = () => {
+    const base64String = btoa(
+      String.fromCharCode(...new Uint8Array(imageData?.data))
+    );
+    const base64Image = `data:image/png;base64,${base64String}`;
+    setImage(base64Image);
+    setIsOpen(true);
+  };
 
   useEffect(() => {
     const fetchVehicle = async () => {
@@ -23,6 +57,8 @@ const VehiclesDetails = ({ tenantId }) => {
         setLoading(true);
         const response = await getVehicle(tenantId);
         setVehicle(response);
+        setImageData(response.LicenseImage);
+        setInspectionReportData(response.inspectionImage);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -41,6 +77,16 @@ const VehiclesDetails = ({ tenantId }) => {
         borderRadius: '10px',
       }}
     >
+      {isOpen && vehicle.LicenseImage ? (
+        <Lightbox large={image} onClose={closeLightbox} alt="Vehicle Image" />
+      ) : null}
+      {isInspectionReportOpen && vehicle.inspectionImage ? (
+        <Lightbox
+          large={inspectionReport}
+          onClose={closeInspectionReport}
+          alt="Inspection Report"
+        />
+      ) : null}
       {loading && <Spinner />}
       <Box
         sx={{
@@ -54,15 +100,26 @@ const VehiclesDetails = ({ tenantId }) => {
           marginTop: '35px',
         }}
       >
-        <PageHeader />
+        <PageHeader onSearch={onSearch} />
       </Box>
       <Grid container spacing={2} sx={{ mt: '2%', ml: '5%' }}>
         <Grid item xs={3}>
-          <img
-            style={{ borderRadius: '5px', height: '50%' }}
-            src={busImage}
-            alt="Bus"
-          />
+          <Box
+            sx={{
+              width: '100px',
+              height: '100px',
+            }}
+          >
+            {vehicle.image ? (
+              <VehicleImage image={vehicle.image} />
+            ) : (
+              <img
+                style={{ borderRadius: '5px', height: '200px', width: '200px' }}
+                src={busImage}
+                alt="Bus"
+              />
+            )}
+          </Box>
         </Grid>
         <Grid item xs={9}>
           <Grid
@@ -159,6 +216,7 @@ const VehiclesDetails = ({ tenantId }) => {
                     variant="contained"
                     color="secondary"
                     style={{ marginLeft: '20px', borderRadius: '5px' }}
+                    onClick={openLightbox}
                   >
                     Vehicle Document
                   </Button>
@@ -181,6 +239,7 @@ const VehiclesDetails = ({ tenantId }) => {
                       marginLeft: '30px',
                       borderRadius: '5px',
                     }}
+                    onClick={openInspectionReport}
                   >
                     Inspection Report
                   </Button>

@@ -1,90 +1,92 @@
 import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import image from '../../../icons/image.png';
 import { useTheme } from '@mui/material/styles';
 import { Box, IconButton, Menu, MenuItem } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { formatTimestamp } from '../../../utils/timestamp';
+import { useNavigate } from 'react-router-dom';
 
-const imageStyles = { width: '40px', height: '40px', borderRadius: '50%' };
-
-const DriverDetail = () => {
+const DriverDetail = ({ poolRequest }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
-    <div
-      style={{
+    <Box
+      sx={{
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: '20px',
-        backgroundColor: theme.palette.background.poolback,
         padding: '10px',
         borderRadius: '12px',
-        height: '100%',
+        backgroundColor: 'white',
+        marginBottom: '10px',
       }}
     >
-      <Box>
-        <IconButton
-          size="small"
-          sx={{
-            padding: 0,
-            borderRadius: '50%',
-            backgroundColor: theme.palette.background.poolback,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            position: 'relative',
-          }}
-        >
-          <img style={imageStyles} src={image} alt="user-profile" />
-        </IconButton>
-      </Box>
-      <div
-        style={{
-          display: 'inline',
-          flexDirection: 'row',
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
           justifyContent: 'space-between',
-          marginTop: '-2px',
-          marginLeft: '-30px',
         }}
       >
-        <Typography
+        <Box
           sx={{
-            color: theme.palette.buttons.secondary,
-            fontSize: '14px',
-            fontWeight: 'bold',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
           }}
         >
-          Muntazer Mehdi
-        </Typography>
+          <Typography
+            sx={{
+              color: theme.palette.buttons.secondary,
+              fontSize: '14px',
+              fontWeight: 'bold',
+            }}
+          >
+            {poolRequest.city} - {poolRequest.destination}
+          </Typography>
+          <Typography
+            sx={{ color: theme.palette.buttons.secondary, fontSize: '13px' }}
+          >
+            Fair: {poolRequest.price}
+          </Typography>
+          <Typography
+            sx={{ color: theme.palette.buttons.secondary, fontSize: '13px' }}
+          >
+            Vehicle Type: {poolRequest.types}
+          </Typography>
+        </Box>
+
         <Typography
           sx={{ color: theme.palette.buttons.secondary, fontSize: '13px' }}
         >
-          muntazer@gmail.com
+          Departure Time: {formatTimestamp(poolRequest.startDate)}
         </Typography>
-      </div>
+      </Box>
 
-      <button
+      <Button
+        variant="contained"
+        color="secondary"
         style={{
-          width: '107px',
-          height: '36px',
-          color: theme.palette.buttons.color,
-          backgroundColor: theme.palette.background.poolback,
-          fontSize: '14px',
-          border: theme.palette.buttons.borderbutton, // Set border width, style, and color
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '0 10px',
-          paddingLeft: '20px',
+          backgroundColor: theme.palette.buttons.primary,
+          color: theme.palette.buttons.secondary,
+          borderRadius: '12px',
+          width: '100px',
+          height: '40px',
+          fontSize: '12px',
+          marginTop: '10px',
+        }}
+        onClick={() => {
+          navigate(`/poolrequest`);
         }}
       >
         Details
         <ArrowForwardIosIcon sx={{ fontSize: 'medium' }} />
-      </button>
-    </div>
+      </Button>
+    </Box>
   );
 };
 

@@ -1,63 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import { Box } from '@mui/material';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import PageHeader from './pageHeader';
 import TableData from './components/table/table';
-import { VehicleColumns, dummyVehicleData } from './_columns.js';
-import useVehicleApprovalService from '../../services/vehicleApprovalService.jsx';
+import { VehicleColumns } from './_columns.js';
+import useVehicleService from '../../services/vehicleService.jsx';
 import Spinner from '../../../utils/spinner';
-import { Grid } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 
 const VehicleApproval = () => {
-  const { getRejectedApproval } = useVehicleApprovalService();
-  const [vehiclesApproval, setVehiclesApproval] = useState([]);
+  const { getVehicles, approveVehicle } = useVehicleService();
+  const [vehicles, setVehicles] = useState([]);
+  const [filteredVehicles, setFilteredVehicles] = useState([]);
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
-        setLoading(true);
-        const data = await getRejectedApproval();
-        setVehiclesApproval(data);
-        setLoading(false);
+        const data = await getVehicles();
+        setVehicles(data);
+        setFilteredVehicles(data);
       } catch (error) {
-        console.log(error);
+        console.error("There's an error in fetching the data");
       }
+      setLoading(false);
     };
     fetchData();
-  }, [VehicleApproval]);
+  }, []);
+
+  const handleSearch = (searchTerm) => {
+    const filtered = vehicles.filter((vehicle) =>
+      Object.values(vehicle).some((value) =>
+        String(value).toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+    setFilteredVehicles(filtered);
+  };
 
   return (
-    <Grid
-      container
-      direction="column"
-      width="95%"
-      height="100%"
-      sx={{ margin: '40px' }}
-    >
-      {loading && (
-        <Grid item>
-          <Spinner />
-        </Grid>
-      )}
-
-      <Grid
-        item
-        xs={1}
-        container
-        justifyContent="space-between"
-        alignItems="center"
-        height="7%"
-        sx={{ mt: isSmallScreen ? '-3%' : -2 }}
-      >
-        <PageHeader />
+    <Grid container direction="row" sx={{ padding: '40px' }}>
+      {loading && <Spinner />}
+      <Grid item xs={12}>
+        <PageHeader onSearch={handleSearch} />
       </Grid>
-
-      <Grid item xs={2} sx={{ mt: isSmallScreen ? '5%' : -1 }} flex="1">
-        <TableData columns={VehicleColumns} rows={vehiclesApproval} />
+      <Grid item xs={12} sx={{ mt: isSmallScreen ? '5%' : -1 }} flex="1">
+        <TableData
+          columns={VehicleColumns}
+          rows={filteredVehicles}
+          handleApprove={approveVehicle}
+        />
       </Grid>
     </Grid>
   );

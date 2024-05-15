@@ -1,105 +1,60 @@
-import React, { useState } from 'react';
-import { Box, Button, Drawer, useTheme } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Box, Button, Drawer, Grid, useTheme } from '@mui/material';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
-import UseTenantAuth from '../../auth/tenantAuth';
+import { useTenantAuth } from '../../auth/tenantAuth';
+import Logo from '../../../commons/resouces/logo.svg';
 
-const Sidebar = ({ leftSpan }) => {
-  const widthVal = (leftSpan / 12) * 100;
+const Sidebar = ({ widthVal }) => {
   const [activeButton, setActiveButton] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
-  const { logout } = UseTenantAuth();
+  const { logout } = useTenantAuth();
 
-  const handleClick = (item) => {
-    navigate(item.link);
-    setActiveButton(item.name);
-  };
-
-  React.useEffect(() => {
-    const currentPath = location.pathname;
-    const currentPathName = currentPath.split('/')[1]; // Update index to 1
-    const currentPathNameCapitalized =
-      currentPathName.charAt(0).toUpperCase() + currentPathName.slice(1);
-    setActiveButton(currentPathNameCapitalized);
+  useEffect(() => {
+    const currentPath = location.pathname.split('/')[1];
+    // Normalize the path to capitalize the first letter
+    setActiveButton(currentPath);
   }, [location]);
 
-  const CustomButton = ({ item, sx }) => {
-    const isActive = activeButton === item.name;
-
-    return (
-      <Button
-        sx={{
-          ...sx,
-          display: 'flex',
-          padding: '16px 16px 16px 32px',
-          alignItems: 'left',
-          gap: '3px',
-          alignSelf: 'stretch',
-          overflow: 'hidden',
-          color: theme.palette.buttonSidebar.ColorActive,
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-          fontSize: '14px',
-          textTransform: 'none',
-          fontWeight: isActive ? 550 : 400,
-          lineHeight: '140%',
-          height: '40px',
-          justifyContent: 'left',
-          borderRight: isActive
-            ? theme.palette.buttonSidebar.borderright
-            : 'none',
-          backgroundColor: isActive
-            ? theme.palette.buttonSidebar.main
-            : theme.palette.buttonSidebar.BackgroundColorActive,
-          '&:hover': {
-            backgroundColor: theme.palette.buttonSidebar.main,
-          },
-        }}
-        onClick={() => handleClick(item)}
-        startIcon={item.icon}
-      >
-        {item.name}
-      </Button>
-    );
+  const logoutButton = () => {
+    logout();
+    navigate('/login');
   };
 
-  const CustomButton2 = ({ item, sx }) => {
-    const isActive = activeButton === item.name;
+  const CustomButton = ({ item }) => {
+    // remove space and convert to lowercase for comparison from item.name
+    const isActive =
+      activeButton.toLowerCase() === item.name.replace(/\s/g, '').toLowerCase();
 
     return (
       <Button
         sx={{
-          ...sx,
           display: 'flex',
-          padding: '16px 16px 16px 32px',
-          alignItems: 'left',
-          gap: '3px',
-          alignSelf: 'stretch',
-          overflow: 'hidden',
-          color: theme.palette.buttonSidebar.ColorActive,
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-          fontSize: '14px',
-          textTransform: 'none',
-          fontWeight: isActive ? 550 : 400,
-          lineHeight: '140%',
-          height: '40px',
-          justifyContent: 'left',
-          borderRight: isActive
-            ? theme.palette.buttonSidebar.borderright
-            : 'none',
+          justifyContent: 'flex-start',
+          padding: '10px 24px',
+          color: theme.palette.sidebar.text,
           backgroundColor: isActive
-            ? theme.palette.buttonSidebar.main
-            : theme.palette.buttonSidebar.BackgroundColorActive,
+            ? 'rgba(255, 255, 255, 0.2)'
+            : 'transparent',
           '&:hover': {
-            backgroundColor: theme.palette.buttonSidebar.main,
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
           },
+          width: '100%',
+          textTransform: 'none',
+          textAlign: 'left',
         }}
-        onClick={() => logout()}
         startIcon={item.icon}
+        onClick={() => {
+          if (item.name === 'Log out') {
+            logout();
+          } else {
+            navigate(item.link);
+          }
+          setActiveButton(item.name);
+        }}
       >
         {item.name}
       </Button>
@@ -108,47 +63,46 @@ const Sidebar = ({ leftSpan }) => {
 
   return (
     <Drawer
-      elevation={4}
       variant="permanent"
       sx={{
-        width: `${widthVal}%`,
+        width: `${(widthVal * 100) / 12}%`,
         flexShrink: 0,
-        whiteSpace: 'nowrap',
-        boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'column',
         '& .MuiDrawer-paper': {
-          mt: '7vh',
-          py: '24px',
-          width: `${widthVal}%`,
-          backgroundColor: theme.palette.buttonSidebar.hovertextcolor,
-          boxShadow: theme.palette.buttonSidebar.sidebarshadow,
+          width: `${(widthVal * 100) / 12}%`,
+          boxSizing: 'border-box',
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundColor: theme.palette.sidebar.main,
         },
       }}
     >
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'start',
           alignItems: 'center',
-          flexDirection: 'column',
-          width: '100%',
-          height: '100%',
-          padding: '0 0 3rem 0',
+          justifyContent: 'center',
+          padding: '1rem',
         }}
       >
+        <img
+          src={Logo}
+          alt="ShipEase-logo"
+          style={{
+            width: '100%',
+            height: 'auto',
+          }}
+        />
+      </Box>
+      <Box sx={{ overflow: 'auto', flex: '1 1 auto' }}>
         {NavigationItems.map((item, index) => (
           <CustomButton key={index} item={item} />
         ))}
-        <CustomButton2
-          item={{
-            name: 'Log out',
-            link: '/login',
-            icon: (
-              <PowerSettingsNewOutlinedIcon
-                style={{ color: theme.palette.buttonSidebar.ColorActive }}
-              />
-            ),
-          }}
-          sx={{ marginTop: 'auto' }}
+      </Box>
+      <Box sx={{ padding: '10px', borderTop: '1px solid #ccc' }}>
+        <CustomButton
+          item={{ name: 'Log out', icon: <PowerSettingsNewOutlinedIcon /> }}
         />
       </Box>
     </Drawer>

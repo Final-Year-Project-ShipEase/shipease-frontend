@@ -27,39 +27,36 @@ const AdminDashboard = () => {
         <Grid item md={12} xs={12}>
           <Grid container spacing={2}>
             <Grid item md={3} xs={12}>
-              <CardViewImage name={name}></CardViewImage>
+              <CardViewImage name={name} />
             </Grid>
             <Grid item md={5} xs={12}>
-              <SummaryCard></SummaryCard>
+              <SummaryCard />
             </Grid>
             <Grid item md={4} xs={12}>
-              <Booking></Booking>
+              <Booking />
             </Grid>
           </Grid>
         </Grid>
         <Grid item md={12} xs={12}>
           <Grid container spacing={2}>
             <Grid item md={8} xs={12}>
-              <Performance></Performance>
+              <Performance />
             </Grid>
             <Grid item md={4} xs={12}>
-              <TopTenant
-                tenantName={tenantName}
-                totalRevenue={revenue}
-              ></TopTenant>
+              <TopTenant tenantName={tenantName} totalRevenue={revenue} />
             </Grid>
           </Grid>
         </Grid>
         <Grid item md={12} xs={12}>
           <Grid container spacing={2}>
-            <Grid item md={4} xs={12}>
-              <VehicleApproval></VehicleApproval>
+            <Grid item md={5} xs={12}>
+              <VehicleApproval />
+            </Grid>
+            <Grid item md={3} xs={12}>
+              <Order />
             </Grid>
             <Grid item md={4} xs={12}>
-              <Order></Order>
-            </Grid>
-            <Grid item md={4} xs={12}>
-              <DriverApproval></DriverApproval>
+              <DriverApproval />
             </Grid>
           </Grid>
         </Grid>

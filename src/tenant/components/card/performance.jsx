@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import dummyPerformanceData from './dummyPerformanceData';
+import tenantPerformanceData from './dummyPerformanceData';
 import { useTheme } from '@mui/material/styles';
 import {
   LineChart,
@@ -12,6 +12,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Legend,
 } from 'recharts';
 
 const Performance = () => {
@@ -29,7 +30,6 @@ const Performance = () => {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          marginLeft: '2%',
         }}
       >
         <Typography
@@ -44,9 +44,9 @@ const Performance = () => {
         <ResponsiveContainer
           width="100%"
           height={190}
-          style={{ marginTop: '1%', marginLeft: '-6%' }}
+          style={{ marginTop: '1%' }}
         >
-          <LineChart data={dummyPerformanceData}>
+          <LineChart data={tenantPerformanceData}>
             <CartesianGrid
               vertical={false}
               horizontal={true}
@@ -61,7 +61,7 @@ const Performance = () => {
               dataKey="bookings"
               stroke={theme.palette.secondary.main}
               strokeWidth={2}
-              name="User"
+              name="Driver"
             />
             <Line
               type="monotone"
@@ -70,6 +70,7 @@ const Performance = () => {
               strokeWidth={2}
               name="Booking"
             />
+            <Legend />
           </LineChart>
         </ResponsiveContainer>
       </CardContent>

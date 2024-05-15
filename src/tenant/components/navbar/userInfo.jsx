@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   IconButton,
@@ -11,8 +11,8 @@ import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined
 import image from '../../../icons/image.png';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import UseTenantAuth from '../../auth/tenantAuth';
 import { useNavigate } from 'react-router-dom';
+import { useTenantAuth } from '../../auth/tenantAuth';
 
 const imageStyles = { width: '35px', height: '35px', borderRadius: '50%' };
 const onlineDotStyles = {
@@ -29,12 +29,12 @@ const onlineDotStyles = {
 };
 
 const UserInfo = () => {
-  const [name, setName] = useState('Hamza Idrees');
-  const [post, setPost] = useState('Software Engineer');
+  const tenantData = JSON.parse(localStorage.getItem('tenantData'));
+  const [name, setName] = useState(tenantData.data.name);
   const [isOnline, setIsOnline] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
-  const { logout } = UseTenantAuth();
+  const { logout } = useTenantAuth();
   const navigate = useNavigate();
 
   const handleClick = (event) => {

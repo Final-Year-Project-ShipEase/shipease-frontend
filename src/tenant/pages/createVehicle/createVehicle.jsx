@@ -1,30 +1,45 @@
-import React, { useRef } from 'react';
-import { Box, Typography } from '@mui/material';
+import React, { useRef, useState } from 'react';
+import { Box, Button, Typography } from '@mui/material';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import TextField from '../../components/inputs/textField/TextField.jsx';
-import PhoneNumberInput from '../../components/inputs/phoneNumberField/PhoneNumber.jsx';
 import CustomSwitch from '../../components/switch/Switch.jsx';
 import CustomButton from '../../components/buttons/CustomButton.jsx';
 import { ReactComponent as LeftArrorSvg } from './assets/leftArrow.svg';
 import { ReactComponent as CameraSvg } from './assets/camera.svg';
 import profileImage from './assets/user_image.png';
 import useVehicleService from '../../../admin/services/vehicleService.jsx';
+import { useSnackbar } from '../../../utils/snackbarContextProvider.jsx';
 
 function CreateVehicle() {
   // const { createUser } = useUserService();
+
+  const [selectedFile, setSelectedFile] = useState('');
+
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const licenseFileInputRef = useRef(null);
+  const inspectionFileInputRef = useRef(null);
   const { addVehicle } = useVehicleService();
+  const { show } = useSnackbar();
   const validationSchema = Yup.object().shape({
     ownerCnic: Yup.string().required('Cnic is required'),
     regNo: Yup.string().required('Registration number is required'),
     type: Yup.string().required('Vehicle Type is required'),
     location: Yup.string().required('Location is required'),
     trackerNo: Yup.string().required('Tracker number is required'),
-    file: Yup.mixed().required('Cover Photo is required'),
   });
+  const [selectedLicenseFile, setSelectedLicenseFile] = useState('');
+  const [selectedInspectionFile, setSelectedInspectionFile] = useState('');
+
+  const handleLicenseDivClick = () => {
+    licenseFileInputRef.current.click();
+  };
+
+  const handleInspectionDivClick = () => {
+    inspectionFileInputRef.current.click();
+  };
 
   const handleDivClick = () => {
     fileInputRef.current.click();
@@ -68,27 +83,58 @@ function CreateVehicle() {
           status: '',
           location: '',
           trackerNo: '',
+          width: '',
+          height: '',
+          cost: '',
+          licenseImage: '',
+          inspectionImage: '',
+          // TODO: utalize these fields
         }}
         validationSchema={validationSchema}
-        onSubmit={async (values) => {
-          // const res = await createUser(values);
-          // if (res.status === 201) navigate('/users');
+        onSubmit={async (values, { setSubmitting }) => {
+          if (!selectedFile) {
+            show('Please select an image', 'error');
+            return;
+          }
+
           const data = localStorage.getItem('tenantData');
-          const tenantId = JSON.parse(data).id;
-          const res = await addVehicle({
-            driver_id: 1, //edit this
-            ownerCnic: values.ownerCnic,
-            regNo: values.regNo,
-            type: ['SUV', 'Sedan', 'Hatchback'],
-            status: 'Available',
-            location: values.location,
-            trackerNo: values.trackerNo,
-            tenant_id: tenantId,
-          });
-          if (res.status === 201) navigate('/vehiclesGarage');
+          const tenantId = JSON.parse(data).data.id;
+
+          const formData = new FormData();
+          formData.append('image', selectedFile.split(',')[1]);
+          formData.append('driver_id', '2');
+          formData.append('ownerCnic', values.ownerCnic);
+          formData.append('regNo', values.regNo);
+          formData.append('type', values.type);
+          formData.append('status', 'Available');
+          formData.append('location', values.location);
+          formData.append('trackerNo', values.trackerNo);
+          formData.append('tenant_id', tenantId);
+          formData.append('width', values.width);
+          formData.append('height', values.height);
+          formData.append('cost', values.cost);
+          formData.append('LicenseImage', selectedLicenseFile.split(',')[1]);
+          formData.append('approved', 'false');
+          formData.append(
+            'inspectionImage',
+            selectedInspectionFile.split(',')[1]
+          );
+
+          try {
+            const res = await addVehicle(formData);
+            console.log('res', res);
+            if (res.status === 200 || res.status === 201) {
+              navigate('/vehiclesGarage');
+              show('Vehicle added successfully: ');
+            }
+          } catch (error) {
+            show(`Error: ${error}`, 'error');
+          }
+
+          setSubmitting(false);
         }}
       >
-        {({ values, isSubmitting, setFieldValue, errors, touched, dirty }) => (
+        {({}) => (
           <Form>
             <Box>
               <Box
@@ -108,7 +154,7 @@ function CreateVehicle() {
                   onClick={handleDivClick}
                 >
                   <img
-                    src={values.file || profileImage}
+                    src={selectedFile || profileImage}
                     style={{
                       height: '100%',
                       width: '100%',
@@ -158,14 +204,13 @@ function CreateVehicle() {
                     type="file"
                     className="hidden"
                     style={{ display: 'none' }}
-                    accept="image/*"
+                    accept=".png,.jpeg,.jpg"
                     onChange={(event) => {
                       const file = event.currentTarget.files[0];
                       if (file) {
                         const reader = new FileReader();
-                        reader.onload = (e) =>
-                          setFieldValue('file', e.target.result);
                         reader.readAsDataURL(file);
+                        reader.onload = () => setSelectedFile(reader.result);
                       }
                     }}
                   />
@@ -178,15 +223,15 @@ function CreateVehicle() {
                 </Box>
                 <Box
                   sx={{
-                    width: '60%',
-                    ml: '32px',
+                    width: '50%',
+                    ml: 5,
                   }}
                 >
                   <Box
                     sx={{
                       display: 'flex',
                       justifyContent: 'space-between',
-                      mb: '24px',
+                      mb: 2,
                     }}
                   >
                     <Box>
@@ -222,7 +267,7 @@ function CreateVehicle() {
                     sx={{
                       display: 'flex',
                       justifyContent: 'space-between',
-                      mb: '40px',
+                      mb: 2,
                     }}
                   >
                     <Box>
@@ -234,41 +279,6 @@ function CreateVehicle() {
                       />
                       <ErrorMessage
                         name="type"
-                        render={(msg) => (
-                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
-                        )}
-                      />
-                    </Box>
-                    <Box
-                      sx={{
-                        width: '361px',
-                        display: 'flex',
-                        alignItems: 'end',
-                      }}
-                    >
-                      <Field
-                        as={CustomSwitch}
-                        label={'Status'}
-                        name={'status'}
-                      />
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      mb: '16px',
-                    }}
-                  >
-                    <Box>
-                      <Field
-                        as={TextField}
-                        label={'Location'}
-                        placeholder={'Ex : faisalabad'}
-                        name={'location'}
-                      />
-                      <ErrorMessage
-                        name="location"
                         render={(msg) => (
                           <Typography sx={{ color: 'red' }}>{msg}</Typography>
                         )}
@@ -293,19 +303,317 @@ function CreateVehicle() {
                     sx={{
                       display: 'flex',
                       justifyContent: 'space-between',
+                      mb: 2,
+                    }}
+                  >
+                    <Box>
+                      <Field
+                        as={TextField}
+                        label={'Width'}
+                        placeholder={'sq ft'}
+                        name={'width'}
+                      />
+                      <ErrorMessage
+                        name="width"
+                        render={(msg) => (
+                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
+                        )}
+                      />
+                    </Box>
+                    <Box>
+                      <Field
+                        as={TextField}
+                        label={'Height'}
+                        placeholder={'sq ft'}
+                        name={'height'}
+                      />
+                      <ErrorMessage
+                        name="height"
+                        render={(msg) => (
+                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
+                        )}
+                      />
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      mb: 2,
+                    }}
+                  >
+                    <Box>
+                      <Field
+                        as={TextField}
+                        label={'Location'}
+                        placeholder={'Ex : faisalabad'}
+                        name={'location'}
+                      />
+                      <ErrorMessage
+                        name="location"
+                        render={(msg) => (
+                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
+                        )}
+                      />
+                    </Box>
+                    <Box
+                      sx={{
+                        width: '361px',
+                        display: 'flex',
+                        alignItems: 'end',
+                      }}
+                    >
+                      <Field
+                        as={CustomSwitch}
+                        label={'Status'}
+                        name={'status'}
+                      />
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      mb: 2,
+                    }}
+                  >
+                    <Box>
+                      <Field
+                        as={TextField}
+                        label={'Cost'}
+                        placeholder={'Cost per km'}
+                        name={'cost'}
+                      />
+                      <ErrorMessage
+                        name="cost"
+                        render={(msg) => (
+                          <Typography sx={{ color: 'red' }}>{msg}</Typography>
+                        )}
+                      />
+                    </Box>
+
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        mt: 3,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: '340px',
+                          height: '50px',
+                          borderRadius: '43px',
+                          position: 'relative',
+                          cursor: 'pointer',
+                          backgroundColor: 'green',
+                        }}
+                        onClick={handleLicenseDivClick}
+                      >
+                        <img
+                          src={selectedLicenseFile || profileImage}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            borderRadius: '10px',
+                          }}
+                          alt="Profile"
+                        />
+                        <div
+                          style={{
+                            position: 'absolute',
+                            backgroundColor: '#000000B2',
+                            top: '0px',
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '10px',
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              height: '100%',
+                              width: '100%',
+                            }}
+                          >
+                            <div>
+                              <Typography
+                                sx={{ color: 'white', textAlign: 'center' }}
+                              >
+                                Click to upload Vehicle Document
+                              </Typography>
+                            </div>
+                          </div>
+                        </div>
+                        <input
+                          ref={licenseFileInputRef}
+                          id="license-file"
+                          name="license-file"
+                          type="file"
+                          className="hidden"
+                          style={{ display: 'none' }}
+                          accept=".png,.jpeg,.jpg"
+                          onChange={(event) => {
+                            const file = event.currentTarget.files[0];
+                            if (file) {
+                              const extension = file.name
+                                .split('.')
+                                .pop()
+                                .toLowerCase();
+                              if (
+                                extension === 'png' ||
+                                extension === 'jpeg' ||
+                                extension === 'jpg'
+                              ) {
+                                const reader = new FileReader();
+                                reader.readAsDataURL(file);
+                                reader.onload = () =>
+                                  setSelectedLicenseFile(reader.result);
+                              } else {
+                                // Show error message or handle invalid file type
+                                console.error(
+                                  'Invalid file type. Only PNG and JPEG files are accepted.'
+                                );
+                              }
+                            }
+                          }}
+                        />
+                        <ErrorMessage
+                          name="file"
+                          render={(msg) => (
+                            <Typography sx={{ color: 'red' }}>{msg}</Typography>
+                          )}
+                        />
+                      </Box>
+                    </Box>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      mb: 2,
+                    }}
+                  >
+                    <Box></Box>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        mt: 3,
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: '340px',
+                          height: '50px',
+                          borderRadius: '43px',
+                          position: 'relative',
+                          cursor: 'pointer',
+                          backgroundColor: 'green',
+                        }}
+                        onClick={handleInspectionDivClick}
+                      >
+                        <img
+                          src={selectedInspectionFile || profileImage}
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            borderRadius: '10px',
+                          }}
+                          alt="Profile"
+                        />
+                        <div
+                          style={{
+                            position: 'absolute',
+                            backgroundColor: '#000000B2',
+                            top: '0px',
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '10px',
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              height: '100%',
+                              width: '100%',
+                            }}
+                          >
+                            <div>
+                              <Typography
+                                sx={{ color: 'white', textAlign: 'center' }}
+                              >
+                                Click to upload Inspection Document
+                              </Typography>
+                            </div>
+                          </div>
+                        </div>
+                        <input
+                          ref={inspectionFileInputRef}
+                          id="inspection-file"
+                          name="inspection-file"
+                          type="file"
+                          className="hidden"
+                          style={{ display: 'none' }}
+                          accept=".png,.jpeg,.jpg"
+                          onChange={(event) => {
+                            const file = event.currentTarget.files[0];
+                            if (file) {
+                              const extension = file.name
+                                .split('.')
+                                .pop()
+                                .toLowerCase();
+                              if (
+                                extension === 'png' ||
+                                extension === 'jpeg' ||
+                                extension === 'jpg'
+                              ) {
+                                const reader = new FileReader();
+                                reader.readAsDataURL(file);
+                                reader.onload = () =>
+                                  setSelectedInspectionFile(reader.result);
+                              } else {
+                                // Show error message or handle invalid file type
+                                console.error(
+                                  'Invalid file type. Only PNG and JPEG files are accepted.'
+                                );
+                              }
+                            }
+                          }}
+                        />
+                        <ErrorMessage
+                          name="file"
+                          render={(msg) => (
+                            <Typography sx={{ color: 'red' }}>{msg}</Typography>
+                          )}
+                        />
+                      </Box>
+                    </Box>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      mt: 3,
                     }}
                   >
                     <CustomButton
                       role={'secondary'}
-                      customStyle={{ width: '361px' }}
-                      onClick={() => navigate('/users')}
+                      onClick={() => navigate('/driversgarage')}
+                      customStyle={{ width: '10rem' }}
                     >
                       Cancel
                     </CustomButton>
                     <CustomButton
                       type="submit"
                       role={'primary'}
-                      customStyle={{ width: '361px' }}
+                      customStyle={{ width: '10rem', marginLeft: '1rem' }}
                     >
                       Submit
                     </CustomButton>

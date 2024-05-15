@@ -4,6 +4,8 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import SubCard from './subCard';
 import DummyUserData from './dummyData';
+import DummyUserData1 from './dummyData1';
+import DummyUserData2 from './dummyData2';
 
 const SummaryCard = () => {
   return (
@@ -43,8 +45,8 @@ const SummaryCard = () => {
           }}
         >
           <SubCard
-            content="User's Registered This Month"
-            count={15}
+            content="Bookings's Registered This Month"
+            count={7}
             data={DummyUserData}
           />
         </div>
@@ -69,13 +71,13 @@ const SummaryCard = () => {
         >
           <SubCard
             content="Driver's Registered This Month"
-            count={25}
-            data={DummyUserData}
+            count={9}
+            data={DummyUserData1}
           />
           <SubCard
             content="Vehicle's Registered This Month"
-            count={20}
-            data={DummyUserData}
+            count={5}
+            data={DummyUserData2}
           />
         </div>
       </CardContent>

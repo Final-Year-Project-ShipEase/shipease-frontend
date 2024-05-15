@@ -2,14 +2,22 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
-import dummyOrderData from './dummyOrderData';
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  ResponsiveContainer,
+  LabelList,
+} from 'recharts';
+import orderData from './dummyOrderData';
 import { useTheme } from '@mui/material/styles';
-import { toContainHTML } from '@testing-library/jest-dom/matchers';
 
 const Order = () => {
   const theme = useTheme();
-  const totalOrders = dummyOrderData.reduce((a, b) => a + b.orders, 0);
+  const totalOrders = orderData.reduce((a, b) => a + b.orders, 0);
+  const length = orderData.length;
+  const avgOrder = totalOrders / length;
 
   return (
     <Card sx={{ width: '100%', borderRadius: 5, height: '280px' }}>
@@ -25,7 +33,6 @@ const Order = () => {
         </Typography>
         <ResponsiveContainer width="100%" height={150}>
           <PieChart
-            width={180}
             margin={{
               top: 0,
               right: 0,
@@ -34,18 +41,17 @@ const Order = () => {
             }}
           >
             <Pie
-              data={dummyOrderData}
+              data={orderData}
               cx="50%"
               cy="50%"
-              innerRadius={30}
-              outerRadius={60}
+              innerRadius={40}
+              outerRadius={70}
               fill={theme.palette.pieChart.COLORS}
-              paddingAngle={5}
               dataKey="orders"
             >
-              {dummyOrderData.map((entry, index) => (
+              {orderData.map((entry, index) => (
                 <Cell
-                  key={`cell-${index}`}
+                  key={orderData[index].month}
                   fill={
                     theme.palette.pieChart[
                       index % theme.palette.pieChart.length
@@ -53,6 +59,26 @@ const Order = () => {
                   }
                 />
               ))}
+              <LabelList
+                dataKey="month"
+                position="outside"
+                style={{
+                  fill: 'black',
+                  fontStyle: 'italic',
+                  fontWeight: 'bold',
+                }}
+                stroke="none"
+                offset={10}
+                angle={-30}
+              />
+
+              <LabelList
+                dataKey="orders"
+                position="inside"
+                style={{ fill: 'black' }}
+                offset={10}
+                angle={30}
+              />
             </Pie>
             <Tooltip />
           </PieChart>
@@ -64,22 +90,21 @@ const Order = () => {
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            marginTop: '-5%',
             marginLeft: '10%',
           }}
         >
           <Typography sx={{ fontWeight: 'bold', fontSize: '14px' }}>
-            Average Order per Month
+            Average Order per Month:
           </Typography>
           <Typography
             sx={{
               fontWeight: 'bold',
               borderRadius: '5px',
               color: 'purple',
-              marginLeft: '25%',
+              marginLeft: '5%',
             }}
           >
-            {totalOrders}
+            {avgOrder}
           </Typography>
         </div>
       </CardContent>
