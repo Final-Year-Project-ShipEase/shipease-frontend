@@ -97,7 +97,7 @@ const PoolRequestCard = ({ poolRequest, handleOnClick }) => {
           overflow: 'hidden',
         }}
       >
-        {poolRequest?.bookingDetails.description || 'No description provided'}
+        {poolRequest.description || 'No description provided'}
       </Typography>
 
       <Typography
@@ -118,14 +118,17 @@ const PoolRequestInformation = ({ poolRequests, error, loading }) => {
   const [poolRequestId, setPoolRequestId] = useState('');
   const theme = useTheme();
   const matchesSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const [buttonText, setButtonText] = useState('');
 
   const handlePoolRequestClick = (id) => {
     setPoolRequestId(id);
+    setButtonText('Update');
     setModal(true);
   };
 
   const handlePoolRequestView = (id) => {
     setPoolRequestId(id);
+    setButtonText('Book Now');
     setModal(true);
   };
 
@@ -144,6 +147,7 @@ const PoolRequestInformation = ({ poolRequests, error, loading }) => {
         open={openModal}
         handleClose={() => setModal(false)}
         prID={poolRequestId}
+        button={buttonText}
       />
       <Box
         sx={{

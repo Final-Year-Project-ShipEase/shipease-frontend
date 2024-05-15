@@ -26,6 +26,7 @@ const PoolRequest = () => {
       setLoading(true);
       try {
         const poolRequestResponse = await getPoolRequestList();
+        console.log('Pool request response:', poolRequestResponse);
         const enhancedPoolRequests = await Promise.all(
           poolRequestResponse.map(async (request) => {
             try {
@@ -37,7 +38,7 @@ const PoolRequest = () => {
             }
           })
         );
-
+        console.log('Enhanced pool requests:', enhancedPoolRequests);
         setPoolRequests({
           currentTenant: enhancedPoolRequests.filter(
             (request) => request.bookingDetails.tenant_id === currentTenantId
@@ -54,6 +55,7 @@ const PoolRequest = () => {
             (request) => request.bookingDetails.tenant_id !== currentTenantId
           ),
         });
+        console.log('Pool requests:', filteredPoolRequests);
         setLoading(false);
       } catch (fetchError) {
         console.error('Failed to fetch data:', fetchError);

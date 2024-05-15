@@ -22,7 +22,7 @@ import { useSnackbar } from '../../../../utils/snackbarContextProvider.jsx';
 import { formatTimestamp } from '../../../../utils/timestamp.js';
 import ConfirmDelete from '../dialog/ConfirmDelete.jsx';
 
-const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
+const PoolRequestDetailsModal = ({ open, handleClose, prID, button }) => {
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] =
     useState(false);
   const theme = useTheme();
@@ -31,6 +31,8 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
   const [poolRequest, setPoolRequest] = useState({});
   const { show } = useSnackbar();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const tenant_id =
+    JSON.parse(localStorage.getItem('tenantData'))?.data?.id || 2;
 
   const handleDelete = () => {
     setIsDeleteDialogOpen(true);
@@ -120,6 +122,7 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
         price,
         width,
         height,
+        status: 'booked',
       });
       handleClose();
       show('Pool Request Updated successfully', 'success');
@@ -278,7 +281,7 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
                 backgroundColor: theme.palette.buttons.cancel,
               }}
             >
-              Delete
+              Cancel
             </Button>
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -291,7 +294,7 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID }) => {
               }}
               variant="contained"
             >
-              Update
+              {button}
             </Button>
           </Grid>
         </Grid>
