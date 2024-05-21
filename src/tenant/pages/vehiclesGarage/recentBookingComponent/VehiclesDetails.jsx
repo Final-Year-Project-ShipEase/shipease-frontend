@@ -126,10 +126,9 @@ const VehiclesDetails = ({ tenantId, onSearch }) => {
             item
             xs={6}
             sx={{
-              marginLeft: '-100px',
               display: 'flex',
               flexDirection: 'row',
-              alignItems: 'center',
+              alignItems: 'left',
             }}
           >
             <Grid

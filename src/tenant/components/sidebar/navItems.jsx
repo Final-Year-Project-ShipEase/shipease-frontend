@@ -13,14 +13,14 @@ const NavigationItems = [
     link: '/booking',
   },
   {
-    name: 'Drivers Garage',
-    icon: <PersonAddAltOutlinedIcon />,
-    link: '/driversGarage',
-  },
-  {
     name: 'Vehicles Garage',
     link: '/vehiclesGarage',
     icon: <Person4OutlinedIcon />,
+  },
+  {
+    name: 'Drivers Garage',
+    icon: <PersonAddAltOutlinedIcon />,
+    link: '/driversGarage',
   },
   {
     name: 'Pool Requests',

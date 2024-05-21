@@ -37,13 +37,7 @@ const Navbar = ({ handleDrawerToggle }) => {
                 display: 'flex',
                 alignItems: 'center',
               }}
-            >
-              <img
-                src={require('../../resources/shipease.png')}
-                alt="ShipEase-logo"
-                style={{ height: isMobile ? '30px' : '40px' }}
-              />
-            </Box>
+            ></Box>
           </Grid>
           <Grid item md={2.5}>
             <Box

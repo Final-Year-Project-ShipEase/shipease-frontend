@@ -20,12 +20,12 @@ const NavigationItems = [
     link: '/admin/driversApproval',
   },
   {
-    name: 'DriversApproval',
-    link: '/admin/driversApproval',
-  },
-  {
     name: 'VehiclesApproval',
     link: '/admin/vehiclesApproval',
+  },
+  {
+    name: 'DriversApproval',
+    link: '/admin/driversApproval',
   },
   {
     name: 'Permissions',
