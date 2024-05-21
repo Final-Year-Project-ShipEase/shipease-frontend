@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Grid, useTheme, useMediaQuery } from '@mui/material';
+import { Grid } from '@mui/material';
 import PageHeader from './pageHeader';
 import TableData from './components/table/table';
 import { TenantsColumns } from './_columns.js';
@@ -11,8 +11,6 @@ const ManageTenantList = () => {
   const [tenants, setTenants] = useState([]);
   const [filteredTenants, setFilteredTenants] = useState([]);
   const [loading, setLoading] = useState(false);
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const fetchData = async () => {
     setLoading(true);
@@ -24,6 +22,8 @@ const ManageTenantList = () => {
 
   useEffect(() => {
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSearch = (searchTerm) => {

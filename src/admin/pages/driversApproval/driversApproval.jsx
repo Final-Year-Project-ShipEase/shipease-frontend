@@ -10,14 +10,12 @@ const DriversApproval = () => {
   const { getRejectedApproval } = useDriverApprovalService();
   const [drivers, setDrivers] = useState([]);
   const [filteredDrivers, setFilteredDrivers] = useState([]);
-  const [loading, setLoading] = useState(false);
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const { getDriver } = useDriverService();
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       const response = await getRejectedApproval();
       if (response) {
         const fetchDetails = async () => {
@@ -37,9 +35,10 @@ const DriversApproval = () => {
         };
         fetchDetails();
       }
-      setLoading(false);
     };
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSearch = (searchTerm) => {

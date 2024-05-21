@@ -1,8 +1,6 @@
 import { Box, IconButton, useTheme } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 import EditNoteIcon from '@mui/icons-material/EditNote';
-import FileCopySharpIcon from '@mui/icons-material/FileCopySharp';
-import LockIcon from '@mui/icons-material/Lock';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
@@ -30,7 +28,6 @@ const VehicleActionColumn = ({
   setModalOpen,
   handleApproval,
 }) => {
-  const [isLockClicked, setIsLockClicked] = useState(false);
   const theme = useTheme();
   //const { delRole } = useRBACService();
   const { deleteVehicleApproval } = useVehicleApprovalService();

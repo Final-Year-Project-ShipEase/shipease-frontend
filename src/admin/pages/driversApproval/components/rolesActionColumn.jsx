@@ -1,11 +1,8 @@
 import { Box, IconButton, useTheme } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 import EditNoteIcon from '@mui/icons-material/EditNote';
-import FileCopySharpIcon from '@mui/icons-material/FileCopySharp';
-import LockIcon from '@mui/icons-material/Lock';
 import DeleteForeverSharpIcon from '@mui/icons-material/DeleteForeverSharp';
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
-import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import useDriverApprovalService from '../../../services/driverApprovalServices';
 
 const CustomIconButton = ({ children, onClick, color }) => {
@@ -29,10 +26,9 @@ const DriverApprovalActionColumn = ({
   boxType,
   setDriverId,
 }) => {
-  const [isLockClicked, setIsLockClicked] = useState(false);
   //const { delRole } = useRBACService();
   const theme = useTheme();
-  const { deleteDriverApproval, approveDriver, rejectDriver } =
+  const { deleteDriverApproval, approveDriver } =
     useDriverApprovalService();
 
   const handleEdit = () => {

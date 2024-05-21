@@ -1,6 +1,5 @@
 import { Button, useTheme } from '@mui/material';
 import React from 'react';
-import theme from '../../theme';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 const BlueModalButton = ({ text, onClick }) => {

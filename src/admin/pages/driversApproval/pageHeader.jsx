@@ -4,7 +4,6 @@ import {
   TextField,
   InputAdornment,
   useTheme,
-  useMediaQuery,
 } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 

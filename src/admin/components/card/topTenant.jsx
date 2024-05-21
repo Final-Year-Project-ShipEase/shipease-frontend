@@ -8,7 +8,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  Legend,
   Tooltip,
 } from 'recharts';
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +21,7 @@ const topPerformingTenants = [
 ];
 
 const CustomTooltip = ({ active, payload }) => {
-  const theme = useTheme();
+
   if (active) {
     return (
       <div

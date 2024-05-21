@@ -2,7 +2,6 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import Person4OutlinedIcon from '@mui/icons-material/Person4Outlined';
 import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
-import GppGoodOutlinedIcon from '@mui/icons-material/GppGoodOutlined';
 const NavigationItems = [
   {
     name: 'Dashboard',

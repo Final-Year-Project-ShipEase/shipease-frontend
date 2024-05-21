@@ -10,8 +10,6 @@ import {
   Grid,
   useTheme,
 } from '@mui/material';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import userList from './userList';
 import useTenantService from '../../../../services/tenantService';
 
 const CustomTable = () => {
@@ -47,6 +45,8 @@ const CustomTable = () => {
   useEffect(() => {
     getUsersData();
     getData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const TableCheckBox = () => {

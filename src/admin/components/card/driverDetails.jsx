@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Typography } from '@mui/material';
@@ -127,7 +127,8 @@ const DriverDetail = ({ content }) => {
             <img
               src={image}
               style={{ width: '20px', height: '20px', borderRadius: '200px' }}
-            ></img>
+              alt="Driver"
+            />
             <Typography
               sx={{
                 color: theme.palette.buttons.main,

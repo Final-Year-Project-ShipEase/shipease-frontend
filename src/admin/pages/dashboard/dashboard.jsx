@@ -11,9 +11,9 @@ import { Grid } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 
 const AdminDashboard = () => {
-  const [name, setName] = useState('Hamza');
-  const [tenantName, setTenantName] = useState('Abdullah');
-  const [revenue, setRevenue] = useState('50k');
+  const [name] = useState('Hamza');
+  const [tenantName] = useState('Abdullah');
+  const [revenue] = useState('50k');
 
   return (
     <Box

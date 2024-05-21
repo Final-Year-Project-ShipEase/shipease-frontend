@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
-  FormControl,
   Grid,
   IconButton,
   TextField,
@@ -58,8 +57,6 @@ const AddRoleModal = ({ open, handleClose, onSubmit }) => {
             <IconButton
               sx={{
                 p: 1,
-                backgroundColor: theme.palette.buttons.approve,
-                color: theme.palette.buttons.white,
               }}
             >
               <AddIcon />
@@ -110,10 +107,6 @@ const AddRoleModal = ({ open, handleClose, onSubmit }) => {
                 onClick={() => {
                   setIsConfirmationDialogOpen(true);
                   addRole(formData.name);
-                }}
-                sx={{
-                  color: theme.palette.primary.white,
-                  backgroundColor: theme.palette.buttons.approve,
                 }}
                 variant="contained"
               >

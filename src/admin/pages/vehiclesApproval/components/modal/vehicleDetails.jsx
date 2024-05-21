@@ -20,9 +20,6 @@ import {
 } from '@mui/icons-material';
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
 import useVehicleService from '../../../../services/vehicleService.jsx';
-//import { useApplicationService } from '../../../../services/applicationService';
-import Spinner from '../../../../../utils/spinner';
-import { useSnackbar } from '../../../../../utils/snackbarContextProvider.jsx';
 import { Lightbox } from 'react-modal-image';
 
 const VehicleDetailsModal = ({
@@ -36,7 +33,6 @@ const VehicleDetailsModal = ({
     useState(false);
   const theme = useTheme();
   const { getVehicle } = useVehicleService();
-  const { show } = useSnackbar();
   const [isOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState(null);
   const [imageData, setImageData] = useState(null);
@@ -133,7 +129,8 @@ const VehicleDetailsModal = ({
     if (tenantId) {
       getVehicleDetails();
     }
-  }, [tenantId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Dialog

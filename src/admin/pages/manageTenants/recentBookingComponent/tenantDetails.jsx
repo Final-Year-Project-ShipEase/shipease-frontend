@@ -27,6 +27,8 @@ const TenantDetails = ({ tenantId }) => {
       setLoading(false);
     };
     fetchTenantData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

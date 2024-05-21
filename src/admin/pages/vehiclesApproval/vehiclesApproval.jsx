@@ -27,6 +27,8 @@ const VehicleApproval = () => {
       setLoading(false);
     };
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSearch = (searchTerm) => {

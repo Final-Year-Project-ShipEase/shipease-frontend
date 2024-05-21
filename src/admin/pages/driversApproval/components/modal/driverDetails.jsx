@@ -64,18 +64,13 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit, driver_id }) => {
     };
 
     if (driver_id) fetchDriver();
-  }, [driver_id]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSwitchChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.checked,
-    });
   };
 
   const handleAddConfirm = async () => {

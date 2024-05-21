@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
-  FormControl,
   Grid,
   IconButton,
   TextField,
@@ -38,8 +37,6 @@ const AddResourceModal = ({ open, handleClose, onSubmit }) => {
   };
 
   const handleUpdateConfirm = async () => {
-    const resourceNames = formData.name;
-    console.log(resource);
     setIsConfirmationDialogOpen(false);
     handleClose();
   };
@@ -63,8 +60,6 @@ const AddResourceModal = ({ open, handleClose, onSubmit }) => {
             <IconButton
               sx={{
                 p: 1,
-                backgroundColor: theme.palette.buttons.approve,
-                color: theme.palette.buttons.white,
               }}
             >
               <AddIcon />
@@ -112,10 +107,6 @@ const AddResourceModal = ({ open, handleClose, onSubmit }) => {
               <Button
                 fullWidth
                 onClick={() => setIsConfirmationDialogOpen(true)}
-                sx={{
-                  color: theme.palette.primary.white,
-                  backgroundColor: theme.palette.buttons.approve,
-                }}
                 variant="contained"
               >
                 Save

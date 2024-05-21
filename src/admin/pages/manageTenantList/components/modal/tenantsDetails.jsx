@@ -57,7 +57,9 @@ const TenantDetailsModal = ({ open, handleClose, onSubmit, tenantId }) => {
       });
     };
     if (tenantId) fetchTenant();
-  }, [tenantId]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

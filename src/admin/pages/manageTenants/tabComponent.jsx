@@ -6,15 +6,12 @@ import Box from '@mui/material/Box';
 import TableData from './table/table';
 import {
   BookingColumns,
-  dummyBookingData,
 } from './recentBookingComponent/_columns';
 import {
   VehicleColumns,
-  dummyVehicleData,
 } from './vehicleDetailsComponent/_columns';
 import {
   DriverColumns,
-  dummyDriverData,
 } from './driverDetailsComponent/_columns';
 import { useParams } from 'react-router-dom';
 import { useVehicleService } from '../../../services/vehicleServices';
@@ -90,6 +87,8 @@ const TabComponent = () => {
     fetchBookingData();
     fetchDriverData();
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (event, newValue) => {

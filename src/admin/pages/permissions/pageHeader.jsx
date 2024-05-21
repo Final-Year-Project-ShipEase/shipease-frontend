@@ -1,6 +1,5 @@
 import React from 'react';
 import { Typography, useTheme, Grid } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 import AddModalButton from '../../../commons/buttons/addModal';
 import AddPermissionModal from './components/modal/addPermission';
 

@@ -1,22 +1,16 @@
 import React from 'react';
 import {
   Box,
-  InputLabel,
-  FormControl,
-  MenuItem,
-  Select,
   TextField,
   InputAdornment,
   useTheme,
   useMediaQuery,
 } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import { useNavigate } from 'react-router-dom';
-import HeaderButton from '../../../commons/buttons/headerButton';
 
 const PageHeader = ({ onSearch }) => {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); // Check if the screen is small
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); 
 
   return (
     <Box
@@ -24,7 +18,7 @@ const PageHeader = ({ onSearch }) => {
         display: 'flex',
         justifyContent: 'space-between',
         width: '100%',
-        marginTop: isSmallScreen ? '5%' : 0, // Apply margin top if the screen is small
+        marginTop: isSmallScreen ? '5%' : 0, 
       }}
     >
       <Box

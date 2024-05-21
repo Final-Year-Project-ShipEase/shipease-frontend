@@ -32,7 +32,6 @@ export function useUserService() {
     getUserList,
     getUser,
     updateUser,
-    updateUser,
     deleteUser,
     createUser,
   };

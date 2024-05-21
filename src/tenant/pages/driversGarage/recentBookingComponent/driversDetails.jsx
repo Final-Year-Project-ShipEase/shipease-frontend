@@ -4,8 +4,6 @@ import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import busImage from '../../../resources/image 1.png';
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../../utils/spinner';
 import { formatTimestamp } from '../../../../utils/timestamp';
 import AddIcon from '@mui/icons-material/Add';
@@ -14,7 +12,6 @@ import PageHeader from '../pageHeader';
 
 const DriversDetails = ({ driverId, onSearch }) => {
   const theme = useTheme();
-  const navigate = useNavigate();
   const [driver, setDriver] = useState({});
   const [loading, setLoading] = useState(false);
   const { getDriver } = useDriverService();
@@ -32,7 +29,9 @@ const DriversDetails = ({ driverId, onSearch }) => {
       }
     };
     fetchDriver();
-  }, [driverId]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Card
@@ -52,7 +51,6 @@ const DriversDetails = ({ driverId, onSearch }) => {
           width: '96%',
           marginLeft: '5%',
           height: '6%',
-          marginLeft: '25px',
           marginTop: '35px',
         }}
       >

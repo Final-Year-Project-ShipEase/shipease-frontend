@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { AppBar, Box, Toolbar, Grid, IconButton, Drawer } from '@mui/material';
+import { AppBar, Box, Toolbar, Grid, IconButton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import MenuIcon from '@mui/icons-material/Menu';
 import UserInfo from './userInfo';
-import Sidebar from '../sidebar/sidebar.jsx';
 import { appBarStyles } from './config.js';
 
 const Navbar = () => {

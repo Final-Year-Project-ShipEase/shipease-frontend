@@ -20,7 +20,6 @@ import DriverApprovalActionColumn from '../rolesActionColumn.jsx';
 import DriverDetailsModal from '../modal/driverDetails.jsx';
 import ConfirmAdd from '../dialogues/ConfirmAdd.jsx';
 import ConfirmDelete from '../dialogues/ConfirmDelete.jsx';
-import useDriverApprovalService from '../../../../services/driverApprovalServices.jsx';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
