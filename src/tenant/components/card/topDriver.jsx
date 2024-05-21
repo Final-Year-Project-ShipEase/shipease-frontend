@@ -3,14 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
-import {
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  Legend,
-  Tooltip,
-} from 'recharts';
+import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 const topPerformingDrivers = [
   { name: 'Driver 1', value: 400 },
@@ -21,7 +14,6 @@ const topPerformingDrivers = [
 ];
 
 const CustomTooltip = ({ active, payload }) => {
-  const theme = useTheme();
   if (active) {
     return (
       <div

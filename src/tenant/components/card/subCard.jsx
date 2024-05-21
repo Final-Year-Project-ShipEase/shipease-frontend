@@ -8,7 +8,7 @@ import { useTheme } from '@mui/material/styles';
 import { LineChart, Line, Tooltip, ResponsiveContainer } from 'recharts';
 
 const SubCard = ({ content, count, data }) => {
-  const [isIncreasing, setIsIncreasing] = useState(true);
+  const [isIncreasing] = useState(true);
   const theme = useTheme();
 
   return (

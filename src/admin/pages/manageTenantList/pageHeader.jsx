@@ -10,7 +10,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 const PageHeader = ({ onSearch }) => {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm')); 
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Box
@@ -18,7 +18,7 @@ const PageHeader = ({ onSearch }) => {
         display: 'flex',
         justifyContent: 'space-between',
         width: '100%',
-        marginTop: isSmallScreen ? '5%' : 0, 
+        marginTop: isSmallScreen ? '5%' : 0,
       }}
     >
       <Box

@@ -1,17 +1,7 @@
 import React from 'react';
-import {
-  Box,
-  InputLabel,
-  FormControl,
-  MenuItem,
-  Select,
-  TextField,
-  InputAdornment,
-  useTheme,
-} from '@mui/material';
+import { Box, TextField, InputAdornment, useTheme } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
-import HeaderButton from '../../../commons/buttons/headerButton';
 import AddModalButton from '../../../commons/buttons/addModal';
 
 const PageHeader = ({ onSearch }) => {

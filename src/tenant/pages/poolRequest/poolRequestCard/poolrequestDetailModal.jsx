@@ -28,12 +28,8 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID, button }) => {
   const theme = useTheme();
   const { getPoolRequest, updatePoolRequest, deletePoolRequest } =
     usePoolRequestService();
-  const [poolRequest, setPoolRequest] = useState({});
   const { show } = useSnackbar();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const tenant_id =
-    JSON.parse(localStorage.getItem('tenantData'))?.data?.id || 2;
-
   const handleDelete = () => {
     setIsDeleteDialogOpen(true);
   };
@@ -52,7 +48,6 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID, button }) => {
     const fetchPRList = async () => {
       await getPoolRequest(prID)
         .then((response) => {
-          setPoolRequest(response);
           setFormData({
             id: response.booking_id,
             type: response.types,
@@ -72,6 +67,7 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID, button }) => {
     };
 
     if (open) fetchPRList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   const [formData, setFormData] = useState({
@@ -91,13 +87,6 @@ const PoolRequestDetailsModal = ({ open, handleClose, prID, button }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSwitchChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.checked,
-    });
   };
 
   const handleAddConfirm = async () => {

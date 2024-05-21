@@ -38,23 +38,13 @@ const TenantAuthProvider = ({ children }) => {
     show('Logged out successfully', 'success');
   };
 
-  // const scheduleTokenRefresh = () => {
-  //   const refreshInterval = 2 * 55 * 1000;
-  //   setInterval(() => {
-  //     refreshToken();
-  //   }, refreshInterval);
-  // };
-
-  // useEffect(() => {
-  //   scheduleTokenRefresh();
-  // }, []);
-
   const contextValue = {
     logout,
     setLoading,
     setTenant,
     tenant,
     login,
+    loading,
   };
 
   return (

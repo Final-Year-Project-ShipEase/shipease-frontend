@@ -12,7 +12,6 @@ import { visuallyHidden } from '@mui/utils';
 import {
   Button,
   Grid,
-  IconButton,
   Paper,
   TablePagination,
   Typography,
@@ -137,11 +136,8 @@ export default function TableData({ columns, rows, setDriverId }) {
   const [visibleRows, setVisibleRows] = useState([]);
   const theme = useTheme();
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [open, setOpen] = React.useState(false);
-  const [boxType, setBoxType] = useState('');
 
   const handleOpen = (row) => {
-    setOpen(true);
     //console.log(row.id); use this to get result of row id
   };
 
@@ -268,10 +264,7 @@ export default function TableData({ columns, rows, setDriverId }) {
                               }}
                             >
                               {column.id === 'actions' ? (
-                                <RolesActionColumn
-                                  value={row.id}
-                                  boxType={setBoxType}
-                                />
+                                <RolesActionColumn value={row.id} />
                               ) : (
                                 row[column.id]
                               )}

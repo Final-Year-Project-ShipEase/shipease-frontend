@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
+import React from 'react';
 import { Button, Typography } from '@mui/material';
-import image from '../../../icons/image.png';
 import { useTheme } from '@mui/material/styles';
-import { Box, IconButton, Menu, MenuItem } from '@mui/material';
+import { Box } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { formatTimestamp } from '../../../utils/timestamp';
 import { useNavigate } from 'react-router-dom';

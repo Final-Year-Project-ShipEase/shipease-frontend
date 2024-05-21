@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   IconButton,
@@ -30,8 +30,8 @@ const onlineDotStyles = {
 
 const UserInfo = () => {
   const tenantData = JSON.parse(localStorage.getItem('tenantData'));
-  const [name, setName] = useState(tenantData.data.name);
-  const [isOnline, setIsOnline] = useState(true);
+  const [name] = useState(tenantData.data.name);
+  const [isOnline] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
   const { logout } = useTenantAuth();

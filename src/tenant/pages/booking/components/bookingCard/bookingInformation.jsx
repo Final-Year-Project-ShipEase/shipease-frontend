@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import BookingDetailsModal from './bookingDetailModal';
@@ -8,10 +8,8 @@ import { formatTimestampWithoutTime } from '../../../../../utils/timestamp';
 const BookingInformation = ({ booking, users }) => {
   const theme = useTheme();
   const [openModal, setModal] = useState(false);
-  const [bookingId, setBookingId] = useState('');
 
   const handleBookingClick = (bookingid) => {
-    setBookingId(bookingid);
     setModal(true);
   };
 
@@ -25,9 +23,8 @@ const BookingInformation = ({ booking, users }) => {
       {booking.map((bookings) => (
         <Box
           sx={{
-            backgroundColor: theme.palette.primary.backgroundColor,
             backgroundColor:
-              bookings.status == 'completed'
+              bookings.status === 'completed'
                 ? 'transparent'
                 : theme.palette.primary.color1,
             width: '30%',
@@ -64,11 +61,11 @@ const BookingInformation = ({ booking, users }) => {
                 <Box
                   sx={{
                     backgroundColor:
-                      bookings.status == 'active'
+                      bookings.status === 'active'
                         ? theme.palette.primary.green
-                        : bookings.status == 'reserved'
+                        : bookings.status === 'reserved'
                           ? theme.palette.primary.purple
-                          : bookings.status == 'completed'
+                          : bookings.status === 'completed'
                             ? theme.palette.primary.yellow
                             : 'transparent',
                     borderRadius: '3px',

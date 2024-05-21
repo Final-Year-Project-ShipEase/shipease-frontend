@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, TextField, InputAdornment, useTheme } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import HeaderButton from '../../../commons/buttons/headerButton';
 import BlueModalButton from '../../../commons/buttons/blueModalButton';
 import PoolRequestModal from './modal/poolReq';
 

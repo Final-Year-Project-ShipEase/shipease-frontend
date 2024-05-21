@@ -40,7 +40,6 @@ const CustomSwitch = styled((props) => (
         backgroundColor: '#2963FF',
         border: '2px solid #E9E9EA',
         opacity: 1,
-        border: 0,
       },
       '&.Mui-disabled + .MuiSwitch-track': {
         opacity: 0.5,

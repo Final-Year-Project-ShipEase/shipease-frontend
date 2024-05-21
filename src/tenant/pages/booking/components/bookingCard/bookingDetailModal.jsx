@@ -55,7 +55,9 @@ const BookingDetailsModal = ({ open, handleClose, onSubmit, booking }) => {
       }
     };
     fetchData();
-  }, [booking]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleAddConfirm = async () => {
     const setFormData = {

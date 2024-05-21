@@ -6,7 +6,7 @@ import { useField } from 'formik';
 import 'react-phone-input-2/lib/style.css';
 
 const PhoneNumberInput = ({ label, ...rest }) => {
-  const [field, meta, helpers] = useField(rest);
+  const [field, helpers] = useField(rest);
 
   return (
     <Box>

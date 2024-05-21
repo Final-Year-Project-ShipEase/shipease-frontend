@@ -53,12 +53,6 @@ const VehicleDetailsModal = ({ open, handleClose, onSubmit }) => {
   };
 
   const handleAddConfirm = async () => {
-    const clientData = {
-      clientId: formData.ID,
-      name: formData.name,
-      trackId: formData.trackId,
-    };
-
     try {
       //await createApplication(clientData);
       setIsConfirmationDialogOpen(false);

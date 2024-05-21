@@ -34,7 +34,6 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
   const { show } = useSnackbar();
   const [vehicleId, setVehicleId] = useState('');
   const { getVehicle } = useVehicleService();
-  const [vehicle, setVehicle] = useState({});
   const [booking, setBooking] = useState({});
 
   useEffect(() => {
@@ -50,6 +49,7 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
     };
 
     if (open) fetchBookingList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   const [formData, setFormData] = useState({
@@ -71,7 +71,6 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
 
       try {
         const response = await getVehicle(vehicleId);
-        setVehicle(response);
         // Here, we have the vehicle details. Now, we can set up our formData properly.
         // We should only do this if the related booking is already selected and available.
         if (formData.booking) {
@@ -98,6 +97,7 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
     };
 
     fetchVehicle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vehicleId]);
 
   const handleChangeBooking = async (event) => {
@@ -114,13 +114,6 @@ const PoolRequestModal = ({ open, handleClose, onSubmit, tenantId }) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSwitchChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.checked,
-    });
   };
 
   const handleAddConfirm = async () => {

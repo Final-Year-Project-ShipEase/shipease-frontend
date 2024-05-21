@@ -1,9 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import CampaignIcon from '@mui/icons-material/Campaign';
-import { useBookingService } from '../../../../../services/bookingServices';
 
 const Reserved = ({ reserved }) => {
   const theme = useTheme();

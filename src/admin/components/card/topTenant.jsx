@@ -3,13 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
-import {
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-} from 'recharts';
+import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from 'recharts';
 import { useNavigate } from 'react-router-dom';
 
 const topPerformingTenants = [
@@ -21,7 +15,6 @@ const topPerformingTenants = [
 ];
 
 const CustomTooltip = ({ active, payload }) => {
-
   if (active) {
     return (
       <div

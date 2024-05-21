@@ -28,9 +28,8 @@ const onlineDotStyles = {
 };
 
 const UserInfo = () => {
-  const [name, setName] = useState('Hamza Idrees');
-  const [post, setPost] = useState('Software Engineer');
-  const [isOnline, setIsOnline] = useState(true);
+  const [name] = useState('Hamza Idrees');
+  const [isOnline] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
   const navigate = useNavigate();

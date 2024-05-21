@@ -1,30 +1,12 @@
 import React from 'react';
-import {
-  Box,
-  InputLabel,
-  FormControl,
-  MenuItem,
-  Select,
-  TextField,
-  InputAdornment,
-  useTheme,
-} from '@mui/material';
+import { Box, TextField, InputAdornment, useTheme } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
-import HeaderButton from '../../../commons/buttons/headerButton';
 import AddModalButton from '../../../commons/buttons/addModal';
 
 const PageHeader = ({ onSearch }) => {
-  const [vehicle, setVehicle] = React.useState('');
   const theme = useTheme();
   const navigate = useNavigate();
-  const handleChange = (event) => {
-    setVehicle(event.target.value);
-  };
-
-  const onClickPermit = () => {
-    navigate('/approval/vehicle');
-  };
 
   return (
     <Box

@@ -4,7 +4,6 @@ import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import busImage from '../../../resources/image 2.png';
-import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../../utils/spinner';
 import AddIcon from '@mui/icons-material/Add';
 import PageHeader from '../pageHeader';
@@ -14,7 +13,6 @@ import { Lightbox } from 'react-modal-image';
 
 const VehiclesDetails = ({ tenantId, onSearch }) => {
   const theme = useTheme();
-  const navigate = useNavigate();
   const [vehicle, setVehicle] = useState([]);
   const [loading, setLoading] = useState(false);
   const { getVehicle } = useVehicleService();
@@ -66,6 +64,8 @@ const VehiclesDetails = ({ tenantId, onSearch }) => {
       }
     };
     fetchVehicle();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tenantId]);
 
   return (
@@ -96,7 +96,6 @@ const VehiclesDetails = ({ tenantId, onSearch }) => {
           width: '96%',
           marginLeft: '5%',
           height: '6%',
-          marginLeft: '25px',
           marginTop: '35px',
         }}
       >

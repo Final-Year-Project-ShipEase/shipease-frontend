@@ -36,6 +36,8 @@ const AdminProtectedRoute = () => {
     };
 
     verifyToken();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return admin ? <Outlet /> : <Navigate to="/admin/login" />;

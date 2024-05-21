@@ -28,7 +28,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import { lightTheme, darkTheme } from './theme';
 
 const App = () => {
-  const [mode, setMode] = useState('light');
+  const [mode] = useState('light');
   const theme = mode === 'light' ? lightTheme : darkTheme;
 
   return (

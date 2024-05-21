@@ -1,6 +1,6 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
-const COLORS = [
+export const COLORS = [
   '#FF0000',
   '#00668C',
   '#FF8C00',

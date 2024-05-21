@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import DriversDetails from './recentBookingComponent/driversDetails';
 import TableData from './components/table/table';
 import { DriverColumns } from './_columns.js';
 import useDriverService from '../../../admin/services/driverService';
-import CreateDriver from '../createDriver/createDriver.jsx';
 import { useSnackbar } from '../../../utils/snackbarContextProvider.jsx';
 import Spinner from '../../../utils/spinner.jsx';
 
@@ -33,6 +31,8 @@ const DriversGarage = () => {
       }
     };
     fetchDrivers();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSearch = (searchTerm) => {
@@ -69,7 +69,7 @@ const DriversGarage = () => {
         <Box sx={{ mt: '-10px' }}>
           <TableData
             columns={DriverColumns}
-            rows={drivers}
+            rows={filteredDrivers}
             setDriverId={setDriverId}
           />
         </Box>

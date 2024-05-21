@@ -56,12 +56,6 @@ const DriverDetailsModal = ({ open, handleClose, onSubmit }) => {
   };
 
   const handleAddConfirm = async () => {
-    const clientData = {
-      clientId: formData.ID,
-      name: formData.name,
-      email: formData.email,
-    };
-
     try {
       //await createApplication(clientData);
       setIsConfirmationDialogOpen(false);

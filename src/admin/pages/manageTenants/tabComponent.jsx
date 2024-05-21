@@ -4,15 +4,9 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import TableData from './table/table';
-import {
-  BookingColumns,
-} from './recentBookingComponent/_columns';
-import {
-  VehicleColumns,
-} from './vehicleDetailsComponent/_columns';
-import {
-  DriverColumns,
-} from './driverDetailsComponent/_columns';
+import { BookingColumns } from './recentBookingComponent/_columns';
+import { VehicleColumns } from './vehicleDetailsComponent/_columns';
+import { DriverColumns } from './driverDetailsComponent/_columns';
 import { useParams } from 'react-router-dom';
 import { useVehicleService } from '../../../services/vehicleServices';
 import useDriverService from '../../services/driverService';

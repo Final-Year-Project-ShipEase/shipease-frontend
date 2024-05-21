@@ -6,17 +6,12 @@ import Spinner from '../../../../utils/spinner';
 
 const PoolRequestCard = ({ poolRequest, handleOnClick }) => {
   const theme = useTheme();
-  const matchesSm = useMediaQuery(theme.breakpoints.down('sm'));
-  const cardWidth = matchesSm ? '90%' : '100%';
-  const cardHeight = 'auto';
-  const cardMinHeight = '200px';
 
   return (
     <Box
       sx={{
-        backgroundColor: theme.palette.primary.backgroundColor,
         backgroundColor:
-          poolRequest.status == 'completed'
+          poolRequest.status === 'completed'
             ? 'transparent'
             : theme.palette.primary.color1,
         width: '30%',

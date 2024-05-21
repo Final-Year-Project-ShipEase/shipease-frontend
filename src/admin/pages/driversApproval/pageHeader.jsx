@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  TextField,
-  InputAdornment,
-  useTheme,
-} from '@mui/material';
+import { Box, TextField, InputAdornment, useTheme } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 
 const PageHeader = ({ onSearch }) => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Drawer, Grid, useTheme } from '@mui/material';
+import { Box, Button, Drawer, useTheme } from '@mui/material';
 import PowerSettingsNewOutlinedIcon from '@mui/icons-material/PowerSettingsNewOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import NavigationItems from './navItems';
@@ -18,11 +18,6 @@ const Sidebar = ({ widthVal }) => {
     // Normalize the path to capitalize the first letter
     setActiveButton(currentPath);
   }, [location]);
-
-  const logoutButton = () => {
-    logout();
-    navigate('/login');
-  };
 
   const CustomButton = ({ item }) => {
     // remove space and convert to lowercase for comparison from item.name

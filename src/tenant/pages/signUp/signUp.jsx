@@ -46,7 +46,6 @@ const TenantSignUpPage = () => {
         width: '100%',
         height: '100vh',
         backgroundColor: theme.palette.page.background,
-        backgroundColor: theme.palette.page.background,
         overflow: 'hidden',
       }}
     >
@@ -80,8 +79,6 @@ const TenantSignUpPage = () => {
             style={{
               backgroundColor: theme.palette.page.form,
               padding: '15%',
-              paddingTop: '17%',
-              paddingBottom: '17%',
               paddingTop: '17%',
               paddingBottom: '17%',
               borderTopLeftRadius: '10%',
@@ -141,8 +138,6 @@ const TenantSignUpPage = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                marginTop: '10px',
-                marginBottom: '16px',
                 marginTop: '10px',
                 marginBottom: '16px',
               }}
@@ -214,8 +209,6 @@ const TenantSignUpPage = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                marginTop: '10px',
-                marginBottom: '16px',
                 marginTop: '10px',
                 marginBottom: '16px',
               }}

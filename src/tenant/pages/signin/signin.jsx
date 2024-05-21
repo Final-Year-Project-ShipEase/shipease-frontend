@@ -1,8 +1,4 @@
-import {
-  LogoDevOutlined,
-  Visibility,
-  VisibilityOff,
-} from '@mui/icons-material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { Box, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';

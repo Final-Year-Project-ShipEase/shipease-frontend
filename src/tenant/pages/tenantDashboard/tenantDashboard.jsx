@@ -5,7 +5,6 @@ import Booking from '../../components/card/booking';
 import Performance from '../../components/card/performance';
 import TopTenant from '../../components/card/topDriver';
 import Order from '../../components/card/order';
-import MessageBox from '../../components/card/UserCommunication';
 import PoolRequestBox from '../../components/card/poolRequestBox';
 import { Grid, Box } from '@mui/material';
 import { usePoolRequestService } from '../../../services/poolRequestServices';
@@ -24,6 +23,8 @@ const TenantDashboard = () => {
       console.log(poolRequestList);
     };
     fetchPoolRequest();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

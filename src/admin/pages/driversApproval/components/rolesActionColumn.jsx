@@ -28,8 +28,7 @@ const DriverApprovalActionColumn = ({
 }) => {
   //const { delRole } = useRBACService();
   const theme = useTheme();
-  const { deleteDriverApproval, approveDriver } =
-    useDriverApprovalService();
+  const { deleteDriverApproval, approveDriver } = useDriverApprovalService();
 
   const handleEdit = () => {
     setDriverId(value.driver_id);
