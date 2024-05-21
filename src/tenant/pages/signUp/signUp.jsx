@@ -14,7 +14,7 @@ const TenantSignUpPage = () => {
   const [cities, setCities] = useState('');
   const theme = useTheme();
   const navigate = useNavigate();
-  const {createTenant} = useTenantServices();
+  const { createTenant } = useTenantServices();
 
   const handlePasswordVisibility = (event) => {
     setShowPassword(!showPassword);
@@ -207,7 +207,6 @@ const TenantSignUpPage = () => {
                   )}
                 </div>
               </div>
-
             </div>
 
             <div
@@ -276,20 +275,20 @@ const TenantSignUpPage = () => {
                 }}
                 onClick={handleSignIn}
                 onTouchStart={(e) =>
-                (e.target.style.backgroundColor =
-                  theme.palette.secondary.hover)
+                  (e.target.style.backgroundColor =
+                    theme.palette.secondary.hover)
                 }
                 onTouchEnd={(e) =>
-                (e.target.style.backgroundColor =
-                  theme.palette.secondary.main)
+                  (e.target.style.backgroundColor =
+                    theme.palette.secondary.main)
                 }
                 onMouseEnter={(e) =>
-                (e.target.style.backgroundColor =
-                  theme.palette.secondary.hover)
+                  (e.target.style.backgroundColor =
+                    theme.palette.secondary.hover)
                 }
                 onMouseLeave={(e) =>
-                (e.target.style.backgroundColor =
-                  theme.palette.secondary.main)
+                  (e.target.style.backgroundColor =
+                    theme.palette.secondary.main)
                 }
               >
                 Create Account

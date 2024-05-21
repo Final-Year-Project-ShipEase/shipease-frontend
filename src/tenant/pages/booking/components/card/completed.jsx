@@ -84,4 +84,4 @@ const Completed = ({ complete }) => {
   );
 };
 
-export default Completed;            
+export default Completed;

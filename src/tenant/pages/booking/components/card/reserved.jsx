@@ -87,4 +87,4 @@ const Reserved = ({ reserved }) => {
   );
 };
 
-export default Reserved;            
+export default Reserved;
