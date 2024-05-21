@@ -116,10 +116,7 @@ const DriversDetails = ({ driverId, onSearch }) => {
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
               >
-                Language:{' '}
-                {driver?.cities
-                  ? driver?.cities.map((city) => city).join(', ')
-                  : 'English'}
+                CNIC: {driver?.cnic ? driver?.cnic : 'English'}
               </Typography>
               <Typography
                 sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
@@ -151,14 +148,7 @@ const DriversDetails = ({ driverId, onSearch }) => {
                     ? formatTimestamp(driver.createdAt)
                     : '19/4/2023 01:23 PM EDT'}
                 </Typography>
-                <Typography
-                  sx={{ color: theme.palette.buttons.main, fontSize: '16px' }}
-                >
-                  Updated At :{' '}
-                  {driver?.updatedAt
-                    ? formatTimestamp(driver.updatedAt)
-                    : '19/4/2023 01:23 PM EDT'}
-                </Typography>
+
                 <Typography
                   sx={{
                     color: theme.palette.buttons.main,
