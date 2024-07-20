@@ -1,4 +1,35 @@
-# Getting Started with Create React App
+# SHIPEASE | Bilty Management System
+
+## Description:
+The project under consideration is a testament to the ever-evolving world of transportation, specifically tailored to the needs of the 'bilty system,' where the transportation of heavy or bulk products takes center stage. With a commitment to transforming the way goods are moved across cities and regions, our platform unites tenants, drivers, and users in a harmonious ecosystem. It's a platform where innovation meets transparency, and where businesses and individuals alike can find streamlined solutions for their logistics needs.
+
+- **Admin:** Platform administrators who manage tenant accounts, approve vehicle and driver registrations, and ensure overall system functionality and security.
+
+<table align="center">
+  <tr>
+    <td align="center">
+   <img src="https://i.ibb.co/RQR9wgH/Tenant-Sign-in-2.png" alt="Tenant-Sign-in-2" border="0" width="400" height="250">
+    </td>
+   <td align="center">
+    <img src="https://i.ibb.co/Wn6mwBb/Admin-Dashboard-2.png" alt="Admin-Dashboard-2" border="0" width="400" height="300">
+    </td>
+  </tr>
+</table>
+
+- **Tenants:** Transport company owners and operators who conduct logistics operations, manage driver and vehicle fleets, handle user bookings, and adhere to platform regulations.
+
+<table align="center">
+  <tr>
+    <td align="center">
+    <img src="https://i.ibb.co/tLjZhQd/Tenant-Dashboard-2.png" alt="Tenant-Dashboard-2" border="0" width="400" height="300">
+    </td>
+   <td align="center">
+    <img src="https://i.ibb.co/QfdJXwk/Drivers.png" alt="Drivers" border="0" width="400" height="300">
+    </td>
+  </tr>
+</table>
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
