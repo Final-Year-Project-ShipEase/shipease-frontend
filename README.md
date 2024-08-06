@@ -8,10 +8,10 @@ The project under consideration is a testament to the ever-evolving world of tra
 <table align="center">
   <tr>
     <td align="center">
-   <img src="https://i.ibb.co/RQR9wgH/Tenant-Sign-in-2.png" alt="Tenant-Sign-in-2" border="0" width="400" height="250">
+   <img src="https://i.ibb.co/RQR9wgH/Tenant-Sign-in-2.png" border="0" width="400" height="250">
     </td>
    <td align="center">
-    <img src="https://i.ibb.co/Wn6mwBb/Admin-Dashboard-2.png" alt="Admin-Dashboard-2" border="0" width="400" height="300">
+    <img src="https://i.ibb.co/Wn6mwBb/Admin-Dashboard-2.png" border="0" width="400" height="300">
     </td>
   </tr>
 </table>
@@ -21,10 +21,10 @@ The project under consideration is a testament to the ever-evolving world of tra
 <table align="center">
   <tr>
     <td align="center">
-    <img src="https://i.ibb.co/tLjZhQd/Tenant-Dashboard-2.png" alt="Tenant-Dashboard-2" border="0" width="400" height="300">
+    <img src="https://i.ibb.co/tLjZhQd/Tenant-Dashboard-2.png" border="0" width="400" height="300">
     </td>
    <td align="center">
-    <img src="https://i.ibb.co/QfdJXwk/Drivers.png" alt="Drivers" border="0" width="400" height="300">
+    <img src="https://i.ibb.co/QfdJXwk/Drivers.png" border="0" width="400" height="300">
     </td>
   </tr>
 </table>
